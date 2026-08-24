@@ -80,3 +80,7 @@ database.database
 database.db
 diagram.png
 __pycache__/
+
+
+#ignore por indicacion de Javier para evitar colisionar con las bases de datos propias
+migrations
