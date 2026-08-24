@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cobijo · Publicar animal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bosque:#12301F; --verde:#1E9E56; --verde-osc:#178145;
+  --verde-suave:#DFF3E4; --verde-tenue:#EDF6EF;
+  --crema:#FBF8F1; --blanco:#FFFFFF;
+  --tinta:#16241C; --tinta-60:#5C6B61; --tinta-40:#8B968E;
+  --linea:#E7E4DA; --linea-2:#F0EDE4;
+  --ambar-bg:#FBEFD4; --ambar-tx:#8A5B12;
+  --coral-bg:#FBE1DA; --coral-tx:#BE3F27;
+  --menta-bg:#DDF0E4; --menta-tx:#2C6A47;
+  --r-s:10px; --r-m:16px; --r-l:22px; --r-pill:999px;
+  --sombra:0 1px 2px rgba(18,48,31,.05), 0 8px 24px -12px rgba(18,48,31,.18);
+  --sombra-alta:0 2px 4px rgba(18,48,31,.06), 0 18px 40px -18px rgba(18,48,31,.28);
+  --fuente:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--fuente);background:#3A3A38;color:var(--tinta);-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit}
+:focus-visible{outline:3px solid #7FD1A0;outline-offset:2px;border-radius:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+h1,h2,h3,h4{letter-spacing:-.015em}
+[hidden]{display:none!important}
+
+/* chrome de maqueta */
+.lienzo{padding:26px clamp(14px,3vw,40px) 60px}
+.barra-maqueta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;max-width:1320px;margin:0 auto 20px}
+.etiqueta-maqueta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#EDEAE2;background:#2A2A28;border:1px solid #4A4A47;padding:7px 12px;border-radius:8px;font-weight:600}
+.conmutador{display:flex;gap:4px;background:#2A2A28;border:1px solid #4A4A47;padding:4px;border-radius:var(--r-pill)}
+.conmutador button{border:0;background:transparent;color:#C9C6BE;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-pill);transition:.18s}
+.conmutador button[aria-selected="true"]{background:var(--verde);color:#fff}
+.escenario{max-width:1320px;margin:0 auto;display:none}
+.escenario.activo{display:block}
+
+/* app */
+.app{background:var(--crema);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);position:relative}
+.cinta{background:var(--bosque);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 26px;gap:16px}
+.cinta .marca{font-weight:700;font-size:15px}
+.cinta .marca span{font-weight:400;font-size:11px;letter-spacing:.18em;color:#8FB39D;margin-left:8px;text-transform:uppercase}
+.roles{display:flex;gap:8px}
+.roles button{font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.22);color:#D9E6DE;background:transparent}
+.roles button[aria-pressed="true"]{background:#38C97D;color:#0C2416;border-color:transparent;font-weight:600}
+.cabecera{background:var(--blanco);border-bottom:1px solid var(--linea-2);display:flex;align-items:center;justify-content:space-between;padding:16px 26px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
+.logo i{font-style:normal;width:30px;height:30px;border-radius:9px;background:var(--verde);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.nav{display:flex;align-items:center;gap:2px;background:var(--verde-tenue);border-radius:var(--r-pill);padding:5px}
+.nav a{text-decoration:none;color:var(--tinta-60);font-size:13.5px;font-weight:500;padding:9px 17px;border-radius:var(--r-pill)}
+.nav a.act{background:var(--verde);color:#fff;font-weight:600}
+.cuenta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--tinta-60)}
+.cuenta em{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--verde-suave);color:#14663A;display:grid;place-items:center;font-size:11px;font-weight:700}
+.cuerpo{padding:26px 26px 0;max-width:1180px;margin:0 auto}
+.miga{font-family:var(--mono);font-size:11.5px;color:var(--tinta-40);margin:0 0 14px}
+.miga a{color:var(--verde);text-decoration:none}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verde);margin:0 0 8px}
+h1{font-size:33px;line-height:1.14;margin:0;font-weight:700}
+.entradilla{color:var(--tinta-60);font-size:14.5px;margin:10px 0 0;max-width:54ch;line-height:1.6}
+.malla{display:grid;grid-template-columns:minmax(0,1fr) 356px;gap:28px;align-items:start;padding:26px 0 130px}
+.pie-app{background:var(--bosque);color:#9FBCAB;padding:24px 26px;font-size:12px;display:flex;align-items:center;gap:12px}
+.pie-app .logo{color:#fff;font-size:16px}
+
+/* bloques */
+.bloque{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);padding:24px 26px;margin-bottom:18px;box-shadow:var(--sombra);transition:opacity .25s}
+.bloque[data-bloqueado="si"]{opacity:.42;pointer-events:none;filter:saturate(.5)}
+.bloque-cab{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.orden{font-family:var(--mono);font-size:11px;color:var(--verde);background:var(--verde-tenue);border-radius:7px;padding:4px 8px;letter-spacing:.04em}
+.bloque h2{font-size:18px;margin:0;font-weight:600}
+.bloque>.pie{color:var(--tinta-60);font-size:13px;margin:0 0 20px;line-height:1.55}
+.campo{margin-bottom:18px}
+.campo:last-child{margin-bottom:0}
+.campo>label,.rotulo{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13px;font-weight:600;margin-bottom:7px}
+.opc{font-weight:400;color:var(--tinta-40);font-size:11.5px;font-family:var(--mono)}
+.contador{font-family:var(--mono);font-size:11px;color:var(--tinta-40)}
+input[type=text],input[type=number],input[type=date],input[type=month],textarea,select{
+  width:100%;border:1.5px solid var(--linea);border-radius:var(--r-m);background:#FCFCFA;padding:13px 15px;font-size:14.5px;color:var(--tinta);transition:.15s}
+input::placeholder,textarea::placeholder{color:#AEB6AF}
+input:focus,textarea:focus,select:focus{border-color:var(--verde);background:#fff;outline:none;box-shadow:0 0 0 3px rgba(30,158,86,.13)}
+textarea{min-height:130px;resize:vertical;line-height:1.6}
+.ayuda{font-size:12.2px;color:var(--tinta-60);margin:7px 0 0;line-height:1.5}
+.fila{display:grid;gap:14px}
+.fila.dos{grid-template-columns:1fr 1fr}
+.fila.tres{grid-template-columns:1fr 1fr 1fr}
+.fila label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
+
+/* especie */
+.especies{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.especie{position:relative;display:flex;gap:13px;align-items:center;text-align:left;background:var(--blanco);border:1.5px solid var(--linea);border-radius:var(--r-m);padding:16px 34px 16px 16px;transition:.16s}
+.especie:hover{border-color:#B9D9C6;transform:translateY(-1px)}
+.especie .ico{width:42px;height:42px;border-radius:12px;background:var(--verde-tenue);display:grid;place-items:center;color:var(--verde-osc);flex:none}
+.especie strong{display:block;font-size:15px;font-weight:600}
+.especie small{color:var(--tinta-60);font-size:12.2px}
+.especie[aria-pressed="true"]{border-color:var(--verde);background:#F6FCF8;box-shadow:0 0 0 3px rgba(30,158,86,.12)}
+.especie[aria-pressed="true"] .ico{background:var(--verde);color:#fff}
+.marca-check{position:absolute;top:12px;right:12px;width:18px;height:18px;border-radius:50%;background:var(--verde);display:none;place-items:center}
+[aria-pressed="true"]>.marca-check{display:grid}
+
+/* segmentado / chips / tri-estado */
+.segmentado{display:flex;gap:4px;background:var(--verde-tenue);padding:4px;border-radius:var(--r-pill)}
+.segmentado button{flex:1;border:0;background:transparent;color:var(--tinta-60);font-size:13px;font-weight:600;padding:10px 12px;border-radius:var(--r-pill);transition:.16s;line-height:1.35}
+.segmentado button small{display:block;font-weight:400;font-size:10.5px;color:var(--tinta-40);font-family:var(--mono)}
+.segmentado button[aria-pressed="true"]{background:var(--blanco);color:var(--verde-osc);box-shadow:var(--sombra)}
+.segmentado button[aria-pressed="true"] small{color:var(--verde)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-sel{border:1.5px solid var(--linea);background:#FCFCFA;border-radius:var(--r-pill);padding:9px 15px;font-size:12.8px;font-weight:500;color:var(--tinta-60);transition:.15s;display:inline-flex;align-items:center;gap:7px}
+.chip-sel:hover{border-color:#B9D9C6}
+.chip-sel[aria-pressed="true"]{border-color:var(--verde);background:#F1FAF4;color:var(--verde-osc);font-weight:600}
+.chip-sel .tic{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--linea);display:grid;place-items:center;flex:none}
+.chip-sel .tic svg{display:none}
+.chip-sel[aria-pressed="true"] .tic{background:var(--verde);border-color:var(--verde)}
+.chip-sel[aria-pressed="true"] .tic svg{display:block}
+.tri-lista{display:grid;gap:9px}
+.tri{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#FCFCFA;border:1.5px solid var(--linea);border-radius:var(--r-m);padding:10px 10px 10px 15px}
+.tri>span{font-size:13.5px;font-weight:500}
+.tri-btns{display:flex;gap:4px;background:var(--verde-tenue);padding:3px;border-radius:var(--r-pill);flex:none}
+.tri-btns button{border:0;background:transparent;font-size:11.5px;font-weight:600;color:var(--tinta-60);padding:7px 11px;border-radius:var(--r-pill);font-family:var(--mono)}
+.tri-btns button[aria-pressed="true"]{background:var(--blanco);box-shadow:var(--sombra);color:var(--verde-osc)}
+.tri-btns button[data-val="no"][aria-pressed="true"]{color:var(--coral-tx)}
+
+/* galería / multimedia */
+.galeria{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.med{position:relative;aspect-ratio:1;border-radius:var(--r-m);overflow:hidden;display:grid;place-items:center;color:rgba(255,255,255,.55)}
+.med .marco{position:absolute;inset:0;display:grid;place-items:center}
+.med .etiq{position:absolute;left:8px;bottom:8px;font-family:var(--mono);font-size:9.5px;background:rgba(0,0,0,.45);color:#fff;padding:3px 7px;border-radius:6px;backdrop-filter:blur(3px)}
+.med .portada{position:absolute;left:8px;top:8px;font-family:var(--mono);font-size:9.5px;background:var(--verde);color:#fff;padding:3px 8px;border-radius:6px}
+.med .herr{position:absolute;right:7px;top:7px;display:flex;gap:5px;opacity:0;transition:.15s}
+.med:hover .herr,.med:focus-within .herr{opacity:1}
+.med .herr button{width:26px;height:26px;border-radius:50%;border:0;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.med .play{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.9);display:grid;place-items:center}
+.med-add{aspect-ratio:1;border:1.5px dashed #C4D8CB;background:#FBFCFB;border-radius:var(--r-m);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--tinta-60);font-size:11.5px;font-weight:600;transition:.15s}
+.med-add:hover{border-color:var(--verde);background:#F4FBF7;color:var(--verde-osc)}
+.acc-media{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
+
+/* lateral */
+.lateral{position:sticky;top:22px;display:grid;gap:16px}
+.rotulo-lateral{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--tinta-40);margin:0 0 10px}
+.tarjeta-previa{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);overflow:hidden;box-shadow:var(--sombra-alta)}
+.pv-foto{aspect-ratio:4/3;display:grid;place-items:center;color:rgba(255,255,255,.5);position:relative}
+.pv-foto .est{position:absolute;left:12px;top:12px}
+.pv-cuerpo{padding:16px 18px 18px}
+.pv-nombre{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 0 4px}
+.pv-nombre h4{font-size:19px;margin:0;font-weight:700}
+.pv-nombre span{font-family:var(--mono);font-size:11.5px;color:var(--tinta-40)}
+.pv-linea{font-size:12.5px;color:var(--tinta-60);margin:0 0 12px}
+.pv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{font-size:10.5px;font-family:var(--mono);padding:4px 9px;border-radius:var(--r-pill)}
+.chip.n{background:var(--verde-tenue);color:#2C6A47}
+.chip.menta{background:var(--menta-bg);color:var(--menta-tx)}
+.chip.coral{background:var(--coral-bg);color:var(--coral-tx)}
+.chip.ambar{background:var(--ambar-bg);color:var(--ambar-tx)}
+.medidor{margin-top:4px}
+.medidor .cab{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--tinta-60);margin-bottom:6px}
+.barra{display:flex;gap:4px}
+.barra i{height:7px;flex:1;border-radius:var(--r-pill);background:var(--linea-2)}
+.barra i.on{background:var(--verde)}
+.lista-control{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);padding:18px 20px;box-shadow:var(--sombra)}
+.lista-control h3{font-size:13px;margin:0 0 12px;font-weight:600}
+.lista-control ul{list-style:none;margin:0 0 4px;padding:0;display:grid;gap:9px}
+.lista-control li{display:flex;align-items:center;gap:10px;font-size:12.8px;color:var(--tinta-40)}
+.lista-control li .punto{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--linea);display:grid;place-items:center;flex:none}
+.lista-control li .punto svg{display:none}
+.lista-control li.ok{color:var(--tinta)}
+.lista-control li.ok .punto{background:var(--verde);border-color:var(--verde)}
+.lista-control li.ok .punto svg{display:block}
+.lista-control .sep{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-40);margin:14px 0 10px}
+
+/* acciones */
+.acciones{position:sticky;bottom:0;background:rgba(251,248,241,.93);backdrop-filter:blur(10px);border-top:1px solid var(--linea);padding:16px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.acciones p{margin:0;font-size:12.5px;color:var(--tinta-60)}
+.acciones .grupo{display:flex;gap:10px}
+.btn{border-radius:var(--r-pill);font-size:14px;font-weight:600;padding:12px 22px;border:1.5px solid transparent;transition:.16s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.fantasma{background:transparent;color:var(--tinta-60)}
+.btn.fantasma:hover{color:var(--tinta);background:#F1EEE5}
+.btn.linea{background:var(--blanco);border-color:var(--linea);color:var(--tinta)}
+.btn.linea:hover{border-color:#B9D9C6}
+.btn.solido{background:var(--verde);color:#fff}
+.btn.solido:hover{background:var(--verde-osc)}
+.btn.solido[disabled]{background:#C9D9CE;color:#F4F8F5;cursor:not-allowed}
+.btn.ancho{width:100%}
+
+/* ficha */
+.ficha{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start;padding:22px 0 60px}
+.hero{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);overflow:hidden;box-shadow:var(--sombra)}
+.hero-media{display:grid;grid-template-columns:2fr 1fr;gap:5px;background:var(--linea-2)}
+.hero-media .grande{aspect-ratio:16/11}
+.hero-media .col{display:grid;gap:5px}
+.hero-media .col .med{aspect-ratio:auto;border-radius:0;min-height:60px}
+.hero-media .med{border-radius:0}
+.hero-txt{padding:22px 26px 26px}
+.hero-txt h2{font-size:29px;margin:0 0 6px;font-weight:700}
+.hero-sub{font-size:14px;color:var(--tinta-60);margin:0 0 16px}
+.datos{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--linea-2);border:1px solid var(--linea-2);border-radius:var(--r-m);overflow:hidden;margin-bottom:20px}
+.datos div{background:var(--blanco);padding:13px 15px}
+.datos span{display:block;font-size:11px;color:var(--tinta-40);margin-bottom:4px}
+.datos b{font-family:var(--mono);font-size:13.5px;font-weight:500}
+.seccion{margin-top:24px}
+.seccion h3{font-size:14px;margin:0 0 11px;font-weight:600;display:flex;align-items:center;gap:9px}
+.seccion h3::after{content:"";flex:1;height:1px;background:var(--linea-2)}
+.seccion p{font-size:14px;line-height:1.75;color:#33463A;margin:0;white-space:pre-line}
+.conviv{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+.conviv div{display:flex;align-items:center;gap:10px;font-size:13px;background:#FCFCFA;border:1px solid var(--linea-2);border-radius:var(--r-m);padding:10px 13px}
+.conviv .est{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:var(--r-pill)}
+.rail{position:sticky;top:22px;display:grid;gap:16px}
+.tarjeta{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);padding:20px;box-shadow:var(--sombra)}
+.tarjeta h3{font-size:14px;margin:0 0 6px;font-weight:600}
+.tarjeta p{font-size:12.6px;color:var(--tinta-60);line-height:1.55;margin:0 0 16px}
+.estado-grande{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.estado-grande b{font-size:15px}
+.acc-rail{display:grid;gap:9px}
+.dato-mini{display:flex;justify-content:space-between;font-size:12.5px;padding:9px 0;border-bottom:1px solid var(--linea-2)}
+.dato-mini:last-child{border:0}
+.dato-mini span{color:var(--tinta-60)}
+.dato-mini b{font-family:var(--mono);font-weight:500;font-size:12px}
+
+/* vista pública */
+.publica{max-width:900px;margin:0 auto;padding:22px 0 60px}
+.aviso-rol{background:var(--bosque);color:#C6DDD0;font-size:12px;padding:10px 26px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.aviso-rol button{background:rgba(255,255,255,.12);border:0;color:#fff;font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:var(--r-pill)}
+.cta-caja{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);padding:20px;box-shadow:var(--sombra-alta)}
+.cta-caja .micro{font-family:var(--mono);font-size:11px;color:var(--tinta-60);text-align:center;margin:10px 0 0;line-height:1.6}
+.espera{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--ambar-tx);background:var(--ambar-bg);border-radius:var(--r-m);padding:11px 14px;margin-bottom:16px}
+
+/* modal */
+.capa{position:absolute;inset:0;background:rgba(18,48,31,.45);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto;z-index:20}
+.capa.visible{display:flex;animation:apar .22s ease}
+@keyframes apar{from{opacity:0}to{opacity:1}}
+.panel{background:var(--crema);border-radius:var(--r-l);width:100%;max-width:560px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5);overflow:hidden;animation:sube .26s ease}
+@keyframes sube{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+.panel-cab{background:var(--blanco);padding:20px 24px;border-bottom:1px solid var(--linea-2)}
+.panel-cab h3{font-size:19px;margin:0 0 5px;font-weight:700}
+.panel-cab p{margin:0;font-size:13px;color:var(--tinta-60);line-height:1.5}
+.panel-cuerpo{padding:22px 24px;display:grid;gap:20px;max-height:56vh;overflow-y:auto}
+.panel-pie{background:var(--blanco);border-top:1px solid var(--linea-2);padding:15px 24px;display:flex;justify-content:flex-end;gap:10px}
+.preg{display:flex;gap:11px;align-items:flex-start;background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-m);padding:12px 14px;font-size:13px;line-height:1.5}
+.preg .num{font-family:var(--mono);font-size:11px;color:var(--verde);flex:none;margin-top:2px}
+.preg button{margin-left:auto;background:none;border:0;color:var(--tinta-40);flex:none}
+.exito-panel{text-align:center;padding:34px 24px}
+.exito-panel .sello{width:66px;height:66px;border-radius:50%;background:var(--verde);display:grid;place-items:center;margin:0 auto 18px}
+.exito-panel h3{font-size:20px;margin:0 0 8px}
+.exito-panel p{font-size:13.5px;color:var(--tinta-60);line-height:1.6;margin:0 auto 22px;max-width:38ch}
+
+/* móvil */
+.telefono{width:392px;margin:0 auto;border-radius:38px;background:#111;padding:11px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.pantalla{border-radius:30px;overflow:hidden;background:var(--crema);height:830px;display:flex;flex-direction:column;position:relative}
+.mv-estado{background:var(--blanco);display:flex;justify-content:space-between;padding:11px 22px 4px;font-family:var(--mono);font-size:11px}
+.mv-cab{background:var(--blanco);padding:8px 16px 0;border-bottom:1px solid var(--linea-2)}
+.mv-fila{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px}
+.mv-fila .volver{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--linea);background:#fff;display:grid;place-items:center;flex:none}
+.mv-fila h2{font-size:15px;margin:0;font-weight:600}
+.mv-fila .paso-num{font-family:var(--mono);font-size:11px;color:var(--tinta-40)}
+.progreso{display:flex;gap:5px;padding-bottom:12px}
+.progreso i{flex:1;height:4px;border-radius:var(--r-pill);background:var(--linea-2)}
+.progreso i.on{background:var(--verde)}
+.mv-scroll{flex:1;overflow-y:auto;scrollbar-width:thin}
+.mv-scroll::-webkit-scrollbar{width:5px}
+.mv-scroll::-webkit-scrollbar-thumb{background:#D8D5CB;border-radius:9px}
+.mv-pad{padding:20px 16px 26px}
+.paso{display:none}
+.paso.activo{display:block;animation:entra .28s ease}
+@keyframes entra{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.paso h3{font-size:21px;margin:0 0 6px;font-weight:700}
+.paso .sub{font-size:13px;color:var(--tinta-60);margin:0 0 20px;line-height:1.55}
+.movil .bloque{padding:0;border:0;box-shadow:none;background:transparent;margin:0}
+.movil .fila.dos,.movil .fila.tres{grid-template-columns:1fr 1fr}
+.movil .galeria{grid-template-columns:repeat(3,1fr)}
+.movil .especies{grid-template-columns:1fr}
+.movil .datos{grid-template-columns:1fr 1fr}
+.movil .conviv{grid-template-columns:1fr}
+.movil .hero-media{grid-template-columns:1fr}
+.movil .hero-media .col{grid-template-columns:repeat(3,1fr);grid-auto-flow:column}
+.movil .hero-txt{padding:18px 16px 20px}
+.movil .hero-txt h2{font-size:24px}
+.mv-barra{background:var(--blanco);border-top:1px solid var(--linea);padding:12px 16px 22px;display:flex;gap:10px;align-items:center}
+.mv-barra .btn{flex:1;padding:15px 16px}
+.mv-barra .btn.fantasma{flex:0 0 92px;border:1.5px solid var(--linea);background:#fff;color:var(--tinta-60)}
+.mv-barra .micro{flex:1;font-family:var(--mono);font-size:10px;color:var(--tinta-40);line-height:1.4}
+.movil .capa{padding:0;align-items:flex-end}
+.movil .panel{max-width:none;border-radius:22px 22px 0 0;animation:sube .3s ease}
+.movil .panel-cuerpo{max-height:48vh}
+.resumen{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-m);padding:2px 16px;box-shadow:var(--sombra)}
+.resumen div{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid var(--linea-2);font-size:13px}
+.resumen div:last-child{border-bottom:0}
+.resumen span{color:var(--tinta-60);flex:none}
+.resumen b{text-align:right;font-family:var(--mono);font-weight:500;font-size:12.5px}
+
+@media(max-width:1080px){.malla,.ficha{grid-template-columns:1fr}.lateral,.rail{position:static}.datos{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){
+  .escenario[data-vista="escritorio"]{display:none!important}
+  .telefono{width:100%;max-width:392px;padding:0;border-radius:0;background:transparent}
+  .pantalla{border-radius:14px;height:760px}
+}
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <div class="barra-maqueta">
+    <span class="etiqueta-maqueta">Cobijo · Panel de protectora · Publicar animal</span>
+    <div class="conmutador" role="tablist" aria-label="Cambiar vista">
+      <button role="tab" aria-selected="true" data-vista="escritorio">Escritorio</button>
+      <button role="tab" aria-selected="false" data-vista="movil">Móvil</button>
+    </div>
+  </div>
+
+  <!-- ============ ESCRITORIO ============ -->
+  <section class="escenario activo" data-vista="escritorio">
+    <div class="app" id="app-escritorio">
+      <div class="cinta">
+        <div class="marca">Cobijo <span>Savia cálida</span></div>
+        <div class="roles">
+          <button>Home</button>
+          <button class="rol-protectora" aria-pressed="true">Protectora</button>
+          <button class="rol-colaborador" aria-pressed="false">Colaborador</button>
+        </div>
+      </div>
+      <header class="cabecera">
+        <div class="logo"><i>C</i> Cobijo</div>
+        <nav class="nav">
+          <a href="#">Panel</a><a href="#">Necesidades</a>
+          <a href="#" class="act">Animales</a><a href="#">Adopciones</a><a href="#">Perfil</a>
+        </nav>
+        <div class="cuenta">Protectora Huellas <em>PH</em></div>
+      </header>
+      <div class="aviso-rol" hidden>
+        <span>Vista previa · así ve la ficha quien busca adoptar</span>
+        <button data-act="salir-publica">Volver al panel</button>
+      </div>
+      <div class="cuerpo lienzo-vistas"></div>
+      <div class="acciones"></div>
+      <footer class="pie-app">
+        <div class="logo"><i>C</i> Cobijo</div>
+        <span>Vista privada · rol protectora / administrador</span>
+      </footer>
+      <div class="capa"></div>
+    </div>
+  </section>
+
+  <!-- ============ MÓVIL ============ -->
+  <section class="escenario" data-vista="movil">
+    <div class="telefono">
+      <div class="pantalla movil" id="app-movil">
+        <div class="mv-estado"><span>9:41</span><span>Cobijo</span></div>
+        <div class="mv-cab">
+          <div class="mv-fila">
+            <button class="volver" aria-label="Volver" data-act="atras">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16241C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <h2>Nuevo animal</h2>
+            <span class="paso-num">1/5</span>
+          </div>
+          <div class="progreso"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="mv-scroll"><div class="mv-pad lienzo-vistas"></div></div>
+        <div class="mv-barra"></div>
+        <div class="capa"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ===================== iconos ===================== */
+const I = {
+ perro:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5.2 7.6 3v3.4M14 5.2 16.4 3v3.4"/><path d="M6.4 8.6C6.4 6.3 8.9 5 12 5s5.6 1.3 5.6 3.6c0 1.6-.6 2.4-.6 3.9 0 1.3.8 2 .8 3.4 0 2.4-2.6 4.1-5.8 4.1s-5.8-1.7-5.8-4.1c0-1.4.8-2.1.8-3.4 0-1.5-.6-2.3-.6-3.9Z"/><path d="M10.4 12.4h.01M13.6 12.4h.01M12 15.2v1.2"/></svg>',
+ gato:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.4 9.4 4.6 3.6 9 6.5M18.6 9.4l.8-5.8L15 6.5"/><path d="M5.4 12.6c0-3.5 2.9-6.1 6.6-6.1s6.6 2.6 6.6 6.1c0 1.9-.5 2.9-.5 4.2 0 2-2.7 3.3-6.1 3.3s-6.1-1.3-6.1-3.3c0-1.3-.5-2.3-.5-4.2Z"/><path d="M9.8 12.6h.01M14.2 12.6h.01M12 15.2v1M12 16.2l-1.6.8M12 16.2l1.6.8"/></svg>',
+ huella:'<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><circle cx="6.6" cy="9" r="2"/><circle cx="11.2" cy="6.6" r="2.1"/><circle cx="16.2" cy="8.2" r="2"/><circle cx="19" cy="12.6" r="1.7"/><path d="M11.6 11.4c2.5 0 4.7 1.9 5.4 4 .5 1.7-.7 3.2-2.5 3.2-.9 0-1.8-.3-2.8-.3s-1.9.3-2.8.3c-1.8 0-3-1.5-2.5-3.2.7-2.1 2.7-4 5.2-4Z"/></svg>',
+ check:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+ check2:'<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+ mas:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ estrella:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#16241C" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg>',
+ equis:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16241C" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+ play:'<svg width="15" height="15" viewBox="0 0 24 24" fill="#16241C"><path d="M8 5v14l11-7z"/></svg>',
+ reloj:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+ info:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+ corazon:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.3A4 4 0 0 1 12 8a4 4 0 0 1 7 2.7C19 15.6 12 20 12 20Z"/></svg>'
+};
+
+/* ===================== dominio ===================== */
+const ESPECIES = {
+  perro:{ nombre:'Perro', sub:'Ficha con datos caninos', articulo:'el',
+    vacunas:['Polivalente','Rabia','Tos de las perreras','Leishmania'],
+    tests:['Leishmania','Filaria'],
+    razas:['Mestizo','Podenco','Galgo','Bodeguero','Pastor alemán','Labrador','Bretón','Mastín','Border collie','Chihuahua'],
+    tamanos:[['Pequeño','hasta 10 kg'],['Mediano','10 – 25 kg'],['Grande','más de 25 kg']],
+    convivencia:['Con otros perros','Con gatos','Con niños','Vida en piso'],
+    requisitos:['Visita previa en el refugio','Contrato de adopción','Seguimiento a los 3 meses','Espacio exterior seguro o paseos diarios','Compromiso de esterilización','Residencia en Valencia y alrededores'] },
+  gato:{ nombre:'Gato', sub:'Ficha con datos felinos', articulo:'el',
+    vacunas:['Trivalente','Leucemia felina','Rabia'],
+    tests:['FeLV','FIV'],
+    razas:['Común europeo','Mestizo','Siamés','Persa','Bengalí','Maine coon'],
+    tamanos:[['Pequeño','hasta 3 kg'],['Mediano','3 – 5 kg'],['Grande','más de 5 kg']],
+    convivencia:['Con otros gatos','Con perros','Con niños','Vida en piso'],
+    requisitos:['Ventanas y terrazas protegidas','Visita previa en el refugio','Contrato de adopción','Seguimiento a los 3 meses','Compromiso de esterilización','Residencia en Valencia y alrededores'] }
+};
+const CARACTER = ['Cariñosa','Tímida','Juguetona','Tranquila','Sociable','Independiente','Curiosa','Protectora','Miedosa con ruidos','Buena en el coche'];
+const IDEAL = ['Primera adopción','Hogar tranquilo','Familia con niños','Persona activa','Casa con patio','Piso pequeño'];
+const ACTIVIDAD = [['baja','Baja','paseos cortos'],['media','Media','2–3 salidas'],['alta','Alta','necesita ejercicio']];
+const PREGUNTAS_BASE = [
+ '¿Con quién vives y hay otros animales en casa?',
+ '¿Cuántas horas pasaría solo al día?',
+ '¿Dónde dormirá y dónde estará cuando no estéis?',
+ '¿Has convivido antes con un animal así? Cuéntanos.',
+ '¿Qué harías si necesitara un tratamiento largo y caro?'
+];
+const FONDOS = ['linear-gradient(145deg,#C8A96E,#8A6438)','linear-gradient(145deg,#9DBFA6,#4A7359)','linear-gradient(145deg,#D6B49E,#9C6A52)','linear-gradient(145deg,#A9B9C8,#5B6E80)','linear-gradient(145deg,#E2C9A2,#AC8850)','linear-gradient(145deg,#B9AFD0,#6E6390)'];
+const MESES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const hoy=new Date(); hoy.setHours(0,0,0,0);
+const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const esc=s=>String(s||'').replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+
+function edadTexto(e){
+  if(e.sinFecha) return (e.edadA||e.edadM) ? `${e.edadA?e.edadA+' a':''}${e.edadA&&e.edadM?' ':''}${e.edadM?e.edadM+' m':''} aprox.` : '—';
+  if(!e.nacimiento) return '—';
+  const n=new Date(e.nacimiento+'T00:00:00');
+  let m=(hoy.getFullYear()-n.getFullYear())*12+(hoy.getMonth()-n.getMonth());
+  if(hoy.getDate()<n.getDate()) m--;
+  if(m<0) return '—';
+  return m<24 ? `${m} meses` : `${Math.floor(m/12)} años`;
+}
+function esperaTexto(e){
+  if(!e.desde) return '';
+  const d=new Date(e.desde+'-01T00:00:00');
+  let m=(hoy.getFullYear()-d.getFullYear())*12+(hoy.getMonth()-d.getMonth());
+  if(m<1) return 'Llegó este mes';
+  return m<12 ? `Lleva ${m} ${m===1?'mes':'meses'} esperando` : `Lleva ${Math.floor(m/12)} ${Math.floor(m/12)===1?'año':'años'} esperando`;
+}
+
+/* ===================== app ===================== */
+function crearApp(raiz, modo){
+  const movil = modo==='movil';
+  const est = {
+    vista:'form', paso:1,
+    especie:'', nombre:'', sexo:'', raza:'', tamano:'', peso:'',
+    nacimiento:'', sinFecha:false, edadA:'', edadM:'',
+    media:[], portada:0,
+    vacunas:[], sinVacunas:false, chip:false, esterilizado:false, tests:[], especial:'',
+    actividad:'', caracter:[], convive:{}, ideal:[],
+    historia:'', lugar:'refugio', desde:'',
+    estado:'borrador', solicitudes:0,
+    proceso:{plazas:'1', requisitos:[], cuota:'', preguntas:[...PREGUNTAS_BASE], cierre:''}
+  };
+  const $=s=>raiz.querySelector(s), $$=s=>[...raiz.querySelectorAll(s)];
+  const lienzo=$('.lienzo-vistas'), capa=$('.capa');
+  const ESP=()=>ESPECIES[est.especie];
+
+  /* ---------- validación ---------- */
+  const ok={
+    especie:()=>!!est.especie,
+    nombre:()=>est.nombre.trim().length>=2,
+    sexo:()=>!!est.sexo,
+    edad:()=>est.sinFecha ? !!(est.edadA||est.edadM) : !!est.nacimiento,
+    tamano:()=>!!est.tamano,
+    fotos:()=>est.media.filter(m=>m.tipo==='foto').length>0
+  };
+  const rec={
+    salud:()=>est.vacunas.length>0||est.sinVacunas,
+    caracter:()=>!!est.actividad&&est.caracter.length>0,
+    historia:()=>est.historia.trim().length>=60,
+    video:()=>est.media.some(m=>m.tipo==='video')
+  };
+  const puedePublicar=()=>Object.values(ok).every(f=>f());
+  const completitud=()=>{
+    const t=[...Object.values(ok),...Object.values(rec)];
+    return Math.round(t.filter(f=>f()).length/t.length*100);
+  };
+  const okPaso=n=>[
+    ()=>ok.especie()&&ok.nombre()&&ok.sexo()&&ok.edad()&&ok.tamano(),
+    ()=>ok.fotos(), ()=>true, ()=>true, ()=>puedePublicar()
+  ][n-1]();
+
+  /* ---------- formulario (se pinta una vez) ---------- */
+  function marcadoForm(){
+    const p=movil?'m':'d';
+    const b=(n,titulo,pie,html)=>movil
+      ? `<div class="bloque">${html}</div>`
+      : `<div class="bloque" data-bloque="${n}"><div class="bloque-cab"><span class="orden">0${n}</span><h2>${titulo}</h2></div><p class="pie">${pie}</p>${html}</div>`;
+
+    const b1=b(1,'Identidad','Los datos que se filtran en el buscador: especie, edad, tamaño y sexo.',`
+      <div class="especies" role="group" aria-label="Especie">
+        ${Object.entries(ESPECIES).map(([k,v])=>`
+          <button type="button" class="especie" data-act="especie" data-val="${k}" aria-pressed="false">
+            <span class="ico">${I[k]}</span>
+            <span><strong>${v.nombre}</strong><small>${v.sub}</small></span>
+            <span class="marca-check">${I.check}</span>
+          </button>`).join('')}
+      </div>
+      <div class="zona-especie" data-bloqueado="si" style="margin-top:22px">
+        <div class="fila dos" style="margin-bottom:18px">
+          <div><label for="${p}-nombre">Nombre</label>
+            <input type="text" id="${p}-nombre" data-campo="nombre" maxlength="24" placeholder="Nala">
+          </div>
+          <div><span class="rotulo">Sexo</span>
+            <div class="segmentado" role="group" aria-label="Sexo">
+              <button type="button" data-act="sexo" data-val="hembra" aria-pressed="false">Hembra</button>
+              <button type="button" data-act="sexo" data-val="macho" aria-pressed="false">Macho</button>
+            </div>
+          </div>
+        </div>
+        <div class="fila dos" style="margin-bottom:18px">
+          <div><label for="${p}-raza">Raza o mezcla</label>
+            <input type="text" id="${p}-raza" data-campo="raza" list="${p}-razas" placeholder="Mestiza">
+            <datalist id="${p}-razas"></datalist>
+          </div>
+          <div><label for="${p}-peso">Peso <span class="opc">kg</span></label>
+            <input type="number" id="${p}-peso" data-campo="peso" min="0" step="0.1" placeholder="14">
+          </div>
+        </div>
+        <div class="campo">
+          <span class="rotulo">Tamaño</span>
+          <div class="segmentado tamanos" role="group" aria-label="Tamaño"></div>
+        </div>
+        <div class="campo">
+          <label for="${p}-nac">Fecha de nacimiento</label>
+          <input type="date" id="${p}-nac" data-campo="nacimiento" max="${iso(hoy)}">
+          <div class="chips" style="margin-top:11px">
+            <button type="button" class="chip-sel" data-act="sinfecha" aria-pressed="false">
+              <span class="tic">${I.check2}</span>No sabemos la fecha exacta
+            </button>
+          </div>
+          <div class="aprox" hidden style="margin-top:14px">
+            <div class="fila dos">
+              <div><label for="${p}-ea">Edad aproximada · años</label><input type="number" id="${p}-ea" data-campo="edadA" min="0" max="25" placeholder="2"></div>
+              <div><label for="${p}-em">y meses</label><input type="number" id="${p}-em" data-campo="edadM" min="0" max="11" placeholder="6"></div>
+            </div>
+            <p class="ayuda">Se publicará como «2 años aprox.». La mayoría de rescatados no tienen fecha exacta: mejor una estimación honesta que un dato inventado.</p>
+          </div>
+        </div>
+      </div>`);
+
+    const b2=b(2,'Fotos y vídeos','La portada es lo primero que se ve en el buscador. Luz natural, animal centrado y sin correa tensa.',`
+      <div class="galeria"></div>
+      <div class="acc-media">
+        <button type="button" class="btn linea" data-act="add-foto">Añadir fotos</button>
+        <button type="button" class="btn linea" data-act="add-video">Añadir vídeo</button>
+      </div>
+      <p class="ayuda">Formatos JPG, PNG, MP4 o MOV · hasta 10 MB por foto y 60 s por vídeo. Pasa el ratón sobre una pieza para marcarla como portada o quitarla.</p>`);
+
+    const b3=b(3,'Salud','Lo que más preguntan quienes adoptan. Ser claro aquí evita solicitudes que luego se caen.',`
+      <div class="campo">
+        <span class="rotulo">Vacunas puestas</span>
+        <div class="chips vacunas"></div>
+      </div>
+      <div class="campo">
+        <span class="rotulo">Estado sanitario</span>
+        <div class="chips">
+          <button type="button" class="chip-sel" data-act="bool" data-val="chip" aria-pressed="false"><span class="tic">${I.check2}</span>Microchip</button>
+          <button type="button" class="chip-sel" data-act="bool" data-val="esterilizado" aria-pressed="false"><span class="tic">${I.check2}</span>Esterilizada</button>
+        </div>
+      </div>
+      <div class="campo">
+        <span class="rotulo">Tests realizados <span class="opc">negativos</span></span>
+        <div class="chips tests"></div>
+      </div>
+      <div class="campo">
+        <label for="${p}-esp">Necesidades especiales <span class="opc">opcional</span></label>
+        <input type="text" id="${p}-esp" data-campo="especial" placeholder="Tratamiento crónico, dieta, movilidad reducida…">
+        <p class="ayuda">Se muestra destacado en la ficha. Decirlo desde el principio filtra mejor que ocultarlo.</p>
+      </div>`);
+
+    const b4=b(4,'Carácter y convivencia','Lo que evita devoluciones: con quién encaja y con quién no.',`
+      <div class="campo">
+        <span class="rotulo">Nivel de actividad</span>
+        <div class="segmentado" role="group" aria-label="Nivel de actividad">
+          ${ACTIVIDAD.map(([v,t,s])=>`<button type="button" data-act="actividad" data-val="${v}" aria-pressed="false">${t}<small>${s}</small></button>`).join('')}
+        </div>
+      </div>
+      <div class="campo">
+        <span class="rotulo">Carácter <span class="opc">elige hasta 4</span></span>
+        <div class="chips caracter"></div>
+      </div>
+      <div class="campo">
+        <span class="rotulo">Convivencia</span>
+        <div class="tri-lista"></div>
+        <p class="ayuda">«Sin valorar» es una respuesta válida y honesta: se publica tal cual.</p>
+      </div>
+      <div class="campo">
+        <span class="rotulo">Hogar ideal <span class="opc">opcional</span></span>
+        <div class="chips ideal"></div>
+      </div>`);
+
+    const b5=b(5,'Su historia','El texto que hace que alguien se pare. Concreto, sin dramatismo: de dónde viene, cómo es un día con él y qué necesita.',`
+      <div class="campo">
+        <label for="${p}-hist">Historia <span class="opc"><span class="c-hist">0</span>/900</span></label>
+        <textarea id="${p}-hist" data-campo="historia" maxlength="900" placeholder="Nala llegó en marzo tras un abandono en la huerta. Los primeros días no salía de la caseta; ahora es la primera en pedir paseo y duerme boca arriba…"></textarea>
+      </div>
+      <div class="fila dos">
+        <div><span class="rotulo">Dónde está ahora</span>
+          <div class="segmentado" role="group" aria-label="Ubicación">
+            <button type="button" data-act="lugar" data-val="refugio" aria-pressed="true">En el refugio</button>
+            <button type="button" data-act="lugar" data-val="acogida" aria-pressed="false">Casa de acogida</button>
+          </div>
+        </div>
+        <div><label for="${p}-desde">En la protectora desde</label>
+          <input type="month" id="${p}-desde" data-campo="desde" max="${iso(hoy).slice(0,7)}">
+        </div>
+      </div>
+      <p class="ayuda">Con esta fecha la ficha muestra «lleva 14 meses esperando». Los animales que llevan más tiempo se destacan en el buscador.</p>`);
+
+    if(movil){
+      return `
+        <div class="paso activo" data-paso="1"><h3>¿Quién es?</h3><p class="sub">Empezamos por lo que se usa para buscar.</p>${b1}</div>
+        <div class="paso" data-paso="2"><h3>Fotos y vídeos</h3><p class="sub">Lo primero que mira quien busca.</p>${b2}</div>
+        <div class="paso" data-paso="3"><h3>Salud</h3><p class="sub">Lo que más preguntan.</p>${b3}</div>
+        <div class="paso" data-paso="4"><h3>Carácter</h3><p class="sub">Con quién encaja y con quién no.</p>${b4}</div>
+        <div class="paso" data-paso="5"><h3>Su historia</h3><p class="sub">El texto que hace que alguien se pare.</p>${b5}
+          <div style="margin-top:22px"><p class="rotulo-lateral">Así se verá en el buscador</p><div class="previa-caja"></div></div>
+          <div class="resumen" style="margin-top:16px"></div>
+        </div>`;
+    }
+    return `
+      <p class="miga"><a href="#">Panel</a> / <a href="#">Animales</a> / Nueva ficha</p>
+      <p class="eyebrow">Nueva ficha</p>
+      <h1>Publicar un animal</h1>
+      <p class="entradilla">La ficha se publica primero como <b>disponible</b>. Cuando decidáis abrir el proceso de adopción, empezará a recibir solicitudes.</p>
+      <div class="malla">
+        <div>${b1}${b2}${b3}${b4}${b5}</div>
+        <aside class="lateral">
+          <div><p class="rotulo-lateral">Así se verá en el buscador</p><div class="previa-caja"></div></div>
+          <div class="lista-control"></div>
+        </aside>
+      </div>`;
+  }
+
+  /* ---------- tarjeta de vista previa ---------- */
+  function previa(){
+    const nom=est.nombre.trim()||'Sin nombre';
+    const port=est.media[est.portada];
+    const tags=[est.raza||(est.especie?ESP().razas[0]:''),edadTexto(est),est.tamano,est.sexo].filter(Boolean);
+    const chipEstado=est.estado==='en_adopcion'?'<span class="chip coral est">En proceso</span>'
+      :est.estado==='disponible'?'<span class="chip menta est">Disponible</span>'
+      :'<span class="chip ambar est">Borrador</span>';
+    return `<div class="tarjeta-previa">
+      <div class="pv-foto" style="background:${port?port.fondo:'var(--verde-tenue)'};color:${port?'rgba(255,255,255,.55)':'#9FC0AC'}">
+        ${chipEstado}${I.huella}
+      </div>
+      <div class="pv-cuerpo">
+        <div class="pv-nombre"><h4>${esc(nom)}</h4><span>${est.especie?ESP().nombre:'—'}</span></div>
+        <p class="pv-linea">${esc(tags.join(' · ')||'Completa los datos básicos')}</p>
+        <div class="pv-tags">${est.caracter.slice(0,3).map(c=>`<span class="chip n">${c}</span>`).join('')||'<span class="chip n" style="opacity:.5">sin carácter</span>'}</div>
+        <div class="medidor">
+          <div class="cab"><span>Ficha completa</span><b>${completitud()} %</b></div>
+          <div class="barra">${[20,40,60,80,100].map(u=>`<i class="${completitud()>=u?'on':''}"></i>`).join('')}</div>
+        </div>
+      </div></div>`;
+  }
+  function listaControl(){
+    const fila=(k,t,f)=>`<li class="${f()?'ok':''}"><span class="punto">${I.check}</span> ${t}</li>`;
+    return `<h3>Para poder publicar</h3><ul>
+      ${fila('a','Especie',ok.especie)}${fila('b','Nombre y sexo',()=>ok.nombre()&&ok.sexo())}
+      ${fila('c','Edad',ok.edad)}${fila('d','Tamaño',ok.tamano)}${fila('e','Al menos una foto',ok.fotos)}</ul>
+      <p class="sep">Suma solicitudes</p><ul>
+      ${fila('f','Vacunas y salud',rec.salud)}${fila('g','Carácter y actividad',rec.caracter)}
+      ${fila('h','Historia contada',rec.historia)}${fila('i','Un vídeo corto',rec.video)}</ul>`;
+  }
+
+  /* ---------- ficha (protectora) ---------- */
+  function vistaFicha(){
+    const nom=esc(est.nombre.trim()||'Sin nombre');
+    const enAd=est.estado==='en_adopcion';
+    const media=est.media.length?est.media:[{tipo:'foto',fondo:FONDOS[0]}];
+    return `
+      <p class="miga"><a href="#">Panel</a> / <a href="#">Animales</a> / ${nom}</p>
+      <div class="ficha">
+        <div class="hero">
+          <div class="hero-media">
+            <div class="med grande" style="background:${media[est.portada]?media[est.portada].fondo:media[0].fondo}">${I.huella}<span class="portada">portada</span></div>
+            <div class="col">${media.filter((_,i)=>i!==est.portada).slice(0,3).map(m=>`<div class="med" style="background:${m.fondo}">${m.tipo==='video'?`<span class="play">${I.play}</span>`:I.huella}</div>`).join('')||`<div class="med" style="background:var(--verde-tenue);color:#9FC0AC">${I.huella}</div>`}</div>
+          </div>
+          <div class="hero-txt">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+              ${enAd?'<span class="chip coral">En proceso de adopción</span>':'<span class="chip menta">Disponible</span>'}
+              ${est.especial?`<span class="chip ambar">Necesidades especiales</span>`:''}
+            </div>
+            <h2>${nom}</h2>
+            <p class="hero-sub">${esc([est.especie?ESP().nombre:'',est.raza,est.sexo].filter(Boolean).join(' · '))} · ${est.lugar==='acogida'?'en casa de acogida':'en el refugio'}${esperaTexto(est)?' · '+esperaTexto(est).toLowerCase():''}</p>
+            <div class="datos">
+              <div><span>Edad</span><b>${edadTexto(est)}</b></div>
+              <div><span>Tamaño</span><b>${est.tamano||'—'}</b></div>
+              <div><span>Peso</span><b>${est.peso?est.peso+' kg':'—'}</b></div>
+              <div><span>Actividad</span><b>${est.actividad||'—'}</b></div>
+            </div>
+            ${est.historia.trim()?`<div class="seccion"><h3>Su historia</h3><p>${esc(est.historia.trim())}</p></div>`:''}
+            <div class="seccion"><h3>Salud</h3>
+              <div class="chips">
+                ${est.sinVacunas?'<span class="chip ambar">Sin vacunar todavía</span>':est.vacunas.map(v=>`<span class="chip menta">${v}</span>`).join('')||'<span class="chip ambar">Vacunas sin indicar</span>'}
+                ${est.chip?'<span class="chip menta">Microchip</span>':''}
+                ${est.esterilizado?'<span class="chip menta">Esterilizada</span>':''}
+                ${est.tests.map(t=>`<span class="chip menta">${t} negativo</span>`).join('')}
+              </div>
+              ${est.especial?`<p style="margin-top:12px;font-size:13.5px">${esc(est.especial)}</p>`:''}
+            </div>
+            <div class="seccion"><h3>Convivencia</h3>
+              <div class="conviv">${(est.especie?ESP().convivencia:[]).map(c=>{
+                const v=est.convive[c]||'';
+                const et=v==='si'?'<span class="chip menta est">sí</span>':v==='no'?'<span class="chip coral est">no</span>':'<span class="chip n est">sin valorar</span>';
+                return `<div>${c}${et}</div>`;}).join('')}
+              </div>
+            </div>
+            ${est.caracter.length?`<div class="seccion"><h3>Carácter</h3><div class="chips">${est.caracter.map(c=>`<span class="chip n">${c}</span>`).join('')}</div></div>`:''}
+          </div>
+        </div>
+        <aside class="rail">
+          <div class="tarjeta">
+            <div class="estado-grande">${enAd?'<span class="chip coral">En proceso</span>':'<span class="chip menta">Disponible</span>'}<b>${enAd?est.solicitudes+' solicitudes':'Ficha publicada'}</b></div>
+            <p>${enAd
+              ? 'El proceso está abierto: quien visite la ficha puede enviar su solicitud y aparecerá en <b>Candidatos</b>.'
+              : 'La ficha ya es visible, pero todavía <b>nadie puede solicitar la adopción</b>. Abrid el proceso cuando esté lista para irse.'}</p>
+            <div class="acc-rail">
+              ${enAd
+                ? `<button class="btn linea ancho" data-act="candidatos">Ver solicitudes (${est.solicitudes})</button>
+                   <button class="btn linea ancho" data-act="pausar">Pausar el proceso</button>`
+                : `<button class="btn solido ancho" data-act="abrir-proceso">Abrir proceso de adopción</button>`}
+              <button class="btn fantasma ancho" data-act="editar">Editar ficha</button>
+              <button class="btn fantasma ancho" data-act="ver-publica">Ver como adoptante</button>
+            </div>
+          </div>
+          ${enAd?`<div class="tarjeta"><h3>Condiciones publicadas</h3>
+            <div class="dato-mini"><span>Solicitudes a la vez</span><b>${est.proceso.plazas==='sin'?'sin límite':est.proceso.plazas}</b></div>
+            <div class="dato-mini"><span>Aportación</span><b>${est.proceso.cuota?est.proceso.cuota+' €':'no indicada'}</b></div>
+            <div class="dato-mini"><span>Preguntas</span><b>${est.proceso.preguntas.length}</b></div>
+            <div class="dato-mini"><span>Requisitos</span><b>${est.proceso.requisitos.length}</b></div></div>`:''}
+          <div class="tarjeta"><h3>Ficha completa al ${completitud()} %</h3>
+            <div class="barra">${[20,40,60,80,100].map(u=>`<i class="${completitud()>=u?'on':''}"></i>`).join('')}</div>
+            <p style="margin:12px 0 0">${rec.video()?'Buen material: tiene vídeo, historia y carácter.':'Añadir un vídeo corto y su carácter ayuda a que la gente se decida.'}</p></div>
+        </aside>
+      </div>`;
+  }
+
+  /* ---------- ficha pública (adoptante) ---------- */
+  function vistaPublica(){
+    const nom=esc(est.nombre.trim()||'Sin nombre');
+    const enAd=est.estado==='en_adopcion';
+    const media=est.media.length?est.media:[{tipo:'foto',fondo:FONDOS[0]}];
+    const cta=enAd
+      ? `<button class="btn solido ancho" data-act="solicitar">Solicitar adopción de ${nom}</button>
+         <button class="btn linea ancho" style="margin-top:9px" data-act="preguntar">Preguntar antes</button>
+         <p class="micro">${est.proceso.preguntas.length} preguntas · unos 3 minutos<br>Protectora Huellas responde en 48 h</p>`
+      : `<button class="btn linea ancho" data-act="avisar">Avisadme cuando se abra</button>
+         <p class="micro">Todavía no está en adopción.<br>Te escribimos en cuanto abra el proceso.</p>`;
+    return `
+      <div class="publica">
+        <div class="hero" style="margin-bottom:18px">
+          <div class="hero-media">
+            <div class="med grande" style="background:${media[est.portada]?media[est.portada].fondo:media[0].fondo}">${I.huella}</div>
+            <div class="col">${media.filter((_,i)=>i!==est.portada).slice(0,3).map(m=>`<div class="med" style="background:${m.fondo}">${m.tipo==='video'?`<span class="play">${I.play}</span>`:I.huella}</div>`).join('')||`<div class="med" style="background:var(--verde-tenue);color:#9FC0AC">${I.huella}</div>`}</div>
+          </div>
+          <div class="hero-txt">
+            <h2>${nom}</h2>
+            <p class="hero-sub">${esc([est.especie?ESP().nombre:'',est.raza,est.sexo,edadTexto(est)].filter(Boolean).join(' · '))} · Protectora Huellas · a 2,4 km de ti</p>
+            ${esperaTexto(est)?`<div class="espera">${I.reloj}<span>${esperaTexto(est)} en ${est.lugar==='acogida'?'casa de acogida':'el refugio'}.</span></div>`:''}
+            <div class="datos">
+              <div><span>Edad</span><b>${edadTexto(est)}</b></div>
+              <div><span>Tamaño</span><b>${est.tamano||'—'}</b></div>
+              <div><span>Peso</span><b>${est.peso?est.peso+' kg':'—'}</b></div>
+              <div><span>Actividad</span><b>${est.actividad||'—'}</b></div>
+            </div>
+            ${est.historia.trim()?`<div class="seccion"><h3>Su historia</h3><p>${esc(est.historia.trim())}</p></div>`:''}
+            <div class="seccion"><h3>Convive bien</h3>
+              <div class="conviv">${(est.especie?ESP().convivencia:[]).map(c=>{
+                const v=est.convive[c]||'';
+                const et=v==='si'?'<span class="chip menta est">sí</span>':v==='no'?'<span class="chip coral est">no</span>':'<span class="chip n est">sin valorar</span>';
+                return `<div>${c}${et}</div>`;}).join('')}</div>
+            </div>
+            <div class="seccion"><h3>Salud</h3><div class="chips">
+              ${est.sinVacunas?'<span class="chip ambar">Sin vacunar todavía</span>':est.vacunas.map(v=>`<span class="chip menta">${v}</span>`).join('')}
+              ${est.chip?'<span class="chip menta">Microchip</span>':''}${est.esterilizado?'<span class="chip menta">Esterilizada</span>':''}
+              ${est.tests.map(t=>`<span class="chip menta">${t} negativo</span>`).join('')}</div>
+              ${est.especial?`<p style="margin-top:12px;font-size:13.5px">${esc(est.especial)}</p>`:''}</div>
+            ${enAd&&est.proceso.requisitos.length?`<div class="seccion"><h3>Qué pide la protectora</h3><div class="chips">${est.proceso.requisitos.map(r=>`<span class="chip n">${r}</span>`).join('')}</div>
+              ${est.proceso.cuota?`<p style="margin-top:12px;font-size:13.5px">Aportación de adopción: <b>${esc(est.proceso.cuota)} €</b>. Cubre chip, vacunas y esterilización.</p>`:''}</div>`:''}
+          </div>
+        </div>
+        ${movil?'':`<div class="cta-caja">${cta}</div>`}
+      </div>`;
+  }
+
+  /* ---------- modales ---------- */
+  function modalProceso(){
+    const req=est.especie?ESP().requisitos:[];
+    return `<div class="panel">
+      <div class="panel-cab"><h3>Abrir proceso de adopción</h3>
+        <p>A partir de ahora la ficha mostrará el botón de solicitud y las respuestas llegarán a <b>Candidatos</b>.</p></div>
+      <div class="panel-cuerpo">
+        <div><span class="rotulo">Solicitudes abiertas a la vez</span>
+          <div class="segmentado" role="group">
+            <button type="button" data-act="plazas" data-val="1" aria-pressed="${est.proceso.plazas==='1'}">Una a una</button>
+            <button type="button" data-act="plazas" data-val="3" aria-pressed="${est.proceso.plazas==='3'}">Hasta 3</button>
+            <button type="button" data-act="plazas" data-val="sin" aria-pressed="${est.proceso.plazas==='sin'}">Sin límite</button>
+          </div>
+          <p class="ayuda">«Una a una» evita dar falsas esperanzas: el resto verá que hay una solicitud en curso.</p></div>
+        <div><span class="rotulo">Requisitos que aceptáis</span>
+          <div class="chips">${req.map(r=>`<button type="button" class="chip-sel" data-act="req" data-val="${r}" aria-pressed="${est.proceso.requisitos.includes(r)}"><span class="tic">${I.check2}</span>${r}</button>`).join('')}</div></div>
+        <div><label class="rotulo" for="cuota-${modo}">Aportación de adopción <span class="opc">opcional · €</span></label>
+          <input type="number" id="cuota-${modo}" data-campo="cuota" min="0" value="${est.proceso.cuota}" placeholder="120">
+          <p class="ayuda">Se muestra siempre junto a lo que cubre. La transparencia aquí reduce las bajas a mitad de proceso.</p></div>
+        <div><span class="rotulo">Preguntas del formulario <span class="opc">${est.proceso.preguntas.length} preguntas</span></span>
+          <div style="display:grid;gap:8px">${est.proceso.preguntas.map((q,i)=>`<div class="preg"><span class="num">0${i+1}</span><span>${esc(q)}</span><button data-act="quita-preg" data-val="${i}" aria-label="Quitar pregunta">${I.equis}</button></div>`).join('')}</div>
+          <div style="display:flex;gap:9px;margin-top:11px">
+            <input type="text" data-campo="nuevaPreg" value="${esc(est.proceso.nueva||'')}" placeholder="Escribe otra pregunta">
+            <button type="button" class="btn linea" data-act="add-preg" style="flex:none">Añadir</button>
+          </div></div>
+      </div>
+      <div class="panel-pie">
+        <button class="btn fantasma" data-act="cerrar-modal">Cancelar</button>
+        <button class="btn solido" data-act="confirmar-proceso">Abrir proceso</button>
+      </div></div>`;
+  }
+  function modalSolicitud(){
+    return `<div class="panel">
+      <div class="panel-cab"><h3>Solicitar adopción de ${esc(est.nombre)}</h3>
+        <p>Protectora Huellas leerá tus respuestas y te contestará en unos 2 días. Enviar la solicitud no es un compromiso.</p></div>
+      <div class="panel-cuerpo">
+        ${est.proceso.preguntas.slice(0,3).map((q,i)=>`<div><label class="rotulo">${esc(q)}</label><textarea style="min-height:74px" placeholder="Escribe tu respuesta"></textarea></div>`).join('')}
+        <p class="ayuda">Quedan ${Math.max(0,est.proceso.preguntas.length-3)} preguntas más · guardamos el borrador mientras escribes.</p>
+      </div>
+      <div class="panel-pie">
+        <button class="btn fantasma" data-act="cerrar-modal">Ahora no</button>
+        <button class="btn solido" data-act="enviar-solicitud">Enviar solicitud</button>
+      </div></div>`;
+  }
+  function modalCandidatos(){
+    const n=est.solicitudes, nombres=['Marta R.','Joselu M.','Andrés P.','Lucía B.'];
+    return `<div class="panel">
+      <div class="panel-cab"><h3>Solicitudes de ${esc(est.nombre)}</h3>
+        <p>${n?`${n} solicitud${n>1?'es':''} · se responden en orden de llegada.`:'Todavía no hay ninguna.'}</p></div>
+      <div class="panel-cuerpo">
+        ${n?[...Array(n)].map((_,i)=>`<div class="preg"><span class="num">0${i+1}</span>
+            <span><b>${nombres[i%4]}</b> · a ${(1.2+i).toFixed(1)} km · ${est.proceso.preguntas.length} respuestas
+            <br><span style="color:var(--tinta-40);font-size:12px">Recibida hoy · sin leer</span></span></div>`).join('')
+          :`<div style="text-align:center;padding:14px 6px">
+              <p class="ayuda" style="font-size:13.5px">Nadie ha solicitado la adopción todavía. Revisad las fotos y la historia: son lo que más mueve a la gente a escribir.</p>
+              <button class="btn linea" style="margin-top:14px" data-act="ver-publica">Ver la ficha como adoptante</button></div>`}
+      </div>
+      <div class="panel-pie"><button class="btn fantasma" data-act="cerrar-modal">Cerrar</button></div></div>`;
+  }
+  function modalExito(titulo,texto,acciones){
+    return `<div class="panel"><div class="exito-panel">
+      <div class="sello"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h3>${titulo}</h3><p>${texto}</p>
+      <div style="display:grid;gap:9px;max-width:280px;margin:0 auto">${acciones}</div>
+    </div></div>`;
+  }
+  const abrirModal=html=>{capa.innerHTML=html;capa.classList.add('visible')};
+  const cerrarModal=()=>{capa.classList.remove('visible');capa.innerHTML=''};
+
+  /* ---------- pintado ---------- */
+  function pintar(){
+    if(est.vista==='form'){
+      if(!lienzo.dataset.form){ lienzo.innerHTML=marcadoForm(); lienzo.dataset.form='1'; refrescarDinamicos(); rellenar(); }
+      lienzo.querySelectorAll('.paso').forEach(s=>s.classList.toggle('activo',+s.dataset.paso===est.paso));
+    } else {
+      lienzo.dataset.form='';
+      lienzo.innerHTML = est.vista==='ficha' ? vistaFicha() : vistaPublica();
+    }
+    if(!movil){
+      const av=$('.aviso-rol'); av.hidden = est.vista!=='publica';
+      $('.rol-protectora').setAttribute('aria-pressed',String(est.vista!=='publica'));
+      $('.rol-colaborador').setAttribute('aria-pressed',String(est.vista==='publica'));
+      $('.cuenta').style.visibility = est.vista==='publica' ? 'hidden':'visible';
+    }
+    sincronizar();
+  }
+
+  /* elementos que dependen de la especie */
+  function refrescarDinamicos(){
+    if(!est.especie) return;
+    const E=ESP();
+    const dl=$('datalist'); if(dl) dl.innerHTML=E.razas.map(r=>`<option value="${r}">`).join('');
+    const tam=$('.tamanos'); if(tam) tam.innerHTML=E.tamanos.map(([t,s])=>`<button type="button" data-act="tamano" data-val="${t}" aria-pressed="${est.tamano===t}">${t}<small>${s}</small></button>`).join('');
+    const vac=$('.vacunas'); if(vac) vac.innerHTML=[...E.vacunas.map(v=>`<button type="button" class="chip-sel" data-act="vacuna" data-val="${v}" aria-pressed="${est.vacunas.includes(v)}"><span class="tic">${I.check2}</span>${v}</button>`),
+      `<button type="button" class="chip-sel" data-act="sinvacunas" aria-pressed="${est.sinVacunas}"><span class="tic">${I.check2}</span>Sin vacunar todavía</button>`].join('');
+    const tst=$('.tests'); if(tst) tst.innerHTML=E.tests.map(t=>`<button type="button" class="chip-sel" data-act="test" data-val="${t}" aria-pressed="${est.tests.includes(t)}"><span class="tic">${I.check2}</span>${t}</button>`).join('');
+    const car=$('.caracter'); if(car) car.innerHTML=CARACTER.map(c=>`<button type="button" class="chip-sel" data-act="caracter" data-val="${c}" aria-pressed="${est.caracter.includes(c)}"><span class="tic">${I.check2}</span>${c}</button>`).join('');
+    const idl=$('.ideal'); if(idl) idl.innerHTML=IDEAL.map(c=>`<button type="button" class="chip-sel" data-act="ideal" data-val="${c}" aria-pressed="${est.ideal.includes(c)}"><span class="tic">${I.check2}</span>${c}</button>`).join('');
+    const tri=$('.tri-lista'); if(tri) tri.innerHTML=E.convivencia.map(c=>`<div class="tri"><span>${c}</span><div class="tri-btns" role="group" aria-label="${c}">
+      ${[['si','Sí'],['no','No'],['','Sin valorar']].map(([v,t])=>`<button type="button" data-act="convive" data-key="${c}" data-val="${v}" aria-pressed="${(est.convive[c]||'')===v}">${t}</button>`).join('')}
+    </div></div>`).join('');
+    const nom=$('[data-campo="nombre"]'); if(nom) nom.placeholder = est.especie==='gato'?'Trufa':'Nala';
+    const rz=$('[data-campo="raza"]'); if(rz) rz.placeholder = est.especie==='gato'?'Común europeo':'Mestiza';
+  }
+
+  /* devuelve al formulario lo ya guardado (al volver desde la ficha) */
+  function rellenar(){
+    ['nombre','raza','peso','nacimiento','especial','historia','edadA','edadM','desde'].forEach(c=>{
+      const el=$(`[data-campo="${c}"]`); if(el&&est[c]) el.value=est[c];
+    });
+    marca('[data-act="especie"]',est.especie);
+    marca('[data-act="sexo"]',est.sexo);
+    marca('[data-act="actividad"]',est.actividad);
+    marca('[data-act="lugar"]',est.lugar);
+    const sf=$('[data-act="sinfecha"]'); if(sf) sf.setAttribute('aria-pressed',String(est.sinFecha));
+    $$('[data-act="bool"]').forEach(b=>b.setAttribute('aria-pressed',String(!!est[b.dataset.val])));
+  }
+
+  function pintarGaleria(){
+    const g=$('.galeria'); if(!g) return;
+    g.innerHTML = est.media.map((m,i)=>`
+      <div class="med" style="background:${m.fondo}">
+        ${I.huella}
+        ${m.tipo==='video'?`<span class="marco"><span class="play">${I.play}</span></span>`:''}
+        ${i===est.portada?'<span class="portada">portada</span>':''}
+        <span class="etiq">${m.tipo==='video'?'0:'+(12+i*4):'IMG_'+(1204+i)}</span>
+        <span class="herr">
+          ${i!==est.portada?`<button data-act="portada" data-val="${i}" title="Hacer portada">${I.estrella}</button>`:''}
+          <button data-act="quita-media" data-val="${i}" title="Quitar">${I.equis}</button>
+        </span>
+      </div>`).join('') + `<button type="button" class="med-add" data-act="add-foto">${I.mas}Añadir</button>`;
+  }
+
+  /* ---------- sincronizar estado visual ---------- */
+  function sincronizar(){
+    if(est.vista==='form'){
+      const zona=$('.zona-especie');
+      if(zona){ if(est.especie) zona.removeAttribute('data-bloqueado'); else zona.setAttribute('data-bloqueado','si'); }
+      if(!movil) ['2','3','4','5'].forEach(n=>{const b=$(`[data-bloque="${n}"]`); if(b){ if(est.especie) b.removeAttribute('data-bloqueado'); else b.setAttribute('data-bloqueado','si'); }});
+      const ap=$('.aprox'); if(ap) ap.hidden=!est.sinFecha;
+      const nac=$('[data-campo="nacimiento"]'); if(nac) nac.disabled=est.sinFecha;
+      const ch=$('.c-hist'); if(ch) ch.textContent=est.historia.length;
+      pintarGaleria();
+      const pv=$('.previa-caja'); if(pv) pv.innerHTML=previa();
+      const lc=$('.lista-control'); if(lc) lc.innerHTML=listaControl();
+      const rs=$('.resumen');
+      if(rs) rs.innerHTML=`
+        <div><span>Especie y sexo</span><b>${est.especie?ESP().nombre:'—'} · ${est.sexo||'—'}</b></div>
+        <div><span>Edad</span><b>${edadTexto(est)}</b></div>
+        <div><span>Tamaño y peso</span><b>${est.tamano||'—'} · ${est.peso?est.peso+' kg':'—'}</b></div>
+        <div><span>Fotos y vídeos</span><b>${est.media.filter(m=>m.tipo==='foto').length} · ${est.media.filter(m=>m.tipo==='video').length}</b></div>
+        <div><span>Ficha completa</span><b>${completitud()} %</b></div>`;
+    }
+    pintarBarra();
+  }
+
+  /* ---------- barras de acción ---------- */
+  function pintarBarra(){
+    if(!movil){
+      const a=$('.acciones');
+      if(est.vista==='form'){
+        const falta=Object.entries(ok).filter(([,f])=>!f()).length;
+        a.hidden=false;
+        a.innerHTML=`<p>${puedePublicar()?'Todo listo. La ficha se publicará como <b>disponible</b>.':(est.especie?`Faltan ${falta} datos obligatorios`:'Elegid especie para empezar')}</p>
+          <div class="grupo">
+            <button class="btn fantasma" data-act="cancelar">Cancelar</button>
+            <button class="btn linea" data-act="borrador">Guardar borrador</button>
+            <button class="btn solido" data-act="publicar" ${puedePublicar()?'':'disabled'}>Publicar ficha</button>
+          </div>`;
+      } else if(est.vista==='ficha'){ a.hidden=true; a.innerHTML=''; }
+      else { a.hidden=false; a.innerHTML=`<p>Vista previa pública · no se envía nada real</p><div class="grupo"><button class="btn linea" data-act="salir-publica">Volver a la ficha</button></div>`; }
+      return;
+    }
+    const b=$('.mv-barra'), t=$('.mv-fila h2'), n=$('.paso-num'), pr=$('.progreso'), vol=$('.volver');
+    if(est.vista==='form'){
+      pr.hidden=false; n.hidden=false;
+      n.textContent=`${est.paso}/5`;
+      pr.querySelectorAll('i').forEach((i,k)=>i.classList.toggle('on',k<est.paso));
+      t.textContent=['Identidad','Fotos y vídeos','Salud','Carácter','Historia'][est.paso-1];
+      vol.style.visibility='visible';
+      b.innerHTML=`${est.paso>1?'<button class="btn fantasma" data-act="atras">Atrás</button>':''}
+        <button class="btn solido" data-act="${est.paso===5?'publicar':'siguiente'}" ${okPaso(est.paso)?'':'disabled'}>${est.paso===5?'Publicar ficha':'Continuar'}</button>`;
+    } else if(est.vista==='ficha'){
+      pr.hidden=true; n.hidden=true; t.textContent=est.nombre.trim()||'Ficha'; vol.style.visibility='visible';
+      b.innerHTML= est.estado==='en_adopcion'
+        ? `<button class="btn linea" data-act="ver-publica">Ver ficha</button><button class="btn solido" data-act="candidatos">Solicitudes (${est.solicitudes})</button>`
+        : `<button class="btn linea" data-act="ver-publica">Previsualizar</button><button class="btn solido" data-act="abrir-proceso">Abrir adopción</button>`;
+    } else {
+      pr.hidden=true; n.hidden=true; t.textContent=est.nombre.trim()||'Ficha'; vol.style.visibility='visible';
+      b.innerHTML= est.estado==='en_adopcion'
+        ? `<div class="micro">${est.proceso.preguntas.length} preguntas · 3 min<br>Responden en 48 h</div><button class="btn solido" data-act="solicitar">Solicitar adopción</button>`
+        : `<div class="micro">Todavía no está<br>en adopción</div><button class="btn linea" data-act="avisar">Avisadme</button>`;
+    }
+  }
+
+  /* ---------- eventos ---------- */
+  const alterna=(arr,v)=>{const i=arr.indexOf(v); i<0?arr.push(v):arr.splice(i,1);};
+  const marca=(sel,val)=>$$(sel).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.val===val)));
+
+  raiz.addEventListener('input',e=>{
+    const c=e.target.dataset.campo; if(!c) return;
+    if(c==='cuota'){ est.proceso.cuota=e.target.value; return; }
+    if(c==='nuevaPreg'){ est.proceso.nueva=e.target.value; return; }
+    est[c]=e.target.value; sincronizar();
+  });
+
+  raiz.addEventListener('click',e=>{
+    const b=e.target.closest('[data-act]'); if(!b) return;
+    const v=b.dataset.val, a=b.dataset.act;
+    switch(a){
+      case 'especie': est.especie=v; marca('[data-act="especie"]',v); est.vacunas=[];est.tests=[];est.convive={};est.tamano='';
+        refrescarDinamicos(); break;
+      case 'sexo': est.sexo=v; marca('[data-act="sexo"]',v); break;
+      case 'tamano': est.tamano=v; marca('[data-act="tamano"]',v); break;
+      case 'actividad': est.actividad=v; marca('[data-act="actividad"]',v); break;
+      case 'lugar': est.lugar=v; marca('[data-act="lugar"]',v); break;
+      case 'sinfecha': est.sinFecha=!est.sinFecha; b.setAttribute('aria-pressed',String(est.sinFecha)); if(est.sinFecha) est.nacimiento=''; break;
+      case 'bool': est[v]=!est[v]; b.setAttribute('aria-pressed',String(est[v])); break;
+      case 'vacuna': if(est.sinVacunas){est.sinVacunas=false;$('[data-act="sinvacunas"]').setAttribute('aria-pressed','false');}
+        alterna(est.vacunas,v); b.setAttribute('aria-pressed',String(est.vacunas.includes(v))); break;
+      case 'sinvacunas': est.sinVacunas=!est.sinVacunas; b.setAttribute('aria-pressed',String(est.sinVacunas));
+        if(est.sinVacunas){est.vacunas=[];$$('[data-act="vacuna"]').forEach(x=>x.setAttribute('aria-pressed','false'));} break;
+      case 'test': alterna(est.tests,v); b.setAttribute('aria-pressed',String(est.tests.includes(v))); break;
+      case 'caracter': if(!est.caracter.includes(v)&&est.caracter.length>=4) break;
+        alterna(est.caracter,v); b.setAttribute('aria-pressed',String(est.caracter.includes(v))); break;
+      case 'ideal': alterna(est.ideal,v); b.setAttribute('aria-pressed',String(est.ideal.includes(v))); break;
+      case 'convive': est.convive[b.dataset.key]=v;
+        b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); break;
+      case 'add-foto': est.media.push({tipo:'foto',fondo:FONDOS[est.media.length%FONDOS.length]}); break;
+      case 'add-video': est.media.push({tipo:'video',fondo:FONDOS[(est.media.length+2)%FONDOS.length]}); break;
+      case 'portada': est.portada=+v; break;
+      case 'quita-media': est.media.splice(+v,1); if(est.portada>=est.media.length) est.portada=0; break;
+      case 'siguiente': est.paso=Math.min(5,est.paso+1); $('.mv-scroll').scrollTop=0; break;
+      case 'atras': if(est.vista!=='form'){est.vista= est.vista==='publica'?'ficha':'form'; pintar(); return;}
+        if(est.paso>1){est.paso--; $('.mv-scroll').scrollTop=0;} break;
+      case 'editar': cerrarModal(); est.vista='form'; est.paso=1; pintar(); return;
+      case 'ver-publica': cerrarModal(); est.vista='publica'; pintar(); if(!movil) window.scrollTo({top:0,behavior:'smooth'}); return;
+      case 'salir-publica': cerrarModal(); est.vista='ficha'; pintar(); return;
+      case 'candidatos': abrirModal(modalCandidatos()); return;
+      case 'publicar': est.estado='disponible'; est.vista='ficha'; pintar();
+        abrirModal(modalExito('Ficha publicada',
+          `<b>${esc(est.nombre)}</b> ya aparece en el buscador como <b>disponible</b>. Todavía nadie puede solicitar la adopción: eso ocurre cuando abráis el proceso.`,
+          `<button class="btn solido" data-act="abrir-proceso">Abrir proceso de adopción</button>
+           <button class="btn linea" data-act="cerrar-modal">Ahora no</button>`)); return;
+      case 'borrador': b.textContent='Borrador guardado'; setTimeout(()=>b.textContent='Guardar borrador',1800); return;
+      case 'abrir-proceso': abrirModal(modalProceso()); return;
+      case 'plazas': est.proceso.plazas=v; marca('[data-act="plazas"]',v); return;
+      case 'req': alterna(est.proceso.requisitos,v); b.setAttribute('aria-pressed',String(est.proceso.requisitos.includes(v))); return;
+      case 'quita-preg': est.proceso.preguntas.splice(+v,1); abrirModal(modalProceso()); return;
+      case 'add-preg': { const t=(est.proceso.nueva||'').trim(); if(t) est.proceso.preguntas.push(t); est.proceso.nueva=''; abrirModal(modalProceso()); return; }
+      case 'confirmar-proceso': est.estado='en_adopcion'; est.vista='ficha'; pintar();
+        abrirModal(modalExito('Proceso abierto',
+          `La ficha de <b>${esc(est.nombre)}</b> ya muestra el botón <b>Solicitar adopción</b>. Cada solicitud llegará a <b>Candidatos</b> con las respuestas al formulario.`,
+          `<button class="btn solido" data-act="ver-publica">Ver como adoptante</button>
+           <button class="btn linea" data-act="cerrar-modal">Volver a la ficha</button>`)); return;
+      case 'pausar': est.estado='disponible'; pintar(); return;
+      case 'solicitar': abrirModal(modalSolicitud()); return;
+      case 'enviar-solicitud': est.solicitudes++;
+        abrirModal(modalExito('Solicitud enviada',
+          `Protectora Huellas leerá tus respuestas y te escribirá en unos 2 días. Puedes seguir el estado desde <b>Mis solicitudes</b>.`,
+          `<button class="btn linea" data-act="cerrar-modal">Seguir mirando</button>`)); pintarBarra(); return;
+      case 'preguntar': abrirModal(modalExito('Mensaje enviado',
+          `Le hemos pasado tu pregunta a Protectora Huellas. Preguntar no te quita el turno si luego decides solicitar la adopción.`,
+          `<button class="btn linea" data-act="cerrar-modal">Cerrar</button>`)); return;
+      case 'avisar': abrirModal(modalExito('Te avisaremos',
+          `Cuando Protectora Huellas abra el proceso de <b>${esc(est.nombre)}</b> recibirás un aviso.`,
+          `<button class="btn linea" data-act="cerrar-modal">Cerrar</button>`)); return;
+      case 'cerrar-modal': cerrarModal(); return;
+      case 'cancelar': return;
+    }
+    sincronizar();
+  });
+  capa.addEventListener('click',e=>{ if(e.target===capa) cerrarModal(); });
+  if(!movil){
+    $('.rol-colaborador').addEventListener('click',()=>{ if(est.estado!=='borrador'){est.vista='publica';pintar();} });
+    $('.rol-protectora').addEventListener('click',()=>{ est.vista= est.estado==='borrador'?'form':'ficha'; pintar(); });
+  }
+
+  pintar();
+}
+
+crearApp(document.getElementById('app-escritorio'),'escritorio');
+crearApp(document.getElementById('app-movil'),'movil');
+document.querySelectorAll('.conmutador button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.conmutador button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+  document.querySelectorAll('.escenario').forEach(s=>s.classList.toggle('activo',s.dataset.vista===b.dataset.vista));
+}));
+</script>
+</body>
+</html>

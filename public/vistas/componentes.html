@@ -1,0 +1,2304 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Red Protectora — sistema de componentes (Bootstrap 5)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <!-- rp-bootstrap.css (incrustado para que la demo funcione en un solo fichero) -->
+    <style>
+      /* ==========================================================================
+   Red Protectora — tema Bootstrap 5.3
+   Cargar SIEMPRE después de bootstrap.min.css
+   ========================================================================== */
+
+      :root,
+      [data-bs-theme="light"] {
+        /* --- paleta de marca --- */
+        --rp-pino: #123a2b;
+        --rp-pino-osc: #0c2b20;
+        --rp-verde: #2f7a55;
+        --rp-verde-osc: #276646;
+        --rp-verde-cl: #dfede4;
+        --rp-hueso: #f7f4ed;
+        --rp-papel: #ffffff;
+        --rp-tinta: #16211c;
+        --rp-gris: #6b7770;
+        --rp-arcilla: #b5533f;
+        --rp-miel: #c08a2e;
+        --rp-linea: #e4e0d5;
+        --rp-linea-sv: #f0ede4;
+
+        /* --- mapeo semántico de Bootstrap --- */
+        --bs-primary: #123a2b;
+        --bs-primary-rgb: 18, 58, 43;
+        --bs-secondary: #6b7770;
+        --bs-secondary-rgb: 107, 119, 112;
+        --bs-success: #2f7a55;
+        --bs-success-rgb: 47, 122, 85;
+        --bs-danger: #b5533f;
+        --bs-danger-rgb: 181, 83, 63;
+        --bs-warning: #c08a2e;
+        --bs-warning-rgb: 192, 138, 46;
+        --bs-info: #3f7a8e;
+        --bs-info-rgb: 63, 122, 142;
+        --bs-light: #f7f4ed;
+        --bs-light-rgb: 247, 244, 237;
+        --bs-dark: #16211c;
+        --bs-dark-rgb: 22, 33, 28;
+
+        --bs-body-bg: #f7f4ed;
+        --bs-body-color: #16211c;
+        --bs-body-color-rgb: 22, 33, 28;
+        --bs-secondary-color: rgba(22, 33, 28, 0.62);
+        --bs-emphasis-color: #0c2b20;
+        --bs-border-color: #e4e0d5;
+        --bs-border-color-translucent: rgba(18, 58, 43, 0.12);
+        --bs-link-color: #2f7a55;
+        --bs-link-color-rgb: 47, 122, 85;
+        --bs-link-hover-color: #123a2b;
+
+        /* subtles: fondos suaves de alerts, badges, tablas */
+        --bs-primary-bg-subtle: #dfede4;
+        --bs-primary-border-subtle: #b7d4c3;
+        --bs-primary-text-emphasis: #0c2b20;
+        --bs-success-bg-subtle: #e2f0e8;
+        --bs-success-border-subtle: #b5d8c4;
+        --bs-success-text-emphasis: #1e5238;
+        --bs-danger-bg-subtle: #f7e5e1;
+        --bs-danger-border-subtle: #e8c0b6;
+        --bs-danger-text-emphasis: #7c3527;
+        --bs-warning-bg-subtle: #faf0dc;
+        --bs-warning-border-subtle: #e9d2a2;
+        --bs-warning-text-emphasis: #7e5a17;
+        --bs-info-bg-subtle: #e3eef2;
+        --bs-info-border-subtle: #bcd5de;
+        --bs-info-text-emphasis: #2a5260;
+        --bs-secondary-bg-subtle: #f0ede4;
+        --bs-secondary-border-subtle: #ddd8cb;
+        --bs-light-bg-subtle: #fcfbf7;
+        --bs-dark-bg-subtle: #d8d5cc;
+        --bs-tertiary-bg: #f0ede4;
+
+        /* --- tipografía --- */
+        --bs-font-sans-serif:
+          "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --rp-display: "Archivo", var(--bs-font-sans-serif);
+        --bs-body-font-size: 1rem;
+        --bs-body-line-height: 1.6;
+
+        /* --- radios: menos redondeado que Bootstrap por defecto --- */
+        --bs-border-radius: 0.625rem;
+        --bs-border-radius-sm: 0.4375rem;
+        --bs-border-radius-lg: 0.875rem;
+        --bs-border-radius-xl: 1.125rem;
+        --bs-border-radius-pill: 999px;
+
+        --bs-focus-ring-color: rgba(47, 122, 85, 0.35);
+        --bs-focus-ring-width: 0.2rem;
+      }
+
+      /* --------------------------------------------------------------------------
+   Tipografía
+   -------------------------------------------------------------------------- */
+      body {
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .h1,
+      .h2,
+      .h3,
+      .h4,
+      .h5,
+      .h6,
+      .display-1,
+      .display-2,
+      .display-3,
+      .display-4,
+      .display-5,
+      .display-6 {
+        font-family: var(--rp-display);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        line-height: 1.1;
+        color: var(--rp-pino);
+      }
+      h4,
+      h5,
+      h6,
+      .h4,
+      .h5,
+      .h6 {
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      /* Etiqueta de sección: Archivo, versalitas, tracking abierto */
+      .rp-eyebrow {
+        font-family: var(--rp-display);
+        font-weight: 500;
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--rp-gris);
+      }
+      /* Cifra grande (contadores, dashboards) */
+      .rp-figure {
+        font-family: var(--rp-display);
+        font-weight: 700;
+        font-size: 2.125rem;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        color: var(--rp-pino);
+      }
+
+      /* --------------------------------------------------------------------------
+   Botones
+   -------------------------------------------------------------------------- */
+      .btn {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        --bs-btn-padding-y: 0.6875rem;
+        --bs-btn-padding-x: 1.25rem;
+        --bs-btn-font-size: 0.9375rem;
+        --bs-btn-border-radius: 0.625rem;
+      }
+      .btn-lg {
+        --bs-btn-padding-y: 0.875rem;
+        --bs-btn-padding-x: 1.5rem;
+        --bs-btn-font-size: 1rem;
+      }
+      .btn-sm {
+        --bs-btn-padding-y: 0.4375rem;
+        --bs-btn-padding-x: 0.875rem;
+        --bs-btn-font-size: 0.8125rem;
+      }
+
+      .btn-primary {
+        --bs-btn-bg: var(--rp-pino);
+        --bs-btn-border-color: var(--rp-pino);
+        --bs-btn-color: #f4f0e6;
+        --bs-btn-hover-bg: var(--rp-pino-osc);
+        --bs-btn-hover-border-color: var(--rp-pino-osc);
+        --bs-btn-hover-color: #fff;
+        --bs-btn-active-bg: #071f16;
+        --bs-btn-active-border-color: #071f16;
+        --bs-btn-disabled-bg: var(--rp-pino);
+        --bs-btn-disabled-border-color: var(--rp-pino);
+      }
+      .btn-success {
+        --bs-btn-bg: var(--rp-verde);
+        --bs-btn-border-color: var(--rp-verde);
+        --bs-btn-hover-bg: var(--rp-verde-osc);
+        --bs-btn-hover-border-color: var(--rp-verde-osc);
+        --bs-btn-active-bg: #1f5439;
+        --bs-btn-active-border-color: #1f5439;
+        --bs-btn-disabled-bg: var(--rp-verde);
+        --bs-btn-disabled-border-color: var(--rp-verde);
+      }
+      .btn-outline-primary {
+        --bs-btn-color: var(--rp-pino);
+        --bs-btn-border-color: #c9c4b4;
+        --bs-btn-hover-bg: var(--rp-pino);
+        --bs-btn-hover-border-color: var(--rp-pino);
+        --bs-btn-hover-color: #f4f0e6;
+        --bs-btn-active-bg: var(--rp-pino-osc);
+        --bs-btn-active-border-color: var(--rp-pino-osc);
+      }
+      .btn-outline-success {
+        --bs-btn-color: var(--rp-verde);
+        --bs-btn-border-color: #b5d8c4;
+        --bs-btn-hover-bg: var(--rp-verde);
+        --bs-btn-hover-border-color: var(--rp-verde);
+      }
+      .btn-light {
+        --bs-btn-bg: var(--rp-papel);
+        --bs-btn-border-color: var(--rp-linea);
+        --bs-btn-color: var(--rp-pino);
+        --bs-btn-hover-bg: #f1eee5;
+        --bs-btn-hover-border-color: #d6d1c2;
+      }
+      .btn-link {
+        --bs-btn-color: var(--rp-verde);
+        --bs-btn-hover-color: var(--rp-pino);
+        text-underline-offset: 0.2em;
+      }
+
+      /* --------------------------------------------------------------------------
+   Formularios
+   -------------------------------------------------------------------------- */
+      .form-label {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        font-size: 0.8125rem;
+        letter-spacing: -0.01em;
+        color: var(--rp-pino);
+        margin-bottom: 0.375rem;
+      }
+      .form-text {
+        color: var(--rp-gris);
+        font-size: 0.8125rem;
+      }
+      .form-control,
+      .form-select {
+        --bs-border-radius: 0.5625rem;
+        background-color: var(--rp-papel);
+        border-color: #dad5c7;
+        padding: 0.625rem 0.875rem;
+        font-size: 0.9375rem;
+      }
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--rp-verde);
+        box-shadow: 0 0 0 0.2rem rgba(47, 122, 85, 0.18);
+      }
+      .form-control::placeholder {
+        color: #a3aaa4;
+      }
+      .form-check-input {
+        border-color: #c7c1b2;
+      }
+      .form-check-input:checked {
+        background-color: var(--rp-verde);
+        border-color: var(--rp-verde);
+      }
+      .form-check-input:focus {
+        border-color: var(--rp-verde);
+        box-shadow: 0 0 0 0.2rem rgba(47, 122, 85, 0.18);
+      }
+      .form-range::-webkit-slider-thumb {
+        background-color: var(--rp-verde);
+      }
+      .form-range::-moz-range-thumb {
+        background-color: var(--rp-verde);
+      }
+      .input-group-text {
+        background-color: var(--rp-hueso);
+        border-color: #dad5c7;
+        color: var(--rp-gris);
+        font-size: 0.875rem;
+      }
+      .form-floating > label {
+        color: var(--rp-gris);
+      }
+
+      /* --------------------------------------------------------------------------
+   Tarjetas, listas, tablas
+   -------------------------------------------------------------------------- */
+      .card {
+        --bs-card-bg: var(--rp-papel);
+        --bs-card-border-color: var(--rp-linea);
+        --bs-card-border-radius: 0.875rem;
+        --bs-card-inner-border-radius: 0.75rem;
+        --bs-card-cap-bg: #fcfbf7;
+        --bs-card-spacer-y: 1.25rem;
+        --bs-card-spacer-x: 1.25rem;
+      }
+      .card-title {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .card-header,
+      .card-footer {
+        border-color: var(--rp-linea-sv);
+      }
+      .card-subtitle,
+      .card-text small {
+        color: var(--rp-gris);
+      }
+
+      .list-group {
+        --bs-list-group-bg: var(--rp-papel);
+        --bs-list-group-border-color: var(--rp-linea);
+        --bs-list-group-border-radius: 0.75rem;
+        --bs-list-group-action-hover-bg: #faf8f2;
+        --bs-list-group-active-bg: var(--rp-pino);
+        --bs-list-group-active-border-color: var(--rp-pino);
+      }
+
+      .table {
+        --bs-table-bg: var(--rp-papel);
+        --bs-table-border-color: var(--rp-linea);
+        --bs-table-striped-bg: #fbf9f4;
+        --bs-table-hover-bg: #f4f9f5;
+      }
+      .table > thead th {
+        font-family: var(--rp-display);
+        font-weight: 500;
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--rp-gris);
+        border-bottom-color: var(--rp-linea);
+      }
+
+      /* --------------------------------------------------------------------------
+   Navegación
+   -------------------------------------------------------------------------- */
+      .navbar {
+        --bs-navbar-brand-font-size: 1.375rem;
+      }
+      .navbar-brand {
+        font-family: var(--rp-display);
+        font-weight: 700;
+        letter-spacing: -0.035em;
+      }
+      .navbar .nav-link {
+        font-size: 0.9375rem;
+      }
+      .nav-pills {
+        --bs-nav-pills-border-radius: 0.5rem;
+        --bs-nav-pills-link-active-bg: var(--rp-pino);
+      }
+      .nav-tabs {
+        --bs-nav-tabs-border-color: var(--rp-linea);
+        --bs-nav-tabs-link-active-bg: var(--rp-papel);
+        --bs-nav-tabs-link-active-border-color: var(--rp-linea) var(--rp-linea)
+          var(--rp-papel);
+        --bs-nav-tabs-link-active-color: var(--rp-pino);
+      }
+      .nav-link {
+        color: #41504a;
+        font-family: var(--rp-display);
+        font-weight: 500;
+      }
+      .nav-link:hover {
+        color: var(--rp-pino);
+      }
+
+      .breadcrumb {
+        --bs-breadcrumb-divider-color: var(--rp-gris);
+        --bs-breadcrumb-item-active-color: var(--rp-pino);
+        font-size: 0.875rem;
+      }
+      .pagination {
+        --bs-pagination-color: var(--rp-pino);
+        --bs-pagination-bg: var(--rp-papel);
+        --bs-pagination-border-color: var(--rp-linea);
+        --bs-pagination-hover-bg: var(--rp-verde-cl);
+        --bs-pagination-hover-border-color: #b7d4c3;
+        --bs-pagination-active-bg: var(--rp-pino);
+        --bs-pagination-active-border-color: var(--rp-pino);
+        --bs-pagination-border-radius: 0.5rem;
+        --bs-pagination-font-size: 0.875rem;
+      }
+      .page-link {
+        font-family: var(--rp-display);
+        font-weight: 500;
+      }
+
+      /* --------------------------------------------------------------------------
+   Feedback: alerts, badges, progress, toasts
+   -------------------------------------------------------------------------- */
+      .alert {
+        --bs-alert-border-radius: 0.75rem;
+        border-width: 1px;
+      }
+      .alert-heading {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .badge {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        font-size: 0.71875rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.375rem 0.625rem;
+        border-radius: 0.4375rem;
+      }
+      .badge.rounded-pill {
+        padding-inline: 0.75rem;
+      }
+
+      .progress {
+        --bs-progress-bg: #edeae1;
+        --bs-progress-border-radius: 0.3125rem;
+        --bs-progress-height: 0.625rem;
+        --bs-progress-bar-bg: var(--rp-verde);
+        --bs-progress-font-size: 0.6875rem;
+      }
+
+      .toast {
+        --bs-toast-bg: var(--rp-papel);
+        --bs-toast-border-color: var(--rp-linea);
+        --bs-toast-header-bg: #fcfbf7;
+        --bs-toast-border-radius: 0.75rem;
+      }
+      .spinner-border,
+      .spinner-grow {
+        color: var(--rp-verde);
+      }
+      .placeholder {
+        background-color: #d9d5ca;
+      }
+
+      /* --------------------------------------------------------------------------
+   Superposiciones: modal, offcanvas, dropdown, tooltip, popover
+   -------------------------------------------------------------------------- */
+      .modal-content,
+      .offcanvas {
+        --bs-modal-bg: var(--rp-papel);
+        --bs-offcanvas-bg: var(--rp-papel);
+        --bs-modal-border-color: var(--rp-linea);
+        --bs-modal-border-radius: 1rem;
+        --bs-modal-header-border-color: var(--rp-linea-sv);
+        --bs-modal-footer-border-color: var(--rp-linea-sv);
+      }
+      .modal-title,
+      .offcanvas-title {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        letter-spacing: -0.025em;
+      }
+      .modal-backdrop {
+        --bs-backdrop-bg: #16211c;
+        --bs-backdrop-opacity: 0.55;
+      }
+
+      .dropdown-menu {
+        --bs-dropdown-bg: var(--rp-papel);
+        --bs-dropdown-border-color: var(--rp-linea);
+        --bs-dropdown-border-radius: 0.75rem;
+        --bs-dropdown-link-hover-bg: #f4f9f5;
+        --bs-dropdown-link-active-bg: var(--rp-verde);
+        --bs-dropdown-font-size: 0.9375rem;
+        --bs-dropdown-padding-y: 0.375rem;
+        box-shadow: 0 18px 34px -22px rgba(18, 58, 43, 0.45);
+      }
+      .dropdown-header {
+        font-family: var(--rp-display);
+        font-size: 0.6875rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .tooltip {
+        --bs-tooltip-bg: var(--rp-pino);
+        --bs-tooltip-border-radius: 0.5rem;
+        --bs-tooltip-font-size: 0.8125rem;
+      }
+      .popover {
+        --bs-popover-bg: var(--rp-papel);
+        --bs-popover-border-color: var(--rp-linea);
+        --bs-popover-border-radius: 0.75rem;
+        --bs-popover-header-bg: #fcfbf7;
+        --bs-popover-font-size: 0.875rem;
+      }
+      .popover-header {
+        font-family: var(--rp-display);
+        font-weight: 600;
+      }
+
+      /* --------------------------------------------------------------------------
+   Acordeón y colapso
+   -------------------------------------------------------------------------- */
+      .accordion {
+        --bs-accordion-bg: var(--rp-papel);
+        --bs-accordion-border-color: var(--rp-linea);
+        --bs-accordion-border-radius: 0.75rem;
+        --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem
+          rgba(47, 122, 85, 0.18);
+        --bs-accordion-active-bg: var(--rp-verde-cl);
+        --bs-accordion-active-color: var(--rp-pino);
+        --bs-accordion-btn-icon-transform: rotate(-180deg);
+      }
+      .accordion-button {
+        font-family: var(--rp-display);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      /* --------------------------------------------------------------------------
+   Componentes propios de Red Protectora
+   -------------------------------------------------------------------------- */
+
+      /* Barra segmentada: cada tramo es una unidad real (1 kg, 1 manta, 1 viaje) */
+      .rp-bar {
+        display: flex;
+        gap: 3px;
+      }
+      .rp-bar i {
+        flex: 1 1 0;
+        height: 9px;
+        border-radius: 3px;
+        background: #edeae1;
+      }
+      .rp-bar i.is-done {
+        background: var(--rp-verde);
+      }
+      .rp-bar i.is-promised {
+        background: #a8cdb8;
+      }
+
+      .rp-key {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.875rem;
+        font-size: 0.75rem;
+        color: var(--rp-gris);
+      }
+      .rp-key span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+      }
+      .rp-key span::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        background: currentColor;
+      }
+      .rp-key .k-done::before {
+        background: var(--rp-verde);
+      }
+      .rp-key .k-promised::before {
+        background: #a8cdb8;
+      }
+      .rp-key .k-free::before {
+        background: #edeae1;
+      }
+
+      /* Contador de necesidad: 12 / 20 kg */
+      .rp-count {
+        font-family: var(--rp-display);
+        font-weight: 700;
+        font-size: 1.625rem;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      .rp-count small {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--rp-gris);
+        letter-spacing: 0;
+      }
+
+      /* Punto en vivo */
+      .rp-live {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .rp-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--rp-verde);
+        position: relative;
+        flex: none;
+      }
+      .rp-dot::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1px solid var(--rp-verde);
+        opacity: 0.5;
+        animation: rp-pulse 2.4s ease-out infinite;
+      }
+      @keyframes rp-pulse {
+        0% {
+          transform: scale(0.6);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      /* Tarjeta de necesidad */
+      .rp-need .rp-need-media {
+        height: 132px;
+        background: #8e9c90;
+        position: relative;
+      }
+      .rp-need .badge {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+      }
+
+      /* Avatar / miniatura de protectora */
+      .rp-thumb {
+        width: 46px;
+        height: 46px;
+        border-radius: 11px;
+        flex: none;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-family: var(--rp-display);
+        font-weight: 700;
+        font-size: 0.8125rem;
+      }
+
+      /* Fila de dato con separador fino */
+      .rp-row {
+        display: flex;
+        gap: 0.875rem;
+        align-items: center;
+        padding: 0.875rem 1rem;
+        border-top: 1px solid var(--rp-linea-sv);
+      }
+      .rp-row:first-child {
+        border-top: 0;
+      }
+
+      /* Sección oscura (pino) */
+      .rp-dark {
+        background: var(--rp-pino);
+        color: #edeae0;
+      }
+      .rp-dark h1,
+      .rp-dark h2,
+      .rp-dark h3 {
+        color: #f4f0e6;
+      }
+      .rp-dark .rp-eyebrow {
+        color: #8fb3a0;
+      }
+      .rp-dark p {
+        color: #b9cdc1;
+      }
+
+      /* Accesibilidad */
+      :focus-visible {
+        outline: 2px solid var(--rp-verde);
+        outline-offset: 3px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+    <style>
+      /* ---- solo para esta página de documentación ---- */
+      .doc-shell {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 992px) {
+        .doc-shell {
+          grid-template-columns: 232px 1fr;
+        }
+      }
+      .doc-side {
+        display: none;
+      }
+      @media (min-width: 992px) {
+        .doc-side {
+          display: block;
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          overflow-y: auto;
+          border-right: 1px solid var(--rp-linea);
+          padding: 24px 20px 60px;
+        }
+      }
+      .doc-side a {
+        display: block;
+        padding: 5px 0;
+        font-size: 13.5px;
+        color: #41504a;
+        text-decoration: none;
+      }
+      .doc-side a:hover {
+        color: var(--rp-pino);
+      }
+      .doc-main {
+        padding: 0 24px 120px;
+        max-width: 940px;
+      }
+      .doc-sec {
+        padding-top: 56px;
+        scroll-margin-top: 20px;
+      }
+      .doc-sec > h2 {
+        font-size: 26px;
+        margin-bottom: 4px;
+      }
+      .doc-sec > .sub {
+        color: var(--rp-gris);
+        font-size: 14.5px;
+        margin-bottom: 22px;
+        max-width: 60ch;
+      }
+      .doc-box {
+        background: var(--rp-papel);
+        border: 1px solid var(--rp-linea);
+        border-radius: 14px;
+        padding: 26px;
+        margin-bottom: 14px;
+      }
+      .doc-box.on-hueso {
+        background: var(--rp-hueso);
+      }
+      .doc-label {
+        font-family: var(--rp-display);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #9aa29b;
+        margin-bottom: 14px;
+      }
+      code.tok {
+        font-size: 12.5px;
+        background: #f0ede4;
+        padding: 2px 6px;
+        border-radius: 5px;
+        color: #3d4a42;
+      }
+      .sw {
+        height: 72px;
+        border-radius: 10px;
+        display: flex;
+        align-items: flex-end;
+        padding: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      .sw code {
+        font-size: 10.5px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ==================== NAVBAR ==================== -->
+    <nav
+      class="navbar navbar-expand-lg sticky-top"
+      style="
+        background: rgba(247, 244, 237, 0.9);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--rp-linea);
+      "
+    >
+      <div class="container-fluid px-4">
+        <a
+          class="navbar-brand d-inline-flex align-items-center gap-2"
+          href="landing-red-protectora.html"
+        >
+          <svg viewBox="0 0 64 64" width="26" height="26" aria-hidden="true">
+            <g fill="#123A2B">
+              <path
+                d="M29.6 27.6 Q32 25.7 34.4 27.6 L50.8 42.2 Q52.2 43.4 52.2 45.3 L52.2 51.2 Q52.2 56.2 47.2 56.2 L16.8 56.2 Q11.8 56.2 11.8 51.2 L11.8 45.3 Q11.8 43.4 13.2 42.2 Z"
+              />
+              <ellipse
+                cx="8.6"
+                cy="30.4"
+                rx="5.5"
+                ry="7.1"
+                transform="rotate(-26 8.6 30.4)"
+              />
+              <ellipse
+                cx="23.2"
+                cy="17.2"
+                rx="5.5"
+                ry="7.4"
+                transform="rotate(-9 23.2 17.2)"
+              />
+              <ellipse
+                cx="40.8"
+                cy="17.2"
+                rx="5.5"
+                ry="7.4"
+                transform="rotate(9 40.8 17.2)"
+              />
+              <ellipse
+                cx="55.4"
+                cy="30.4"
+                rx="5.5"
+                ry="7.1"
+                transform="rotate(26 55.4 30.4)"
+              />
+            </g>
+          </svg>
+          <span style="color: var(--rp-pino)"
+            ><span style="font-weight: 500; color: var(--rp-verde)">Red</span>
+            Protectora</span
+          >
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navDemo"
+          aria-controls="navDemo"
+          aria-expanded="false"
+          aria-label="Abrir menú"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navDemo">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            <li class="nav-item">
+              <a class="nav-link active" href="#botones">Componentes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tokens">Tokens</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#propios">Propios</a>
+            </li>
+            <li class="nav-item ms-lg-2">
+              <a
+                class="btn btn-primary btn-sm"
+                href="landing-red-protectora.html"
+                >Ver la landing</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="doc-shell">
+      <!-- ==================== ÍNDICE ==================== -->
+      <aside class="doc-side">
+        <div class="rp-eyebrow mb-2">Índice</div>
+        <a href="#tokens">Tokens</a>
+        <a href="#tipografia">Tipografía</a>
+        <a href="#botones">Botones</a>
+        <a href="#grupos">Grupos de botones</a>
+        <a href="#formularios">Formularios</a>
+        <a href="#inputgroup">Input group</a>
+        <a href="#validacion">Validación</a>
+        <a href="#alertas">Alertas</a>
+        <a href="#badges">Badges</a>
+        <a href="#progreso">Progreso</a>
+        <a href="#spinners">Spinners y placeholders</a>
+        <a href="#tarjetas">Tarjetas</a>
+        <a href="#listgroup">List group</a>
+        <a href="#tablas">Tablas</a>
+        <a href="#navs">Navs y tabs</a>
+        <a href="#breadcrumb">Breadcrumb y paginación</a>
+        <a href="#dropdown">Dropdowns</a>
+        <a href="#acordeon">Acordeón y collapse</a>
+        <a href="#modal">Modal</a>
+        <a href="#offcanvas">Offcanvas</a>
+        <a href="#toast">Toasts</a>
+        <a href="#tooltip">Tooltip y popover</a>
+        <a href="#carousel">Carousel</a>
+        <a href="#propios">Componentes propios</a>
+      </aside>
+
+      <!-- ==================== CONTENIDO ==================== -->
+      <main class="doc-main">
+        <header class="pt-5">
+          <div class="rp-eyebrow">Guía de desarrollo</div>
+          <h1 class="display-6 mt-2">Sistema de componentes</h1>
+          <p class="text-secondary" style="max-width: 62ch">
+            Bootstrap 5.3 sin tocar su HTML: todo el estilo vive en
+            <code class="tok">rp-bootstrap.css</code>, que solo redefine
+            variables CSS. Copia el marcado tal cual y saldrá con la identidad
+            de la landing.
+          </p>
+          <div class="alert alert-primary d-flex gap-3 mt-4" role="alert">
+            <i class="bi bi-info-circle-fill flex-shrink-0"></i>
+            <div>
+              Orden de carga obligatorio:
+              <code class="tok">bootstrap.min.css</code> →
+              <code class="tok">rp-bootstrap.css</code>. Nunca al revés.
+            </div>
+          </div>
+        </header>
+
+        <!-- TOKENS -->
+        <section class="doc-sec" id="tokens">
+          <h2>Tokens de color</h2>
+          <p class="sub">
+            El pino es la estructura; el verde solo aparece en lo accionable.
+            Arcilla y miel son señales de estado, no decoración.
+          </p>
+          <div class="doc-box">
+            <div class="row g-3">
+              <div class="col-6 col-md-4 col-lg-2">
+                <div class="sw" style="background: #123a2b">
+                  <code>--rp-pino</code>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 col-lg-2">
+                <div class="sw" style="background: #2f7a55">
+                  <code>--rp-verde</code>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 col-lg-2">
+                <div class="sw" style="background: #dfede4">
+                  <code>--rp-verde-cl</code>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 col-lg-2">
+                <div class="sw" style="background: #f7f4ed">
+                  <code>--rp-hueso</code>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 col-lg-2">
+                <div class="sw" style="background: #b5533f">
+                  <code>--rp-arcilla</code>
+                </div>
+              </div>
+              <div class="col-6 col-md-4 col-lg-2">
+                <div class="sw" style="background: #c08a2e">
+                  <code>--rp-miel</code>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <div class="rp-eyebrow">Mapeo semántico</div>
+            <ul class="mb-0 mt-2 text-secondary" style="font-size: 14.5px">
+              <li>
+                <code class="tok">primary</code> = pino. Acción principal y
+                estructura.
+              </li>
+              <li>
+                <code class="tok">success</code> = verde. Colaborar, entregado,
+                necesidad cubierta.
+              </li>
+              <li>
+                <code class="tok">danger</code> = arcilla. Urgente y errores.
+              </li>
+              <li>
+                <code class="tok">warning</code> = miel. Plazo a punto de
+                vencer.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- TIPOGRAFÍA -->
+        <section class="doc-sec" id="tipografia">
+          <h2>Tipografía</h2>
+          <p class="sub">
+            Archivo para títulos, interfaz y cifras. Inter para texto corrido.
+          </p>
+          <div class="doc-box">
+            <h1>Titular grande</h1>
+            <h2 class="mt-3">Titular de sección</h2>
+            <h3 class="mt-3">Título de tarjeta</h3>
+            <p class="mt-3 mb-1">
+              Texto corrido en Inter. Las protectoras publican qué les falta,
+              cuánto y para cuándo.
+            </p>
+            <p class="text-secondary mb-3" style="font-size: 14px">
+              Texto secundario para metadatos y fechas.
+            </p>
+            <div class="rp-eyebrow">Etiqueta de sección · .rp-eyebrow</div>
+            <div class="rp-figure mt-3">312</div>
+            <div class="text-secondary" style="font-size: 13.5px">
+              Cifra grande · .rp-figure
+            </div>
+          </div>
+        </section>
+
+        <!-- BOTONES -->
+        <section class="doc-sec" id="botones">
+          <h2>Botones</h2>
+          <p class="sub">
+            Un solo botón sólido por bloque. El verde se reserva para la acción
+            que hace avanzar una necesidad.
+          </p>
+          <div class="doc-box">
+            <div class="doc-label">Sólidos</div>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <button class="btn btn-primary">Crear cuenta</button>
+              <button class="btn btn-success">Colaborar</button>
+              <button class="btn btn-danger">Cancelar reserva</button>
+              <button class="btn btn-warning">Prorrogar plazo</button>
+              <button class="btn btn-light">Guardar</button>
+              <button class="btn btn-dark">Panel</button>
+            </div>
+            <div class="doc-label">Contorno y enlace</div>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <button class="btn btn-outline-primary">Ver detalle</button>
+              <button class="btn btn-outline-success">Seguir protectora</button>
+              <button class="btn btn-outline-danger">Reportar</button>
+              <button class="btn btn-link">Más información</button>
+            </div>
+            <div class="doc-label">Tamaños y estados</div>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+              <button class="btn btn-success btn-lg">Colaborar</button>
+              <button class="btn btn-success">Colaborar</button>
+              <button class="btn btn-success btn-sm">Colaborar</button>
+              <button class="btn btn-success" disabled>Ya cubierta</button>
+              <button class="btn btn-success" disabled>
+                <span
+                  class="spinner-border spinner-border-sm"
+                  aria-hidden="true"
+                ></span>
+                Enviando…
+              </button>
+            </div>
+            <div class="doc-label">Con icono</div>
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Publicar necesidad
+              </button>
+              <button class="btn btn-outline-primary">
+                <i class="bi bi-geo-alt"></i> Cerca de mí
+              </button>
+              <button class="btn btn-outline-primary">
+                <i class="bi bi-share"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- GRUPOS -->
+        <section class="doc-sec" id="grupos">
+          <h2>Grupos de botones</h2>
+          <p class="sub">
+            Para filtros excluyentes: tipo de necesidad, radio de distancia.
+          </p>
+          <div class="doc-box">
+            <div
+              class="btn-group mb-3"
+              role="group"
+              aria-label="Tipo de necesidad"
+            >
+              <input
+                type="radio"
+                class="btn-check"
+                name="tipo"
+                id="t1"
+                checked
+              />
+              <label class="btn btn-outline-primary" for="t1">Todo</label>
+              <input type="radio" class="btn-check" name="tipo" id="t2" />
+              <label class="btn btn-outline-primary" for="t2">Comida</label>
+              <input type="radio" class="btn-check" name="tipo" id="t3" />
+              <label class="btn btn-outline-primary" for="t3">Transporte</label>
+              <input type="radio" class="btn-check" name="tipo" id="t4" />
+              <label class="btn btn-outline-primary" for="t4">Material</label>
+            </div>
+            <br />
+            <div class="btn-group" role="group">
+              <button class="btn btn-primary">Colaborar</button>
+              <button
+                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Más opciones</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Entrego yo</a></li>
+                <li><a class="dropdown-item" href="#">Envío a domicilio</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- FORMULARIOS -->
+        <section class="doc-sec" id="formularios">
+          <h2>Formularios</h2>
+          <p class="sub">
+            Etiquetas en Archivo semibold; ayuda debajo, nunca dentro del campo.
+          </p>
+          <div class="doc-box">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="f1">Qué necesitáis</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="f1"
+                  placeholder="Pienso de cachorro"
+                />
+                <div class="form-text">
+                  Sé concreto: la gente cubre mejor lo que puede imaginar.
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label class="form-label" for="f2">Cantidad</label>
+                <input type="number" class="form-control" id="f2" value="20" />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label" for="f3">Unidad</label>
+                <select class="form-select" id="f3">
+                  <option>kg</option>
+                  <option>unidades</option>
+                  <option>viajes</option>
+                  <option>horas</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="f4">Fecha límite</label>
+                <input type="date" class="form-control" id="f4" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="f5">Foto</label>
+                <input type="file" class="form-control" id="f5" />
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="f6">Detalle</label>
+                <textarea
+                  class="form-control"
+                  id="f6"
+                  rows="3"
+                  placeholder="Cómo y dónde entregarlo"
+                ></textarea>
+              </div>
+              <div class="col-12">
+                <div class="form-floating">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="f7"
+                    placeholder="correo"
+                  />
+                  <label for="f7">Correo de contacto</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="f8"
+                  >Radio de búsqueda: 20 km</label
+                >
+                <input
+                  type="range"
+                  class="form-range"
+                  id="f8"
+                  min="1"
+                  max="50"
+                  value="20"
+                />
+              </div>
+              <div class="col-md-6 d-flex flex-column justify-content-end">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="c1"
+                    checked
+                  />
+                  <label class="form-check-label" for="c1"
+                    >Puedo transportar animales</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="r"
+                    id="c2"
+                    checked
+                  />
+                  <label class="form-check-label" for="c2"
+                    >Entrego en el refugio</label
+                  >
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="r"
+                    id="c3"
+                  />
+                  <label class="form-check-label" for="c3"
+                    >Que lo recojan</label
+                  >
+                </div>
+                <div class="form-check form-switch mt-2">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="c4"
+                    checked
+                  />
+                  <label class="form-check-label" for="c4"
+                    >Avisarme de necesidades urgentes</label
+                  >
+                </div>
+              </div>
+              <div class="col-12">
+                <button class="btn btn-primary">Publicar necesidad</button>
+                <button class="btn btn-link">Descartar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- INPUT GROUP -->
+        <section class="doc-sec" id="inputgroup">
+          <h2>Input group</h2>
+          <p class="sub">
+            La unidad va pegada al número: evita el error de "20" sin saber de
+            qué.
+          </p>
+          <div class="doc-box">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Buscar necesidades o protectoras"
+              />
+              <button class="btn btn-primary">Buscar</button>
+            </div>
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" value="5" />
+              <span class="input-group-text">kg de 20</span>
+            </div>
+            <div class="input-group">
+              <span class="input-group-text">Código postal</span>
+              <input type="text" class="form-control" value="28801" />
+              <span class="input-group-text"
+                ><i class="bi bi-geo-alt"></i
+              ></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- VALIDACIÓN -->
+        <section class="doc-sec" id="validacion">
+          <h2>Validación</h2>
+          <p class="sub">
+            El error dice qué pasó y cómo arreglarlo. Sin disculpas ni frases
+            vagas.
+          </p>
+          <div class="doc-box">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="v1">Cantidad reservada</label>
+                <input
+                  type="number"
+                  class="form-control is-valid"
+                  id="v1"
+                  value="5"
+                />
+                <div class="valid-feedback">Reservado. Quedan 3 kg libres.</div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="v2">Cantidad reservada</label>
+                <input
+                  type="number"
+                  class="form-control is-invalid"
+                  id="v2"
+                  value="25"
+                />
+                <div class="invalid-feedback">
+                  Solo quedan 8 kg sin cubrir. Baja la cantidad a 8 o menos.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ALERTAS -->
+        <section class="doc-sec" id="alertas">
+          <h2>Alertas</h2>
+          <p class="sub">
+            Una por pantalla como máximo. Si hay dos, una de ellas no era
+            importante.
+          </p>
+          <div class="doc-box">
+            <div
+              class="alert alert-success d-flex align-items-center gap-3"
+              role="alert"
+            >
+              <i class="bi bi-check-circle-fill"></i>
+              <div>
+                Reserva confirmada. Tienes hasta el jueves 20 para entregarlo.
+              </div>
+            </div>
+            <div
+              class="alert alert-warning d-flex align-items-center gap-3"
+              role="alert"
+            >
+              <i class="bi bi-clock-fill"></i>
+              <div>Esta necesidad cierra en 3 días y le faltan 8 kg.</div>
+            </div>
+            <div
+              class="alert alert-danger alert-dismissible fade show"
+              role="alert"
+            >
+              <h5 class="alert-heading">No se pudo guardar la necesidad</h5>
+              <p class="mb-0">
+                Falta la fecha límite. Añádela y vuelve a enviar.
+              </p>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+            <div class="alert alert-primary mb-0" role="alert">
+              Bruno ya tiene casa.
+              <a href="#" class="alert-link">Ver su historia</a>
+            </div>
+          </div>
+        </section>
+
+        <!-- BADGES -->
+        <section class="doc-sec" id="badges">
+          <h2>Badges</h2>
+          <p class="sub">
+            Solo tres estados de necesidad: urgente, con plazo, cubierta.
+          </p>
+          <div class="doc-box">
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge text-bg-danger">Urgente</span>
+              <span class="badge text-bg-warning">Quedan 3 días</span>
+              <span class="badge text-bg-success">Cubierta</span>
+              <span class="badge text-bg-primary">Verificada</span>
+              <span class="badge text-bg-secondary">Borrador</span>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge rounded-pill text-bg-light border"
+                >Comida</span
+              >
+              <span class="badge rounded-pill text-bg-light border"
+                >Transporte</span
+              >
+              <span class="badge rounded-pill text-bg-light border"
+                >Material</span
+              >
+            </div>
+            <button class="btn btn-outline-primary position-relative">
+              Notificaciones
+              <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-bg-danger"
+                >4</span
+              >
+            </button>
+          </div>
+        </section>
+
+        <!-- PROGRESO -->
+        <section class="doc-sec" id="progreso">
+          <h2>Barras de progreso</h2>
+          <p class="sub">
+            La barra continua vale para porcentajes. Para unidades reales usa la
+            segmentada de abajo.
+          </p>
+          <div class="doc-box">
+            <div
+              class="progress mb-3"
+              role="progressbar"
+              aria-label="60%"
+              aria-valuenow="60"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div class="progress-bar" style="width: 60%"></div>
+            </div>
+            <div
+              class="progress mb-3"
+              role="progressbar"
+              aria-valuenow="35"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div class="progress-bar bg-warning" style="width: 35%"></div>
+            </div>
+            <div class="progress-stacked mb-3">
+              <div
+                class="progress"
+                role="progressbar"
+                aria-valuenow="60"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: 60%"
+              >
+                <div class="progress-bar"></div>
+              </div>
+              <div
+                class="progress"
+                role="progressbar"
+                aria-valuenow="20"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="width: 20%"
+              >
+                <div class="progress-bar" style="background: #a8cdb8"></div>
+              </div>
+            </div>
+            <div
+              class="progress"
+              style="--bs-progress-height: 1.25rem"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                style="width: 75%"
+              >
+                15 / 20 kg
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SPINNERS -->
+        <section class="doc-sec" id="spinners">
+          <h2>Spinners y placeholders</h2>
+          <p class="sub">
+            Placeholders mientras cargan las tarjetas; spinner solo para
+            acciones del usuario.
+          </p>
+          <div class="doc-box">
+            <div class="d-flex align-items-center gap-3 mb-4">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Cargando…</span>
+              </div>
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Cargando…</span>
+              </div>
+              <div class="spinner-grow" role="status">
+                <span class="visually-hidden">Cargando…</span>
+              </div>
+            </div>
+            <div class="card" style="max-width: 320px">
+              <div class="card-body">
+                <h5 class="card-title placeholder-glow">
+                  <span class="placeholder col-7"></span>
+                </h5>
+                <p class="card-text placeholder-glow mb-3">
+                  <span class="placeholder col-4"></span>
+                  <span class="placeholder col-6"></span>
+                  <span class="placeholder col-8"></span>
+                </p>
+                <a
+                  class="btn btn-success disabled placeholder col-5"
+                  aria-disabled="true"
+                ></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TARJETAS -->
+        <section class="doc-sec" id="tarjetas">
+          <h2>Tarjetas</h2>
+          <p class="sub">
+            Estructura fija: media, cuerpo con progreso, pie con la condición de
+            entrega y la acción.
+          </p>
+          <div class="doc-box on-hueso">
+            <div class="row g-3">
+              <div class="col-md-6 col-lg-4">
+                <div class="card rp-need h-100">
+                  <div class="rp-need-media" style="background: #a79a86">
+                    <span class="badge text-bg-warning">Quedan 3 días</span>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Pienso de cachorro</h5>
+                    <p class="card-subtitle mb-3" style="font-size: 13px">
+                      Protectora Huellas · Alcalá de Henares
+                    </p>
+                    <div
+                      class="d-flex justify-content-between align-items-baseline mb-2"
+                    >
+                      <span class="rp-count">12 <small>/ 20 kg</small></span>
+                      <span class="text-secondary" style="font-size: 12.5px"
+                        >4 personas</span
+                      >
+                    </div>
+                    <div class="rp-bar mb-2">
+                      <i class="is-done"></i><i class="is-done"></i
+                      ><i class="is-done"></i><i class="is-done"></i>
+                      <i class="is-done"></i><i class="is-done"></i
+                      ><i class="is-promised"></i><i class="is-promised"></i
+                      ><i></i><i></i>
+                    </div>
+                    <div class="rp-key">
+                      <span class="k-done">12 entregados</span
+                      ><span class="k-promised">4 prometidos</span
+                      ><span class="k-free">4 libres</span>
+                    </div>
+                  </div>
+                  <div
+                    class="card-footer d-flex justify-content-between align-items-center"
+                  >
+                    <span class="text-secondary" style="font-size: 13px"
+                      >Recogen en el refugio</span
+                    >
+                    <button class="btn btn-success btn-sm">Colaborar</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="card h-100">
+                  <div class="card-header">Protectora verificada</div>
+                  <div class="card-body">
+                    <h5 class="card-title">Gatos del Sur</h5>
+                    <p class="card-text text-secondary" style="font-size: 14px">
+                      Colonia felina con 38 animales en seguimiento. Publica
+                      desde marzo de 2024.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary btn-sm"
+                      >Ver perfil</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card h-100">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span>Necesidades abiertas</span><strong>14</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span>Cubiertas este mes</span><strong>27</strong>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                      <span>Colaboradores activos</span><strong>96</strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- LIST GROUP -->
+        <section class="doc-sec" id="listgroup">
+          <h2>List group</h2>
+          <p class="sub">
+            Para el tablón de actividad y los listados del panel de la
+            protectora.
+          </p>
+          <div class="doc-box">
+            <div class="list-group mb-3">
+              <a href="#" class="list-group-item list-group-item-action active">
+                <div class="d-flex justify-content-between">
+                  <strong>Pienso de cachorro</strong><small>8 kg libres</small>
+                </div>
+                <small>Protectora Huellas · Alcalá de Henares</small>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex justify-content-between">
+                  <strong>Arena aglomerante</strong
+                  ><small class="text-secondary">16 kg libres</small>
+                </div>
+                <small class="text-secondary">Colonia Felina Vallecas</small>
+              </a>
+              <a
+                href="#"
+                class="list-group-item list-group-item-action disabled"
+              >
+                <div class="d-flex justify-content-between">
+                  <strong>Mantas y toallas</strong><small>Cubierta</small>
+                </div>
+                <small>Cerrada el 14 de agosto</small>
+              </a>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item list-group-item-success">
+                Entrega confirmada por la protectora
+              </li>
+              <li class="list-group-item list-group-item-warning">
+                Pendiente de entregar antes del jueves
+              </li>
+              <li class="list-group-item list-group-item-danger">
+                Reserva caducada
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- TABLAS -->
+        <section class="doc-sec" id="tablas">
+          <h2>Tablas</h2>
+          <p class="sub">
+            Cabecera en versalitas, sin bordes verticales. Para el panel de la
+            protectora.
+          </p>
+          <div class="doc-box p-0" style="overflow: hidden">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Necesidad</th>
+                    <th>Protectora</th>
+                    <th>Cubierto</th>
+                    <th>Cierra</th>
+                    <th>Estado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="fw-semibold">Pienso de cachorro</td>
+                    <td class="text-secondary">Huellas</td>
+                    <td>12 / 20 kg</td>
+                    <td class="text-secondary">25 ago</td>
+                    <td><span class="badge text-bg-warning">3 días</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Llevar dos gatos al veterinario</td>
+                    <td class="text-secondary">Gatos del Sur</td>
+                    <td>0 / 1 viaje</td>
+                    <td class="text-secondary">20 ago</td>
+                    <td><span class="badge text-bg-danger">Urgente</span></td>
+                  </tr>
+                  <tr>
+                    <td class="fw-semibold">Mantas y toallas</td>
+                    <td class="text-secondary">Huellas</td>
+                    <td>4 / 4</td>
+                    <td class="text-secondary">14 ago</td>
+                    <td><span class="badge text-bg-success">Cubierta</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- NAVS -->
+        <section class="doc-sec" id="navs">
+          <h2>Navs y tabs</h2>
+          <p class="sub">
+            Pills para filtros de estado; tabs para las secciones de una ficha.
+          </p>
+          <div class="doc-box">
+            <ul class="nav nav-pills gap-2 mb-4">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Abiertas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Mis reservas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Cerradas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Archivo</a>
+              </li>
+            </ul>
+            <ul class="nav nav-tabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab1"
+                  type="button"
+                  role="tab"
+                >
+                  Necesidad
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab2"
+                  type="button"
+                  role="tab"
+                >
+                  Quién colabora
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  data-bs-target="#tab3"
+                  type="button"
+                  role="tab"
+                >
+                  Entrega
+                </button>
+              </li>
+            </ul>
+            <div
+              class="tab-content border border-top-0 rounded-bottom p-4"
+              style="background: #fff; border-color: var(--rp-linea) !important"
+            >
+              <div class="tab-pane fade show active" id="tab1" role="tabpanel">
+                Hacen falta 20 kg de pienso de cachorro antes del 25 de agosto.
+              </div>
+              <div class="tab-pane fade" id="tab2" role="tabpanel">
+                Cuatro personas han reservado 16 kg entre todas.
+              </div>
+              <div class="tab-pane fade" id="tab3" role="tabpanel">
+                Entrega en el refugio, de lunes a viernes de 17:00 a 20:00.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- BREADCRUMB -->
+        <section class="doc-sec" id="breadcrumb">
+          <h2>Breadcrumb y paginación</h2>
+          <div class="doc-box">
+            <nav aria-label="Ruta">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Necesidades</a></li>
+                <li class="breadcrumb-item">
+                  <a href="#">Alcalá de Henares</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  Pienso de cachorro
+                </li>
+              </ol>
+            </nav>
+            <nav aria-label="Páginas" class="mt-3">
+              <ul class="pagination mb-0">
+                <li class="page-item disabled">
+                  <a class="page-link" href="#">Anterior</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">Siguiente</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </section>
+
+        <!-- DROPDOWN -->
+        <section class="doc-sec" id="dropdown">
+          <h2>Dropdowns</h2>
+          <div class="doc-box d-flex flex-wrap gap-2">
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-primary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Ordenar por
+              </button>
+              <ul class="dropdown-menu">
+                <li><h6 class="dropdown-header">Ordenar</h6></li>
+                <li><a class="dropdown-item active" href="#">Más cerca</a></li>
+                <li><a class="dropdown-item" href="#">Cierra antes</a></li>
+                <li><a class="dropdown-item" href="#">Menos cubierta</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Restablecer</a></li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <button
+                class="btn btn-primary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-person-circle"></i> Mi cuenta
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Mis reservas</a></li>
+                <li><a class="dropdown-item" href="#">Mi protectora</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Salir</a></li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ACORDEÓN -->
+        <section class="doc-sec" id="acordeon">
+          <h2>Acordeón y collapse</h2>
+          <p class="sub">Para las preguntas frecuentes de la sección Ayuda.</p>
+          <div class="doc-box">
+            <div class="accordion mb-4" id="faq">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#q1"
+                  >
+                    ¿Puedo cubrir solo una parte?
+                  </button>
+                </h2>
+                <div
+                  id="q1"
+                  class="accordion-collapse collapse show"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    Sí. Reservas los kilos o las unidades que puedas y la barra
+                    suma lo de todos.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#q2"
+                  >
+                    ¿Qué pasa si no llego a la fecha?
+                  </button>
+                </h2>
+                <div
+                  id="q2"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    Tu reserva se libera y esa parte vuelve a quedar disponible.
+                    Puedes cancelarla antes desde tus reservas.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button
+                    class="accordion-button collapsed"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#q3"
+                  >
+                    ¿Se puede donar dinero?
+                  </button>
+                </h2>
+                <div
+                  id="q3"
+                  class="accordion-collapse collapse"
+                  data-bs-parent="#faq"
+                >
+                  <div class="accordion-body">
+                    No. La plataforma solo mueve cosas y tiempo, nunca pagos.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="btn btn-outline-primary"
+              data-bs-toggle="collapse"
+              data-bs-target="#filtros"
+            >
+              Filtros avanzados
+            </button>
+            <div class="collapse mt-3" id="filtros">
+              <div class="card card-body">
+                Distancia, tipo de necesidad, protectora y fecha de cierre.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODAL -->
+        <section class="doc-sec" id="modal">
+          <h2>Modal</h2>
+          <p class="sub">
+            Solo para confirmar un compromiso: reservar, cancelar, cerrar una
+            necesidad.
+          </p>
+          <div class="doc-box">
+            <button
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              data-bs-target="#mReservar"
+            >
+              Colaborar
+            </button>
+            <div
+              class="modal fade"
+              id="mReservar"
+              tabindex="-1"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">
+                      Reservar parte de esta necesidad
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Cerrar"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="text-secondary" style="font-size: 14.5px">
+                      Pienso de cachorro · Protectora Huellas. Quedan 8 kg sin
+                      cubrir.
+                    </p>
+                    <label class="form-label" for="mq"
+                      >¿Cuánto puedes llevar?</label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="mq"
+                        value="5"
+                      />
+                      <span class="input-group-text">kg</span>
+                    </div>
+                    <div class="form-text">
+                      Te comprometes a entregarlo antes del 25 de agosto.
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-link" data-bs-dismiss="modal">
+                      Cancelar
+                    </button>
+                    <button class="btn btn-success" data-bs-dismiss="modal">
+                      Reservar 5 kg
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- OFFCANVAS -->
+        <section class="doc-sec" id="offcanvas">
+          <h2>Offcanvas</h2>
+          <p class="sub">Filtros en móvil y menú lateral del panel.</p>
+          <div class="doc-box">
+            <button
+              class="btn btn-outline-primary"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#ocFiltros"
+            >
+              <i class="bi bi-sliders"></i> Filtrar
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="ocFiltros">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Filtrar necesidades</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Cerrar"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <label class="form-label">Distancia máxima: 20 km</label>
+                <input
+                  type="range"
+                  class="form-range mb-3"
+                  min="1"
+                  max="50"
+                  value="20"
+                />
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="o1"
+                    checked
+                  /><label class="form-check-label" for="o1">Comida</label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="o2"
+                  /><label class="form-check-label" for="o2">Transporte</label>
+                </div>
+                <div class="form-check mb-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="o3"
+                  /><label class="form-check-label" for="o3">Material</label>
+                </div>
+                <button class="btn btn-primary w-100">Ver 14 resultados</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TOAST -->
+        <section class="doc-sec" id="toast">
+          <h2>Toasts</h2>
+          <p class="sub">
+            Confirmación breve tras una acción. El verbo del toast repite el del
+            botón: "Reservar" → "Reservado".
+          </p>
+          <div class="doc-box">
+            <button class="btn btn-primary" id="btnToast">Lanzar aviso</button>
+            <div class="toast-container position-fixed bottom-0 end-0 p-4">
+              <div
+                class="toast"
+                id="toastDemo"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+              >
+                <div class="toast-header">
+                  <span class="rp-dot me-2"></span>
+                  <strong class="me-auto">Reservado</strong>
+                  <small class="text-secondary">ahora</small>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="toast"
+                    aria-label="Cerrar"
+                  ></button>
+                </div>
+                <div class="toast-body">
+                  5 kg de pienso. Entrega antes del 25 de agosto en Protectora
+                  Huellas.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TOOLTIP -->
+        <section class="doc-sec" id="tooltip">
+          <h2>Tooltip y popover</h2>
+          <div class="doc-box d-flex flex-wrap gap-2">
+            <button
+              class="btn btn-outline-primary"
+              data-bs-toggle="tooltip"
+              data-bs-title="Verificada por el equipo en julio de 2026"
+            >
+              Protectora verificada
+            </button>
+            <button
+              class="btn btn-outline-primary"
+              data-bs-toggle="popover"
+              data-bs-title="Cómo se reparte"
+              data-bs-content="Cada tramo de la barra es una unidad real. Verde: entregado. Verde claro: prometido."
+            >
+              Ver leyenda
+            </button>
+          </div>
+        </section>
+
+        <!-- CAROUSEL -->
+        <section class="doc-sec" id="carousel">
+          <h2>Carousel</h2>
+          <p class="sub">
+            Solo para fotos del mismo animal en su ficha. Nunca para
+            necesidades: se pierden las que no se ven.
+          </p>
+          <div class="doc-box">
+            <div id="carDemo" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button
+                  data-bs-target="#carDemo"
+                  data-bs-slide-to="0"
+                  class="active"
+                  aria-label="Foto 1"
+                ></button>
+                <button
+                  data-bs-target="#carDemo"
+                  data-bs-slide-to="1"
+                  aria-label="Foto 2"
+                ></button>
+                <button
+                  data-bs-target="#carDemo"
+                  data-bs-slide-to="2"
+                  aria-label="Foto 3"
+                ></button>
+              </div>
+              <div class="carousel-inner rounded-3">
+                <div class="carousel-item active">
+                  <div style="height: 260px; background: #8e9c90"></div>
+                  <div class="carousel-caption">
+                    <h5>Bruno</h5>
+                    <p>Mestizo, 3 años</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div style="height: 260px; background: #a79a86"></div>
+                  <div class="carousel-caption">
+                    <h5>En el refugio</h5>
+                    <p>Junio de 2026</p>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div style="height: 260px; background: #7e8a96"></div>
+                  <div class="carousel-caption">
+                    <h5>Ya en casa</h5>
+                    <p>Agosto de 2026</p>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carDemo"
+                data-bs-slide="prev"
+              >
+                <span class="carousel-control-prev-icon"></span
+                ><span class="visually-hidden">Anterior</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carDemo"
+                data-bs-slide="next"
+              >
+                <span class="carousel-control-next-icon"></span
+                ><span class="visually-hidden">Siguiente</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROPIOS -->
+        <section class="doc-sec" id="propios">
+          <h2>Componentes propios</h2>
+          <p class="sub">
+            Lo que Bootstrap no trae y define el producto. Viven en la misma
+            hoja, con prefijo <code class="tok">.rp-</code>.
+          </p>
+
+          <div class="doc-box">
+            <div class="doc-label">Barra segmentada · .rp-bar</div>
+            <p class="text-secondary mb-3" style="font-size: 14px">
+              Cada tramo es una unidad real. Se ve de un vistazo cuánto falta
+              sin leer números.
+            </p>
+            <div class="rp-bar mb-2">
+              <i class="is-done"></i><i class="is-done"></i
+              ><i class="is-done"></i><i class="is-promised"></i><i></i><i></i
+              ><i></i><i></i>
+            </div>
+            <div class="rp-key">
+              <span class="k-done">3 entregados</span
+              ><span class="k-promised">1 prometido</span
+              ><span class="k-free">4 libres</span>
+            </div>
+          </div>
+
+          <div class="doc-box">
+            <div class="doc-label">Estado en vivo · .rp-live / .rp-dot</div>
+            <span class="rp-live"
+              ><i class="rp-dot"></i> 14 necesidades abiertas hoy</span
+            >
+          </div>
+
+          <div class="doc-box p-0">
+            <div class="doc-label px-4 pt-4">
+              Fila de tablón · .rp-row / .rp-thumb
+            </div>
+            <div class="rp-row">
+              <div class="rp-thumb" style="background: #2f7a55">AH</div>
+              <div>
+                <div
+                  class="fw-semibold"
+                  style="
+                    font-family: var(--rp-display);
+                    letter-spacing: -0.02em;
+                  "
+                >
+                  Pienso de cachorro
+                </div>
+                <div class="text-secondary" style="font-size: 12.5px">
+                  Protectora Huellas · Alcalá de Henares
+                </div>
+              </div>
+              <div class="ms-auto text-end">
+                <div class="rp-count" style="font-size: 1rem">8 kg</div>
+                <div class="rp-eyebrow">Falta</div>
+              </div>
+            </div>
+            <div class="rp-row">
+              <div class="rp-thumb" style="background: #b5533f">GS</div>
+              <div>
+                <div
+                  class="fw-semibold"
+                  style="
+                    font-family: var(--rp-display);
+                    letter-spacing: -0.02em;
+                  "
+                >
+                  Llevar dos gatos al veterinario
+                </div>
+                <div class="text-secondary" style="font-size: 12.5px">
+                  Gatos del Sur · jueves 20, mañana
+                </div>
+              </div>
+              <div class="ms-auto text-end">
+                <div class="rp-count" style="font-size: 1rem">1</div>
+                <div class="rp-eyebrow">Viaje</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-box rp-dark">
+            <div class="doc-label" style="color: #8fb3a0">
+              Bloque oscuro · .rp-dark
+            </div>
+            <h3>De la necesidad al refugio, en cuatro pasos</h3>
+            <p class="mb-3">
+              Se usa una sola vez por página, para cortar el ritmo antes del
+              cierre.
+            </p>
+            <button class="btn btn-success">Ver qué hace falta</button>
+          </div>
+
+          <div class="doc-box">
+            <div class="doc-label">Cifras · .rp-figure + .rp-eyebrow</div>
+            <div class="row text-center g-4">
+              <div class="col-6 col-md-3">
+                <div class="rp-figure">14</div>
+                <div class="rp-eyebrow mt-2">Abiertas</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rp-figure">38</div>
+                <div class="rp-eyebrow mt-2">En adopción</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rp-figure">6</div>
+                <div class="rp-eyebrow mt-2">Protectoras</div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="rp-figure">312</div>
+                <div class="rp-eyebrow mt-2">Cerradas</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .querySelectorAll('[data-bs-toggle="tooltip"]')
+        .forEach((el) => new bootstrap.Tooltip(el));
+      document
+        .querySelectorAll('[data-bs-toggle="popover"]')
+        .forEach((el) => new bootstrap.Popover(el));
+      document.getElementById("btnToast").addEventListener("click", () => {
+        bootstrap.Toast.getOrCreateInstance(
+          document.getElementById("toastDemo"),
+        ).show();
+      });
+    </script>
+  </body>
+</html>

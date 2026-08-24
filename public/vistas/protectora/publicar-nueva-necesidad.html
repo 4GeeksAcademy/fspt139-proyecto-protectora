@@ -1,0 +1,2059 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cobijo · Publicar necesidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bosque: #12301f;
+        --bosque-2: #1a4230;
+        --verde: #1e9e56;
+        --verde-osc: #178145;
+        --verde-suave: #dff3e4;
+        --verde-tenue: #edf6ef;
+        --crema: #fbf8f1;
+        --blanco: #ffffff;
+        --tinta: #16241c;
+        --tinta-60: #5c6b61;
+        --tinta-40: #8b968e;
+        --linea: #e7e4da;
+        --linea-2: #f0ede4;
+        --ambar-bg: #fbefd4;
+        --ambar-tx: #8a5b12;
+        --coral-bg: #fbe1da;
+        --coral-tx: #be3f27;
+        --r-s: 10px;
+        --r-m: 16px;
+        --r-l: 22px;
+        --r-pill: 999px;
+        --sombra:
+          0 1px 2px rgba(18, 48, 31, 0.05),
+          0 8px 24px -12px rgba(18, 48, 31, 0.18);
+        --sombra-alta:
+          0 2px 4px rgba(18, 48, 31, 0.06),
+          0 18px 40px -18px rgba(18, 48, 31, 0.28);
+        --fuente:
+          "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+          sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--fuente);
+        background: #3a3a38;
+        color: var(--tinta);
+        -webkit-font-smoothing: antialiased;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+      }
+      input,
+      textarea,
+      select {
+        font-family: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid #7fd1a0;
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+
+      /* ---------- Chrome de la maqueta ---------- */
+      .lienzo {
+        padding: 26px clamp(14px, 3vw, 40px) 60px;
+      }
+      .barra-maqueta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1320px;
+        margin: 0 auto 20px;
+      }
+      .etiqueta-maqueta {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #edeae2;
+        background: #2a2a28;
+        border: 1px solid #4a4a47;
+        padding: 7px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+      .conmutador {
+        display: flex;
+        gap: 4px;
+        background: #2a2a28;
+        border: 1px solid #4a4a47;
+        padding: 4px;
+        border-radius: var(--r-pill);
+      }
+      .conmutador button {
+        border: 0;
+        background: transparent;
+        color: #c9c6be;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 18px;
+        border-radius: var(--r-pill);
+        transition: 0.18s;
+      }
+      .conmutador button[aria-selected="true"] {
+        background: var(--verde);
+        color: #fff;
+      }
+      .escenario {
+        max-width: 1320px;
+        margin: 0 auto;
+        display: none;
+      }
+      .escenario.activo {
+        display: block;
+      }
+
+      /* ---------- App: cabecera común ---------- */
+      .app {
+        background: var(--crema);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
+      }
+      .cinta {
+        background: var(--bosque);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 26px;
+        gap: 16px;
+      }
+      .cinta .marca {
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.01em;
+      }
+      .cinta .marca span {
+        font-weight: 400;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        color: #8fb39d;
+        margin-left: 8px;
+        text-transform: uppercase;
+      }
+      .roles {
+        display: flex;
+        gap: 8px;
+      }
+      .roles b,
+      .roles i {
+        font-style: normal;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 7px 14px;
+        border-radius: var(--r-pill);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        color: #d9e6de;
+      }
+      .roles b {
+        background: #38c97d;
+        color: #0c2416;
+        border-color: transparent;
+        font-weight: 600;
+      }
+
+      .cabecera {
+        background: var(--blanco);
+        border-bottom: 1px solid var(--linea-2);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 26px;
+        gap: 20px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 19px;
+      }
+      .logo i {
+        font-style: normal;
+        width: 30px;
+        height: 30px;
+        border-radius: 9px;
+        background: var(--verde);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        background: var(--verde-tenue);
+        border-radius: var(--r-pill);
+        padding: 5px;
+      }
+      .nav a {
+        text-decoration: none;
+        color: var(--tinta-60);
+        font-size: 13.5px;
+        font-weight: 500;
+        padding: 9px 17px;
+        border-radius: var(--r-pill);
+      }
+      .nav a.act {
+        background: var(--verde);
+        color: #fff;
+        font-weight: 600;
+      }
+      .cuenta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        color: var(--tinta-60);
+      }
+      .cuenta em {
+        font-style: normal;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--verde-suave);
+        color: #14663a;
+        display: grid;
+        place-items: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      /* ---------- Escritorio: cuerpo ---------- */
+      .cuerpo {
+        padding: 28px 26px 0;
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      .miga {
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--tinta-40);
+        letter-spacing: 0.02em;
+        margin-bottom: 14px;
+      }
+      .miga a {
+        color: var(--verde);
+        text-decoration: none;
+      }
+      .miga a:hover {
+        text-decoration: underline;
+      }
+      .titular {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 6px;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--verde);
+        margin: 0 0 8px;
+      }
+      h1 {
+        font-size: 34px;
+        line-height: 1.14;
+        margin: 0;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .entradilla {
+        color: var(--tinta-60);
+        font-size: 14.5px;
+        margin: 10px 0 0;
+        max-width: 52ch;
+        line-height: 1.6;
+      }
+      .malla {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 356px;
+        gap: 28px;
+        align-items: start;
+        padding: 26px 0 130px;
+      }
+
+      /* ---------- Bloques del formulario ---------- */
+      .bloque {
+        background: var(--blanco);
+        border: 1px solid var(--linea-2);
+        border-radius: var(--r-l);
+        padding: 24px 26px;
+        margin-bottom: 18px;
+        box-shadow: var(--sombra);
+        position: relative;
+        transition: opacity 0.25s;
+      }
+      .bloque[data-bloqueado="si"] {
+        opacity: 0.42;
+        pointer-events: none;
+        filter: saturate(0.5);
+      }
+      .bloque-cab {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        margin-bottom: 4px;
+      }
+      .orden {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--verde);
+        background: var(--verde-tenue);
+        border-radius: 7px;
+        padding: 4px 8px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+      .bloque h2 {
+        font-size: 18px;
+        margin: 0;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .bloque .pie {
+        color: var(--tinta-60);
+        font-size: 13px;
+        margin: 0 0 20px;
+        line-height: 1.55;
+      }
+
+      /* selector de tipo */
+      .tipos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .tipo {
+        position: relative;
+        text-align: left;
+        background: var(--blanco);
+        border: 1.5px solid var(--linea);
+        border-radius: var(--r-m);
+        padding: 16px 36px 15px 16px;
+        display: flex;
+        gap: 13px;
+        align-items: flex-start;
+        transition: 0.16s;
+      }
+      .tipo:hover {
+        border-color: #b9d9c6;
+        transform: translateY(-1px);
+      }
+      .tipo .ico {
+        flex: none;
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: var(--verde-tenue);
+        display: grid;
+        place-items: center;
+        color: var(--verde-osc);
+      }
+      .tipo strong {
+        display: block;
+        font-size: 14.5px;
+        font-weight: 600;
+        margin-bottom: 3px;
+      }
+      .tipo small {
+        display: block;
+        color: var(--tinta-60);
+        font-size: 12.2px;
+        line-height: 1.45;
+      }
+      .tipo[aria-pressed="true"] {
+        border-color: var(--verde);
+        background: #f6fcf8;
+        box-shadow: 0 0 0 3px rgba(30, 158, 86, 0.12);
+      }
+      .tipo[aria-pressed="true"] .ico {
+        background: var(--verde);
+        color: #fff;
+      }
+      .tipo .marca-check {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--verde);
+        display: none;
+        place-items: center;
+      }
+      .tipo[aria-pressed="true"] .marca-check {
+        display: grid;
+      }
+      .aviso-flujo {
+        margin-top: 14px;
+        display: none;
+        gap: 11px;
+        align-items: flex-start;
+        background: var(--verde-tenue);
+        border-radius: var(--r-m);
+        padding: 13px 15px;
+        font-size: 12.8px;
+        color: #245c3c;
+        line-height: 1.5;
+      }
+      .aviso-flujo.visible {
+        display: flex;
+      }
+      .aviso-flujo svg {
+        flex: none;
+        margin-top: 1px;
+      }
+
+      /* campos */
+      .campo {
+        margin-bottom: 18px;
+      }
+      .campo:last-child {
+        margin-bottom: 0;
+      }
+      .campo > label,
+      .rotulo {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 7px;
+      }
+      .opc {
+        font-weight: 400;
+        color: var(--tinta-40);
+        font-size: 11.5px;
+        font-family: var(--mono);
+      }
+      .contador {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--tinta-40);
+      }
+      input[type="text"],
+      input[type="number"],
+      input[type="date"],
+      textarea,
+      select {
+        width: 100%;
+        border: 1.5px solid var(--linea);
+        border-radius: var(--r-m);
+        background: #fcfcfa;
+        padding: 13px 15px;
+        font-size: 14.5px;
+        color: var(--tinta);
+        transition: 0.15s;
+      }
+      input::placeholder,
+      textarea::placeholder {
+        color: #aeb6af;
+      }
+      input:focus,
+      textarea:focus,
+      select:focus {
+        border-color: var(--verde);
+        background: #fff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(30, 158, 86, 0.13);
+      }
+      textarea {
+        min-height: 112px;
+        resize: vertical;
+        line-height: 1.6;
+      }
+      .ayuda {
+        font-size: 12.2px;
+        color: var(--tinta-60);
+        margin: 7px 0 0;
+        line-height: 1.5;
+      }
+
+      /* animal */
+      .animales {
+        display: grid;
+        gap: 9px;
+      }
+      .animal {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+        background: #fcfcfa;
+        border: 1.5px solid var(--linea);
+        border-radius: var(--r-m);
+        padding: 11px 14px;
+        transition: 0.15s;
+        width: 100%;
+      }
+      .animal:hover {
+        border-color: #b9d9c6;
+      }
+      .animal[aria-pressed="true"] {
+        border-color: var(--verde);
+        background: #f6fcf8;
+      }
+      .animal .foto {
+        flex: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .animal .datos {
+        flex: 1;
+        min-width: 0;
+      }
+      .animal .datos b {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .animal .datos span {
+        font-size: 12px;
+        color: var(--tinta-60);
+      }
+      .animal .estado {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        padding: 4px 9px;
+        border-radius: var(--r-pill);
+        background: var(--verde-tenue);
+        color: #2c6a47;
+        white-space: nowrap;
+      }
+      .animal.ninguno .foto {
+        background: var(--verde-tenue);
+        color: var(--tinta-60);
+        border: 1.5px dashed #c4d8cb;
+      }
+      .animal[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* objetivo */
+      .segmentado {
+        display: flex;
+        gap: 4px;
+        background: var(--verde-tenue);
+        padding: 4px;
+        border-radius: var(--r-pill);
+        margin-bottom: 16px;
+      }
+      .segmentado button {
+        flex: 1;
+        border: 0;
+        background: transparent;
+        color: var(--tinta-60);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 10px 12px;
+        border-radius: var(--r-pill);
+        transition: 0.16s;
+      }
+      .segmentado button[aria-pressed="true"] {
+        background: var(--blanco);
+        color: var(--verde-osc);
+        box-shadow: var(--sombra);
+      }
+      .dupla {
+        display: grid;
+        grid-template-columns: 1fr 150px;
+        gap: 12px;
+      }
+      .dupla label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 7px;
+      }
+      .cant {
+        font-family: var(--mono);
+        font-size: 17px;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+      .caja-ilimitada {
+        display: none;
+        background: var(--verde-tenue);
+        border-radius: var(--r-m);
+        padding: 16px;
+        font-size: 13px;
+        color: #245c3c;
+        line-height: 1.55;
+      }
+      .caja-ilimitada.visible {
+        display: block;
+      }
+      .caja-ilimitada b {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 13.5px;
+      }
+
+      /* plazo */
+      .atajos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .atajo {
+        border: 1.5px solid var(--linea);
+        background: #fcfcfa;
+        border-radius: var(--r-pill);
+        padding: 9px 15px;
+        font-size: 12.8px;
+        font-weight: 500;
+        color: var(--tinta-60);
+        transition: 0.15s;
+      }
+      .atajo:hover {
+        border-color: #b9d9c6;
+      }
+      .atajo[aria-pressed="true"] {
+        border-color: var(--verde);
+        background: #f6fcf8;
+        color: var(--verde-osc);
+        font-weight: 600;
+      }
+      .alerta-urgente {
+        display: none;
+        align-items: flex-start;
+        gap: 11px;
+        margin-top: 14px;
+        background: var(--coral-bg);
+        color: #8e3220;
+        border-radius: var(--r-m);
+        padding: 13px 15px;
+        font-size: 12.8px;
+        line-height: 1.5;
+      }
+      .alerta-urgente.visible {
+        display: flex;
+      }
+      .alerta-urgente svg {
+        flex: none;
+        margin-top: 1px;
+      }
+
+      /* ---------- Panel lateral ---------- */
+      .lateral {
+        position: sticky;
+        top: 22px;
+        display: grid;
+        gap: 16px;
+      }
+      .rotulo-lateral {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--tinta-40);
+        margin: 0 0 10px;
+      }
+      .tarjeta-previa {
+        background: var(--blanco);
+        border: 1px solid var(--linea-2);
+        border-radius: var(--r-l);
+        padding: 18px;
+        box-shadow: var(--sombra-alta);
+      }
+      .pv-cab {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 13px;
+      }
+      .pv-foto {
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 600;
+        font-size: 15px;
+        flex: none;
+        background: var(--verde-tenue);
+      }
+      .pv-etiquetas {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 7px;
+      }
+      .chip {
+        font-size: 10.5px;
+        font-family: var(--mono);
+        padding: 4px 9px;
+        border-radius: var(--r-pill);
+        letter-spacing: 0.02em;
+      }
+      .chip.tipo {
+        background: var(--verde-tenue);
+        color: #2c6a47;
+      }
+      .chip.abierta {
+        background: var(--ambar-bg);
+        color: var(--ambar-tx);
+      }
+      .chip.urgente {
+        background: var(--coral-bg);
+        color: var(--coral-tx);
+      }
+      .pv-titulo {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 6px;
+        line-height: 1.3;
+        letter-spacing: -0.01em;
+      }
+      .pv-desc {
+        font-size: 12.8px;
+        color: var(--tinta-60);
+        margin: 0 0 15px;
+        line-height: 1.55;
+      }
+      .pv-cifras {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        margin-bottom: 8px;
+      }
+      .pv-cifras b {
+        font-weight: 500;
+      }
+      .pv-cifras span {
+        color: var(--tinta-40);
+        font-size: 11px;
+      }
+      .barra {
+        display: flex;
+        gap: 4px;
+      }
+      .barra i {
+        height: 7px;
+        flex: 1;
+        border-radius: var(--r-pill);
+        background: var(--linea-2);
+      }
+      .barra i.on {
+        background: var(--verde);
+      }
+      .barra.abierta i {
+        background: transparent;
+        border: 1.5px dashed #cfdcd3;
+        height: 9px;
+      }
+      .pv-plazo {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        color: var(--tinta-60);
+        margin-top: 13px;
+      }
+      .pv-cta {
+        width: 100%;
+        margin-top: 15px;
+        border: 0;
+        background: var(--verde);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 12px;
+        border-radius: var(--r-pill);
+      }
+      .pv-nota {
+        text-align: center;
+        font-size: 11px;
+        color: var(--tinta-40);
+        margin: 9px 0 0;
+      }
+
+      .lista-control {
+        background: var(--blanco);
+        border: 1px solid var(--linea-2);
+        border-radius: var(--r-l);
+        padding: 18px 20px;
+        box-shadow: var(--sombra);
+      }
+      .lista-control h3 {
+        font-size: 13px;
+        margin: 0 0 12px;
+        font-weight: 600;
+      }
+      .lista-control ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 9px;
+      }
+      .lista-control li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12.8px;
+        color: var(--tinta-40);
+      }
+      .lista-control li .punto {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        border: 1.5px solid var(--linea);
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .lista-control li .punto svg {
+        display: none;
+      }
+      .lista-control li.ok {
+        color: var(--tinta);
+      }
+      .lista-control li.ok .punto {
+        background: var(--verde);
+        border-color: var(--verde);
+      }
+      .lista-control li.ok .punto svg {
+        display: block;
+      }
+
+      /* ---------- Barra de acciones ---------- */
+      .acciones {
+        position: sticky;
+        bottom: 0;
+        background: rgba(251, 248, 241, 0.93);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid var(--linea);
+        padding: 16px 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+      .acciones .estado-form {
+        font-size: 12.5px;
+        color: var(--tinta-60);
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin: 0;
+      }
+      .acciones .grupo {
+        display: flex;
+        gap: 10px;
+      }
+      .btn {
+        border-radius: var(--r-pill);
+        font-size: 14px;
+        font-weight: 600;
+        padding: 12px 22px;
+        border: 1.5px solid transparent;
+        transition: 0.16s;
+      }
+      .btn.fantasma {
+        background: transparent;
+        color: var(--tinta-60);
+        border-color: transparent;
+      }
+      .btn.fantasma:hover {
+        color: var(--tinta);
+        background: #f1eee5;
+      }
+      .btn.linea {
+        background: var(--blanco);
+        border-color: var(--linea);
+        color: var(--tinta);
+      }
+      .btn.linea:hover {
+        border-color: #b9d9c6;
+      }
+      .btn.solido {
+        background: var(--verde);
+        color: #fff;
+      }
+      .btn.solido:hover {
+        background: var(--verde-osc);
+      }
+      .btn.solido[disabled] {
+        background: #c9d9ce;
+        color: #f4f8f5;
+        cursor: not-allowed;
+      }
+      .pie-app {
+        background: var(--bosque);
+        color: #9fbcab;
+        padding: 24px 26px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .pie-app .logo {
+        color: #fff;
+        font-size: 16px;
+      }
+
+      /* ---------- Móvil ---------- */
+      .telefono {
+        width: 392px;
+        margin: 0 auto;
+        border-radius: 38px;
+        background: #111;
+        padding: 11px;
+        box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+      }
+      .pantalla {
+        border-radius: 30px;
+        overflow: hidden;
+        background: var(--crema);
+        height: 812px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .mv-estado {
+        background: var(--blanco);
+        display: flex;
+        justify-content: space-between;
+        padding: 11px 22px 4px;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--tinta);
+      }
+      .mv-cab {
+        background: var(--blanco);
+        padding: 8px 16px 0;
+        border-bottom: 1px solid var(--linea-2);
+      }
+      .mv-fila {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding-bottom: 10px;
+      }
+      .mv-fila .volver {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid var(--linea);
+        background: #fff;
+        display: grid;
+        place-items: center;
+      }
+      .mv-fila h2 {
+        font-size: 15px;
+        margin: 0;
+        font-weight: 600;
+      }
+      .mv-fila .paso-num {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--tinta-40);
+      }
+      .progreso {
+        display: flex;
+        gap: 5px;
+        padding-bottom: 12px;
+      }
+      .progreso i {
+        flex: 1;
+        height: 4px;
+        border-radius: var(--r-pill);
+        background: var(--linea-2);
+      }
+      .progreso i.on {
+        background: var(--verde);
+      }
+      .mv-scroll {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px 16px 24px;
+        scrollbar-width: thin;
+      }
+      .mv-scroll::-webkit-scrollbar {
+        width: 5px;
+      }
+      .mv-scroll::-webkit-scrollbar-thumb {
+        background: #d8d5cb;
+        border-radius: 9px;
+      }
+      .paso {
+        display: none;
+      }
+      .paso.activo {
+        display: block;
+        animation: entra 0.28s ease;
+      }
+      @keyframes entra {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .paso h3 {
+        font-size: 21px;
+        margin: 0 0 6px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .paso .sub {
+        font-size: 13px;
+        color: var(--tinta-60);
+        margin: 0 0 20px;
+        line-height: 1.55;
+      }
+      .movil .tipos {
+        grid-template-columns: 1fr;
+      }
+      .movil .bloque {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+        margin: 0;
+      }
+      .movil .dupla {
+        grid-template-columns: 1fr 128px;
+      }
+      .mv-barra {
+        background: var(--blanco);
+        border-top: 1px solid var(--linea);
+        padding: 12px 16px 22px;
+        display: flex;
+        gap: 10px;
+      }
+      .mv-barra .btn {
+        flex: 1;
+        justify-content: center;
+        padding: 15px 18px;
+      }
+      .mv-barra .btn.fantasma {
+        flex: 0 0 96px;
+        border: 1.5px solid var(--linea);
+        background: #fff;
+        color: var(--tinta-60);
+      }
+      .resumen {
+        background: var(--blanco);
+        border: 1px solid var(--linea-2);
+        border-radius: var(--r-m);
+        padding: 6px 16px;
+        margin-top: 18px;
+        box-shadow: var(--sombra);
+      }
+      .resumen div {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--linea-2);
+        font-size: 13px;
+      }
+      .resumen div:last-child {
+        border-bottom: 0;
+      }
+      .resumen dt {
+        color: var(--tinta-60);
+        flex: none;
+      }
+      .resumen dd {
+        margin: 0;
+        text-align: right;
+        font-weight: 500;
+        font-family: var(--mono);
+        font-size: 12.5px;
+      }
+      .resumen button {
+        background: none;
+        border: 0;
+        color: var(--verde);
+        font-size: 12px;
+        font-weight: 600;
+        padding: 0;
+        text-decoration: underline;
+      }
+
+      /* ---------- Éxito ---------- */
+      .exito {
+        position: absolute;
+        inset: 0;
+        background: var(--crema);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 34px;
+        z-index: 5;
+      }
+      .exito.visible {
+        display: flex;
+        animation: entra 0.3s ease;
+      }
+      .exito .sello {
+        width: 74px;
+        height: 74px;
+        border-radius: 50%;
+        background: var(--verde);
+        display: grid;
+        place-items: center;
+        margin-bottom: 20px;
+      }
+      .exito h3 {
+        font-size: 22px;
+        margin: 0 0 8px;
+        font-weight: 700;
+      }
+      .exito p {
+        font-size: 13.5px;
+        color: var(--tinta-60);
+        margin: 0 0 24px;
+        line-height: 1.6;
+        max-width: 34ch;
+      }
+      .exito .grupo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 290px;
+      }
+      .escenario .app {
+        position: relative;
+      }
+      .escenario > .app > .exito {
+        border-radius: 14px;
+      }
+
+      @media (max-width: 1080px) {
+        .malla {
+          grid-template-columns: 1fr;
+        }
+        .lateral {
+          position: static;
+        }
+      }
+      @media (max-width: 640px) {
+        .escenario[data-vista="escritorio"] {
+          display: none !important;
+        }
+        .telefono {
+          width: 100%;
+          max-width: 392px;
+          padding: 0;
+          border-radius: 0;
+          background: transparent;
+        }
+        .pantalla {
+          border-radius: 14px;
+          height: 760px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lienzo">
+      <div class="barra-maqueta">
+        <span class="etiqueta-maqueta"
+          >Cobijo · Panel de protectora · Publicar necesidad</span
+        >
+        <div class="conmutador" role="tablist" aria-label="Cambiar vista">
+          <button role="tab" aria-selected="true" data-vista="escritorio">
+            Escritorio
+          </button>
+          <button role="tab" aria-selected="false" data-vista="movil">
+            Móvil
+          </button>
+        </div>
+      </div>
+
+      <!-- ====================== ESCRITORIO ====================== -->
+      <section class="escenario activo" data-vista="escritorio">
+        <div class="app" id="app-escritorio">
+          <div class="cinta">
+            <div class="marca">Cobijo <span>Savia cálida</span></div>
+            <div class="roles">
+              <i>Home</i><b>Protectora</b><i>Colaborador</i>
+            </div>
+          </div>
+
+          <header class="cabecera">
+            <div class="logo"><i>C</i> Cobijo</div>
+            <nav class="nav">
+              <a href="#">Panel</a>
+              <a href="#" class="act">Necesidades</a>
+              <a href="#">Animales</a>
+              <a href="#">Adopciones</a>
+              <a href="#">Perfil</a>
+            </nav>
+            <div class="cuenta">Protectora Huellas <em>PH</em></div>
+          </header>
+
+          <div class="cuerpo">
+            <p class="miga">
+              <a href="#">Panel</a> / <a href="#">Necesidades</a> / Nueva
+              necesidad
+            </p>
+            <div class="titular">
+              <div>
+                <p class="eyebrow">Nueva necesidad</p>
+                <h1>¿Con qué os pueden ayudar?</h1>
+                <p class="entradilla">
+                  Publicad una necesidad concreta y aparecerá en el tablón de
+                  las personas colaboradoras cercanas. Podréis editarla o
+                  cerrarla en cualquier momento.
+                </p>
+              </div>
+            </div>
+
+            <div class="malla" data-flujo="escritorio">
+              <div class="columna-form"><!-- se rellena por JS --></div>
+              <aside class="lateral"><!-- se rellena por JS --></aside>
+            </div>
+          </div>
+
+          <div class="acciones">
+            <p class="estado-form">
+              <span class="txt-estado">Elegid un tipo para empezar</span>
+            </p>
+            <div class="grupo">
+              <button class="btn fantasma" data-accion="cancelar">
+                Cancelar
+              </button>
+              <button class="btn linea" data-accion="borrador">
+                Guardar borrador
+              </button>
+              <button class="btn solido" data-accion="publicar" disabled>
+                Publicar necesidad
+              </button>
+            </div>
+          </div>
+
+          <footer class="pie-app">
+            <div class="logo"><i>C</i> Cobijo</div>
+            <span>Vista privada · rol protectora / administrador</span>
+          </footer>
+
+          <div class="exito">
+            <div class="sello">
+              <svg
+                width="34"
+                height="34"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#fff"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            </div>
+            <h3>Necesidad publicada</h3>
+            <p class="texto-exito">
+              Ya es visible para las personas colaboradoras cercanas a la
+              protectora.
+            </p>
+            <div class="grupo">
+              <button class="btn solido" data-accion="volver">
+                Ver en el panel
+              </button>
+              <button class="btn linea" data-accion="otra">
+                Publicar otra necesidad
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================== MÓVIL ====================== -->
+      <section class="escenario" data-vista="movil">
+        <div class="telefono">
+          <div class="pantalla movil" id="app-movil">
+            <div class="mv-estado"><span>9:41</span><span>Cobijo</span></div>
+            <div class="mv-cab">
+              <div class="mv-fila">
+                <button class="volver" aria-label="Volver">
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#16241C"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m15 18-6-6 6-6" />
+                  </svg>
+                </button>
+                <h2>Nueva necesidad</h2>
+                <span class="paso-num">1/4</span>
+              </div>
+              <div class="progreso">
+                <i class="on"></i><i></i><i></i><i></i>
+              </div>
+            </div>
+            <div class="mv-scroll" data-flujo="movil">
+              <!-- se rellena por JS -->
+            </div>
+            <div class="mv-barra">
+              <button
+                class="btn fantasma"
+                data-accion="atras"
+                style="visibility: hidden"
+              >
+                Atrás
+              </button>
+              <button class="btn solido" data-accion="siguiente" disabled>
+                Continuar
+              </button>
+            </div>
+
+            <div class="exito">
+              <div class="sello">
+                <svg
+                  width="34"
+                  height="34"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#fff"
+                  stroke-width="2.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </div>
+              <h3>Necesidad publicada</h3>
+              <p class="texto-exito">
+                Ya es visible para las personas colaboradoras cercanas.
+              </p>
+              <div class="grupo">
+                <button class="btn solido" data-accion="volver">
+                  Ver en el panel
+                </button>
+                <button class="btn linea" data-accion="otra">
+                  Publicar otra
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      /* =======================================================================
+   Datos del dominio
+   ======================================================================= */
+      const ICO = {
+        euro: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 5.5A7.5 7.5 0 0 0 7.2 9M18.5 18.5A7.5 7.5 0 0 1 7.2 15"/><path d="M3 10h9M3 14h9"/></svg>',
+        caja: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>',
+        reloj:
+          '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+        otros:
+          '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6 5.6 18.4"/></svg>',
+        info: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+        rayo: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>',
+        calendario:
+          '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
+        check:
+          '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+        huella:
+          '<svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor"><circle cx="6.6" cy="9" r="2"/><circle cx="11.2" cy="6.6" r="2.1"/><circle cx="16.2" cy="8.2" r="2"/><circle cx="19" cy="12.6" r="1.7"/><path d="M11.6 11.4c2.5 0 4.7 1.9 5.4 4 .5 1.7-.7 3.2-2.5 3.2-.9 0-1.8-.3-2.8-.3s-1.9.3-2.8.3c-1.8 0-3-1.5-2.5-3.2.7-2.1 2.7-4 5.2-4Z"/></svg>',
+      };
+
+      const TIPOS = [
+        {
+          id: "economica",
+          nombre: "Ayuda económica",
+          icono: ICO.euro,
+          resumen: "Para cubrir un gasto concreto: cirugía, vacunas, chip…",
+          unidades: ["€"],
+          cta: "Aportar",
+          ejemplo: "Fondo cirugía de Nala",
+          ejemploDesc:
+            "Nala llegó con la cadera dañada. La operación cuesta 600 € y la tenemos programada para el 3 de septiembre en la clínica del barrio.",
+          flujo:
+            "Cada persona indica el importe que aporta. Lo verás en <b>Entregas por confirmar</b> y lo marcas como recibido.",
+        },
+        {
+          id: "recursos",
+          nombre: "Recursos",
+          icono: ICO.caja,
+          resumen: "Comida, mantas, medicación, arena, material…",
+          unidades: ["kg", "unidades", "latas", "sacos", "mantas"],
+          cta: "Comprometer entrega",
+          ejemplo: "Pienso de cachorro",
+          ejemploDesc:
+            "Nos quedan dos semanas de pienso para la camada. Sirve cualquier marca de gama media para cachorro de talla mediana.",
+          flujo:
+            "Cada persona reserva una cantidad y la lleva a la protectora. Aparecerá en <b>Entregas por confirmar</b> hasta que la deis por recibida.",
+        },
+        {
+          id: "voluntariado",
+          nombre: "Tiempo voluntario",
+          icono: ICO.reloj,
+          resumen: "Transporte, paseos, acogida, limpieza, difusión…",
+          unidades: ["viajes", "horas", "turnos", "días"],
+          cta: "Apuntarme",
+          ejemplo: "Transporte veterinario",
+          ejemploDesc:
+            "Necesitamos llevar a dos gatos a la clínica de Burjassot el jueves por la mañana. Ida y vuelta, unas dos horas.",
+          flujo:
+            "Cada persona se apunta a un turno o viaje y os deja su disponibilidad. Confirmáis cuando se haya realizado.",
+        },
+        {
+          id: "otros",
+          nombre: "Otros",
+          icono: ICO.otros,
+          resumen: "Cualquier ayuda que no encaje en las anteriores",
+          unidades: ["unidades", "personas", "plazas"],
+          cta: "Quiero ayudar",
+          ejemplo: "Fotógrafo para fichas de adopción",
+          ejemploDesc:
+            "Buscamos a alguien que haga fotos decentes a los diez animales que tenemos sin ficha. Un sábado por la mañana en el refugio.",
+          flujo:
+            "Cada persona os escribe qué puede aportar y vosotros decidís si lo aceptáis.",
+        },
+      ];
+
+      const ANIMALES = [
+        {
+          id: "nala",
+          nombre: "Nala",
+          detalle: "Perro · mestiza · 2 años",
+          estado: "En proceso",
+          ini: "N",
+          color: "#B98A2E",
+        },
+        {
+          id: "trufa",
+          nombre: "Trufa",
+          detalle: "Gato · europeo · 7 meses",
+          estado: "Disponible",
+          ini: "T",
+          color: "#7C6047",
+        },
+        {
+          id: "bruno",
+          nombre: "Bruno",
+          detalle: "Perro · podenco · 5 años",
+          estado: "Adoptado",
+          ini: "B",
+          color: "#5C6B61",
+          bloqueado: true,
+        },
+      ];
+
+      const MESES = [
+        "ene",
+        "feb",
+        "mar",
+        "abr",
+        "may",
+        "jun",
+        "jul",
+        "ago",
+        "sep",
+        "oct",
+        "nov",
+        "dic",
+      ];
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+      const iso = (d) =>
+        `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+      const enDias = (n) => {
+        const d = new Date(hoy);
+        d.setDate(d.getDate() + n);
+        return d;
+      };
+      const fmtCorta = (d) => `${d.getDate()} ${MESES[d.getMonth()]}`;
+      const diasHasta = (s) =>
+        Math.round((new Date(s + "T00:00:00") - hoy) / 86400000);
+
+      /* =======================================================================
+   Marcado compartido
+   ======================================================================= */
+      function bloqueTipo(p) {
+        return `
+  <div class="bloque" data-bloque="tipo">
+    <div class="bloque-cab"><span class="orden">01</span><h2>Tipo de ayuda</h2></div>
+    <p class="pie">Define cómo colaborará la gente y en qué unidades se mide la necesidad.</p>
+    <div class="tipos" role="group" aria-label="Tipo de ayuda">
+      ${TIPOS.map(
+        (t) => `
+        <button type="button" class="tipo" data-tipo="${t.id}" aria-pressed="false">
+          <span class="ico">${t.icono}</span>
+          <span><strong>${t.nombre}</strong><small>${t.resumen}</small></span>
+          <span class="marca-check">${ICO.check}</span>
+        </button>`,
+      ).join("")}
+    </div>
+    <div class="aviso-flujo">${ICO.info}<span class="txt-flujo"></span></div>
+  </div>`;
+      }
+
+      function bloqueDetalles(p) {
+        return `
+  <div class="bloque" data-bloque="detalles" data-bloqueado="si">
+    <div class="bloque-cab"><span class="orden">02</span><h2>Qué necesitáis</h2></div>
+    <p class="pie">Un título claro y el contexto justo. Es lo primero que se lee en el tablón.</p>
+    <div class="campo">
+      <label for="${p}-nombre">Nombre de la necesidad <span class="contador"><span class="c-nombre">0</span>/60</span></label>
+      <input type="text" id="${p}-nombre" maxlength="60" data-campo="nombre" placeholder="Pienso de cachorro">
+      <p class="ayuda">Nombrad la cosa, no la petición: <em>«Pienso de cachorro»</em> funciona mejor que <em>«Necesitamos ayuda urgente»</em>.</p>
+    </div>
+    <div class="campo">
+      <label for="${p}-desc">Descripción <span class="opc">opcional · <span class="c-desc">0</span>/400</span></label>
+      <textarea id="${p}-desc" maxlength="400" data-campo="descripcion" placeholder="Para qué es, qué sirve exactamente y cuándo hace falta."></textarea>
+      <p class="ayuda">Contad para qué es y qué vale: la gente colabora más cuando sabe dónde acaba su ayuda.</p>
+    </div>
+    <div class="campo">
+      <span class="rotulo">Animal relacionado <span class="opc">opcional</span></span>
+      <div class="animales" role="group" aria-label="Animal relacionado">
+        <button type="button" class="animal ninguno" data-animal="" aria-pressed="true">
+          <span class="foto">—</span>
+          <span class="datos"><b>Necesidad general</b><span>Para toda la protectora</span></span>
+        </button>
+        ${ANIMALES.map(
+          (a) => `
+        <button type="button" class="animal" data-animal="${a.id}" aria-pressed="false" ${a.bloqueado ? "disabled" : ""}>
+          <span class="foto" style="background:${a.color}">${a.ini}</span>
+          <span class="datos"><b>${a.nombre}</b><span>${a.detalle}</span></span>
+          <span class="estado">${a.bloqueado ? "Adoptado" : a.estado}</span>
+        </button>`,
+        ).join("")}
+      </div>
+      <p class="ayuda">Al vincular un animal, su foto y su ficha aparecen en la necesidad.</p>
+    </div>
+  </div>`;
+      }
+
+      function bloqueObjetivo(p) {
+        return `
+  <div class="bloque" data-bloque="objetivo" data-bloqueado="si">
+    <div class="bloque-cab"><span class="orden">03</span><h2>Cuánto hace falta</h2></div>
+    <p class="pie">Marca cuándo se considera cubierta la necesidad.</p>
+    <div class="segmentado" role="group" aria-label="Tipo de objetivo">
+      <button type="button" data-objetivo="definido" aria-pressed="true">Cantidad concreta</button>
+      <button type="button" data-objetivo="ilimitado" aria-pressed="false">Sin límite</button>
+    </div>
+    <div class="caja-definida">
+      <div class="dupla">
+        <div>
+          <label for="${p}-cant">Cantidad objetivo</label>
+          <input type="number" min="1" step="1" id="${p}-cant" class="cant" data-campo="cantidad" placeholder="20">
+        </div>
+        <div>
+          <label for="${p}-unidad">Unidad</label>
+          <select id="${p}-unidad" data-campo="unidad"></select>
+        </div>
+      </div>
+      <p class="ayuda">Se mostrará como barra de progreso: <span class="mono-ej" style="font-family:var(--mono)">0/20 kg</span>. La necesidad se cierra sola al llegar al objetivo.</p>
+    </div>
+    <div class="caja-ilimitada">
+      <b>Se recoge sin tope</b>
+      Sin barra de progreso: la tarjeta mostrará lo acumulado hasta ahora y la necesidad seguirá abierta hasta que la cerréis o llegue la fecha límite.
+    </div>
+  </div>`;
+      }
+
+      function bloquePlazo(p) {
+        return `
+  <div class="bloque" data-bloque="plazo" data-bloqueado="si">
+    <div class="bloque-cab"><span class="orden">04</span><h2>Hasta cuándo</h2></div>
+    <p class="pie">Las necesidades con fecha se ordenan antes en el tablón de colaboradores.</p>
+    <div class="atajos" role="group" aria-label="Fecha límite rápida">
+      <button type="button" class="atajo" data-plazo="7" aria-pressed="false">En 7 días</button>
+      <button type="button" class="atajo" data-plazo="15" aria-pressed="false">En 15 días</button>
+      <button type="button" class="atajo" data-plazo="30" aria-pressed="false">En 30 días</button>
+      <button type="button" class="atajo" data-plazo="sin" aria-pressed="false">Sin fecha límite</button>
+    </div>
+    <div class="campo caja-fecha">
+      <label for="${p}-fecha">Fecha límite</label>
+      <input type="date" id="${p}-fecha" data-campo="fecha" min="${iso(hoy)}">
+    </div>
+    <div class="alerta-urgente">${ICO.rayo}<span>Quedan pocos días: la necesidad se publicará con la etiqueta <b>Urgente</b> y subirá al principio del tablón.</span></div>
+  </div>`;
+      }
+
+      function panelLateral() {
+        return `
+  <div>
+    <p class="rotulo-lateral">Así lo verá quien colabora</p>
+    <div class="tarjeta-previa">
+      <div class="pv-cab">
+        <div class="pv-foto" style="color:#7C9C89">${ICO.huella}</div>
+        <div>
+          <div class="pv-etiquetas">
+            <span class="chip tipo">Tipo</span>
+            <span class="chip abierta">Abierta</span>
+          </div>
+        </div>
+      </div>
+      <h4 class="pv-titulo">Nombre de la necesidad</h4>
+      <p class="pv-desc">La descripción aparecerá aquí.</p>
+      <div class="pv-cifras"><b class="pv-cantidad">0/0</b><span class="pv-pct">0 %</span></div>
+      <div class="barra"><i></i><i></i><i></i><i></i><i></i></div>
+      <p class="pv-plazo">${ICO.calendario}<span class="pv-fecha">Sin fecha límite</span></p>
+      <button type="button" class="pv-cta" disabled>Colaborar</button>
+      <p class="pv-nota">Protectora Huellas · a 2,4 km de ti</p>
+    </div>
+  </div>
+  <div class="lista-control">
+    <h3>Para poder publicar</h3>
+    <ul>
+      <li data-req="tipo"><span class="punto">${ICO.check}</span> Tipo de ayuda</li>
+      <li data-req="nombre"><span class="punto">${ICO.check}</span> Nombre de la necesidad</li>
+      <li data-req="objetivo"><span class="punto">${ICO.check}</span> Cantidad objetivo</li>
+      <li data-req="plazo"><span class="punto">${ICO.check}</span> Fecha límite o sin límite</li>
+    </ul>
+  </div>`;
+      }
+
+      /* =======================================================================
+   Lógica del flujo
+   ======================================================================= */
+      function crearFlujo(raiz, modo) {
+        const p = modo === "movil" ? "m" : "d";
+        const contenedor = raiz.querySelector("[data-flujo]");
+
+        if (modo === "escritorio") {
+          raiz.querySelector(".columna-form").innerHTML =
+            bloqueTipo(p) +
+            bloqueDetalles(p) +
+            bloqueObjetivo(p) +
+            bloquePlazo(p);
+          raiz.querySelector(".lateral").innerHTML = panelLateral();
+        } else {
+          contenedor.innerHTML = `
+      <div class="paso activo" data-paso="1">
+        <h3>¿Qué tipo de ayuda?</h3>
+        <p class="sub">De esto depende cómo colabora la gente y en qué se mide.</p>
+        ${bloqueTipo(p)}
+      </div>
+      <div class="paso" data-paso="2">
+        <h3>Qué necesitáis</h3>
+        <p class="sub">Un título claro y el contexto justo.</p>
+        ${bloqueDetalles(p)}
+      </div>
+      <div class="paso" data-paso="3">
+        <h3>Cuánto y hasta cuándo</h3>
+        <p class="sub">Marca cuándo se considera cubierta.</p>
+        ${bloqueObjetivo(p)}
+        <div style="height:22px"></div>
+        ${bloquePlazo(p)}
+      </div>
+      <div class="paso" data-paso="4">
+        <h3>Revisad y publicad</h3>
+        <p class="sub">Esto es exactamente lo que verá quien colabore.</p>
+        ${panelLateral().split('<div class="lista-control">')[0]}
+        <div class="resumen">
+          <div><dt>Tipo</dt><dd class="r-tipo">—</dd></div>
+          <div><dt>Animal</dt><dd class="r-animal">—</dd></div>
+          <div><dt>Objetivo</dt><dd class="r-objetivo">—</dd></div>
+          <div><dt>Límite</dt><dd class="r-plazo">—</dd></div>
+        </div>
+        <p style="text-align:center;margin-top:16px"><button type="button" data-accion="editar" style="background:none;border:0;color:var(--verde);font-weight:600;font-size:13px;text-decoration:underline">Editar los datos</button></p>
+      </div>`;
+          // los bloques del móvil nunca se atenúan: el paso ya controla el orden
+          contenedor
+            .querySelectorAll(".bloque")
+            .forEach((b) => b.removeAttribute("data-bloqueado"));
+          contenedor
+            .querySelectorAll(".bloque-cab, .bloque > .pie")
+            .forEach((e) => e.remove());
+        }
+
+        const estado = {
+          tipo: null,
+          nombre: "",
+          descripcion: "",
+          animal: "",
+          objetivo: "definido",
+          cantidad: "",
+          unidad: "",
+          fecha: "",
+          sinFecha: false,
+          paso: 1,
+        };
+        const q = (s) => raiz.querySelector(s);
+        const qa = (s) => [...raiz.querySelectorAll(s)];
+        const tipoActual = () => TIPOS.find((t) => t.id === estado.tipo);
+
+        /* --- validaciones --- */
+        const okTipo = () => !!estado.tipo;
+        const okNombre = () => estado.nombre.trim().length >= 3;
+        const okObjetivo = () =>
+          estado.objetivo === "ilimitado" || +estado.cantidad > 0;
+        const okPlazo = () => estado.sinFecha || !!estado.fecha;
+        const okTodo = () =>
+          okTipo() && okNombre() && okObjetivo() && okPlazo();
+        const okPaso = (n) =>
+          n === 1
+            ? okTipo()
+            : n === 2
+              ? okNombre()
+              : n === 3
+                ? okObjetivo() && okPlazo()
+                : okTodo();
+
+        /* --- selección de tipo --- */
+        qa(".tipo").forEach((btn) =>
+          btn.addEventListener("click", () => {
+            estado.tipo = btn.dataset.tipo;
+            qa(".tipo").forEach((b) =>
+              b.setAttribute("aria-pressed", String(b === btn)),
+            );
+            const t = tipoActual();
+            estado.unidad = t.unidades[0];
+            const sel = q('[data-campo="unidad"]');
+            sel.innerHTML = t.unidades
+              .map((u) => `<option>${u}</option>`)
+              .join("");
+            sel.disabled = t.unidades.length === 1;
+            q('[data-campo="nombre"]').placeholder = t.ejemplo;
+            q('[data-campo="descripcion"]').placeholder = t.ejemploDesc;
+            q('[data-campo="cantidad"]').placeholder =
+              t.id === "economica" ? "600" : "20";
+            q(".aviso-flujo").classList.add("visible");
+            q(".txt-flujo").innerHTML = t.flujo;
+            sincronizar();
+          }),
+        );
+
+        /* --- texto --- */
+        ["nombre", "descripcion"].forEach((campo) => {
+          q(`[data-campo="${campo}"]`).addEventListener("input", (e) => {
+            estado[campo] = e.target.value;
+            const c = q(campo === "nombre" ? ".c-nombre" : ".c-desc");
+            if (c) c.textContent = e.target.value.length;
+            sincronizar();
+          });
+        });
+
+        /* --- animal --- */
+        qa(".animal").forEach((btn) =>
+          btn.addEventListener("click", () => {
+            estado.animal = btn.dataset.animal;
+            qa(".animal").forEach((b) =>
+              b.setAttribute("aria-pressed", String(b === btn)),
+            );
+            sincronizar();
+          }),
+        );
+
+        /* --- objetivo --- */
+        qa("[data-objetivo]").forEach((btn) =>
+          btn.addEventListener("click", () => {
+            estado.objetivo = btn.dataset.objetivo;
+            qa("[data-objetivo]").forEach((b) =>
+              b.setAttribute("aria-pressed", String(b === btn)),
+            );
+            const ilim = estado.objetivo === "ilimitado";
+            q(".caja-definida").style.display = ilim ? "none" : "block";
+            q(".caja-ilimitada").classList.toggle("visible", ilim);
+            sincronizar();
+          }),
+        );
+        q('[data-campo="cantidad"]').addEventListener("input", (e) => {
+          estado.cantidad = e.target.value;
+          sincronizar();
+        });
+        q('[data-campo="unidad"]').addEventListener("change", (e) => {
+          estado.unidad = e.target.value;
+          sincronizar();
+        });
+
+        /* --- plazo --- */
+        qa(".atajo").forEach((btn) =>
+          btn.addEventListener("click", () => {
+            const v = btn.dataset.plazo;
+            qa(".atajo").forEach((b) =>
+              b.setAttribute("aria-pressed", String(b === btn)),
+            );
+            if (v === "sin") {
+              estado.sinFecha = true;
+              estado.fecha = "";
+              q('[data-campo="fecha"]').value = "";
+              q(".caja-fecha").style.display = "none";
+            } else {
+              estado.sinFecha = false;
+              estado.fecha = iso(enDias(+v));
+              q(".caja-fecha").style.display = "block";
+              q('[data-campo="fecha"]').value = estado.fecha;
+            }
+            sincronizar();
+          }),
+        );
+        q('[data-campo="fecha"]').addEventListener("change", (e) => {
+          estado.fecha = e.target.value;
+          estado.sinFecha = false;
+          qa(".atajo").forEach((b) => b.setAttribute("aria-pressed", "false"));
+          sincronizar();
+        });
+
+        /* --- vista previa + estado global --- */
+        function sincronizar() {
+          const t = tipoActual();
+
+          // desbloqueo progresivo (solo escritorio)
+          if (modo === "escritorio") {
+            const abierto = okTipo();
+            ["detalles", "objetivo", "plazo"].forEach((b) => {
+              const el = q(`[data-bloque="${b}"]`);
+              if (abierto) el.removeAttribute("data-bloqueado");
+              else el.setAttribute("data-bloqueado", "si");
+            });
+          }
+
+          // tarjeta
+          const animal = ANIMALES.find((a) => a.id === estado.animal);
+          const foto = q(".pv-foto");
+          if (animal) {
+            foto.textContent = animal.ini;
+            foto.style.background = animal.color;
+            foto.style.color = "#fff";
+          } else {
+            foto.innerHTML = ICO.huella;
+            foto.style.background = "var(--verde-tenue)";
+            foto.style.color = "#7C9C89";
+          }
+
+          q(".chip.tipo").textContent = t ? t.nombre : "Tipo";
+          q(".pv-titulo").textContent =
+            estado.nombre.trim() || (t ? t.ejemplo : "Nombre de la necesidad");
+          q(".pv-titulo").style.color = estado.nombre.trim()
+            ? "var(--tinta)"
+            : "var(--tinta-40)";
+          const desc = estado.descripcion.trim();
+          q(".pv-desc").textContent =
+            desc || "Sin descripción. La tarjeta se verá más corta.";
+          q(".pv-desc").style.opacity = desc ? "1" : ".6";
+
+          const ilim = estado.objetivo === "ilimitado";
+          const barra = q(".barra");
+          barra.classList.toggle("abierta", ilim);
+          if (ilim) {
+            q(".pv-cantidad").textContent = `0 ${estado.unidad || ""} recogido`;
+            q(".pv-pct").textContent = "sin tope";
+          } else {
+            q(".pv-cantidad").textContent =
+              `0/${estado.cantidad || "—"} ${estado.unidad || ""}`;
+            q(".pv-pct").textContent = "0 %";
+          }
+          qa(".barra i").forEach((i) => i.classList.remove("on"));
+
+          // plazo + urgencia
+          let urgente = false,
+            txtFecha = "Sin fecha límite";
+          if (estado.fecha) {
+            const d = diasHasta(estado.fecha);
+            urgente = d <= 5;
+            txtFecha =
+              d <= 0
+                ? `Último día · ${fmtCorta(new Date(estado.fecha + "T00:00:00"))}`
+                : `Quedan ${d} días · ${fmtCorta(new Date(estado.fecha + "T00:00:00"))}`;
+          }
+          q(".pv-fecha").textContent = txtFecha;
+          const chipEstado = q(".chip.abierta, .chip.urgente");
+          chipEstado.className = "chip " + (urgente ? "urgente" : "abierta");
+          chipEstado.textContent = urgente ? "Urgente" : "Abierta";
+          q(".alerta-urgente").classList.toggle("visible", urgente);
+
+          const cta = q(".pv-cta");
+          cta.textContent = t ? t.cta : "Colaborar";
+          cta.disabled = !t;
+          cta.style.opacity = t ? "1" : ".45";
+
+          // lista de control
+          const req = {
+            tipo: okTipo(),
+            nombre: okNombre(),
+            objetivo: okObjetivo(),
+            plazo: okPlazo(),
+          };
+          qa("[data-req]").forEach((li) =>
+            li.classList.toggle("ok", req[li.dataset.req]),
+          );
+
+          if (modo === "escritorio") {
+            const btn = q('[data-accion="publicar"]');
+            btn.disabled = !okTodo();
+            const faltan = Object.entries(req).filter(([, v]) => !v).length;
+            q(".txt-estado").textContent = okTodo()
+              ? "Todo listo. Se publicará ahora mismo en el tablón."
+              : okTipo()
+                ? `Faltan ${faltan} campo${faltan > 1 ? "s" : ""} obligatorio${faltan > 1 ? "s" : ""}`
+                : "Elegid un tipo para empezar";
+          } else {
+            // resumen del paso 4
+            q(".r-tipo").textContent = t ? t.nombre : "—";
+            q(".r-animal").textContent = animal ? animal.nombre : "Ninguno";
+            q(".r-objetivo").textContent = ilim
+              ? "Sin límite"
+              : estado.cantidad
+                ? `${estado.cantidad} ${estado.unidad}`
+                : "—";
+            q(".r-plazo").textContent = estado.fecha
+              ? fmtCorta(new Date(estado.fecha + "T00:00:00"))
+              : "Sin fecha";
+            actualizarPaso();
+          }
+        }
+
+        /* --- navegación móvil --- */
+        function actualizarPaso() {
+          const n = estado.paso;
+          qa(".paso").forEach((s) =>
+            s.classList.toggle("activo", +s.dataset.paso === n),
+          );
+          qa(".progreso i").forEach((i, k) => i.classList.toggle("on", k < n));
+          q(".paso-num").textContent = `${n}/4`;
+          q('[data-accion="atras"]').style.visibility =
+            n === 1 ? "hidden" : "visible";
+          const sig = q('[data-accion="siguiente"]');
+          sig.textContent = n === 4 ? "Publicar necesidad" : "Continuar";
+          sig.disabled = !okPaso(n);
+          q(".mv-fila h2").textContent = [
+            "Tipo de ayuda",
+            "Qué necesitáis",
+            "Cuánto y cuándo",
+            "Revisar",
+          ][n - 1];
+        }
+
+        if (modo === "movil") {
+          q('[data-accion="siguiente"]').addEventListener("click", () => {
+            if (estado.paso === 4) {
+              publicar();
+              return;
+            }
+            estado.paso++;
+            q(".mv-scroll").scrollTop = 0;
+            sincronizar();
+          });
+          q('[data-accion="atras"]').addEventListener("click", () => {
+            estado.paso--;
+            q(".mv-scroll").scrollTop = 0;
+            sincronizar();
+          });
+          q('[data-accion="editar"]').addEventListener("click", () => {
+            estado.paso = 2;
+            q(".mv-scroll").scrollTop = 0;
+            sincronizar();
+          });
+        } else {
+          q('[data-accion="publicar"]').addEventListener("click", publicar);
+          q('[data-accion="borrador"]').addEventListener("click", (e) => {
+            const b = e.currentTarget,
+              txt = b.textContent;
+            b.textContent = "Borrador guardado";
+            setTimeout(() => (b.textContent = txt), 1800);
+          });
+        }
+
+        function publicar() {
+          const t = tipoActual();
+          const ilim = estado.objetivo === "ilimitado";
+          raiz.querySelector(".texto-exito").innerHTML =
+            `<b>${estado.nombre.trim()}</b> ya es visible para las personas colaboradoras cercanas.<br>` +
+            (ilim
+              ? "Se recogerá sin tope hasta que la cerréis."
+              : `Objetivo: ${estado.cantidad} ${estado.unidad}.`) +
+            ` Cada aportación llegará a <b>Entregas por confirmar</b>.`;
+          raiz.querySelector(".exito").classList.add("visible");
+        }
+        raiz
+          .querySelector('[data-accion="volver"]')
+          .addEventListener("click", () =>
+            raiz.querySelector(".exito").classList.remove("visible"),
+          );
+        raiz
+          .querySelector('[data-accion="otra"]')
+          .addEventListener("click", () => location.reload());
+
+        // arranque
+        q(".caja-definida").style.display = "block";
+        sincronizar();
+      }
+
+      crearFlujo(document.getElementById("app-escritorio"), "escritorio");
+      crearFlujo(document.getElementById("app-movil"), "movil");
+
+      /* conmutador de vistas */
+      document.querySelectorAll(".conmutador button").forEach((b) =>
+        b.addEventListener("click", () => {
+          document
+            .querySelectorAll(".conmutador button")
+            .forEach((x) => x.setAttribute("aria-selected", String(x === b)));
+          document
+            .querySelectorAll(".escenario")
+            .forEach((s) =>
+              s.classList.toggle("activo", s.dataset.vista === b.dataset.vista),
+            );
+        }),
+      );
+    </script>
+  </body>
+</html>
