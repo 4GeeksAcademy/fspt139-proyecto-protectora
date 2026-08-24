@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Red Protectora · Iniciar sesión (centrado)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&family=Outfit:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --verde:#2E9E63;--verde2:#48BC7D;--verde-osc:#1F7449;--verde-suave:#E4F4EA;--verde-papel:#F1F7F0;
+ --miel:#E8B04B;--miel-suave:#FBF0D8;--rosa:#E0756B;
+ --crema:#FCFAF5;--crema2:#F6F2E9;--blanco:#fff;
+ --tx:#26302A;--mut:#6F7C73;--bd:#E7E3D8;
+ --som:0 1px 2px rgba(38,48,42,.04),0 8px 24px rgba(38,48,42,.06);
+ --som2:0 3px 10px rgba(38,48,42,.06),0 24px 60px rgba(38,48,42,.11);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--tx);font-family:"Nunito Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.65;
+ -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden}
+/* halos decorativos suaves de fondo */
+body::before{content:"";position:fixed;width:620px;height:620px;border-radius:50%;background:var(--verde-papel);left:-240px;top:-220px;z-index:0}
+body::after{content:"";position:fixed;width:520px;height:520px;border-radius:50%;background:var(--miel-suave);right:-220px;bottom:-240px;opacity:.55;z-index:0}
+h1,h2,h3{font-family:Outfit,sans-serif;margin:0;line-height:1.15;font-weight:700;letter-spacing:-.02em}
+h1{font-size:30px}
+p{margin:0}
+a{color:var(--verde-osc)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px;width:100%;position:relative;z-index:2}
+
+.top .wrap{display:flex;align-items:center;gap:16px;height:76px}
+.logo{font-family:Outfit;font-weight:700;font-size:19.5px;display:flex;align-items:center;gap:11px;letter-spacing:-.025em;white-space:nowrap;text-decoration:none;color:inherit}
+.logo i{width:36px;height:36px;border-radius:13px 13px 13px 5px;background:var(--verde);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700;transform:rotate(-6deg);flex:none}
+.top .r{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:14.5px;color:var(--mut)}
+
+.btn{font:inherit;font-size:15px;font-weight:600;cursor:pointer;border-radius:99px;padding:13px 24px;text-decoration:none;display:inline-block;border:1px solid transparent;
+ background:var(--verde);color:#fff;box-shadow:0 2px 10px rgba(46,158,99,.24);width:100%;text-align:center}
+.btn:hover{background:var(--verde-osc)}
+.btn.g{background:var(--blanco);color:var(--verde-osc);border-color:var(--bd);box-shadow:var(--som)}
+.btn.g:hover{background:var(--verde-suave);border-color:var(--verde-suave)}
+.btn.sm{padding:8px 18px;font-size:13.5px;width:auto}
+.btn:focus-visible{outline:2px solid var(--verde-osc);outline-offset:3px}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 0 52px}
+.center{width:100%;max-width:470px;margin:0 auto}
+
+.card{background:var(--blanco);border-radius:26px;box-shadow:var(--som2);padding:40px 38px}
+.mark{width:52px;height:52px;border-radius:18px 18px 18px 7px;background:var(--verde);display:grid;place-items:center;color:#fff;
+ font-family:Outfit;font-size:17px;font-weight:700;transform:rotate(-6deg);margin:0 auto 20px}
+.card .hd{text-align:center;margin-bottom:6px}
+.card .hd p{color:var(--mut);margin-top:9px}
+
+.field{margin-top:19px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:7px}
+.inp{position:relative}
+input[type=email],input[type=password],input[type=text]{
+ width:100%;font:inherit;font-size:15.5px;padding:13px 17px;border-radius:14px;border:1px solid var(--bd);background:var(--crema);color:var(--tx)}
+input::placeholder{color:#9AA69E}
+input:focus{outline:none;border-color:var(--verde);background:var(--blanco);box-shadow:0 0 0 4px var(--verde-suave)}
+.inp .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;
+ font:inherit;font-size:13px;font-weight:600;color:var(--mut);padding:7px 11px;border-radius:10px}
+.inp .eye:hover{color:var(--verde-osc);background:var(--verde-suave)}
+.err{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;color:#B0463C}
+.err u{width:16px;height:16px;border-radius:50%;background:var(--rosa);color:#fff;display:grid;place-items:center;font-size:11px;text-decoration:none;flex:none;font-weight:700}
+
+.row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:17px;flex-wrap:wrap}
+.check{display:flex;align-items:center;gap:9px;font-size:14.5px;cursor:pointer;color:var(--mut)}
+.check input{width:19px;height:19px;accent-color:var(--verde);cursor:pointer}
+.row a{font-size:14.5px;font-weight:600;text-decoration:none}
+.row a:hover{text-decoration:underline}
+
+.sep{display:flex;align-items:center;gap:14px;margin:24px 0 18px;color:var(--mut);font-size:13.5px}
+.sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--bd)}
+.foot{margin-top:24px;padding-top:20px;border-top:1px solid var(--bd);font-size:14.5px;color:var(--mut);text-align:center}
+.foot a{font-weight:600;text-decoration:none}.foot a:hover{text-decoration:underline}
+
+/* recuadro informativo pequeño, debajo de la tarjeta */
+.note{display:flex;align-items:center;gap:14px;background:var(--verde-papel);border-radius:18px;padding:15px 18px;margin-top:18px}
+.note u{width:40px;height:40px;border-radius:14px;background:var(--verde);color:#fff;display:grid;place-items:center;flex:none;
+ font-family:Outfit;font-size:15px;font-weight:700;text-decoration:none}
+.note b{display:block;font-family:Outfit;font-size:14.5px;font-weight:700}
+.note small{color:var(--mut);font-size:13.5px;display:block;line-height:1.45}
+.legal{margin-top:16px;font-size:12.5px;color:var(--mut);text-align:center;line-height:1.5}
+
+@media(max-width:520px){.card{padding:30px 22px;border-radius:22px}}
+</style></head><body>
+
+<header class="top"><div class="wrap">
+<a class="logo" href="#"><i>RP</i>Red Protectora</a>
+<div class="r"><span>¿Aún no tienes cuenta?</span><a class="btn g sm" href="#">Crear cuenta</a></div>
+</div></header>
+
+<main><div class="wrap"><div class="center">
+
+ <div class="card">
+  <div class="mark">RP</div>
+  <div class="hd">
+   <h1>Inicia sesión</h1>
+   <p>Accede para colaborar o gestionar tu protectora.</p>
+  </div>
+
+  <div class="field">
+   <label for="email">Correo electrónico</label>
+   <input id="email" type="email" placeholder="tu@correo.com" autocomplete="email">
+  </div>
+
+  <div class="field">
+   <label for="pass">Contraseña</label>
+   <div class="inp">
+    <input id="pass" type="password" placeholder="Tu contraseña" autocomplete="current-password" style="padding-right:76px">
+    <button class="eye" type="button" data-for="pass">Mostrar</button>
+   </div>
+   <p class="err"><u>!</u>El correo o la contraseña no son correctos</p>
+  </div>
+
+  <div class="row">
+   <label class="check"><input type="checkbox"> Mantener la sesión</label>
+   <a href="#">¿Has olvidado tu contraseña?</a>
+  </div>
+
+  <div style="margin-top:24px"><button class="btn" type="button">Entrar</button></div>
+
+  <div class="sep">o continúa con</div>
+  <button class="btn g" type="button">Continuar con Google</button>
+
+  <p class="foot">¿Todavía no tienes cuenta? <a href="#">Créala aquí</a></p>
+ </div>
+
+ <div class="note">
+  <u>312</u>
+  <div><b>colaboraciones cerradas este año</b>
+  <small>14 necesidades abiertas ahora mismo en 6 protectoras.</small></div>
+ </div>
+
+ <p class="legal">Al entrar aceptas los <a href="#">términos de uso</a> y la <a href="#">política de privacidad</a>.</p>
+
+</div></div></main>
+
+<script>
+document.querySelectorAll('.eye').forEach(b=>b.addEventListener('click',()=>{
+ const i=document.getElementById(b.dataset.for);
+ const on=i.type==='password';
+ i.type=on?'text':'password';
+ b.textContent=on?'Ocultar':'Mostrar';
+}));
+</script></body></html>
