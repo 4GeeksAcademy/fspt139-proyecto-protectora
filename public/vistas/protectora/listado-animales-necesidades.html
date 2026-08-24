@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cobijo · Animales y Necesidades</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bosque:#12301F; --verde:#1E9E56; --verde-osc:#178145;
+  --verde-suave:#DFF3E4; --verde-tenue:#EDF6EF;
+  --crema:#FBF8F1; --blanco:#FFFFFF;
+  --tinta:#16241C; --tinta-60:#5C6B61; --tinta-40:#8B968E;
+  --linea:#E7E4DA; --linea-2:#F0EDE4;
+  --ambar-bg:#FBEFD4; --ambar-tx:#8A5B12;
+  --coral-bg:#FBE1DA; --coral-tx:#BE3F27;
+  --menta-bg:#DDF0E4; --menta-tx:#2C6A47;
+  --r-m:16px; --r-l:22px; --r-pill:999px;
+  --sombra:0 1px 2px rgba(18,48,31,.05), 0 8px 24px -12px rgba(18,48,31,.18);
+  --sombra-alta:0 2px 4px rgba(18,48,31,.06), 0 18px 40px -18px rgba(18,48,31,.28);
+  --fuente:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:var(--fuente);background:#3A3A38;color:var(--tinta);-webkit-font-smoothing:antialiased}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit}
+:focus-visible{outline:3px solid #7FD1A0;outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
+h1,h2,h3{letter-spacing:-.015em}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* maqueta */
+.lienzo{padding:26px clamp(14px,3vw,40px) 60px}
+.barra-maqueta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;max-width:1320px;margin:0 auto 20px}
+.etiqueta-maqueta{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#EDEAE2;background:#2A2A28;border:1px solid #4A4A47;padding:7px 12px;border-radius:8px;font-weight:600}
+.conmutador{display:flex;gap:4px;background:#2A2A28;border:1px solid #4A4A47;padding:4px;border-radius:var(--r-pill)}
+.conmutador button{border:0;background:transparent;color:#C9C6BE;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--r-pill)}
+.conmutador button[aria-selected="true"]{background:var(--verde);color:#fff}
+.escenario{max-width:1320px;margin:0 auto;display:none}
+.escenario.activo{display:block}
+
+/* chrome app */
+.app{background:var(--crema);border-radius:14px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);position:relative}
+.cinta{background:var(--bosque);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:14px 26px}
+.cinta .marca{font-weight:700;font-size:15px}
+.cinta .marca span{font-weight:400;font-size:11px;letter-spacing:.18em;color:#8FB39D;margin-left:8px;text-transform:uppercase}
+.roles{display:flex;gap:8px}
+.roles i{font-style:normal;font-size:12px;padding:7px 14px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.22);color:#D9E6DE}
+.roles b{font-size:12px;font-weight:600;padding:7px 14px;border-radius:var(--r-pill);background:#38C97D;color:#0C2416}
+.cabecera{background:var(--blanco);border-bottom:1px solid var(--linea-2);display:flex;align-items:center;justify-content:space-between;padding:16px 26px;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px}
+.logo i{font-style:normal;width:30px;height:30px;border-radius:9px;background:var(--verde);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:700}
+.nav{display:flex;gap:2px;background:var(--verde-tenue);border-radius:var(--r-pill);padding:5px}
+.nav button{border:0;background:transparent;color:var(--tinta-60);font-size:13.5px;font-weight:500;padding:9px 17px;border-radius:var(--r-pill)}
+.nav button[aria-current="true"]{background:var(--verde);color:#fff;font-weight:600}
+.cuenta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--tinta-60)}
+.cuenta em{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--verde-suave);color:#14663A;display:grid;place-items:center;font-size:11px;font-weight:700}
+.cuerpo{padding:26px 26px 46px;max-width:1240px;margin:0 auto}
+.pie-app{background:var(--bosque);color:#9FBCAB;padding:24px 26px;font-size:12px;display:flex;align-items:center;gap:12px}
+.pie-app .logo{color:#fff;font-size:16px}
+
+.titular{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--verde);margin:0 0 8px}
+h1{font-size:32px;margin:0;font-weight:700}
+.sub{color:var(--tinta-60);font-size:14px;margin:9px 0 0}
+.sub b{font-family:var(--mono);font-weight:500;color:var(--tinta)}
+.btn{border-radius:var(--r-pill);font-size:14px;font-weight:600;padding:12px 22px;border:1.5px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.16s}
+.btn.solido{background:var(--verde);color:#fff}
+.btn.solido:hover{background:var(--verde-osc)}
+.btn.linea{background:var(--blanco);border-color:var(--linea);color:var(--tinta)}
+.btn.linea:hover{border-color:#B9D9C6}
+.btn.fantasma{background:transparent;color:var(--tinta-60)}
+.btn.peq{padding:9px 16px;font-size:13px}
+
+/* estructura listado */
+.malla{display:grid;grid-template-columns:268px minmax(0,1fr);gap:26px;align-items:start}
+
+/* panel de filtros */
+.filtros{position:sticky;top:20px;background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);box-shadow:var(--sombra);overflow:hidden}
+.filtros-cab{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--linea-2)}
+.filtros-cab h2{font-size:14px;margin:0;font-weight:600}
+.filtros-cab button{background:none;border:0;font-size:12px;color:var(--verde);font-weight:600;padding:0}
+.filtros-cab button[disabled]{color:var(--tinta-40);cursor:default}
+.filtros-scroll{max-height:calc(100vh - 190px);overflow-y:auto;padding:4px 18px 18px;scrollbar-width:thin}
+.filtros-scroll::-webkit-scrollbar{width:5px}
+.filtros-scroll::-webkit-scrollbar-thumb{background:#DDD9CE;border-radius:9px}
+.grupo{padding:16px 0;border-bottom:1px solid var(--linea-2)}
+.grupo:last-child{border-bottom:0}
+.grupo h3{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-40);margin:0 0 11px;display:flex;align-items:center;gap:8px}
+.grupo h3 .cruce{background:var(--verde-tenue);color:var(--verde-osc);border-radius:5px;padding:2px 6px;letter-spacing:.04em;font-size:9px}
+.op{display:flex;align-items:center;gap:10px;width:100%;background:none;border:0;padding:7px 0;text-align:left;font-size:13px;color:var(--tinta-60);border-radius:8px;transition:.14s}
+.op:hover{color:var(--tinta)}
+.op .caja{width:17px;height:17px;border-radius:5px;border:1.5px solid var(--linea);display:grid;place-items:center;flex:none;background:#FCFCFA}
+.op .caja svg{display:none}
+.op[aria-pressed="true"]{color:var(--tinta);font-weight:600}
+.op[aria-pressed="true"] .caja{background:var(--verde);border-color:var(--verde)}
+.op[aria-pressed="true"] .caja svg{display:block}
+.op .n{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--tinta-40)}
+.op[disabled]{opacity:.38;cursor:default}
+.op .mini{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:700;flex:none}
+
+/* barra de herramientas */
+.herr{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.buscador{position:relative;flex:1}
+.buscador svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--tinta-40)}
+.buscador input{width:100%;border:1.5px solid var(--linea);border-radius:var(--r-pill);background:var(--blanco);padding:12px 16px 12px 42px;font-size:14px;color:var(--tinta)}
+.buscador input:focus{outline:none;border-color:var(--verde);box-shadow:0 0 0 3px rgba(30,158,86,.13)}
+.orden{border:1.5px solid var(--linea);border-radius:var(--r-pill);background:var(--blanco);padding:12px 16px;font-size:13px;font-weight:500;color:var(--tinta)}
+.orden:focus{outline:none;border-color:var(--verde)}
+.atajos{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.atajo{border:1.5px solid var(--linea);background:var(--blanco);border-radius:var(--r-pill);padding:8px 14px;font-size:12.5px;font-weight:500;color:var(--tinta-60);display:inline-flex;align-items:center;gap:7px}
+.atajo:hover{border-color:#B9D9C6}
+.atajo[aria-pressed="true"]{border-color:var(--verde);background:#F1FAF4;color:var(--verde-osc);font-weight:600}
+.atajo .p{font-family:var(--mono);font-size:10.5px;background:var(--verde-tenue);color:var(--verde-osc);border-radius:5px;padding:2px 6px}
+.activos{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px;min-height:1px}
+.activo{display:inline-flex;align-items:center;gap:7px;background:var(--verde-tenue);color:var(--verde-osc);border:0;border-radius:var(--r-pill);padding:7px 12px;font-size:12.5px;font-weight:600}
+.activo svg{opacity:.7}
+.limpiar{background:none;border:0;color:var(--tinta-60);font-size:12.5px;text-decoration:underline;padding:0 4px}
+.recuento{font-size:13px;color:var(--tinta-60);margin:0 0 14px}
+.recuento b{font-family:var(--mono);color:var(--tinta);font-weight:500}
+
+/* rejilla de animales */
+.rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(214px,1fr));gap:16px}
+.tarj{cursor:pointer;background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);overflow:hidden;box-shadow:var(--sombra);text-align:left;padding:0;transition:.18s;display:block;width:100%}
+.tarj:hover{transform:translateY(-2px);box-shadow:var(--sombra-alta)}
+.tarj .foto{aspect-ratio:4/3;display:grid;place-items:center;color:rgba(255,255,255,.5);position:relative}
+.tarj .foto .est{position:absolute;left:10px;top:10px}
+.tarj .foto .nec{border:0;cursor:pointer;position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.94);color:var(--tinta);font-family:var(--mono);font-size:10px;padding:5px 9px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.tarj .foto .nec.urg{background:var(--coral-tx);color:#fff}
+.tarj .txt{padding:14px 15px 16px}
+.tarj h3{font-size:16px;margin:0 0 3px;font-weight:600;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tarj h3 span{font-family:var(--mono);font-size:10.5px;color:var(--tinta-40);font-weight:400}
+.tarj .meta{font-size:12.2px;color:var(--tinta-60);margin:0 0 11px;line-height:1.45}
+.tarj .pies{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:10.5px;font-family:var(--mono);padding:4px 9px;border-radius:var(--r-pill);display:inline-flex;align-items:center;gap:5px}
+.chip.n{background:var(--verde-tenue);color:#2C6A47}
+.chip.menta{background:var(--menta-bg);color:var(--menta-tx)}
+.chip.coral{background:var(--coral-bg);color:var(--coral-tx)}
+.chip.ambar{background:var(--ambar-bg);color:var(--ambar-tx)}
+.chip.gris{background:#EFEDE6;color:var(--tinta-60)}
+
+/* tabla de necesidades */
+.tabla{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);overflow:hidden;box-shadow:var(--sombra)}
+.tabla table{width:100%;border-collapse:collapse}
+.tabla th{background:var(--verde-tenue);font-size:11.5px;font-weight:500;color:var(--tinta-60);text-align:left;padding:13px 18px}
+.tabla td{padding:15px 18px;border-top:1px solid var(--linea-2);font-size:13.5px;vertical-align:middle}
+.tabla tr:hover td{background:#FCFDFB}
+.t-nom{font-weight:600;font-size:14px}
+.t-animal{display:inline-flex;align-items:center;gap:7px;margin-top:5px;background:none;border:0;padding:0;font-size:11.5px;color:var(--tinta-60);font-family:var(--mono)}
+.t-animal:hover{color:var(--verde-osc);text-decoration:underline}
+.t-animal .mini{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:9px;font-weight:700}
+.t-prog{font-family:var(--mono);font-size:12.5px;margin-bottom:6px;display:block}
+.barra{display:flex;gap:4px;width:110px}
+.barra i{height:6px;flex:1;border-radius:var(--r-pill);background:var(--linea-2)}
+.barra i.on{background:var(--verde)}
+.barra.abierta i{background:transparent;border:1.5px dashed #CFDCD3}
+.t-fecha{font-family:var(--mono);font-size:12.5px}
+.t-fecha small{display:block;color:var(--tinta-40);font-size:10.5px;margin-top:3px}
+
+/* vacío */
+.vacio{background:var(--blanco);border:1px dashed var(--linea);border-radius:var(--r-l);padding:54px 30px;text-align:center}
+.vacio .h{width:62px;height:62px;border-radius:50%;background:var(--verde-tenue);color:#A9C6B4;display:grid;place-items:center;margin:0 auto 18px}
+.vacio h3{font-size:18px;margin:0 0 8px}
+.vacio p{font-size:13.5px;color:var(--tinta-60);margin:0 auto 20px;max-width:40ch;line-height:1.6}
+
+/* móvil */
+.telefono{width:392px;margin:0 auto;border-radius:38px;background:#111;padding:11px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.pantalla{border-radius:30px;overflow:hidden;background:var(--crema);height:830px;display:flex;flex-direction:column;position:relative}
+.mv-estado{background:var(--blanco);display:flex;justify-content:space-between;padding:11px 22px 4px;font-family:var(--mono);font-size:11px}
+.mv-cab{background:var(--blanco);border-bottom:1px solid var(--linea-2);padding:6px 16px 12px}
+.mv-tit{display:flex;align-items:center;justify-content:space-between;padding:6px 0 12px}
+.mv-tit h1{font-size:22px}
+.mv-tit .btn{padding:10px 14px;font-size:13px}
+.mv-tabs{display:flex;gap:4px;background:var(--verde-tenue);border-radius:var(--r-pill);padding:4px;margin-bottom:12px}
+.mv-tabs button{flex:1;border:0;background:transparent;color:var(--tinta-60);font-size:13px;font-weight:600;padding:9px;border-radius:var(--r-pill)}
+.mv-tabs button[aria-current="true"]{background:var(--blanco);color:var(--verde-osc);box-shadow:var(--sombra)}
+.mv-busca{display:flex;gap:9px}
+.mv-busca .buscador input{padding:11px 14px 11px 40px;font-size:13.5px}
+.mv-filtro{position:relative;border:1.5px solid var(--linea);background:var(--blanco);border-radius:var(--r-pill);padding:0 16px;font-size:13px;font-weight:600;color:var(--tinta);display:flex;align-items:center;gap:7px;flex:none}
+.mv-filtro .glob{position:absolute;top:-5px;right:-4px;background:var(--verde);color:#fff;font-family:var(--mono);font-size:9.5px;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center;padding:0 4px}
+.mv-scroll{flex:1;overflow-y:auto;padding:16px;scrollbar-width:thin}
+.mv-scroll::-webkit-scrollbar{width:5px}
+.mv-scroll::-webkit-scrollbar-thumb{background:#D8D5CB;border-radius:9px}
+.movil .rejilla{grid-template-columns:1fr 1fr;gap:12px}
+.movil .tarj .txt{padding:11px 12px 13px}
+.movil .tarj h3{font-size:14.5px}
+.movil .activos{margin-bottom:12px}
+.nec-card{background:var(--blanco);border:1px solid var(--linea-2);border-radius:var(--r-l);padding:15px 16px;box-shadow:var(--sombra);margin-bottom:11px}
+.nec-card .fila{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:9px}
+.nec-card h3{font-size:15px;margin:0 0 5px;font-weight:600}
+.nec-card .barra{width:100%;margin-top:7px}
+.nec-card .pie{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-family:var(--mono);font-size:11.5px;color:var(--tinta-60)}
+
+/* hoja de filtros */
+.capa{position:absolute;inset:0;background:rgba(18,48,31,.45);backdrop-filter:blur(3px);display:none;align-items:flex-end;z-index:20}
+.capa.visible{display:flex;animation:apar .2s ease}
+@keyframes apar{from{opacity:0}to{opacity:1}}
+.hoja{background:var(--crema);width:100%;border-radius:22px 22px 0 0;max-height:88%;display:flex;flex-direction:column;animation:sube .26s ease}
+@keyframes sube{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+.hoja-cab{background:var(--blanco);padding:16px 20px;border-bottom:1px solid var(--linea-2);display:flex;align-items:center;justify-content:space-between}
+.hoja-cab h2{font-size:17px;margin:0}
+.hoja-cab button{background:none;border:0;font-size:13px;color:var(--verde);font-weight:600}
+.hoja-cuerpo{overflow-y:auto;padding:0 20px 10px}
+.hoja-pie{background:var(--blanco);border-top:1px solid var(--linea-2);padding:14px 20px 24px}
+.hoja .op{padding:11px 0;font-size:14px}
+
+@media(max-width:1080px){.malla{grid-template-columns:1fr}.filtros{position:static}.filtros-scroll{max-height:none}}
+@media(max-width:640px){
+  .escenario[data-vista="escritorio"]{display:none!important}
+  .telefono{width:100%;max-width:392px;padding:0;border-radius:0;background:transparent}
+  .pantalla{border-radius:14px;height:760px}
+}
+</style>
+</head>
+<body>
+<div class="lienzo">
+  <div class="barra-maqueta">
+    <span class="etiqueta-maqueta">Cobijo · Panel de protectora · Listados y filtros</span>
+    <div class="conmutador" role="tablist" aria-label="Cambiar vista">
+      <button role="tab" aria-selected="true" data-vista="escritorio">Escritorio</button>
+      <button role="tab" aria-selected="false" data-vista="movil">Móvil</button>
+    </div>
+  </div>
+
+  <section class="escenario activo" data-vista="escritorio">
+    <div class="app" id="app-escritorio">
+      <div class="cinta">
+        <div class="marca">Cobijo <span>Savia cálida</span></div>
+        <div class="roles"><i>Home</i><b>Protectora</b><i>Colaborador</i></div>
+      </div>
+      <header class="cabecera">
+        <div class="logo"><i>C</i> Cobijo</div>
+        <nav class="nav">
+          <button>Panel</button>
+          <button data-seccion="necesidades">Necesidades</button>
+          <button data-seccion="animales" aria-current="true">Animales</button>
+          <button>Adopciones</button><button>Perfil</button>
+        </nav>
+        <div class="cuenta">Protectora Huellas <em>PH</em></div>
+      </header>
+      <div class="cuerpo lienzo-vista"></div>
+      <footer class="pie-app">
+        <div class="logo"><i>C</i> Cobijo</div><span>Vista privada · rol protectora / administrador</span>
+      </footer>
+    </div>
+  </section>
+
+  <section class="escenario" data-vista="movil">
+    <div class="telefono">
+      <div class="pantalla movil" id="app-movil">
+        <div class="mv-estado"><span>9:41</span><span>Cobijo</span></div>
+        <div class="mv-cab">
+          <div class="mv-tit"><h1 class="mv-titulo">Animales</h1><button class="btn solido" data-act="crear">Publicar</button></div>
+          <div class="mv-tabs">
+            <button data-seccion="animales" aria-current="true">Animales</button>
+            <button data-seccion="necesidades">Necesidades</button>
+          </div>
+          <div class="mv-busca">
+            <div class="buscador">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+              <input type="search" data-buscar placeholder="Buscar">
+            </div>
+            <button class="mv-filtro" data-act="abrir-filtros">Filtros<span class="glob" hidden>0</span></button>
+          </div>
+        </div>
+        <div class="mv-scroll lienzo-vista"></div>
+        <div class="capa"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ======================= iconos ======================= */
+const I={
+ huella:'<svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><circle cx="6.6" cy="9" r="2"/><circle cx="11.2" cy="6.6" r="2.1"/><circle cx="16.2" cy="8.2" r="2"/><circle cx="19" cy="12.6" r="1.7"/><path d="M11.6 11.4c2.5 0 4.7 1.9 5.4 4 .5 1.7-.7 3.2-2.5 3.2-.9 0-1.8-.3-2.8-.3s-1.9.3-2.8.3c-1.8 0-3-1.5-2.5-3.2.7-2.1 2.7-4 5.2-4Z"/></svg>',
+ tic:'<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+ equis:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+ lupa:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
+ filtro:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M7 12h10M10 18h4"/></svg>',
+ rayo:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>',
+ caja:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 8-9-5-9 5 9 5 9-5Z"/><path d="M3 8v8l9 5 9-5V8"/></svg>'
+};
+const FONDOS=['linear-gradient(145deg,#C8A96E,#8A6438)','linear-gradient(145deg,#9DBFA6,#4A7359)','linear-gradient(145deg,#D6B49E,#9C6A52)','linear-gradient(145deg,#A9B9C8,#5B6E80)','linear-gradient(145deg,#E2C9A2,#AC8850)','linear-gradient(145deg,#B9AFD0,#6E6390)'];
+const COLORES=['#B98A2E','#7C6047','#5C6B61','#9C6A52','#5B6E80','#6E6390'];
+const MESES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const hoy=new Date(); hoy.setHours(0,0,0,0);
+const masDias=n=>{const d=new Date(hoy);d.setDate(d.getDate()+n);return d};
+const fmt=d=>`${d.getDate()} ${MESES[d.getMonth()]}`;
+
+/* ======================= datos ======================= */
+const ANIMALES=[
+ {id:'nala',n:'Nala',esp:'perro',raza:'Mestiza',sexo:'hembra',tam:'Mediano',peso:14,meses:26,act:'media',estado:'proceso',cand:3,espera:17,est:1,vac:1,especial:0,conv:{perros:1,gatos:0,ninos:1,piso:1},f:0},
+ {id:'trufa',n:'Trufa',esp:'gato',raza:'Común europeo',sexo:'hembra',tam:'Pequeño',peso:3.2,meses:7,act:'alta',estado:'disponible',cand:5,espera:6,est:0,vac:1,especial:0,conv:{perros:1,gatos:1,ninos:1,piso:1},f:1},
+ {id:'bruno',n:'Bruno',esp:'perro',raza:'Podenco',sexo:'macho',tam:'Grande',peso:26,meses:60,act:'alta',estado:'adoptado',cand:0,espera:26,est:1,vac:1,especial:0,conv:{perros:1,gatos:0,ninos:1,piso:0},f:2},
+ {id:'copo',n:'Copo',esp:'gato',raza:'Común europeo',sexo:'macho',tam:'Pequeño',peso:4.1,meses:14,act:'media',estado:'disponible',cand:1,espera:9,est:1,vac:1,especial:1,conv:{perros:0,gatos:1,ninos:1,piso:1},f:3},
+ {id:'rocco',n:'Rocco',esp:'perro',raza:'Bodeguero',sexo:'macho',tam:'Pequeño',peso:9,meses:96,act:'baja',estado:'disponible',cand:0,espera:30,est:1,vac:1,especial:0,conv:{perros:1,gatos:1,ninos:0,piso:1},f:4},
+ {id:'luna',n:'Luna',esp:'perro',raza:'Galga',sexo:'hembra',tam:'Grande',peso:24,meses:40,act:'media',estado:'disponible',cand:2,espera:11,est:1,vac:1,especial:0,conv:{perros:1,gatos:0,ninos:1,piso:1},f:5},
+ {id:'mia',n:'Mia',esp:'gato',raza:'Siamesa',sexo:'hembra',tam:'Pequeño',peso:3.5,meses:5,act:'alta',estado:'disponible',cand:4,espera:3,est:0,vac:0,especial:0,conv:{perros:0,gatos:1,ninos:1,piso:1},f:0},
+ {id:'toby',n:'Toby',esp:'perro',raza:'Mestizo',sexo:'macho',tam:'Mediano',peso:18,meses:8,act:'alta',estado:'proceso',cand:2,espera:5,est:0,vac:1,especial:0,conv:{perros:1,gatos:1,ninos:1,piso:1},f:1},
+ {id:'nube',n:'Nube',esp:'gato',raza:'Común europeo',sexo:'hembra',tam:'Mediano',peso:4.6,meses:30,act:'baja',estado:'disponible',cand:0,espera:14,est:1,vac:1,especial:0,conv:{perros:0,gatos:0,ninos:0,piso:1},f:2},
+ {id:'kira',n:'Kira',esp:'perro',raza:'Mezcla de pastor',sexo:'hembra',tam:'Grande',peso:28,meses:72,act:'media',estado:'proceso',cand:1,espera:20,est:1,vac:1,especial:0,conv:{perros:1,gatos:0,ninos:1,piso:0},f:3},
+ {id:'lolo',n:'Lolo',esp:'gato',raza:'Común europeo',sexo:'macho',tam:'Pequeño',peso:2.8,meses:4,act:'alta',estado:'disponible',cand:3,espera:2,est:0,vac:0,especial:0,conv:{perros:1,gatos:1,ninos:1,piso:1},f:4},
+ {id:'duna',n:'Duna',esp:'perro',raza:'Mastina',sexo:'hembra',tam:'Grande',peso:42,meses:108,act:'baja',estado:'disponible',cand:0,espera:32,est:1,vac:1,especial:1,conv:{perros:1,gatos:0,ninos:1,piso:0},f:5},
+ {id:'pipo',n:'Pipo',esp:'perro',raza:'Chihuahua',sexo:'macho',tam:'Pequeño',peso:3.4,meses:18,act:'media',estado:'borrador',cand:0,espera:1,est:0,vac:0,especial:0,conv:{perros:1,gatos:1,ninos:0,piso:1},f:0}
+];
+const NECESIDADES=[
+ {id:1,n:'Pienso de cachorro',tipo:'recursos',uni:'kg',obj:20,log:12,dias:3,estado:'abierta',animal:'',entregas:2},
+ {id:2,n:'Transporte veterinario',tipo:'voluntariado',uni:'viaje',obj:1,log:0,dias:2,estado:'abierta',animal:'trufa',entregas:0},
+ {id:3,n:'Fondo cirugía de Nala',tipo:'economica',uni:'€',obj:600,log:340,dias:12,estado:'abierta',animal:'nala',entregas:1},
+ {id:4,n:'Mantas y toallas',tipo:'recursos',uni:'mantas',obj:4,log:4,dias:-6,estado:'cubierta',animal:'',entregas:0},
+ {id:5,n:'Arena aglomerante',tipo:'recursos',uni:'kg',obj:40,log:40,dias:-3,estado:'cubierta',animal:'',entregas:0},
+ {id:6,n:'Voluntarios para el mercadillo',tipo:'voluntariado',uni:'turnos',obj:8,log:8,dias:-12,estado:'cerrada',animal:'',entregas:0},
+ {id:7,n:'Medicación de Copo',tipo:'economica',uni:'€',obj:180,log:55,dias:4,estado:'abierta',animal:'copo',entregas:0},
+ {id:8,n:'Casa de acogida para Lolo',tipo:'otros',uni:'',obj:null,log:0,dias:null,estado:'abierta',animal:'lolo',entregas:0},
+ {id:9,n:'Pienso senior',tipo:'recursos',uni:'kg',obj:30,log:30,dias:-20,estado:'cerrada',animal:'duna',entregas:0}
+];
+const TIPO_NOM={economica:'Económica',recursos:'Recursos',voluntariado:'Voluntariado',otros:'Otros'};
+const EST_ANIMAL={disponible:['menta','Disponible'],proceso:['coral','En proceso'],adoptado:['n','Adoptado'],borrador:['ambar','Borrador']};
+const anim=id=>ANIMALES.find(a=>a.id===id);
+const urgente=n=>n.estado==='abierta'&&n.dias!==null&&n.dias<=5;
+const pct=n=>n.obj?Math.min(1,n.log/n.obj):0;
+const necDe=id=>NECESIDADES.filter(n=>n.animal===id&&n.estado==='abierta');
+const grupoEdad=m=>m<12?'cachorro':m<36?'joven':m<96?'adulto':'senior';
+const edadTxt=m=>m<24?`${m} meses`:`${Math.floor(m/12)} años`;
+const esperaTxt=m=>m<12?`${m} meses aquí`:m<24?`${m%12?(m/12).toFixed(1)+' años':'1 año'} aquí`:`${(m/12).toFixed(m%12?1:0)} años aquí`;
+
+/* ======================= definición de filtros ======================= */
+const F_ANIMALES=[
+ {k:'estado',t:'Estado',ops:[['disponible','Disponible'],['proceso','En proceso de adopción'],['adoptado','Adoptado'],['borrador','Borrador']]},
+ {k:'esp',t:'Especie',ops:[['perro','Perros'],['gato','Gatos']]},
+ {k:'edad',t:'Edad',ops:[['cachorro','Cachorro · menos de 1 año'],['joven','Joven · 1 a 3'],['adulto','Adulto · 3 a 8'],['senior','Senior · más de 8']]},
+ {k:'tam',t:'Tamaño',ops:[['Pequeño','Pequeño'],['Mediano','Mediano'],['Grande','Grande']]},
+ {k:'sexo',t:'Sexo',ops:[['hembra','Hembra'],['macho','Macho']]},
+ {k:'act',t:'Nivel de actividad',ops:[['baja','Baja'],['media','Media'],['alta','Alta']]},
+ {k:'conv',t:'Convive bien con',ops:[['perros','Perros'],['gatos','Gatos'],['ninos','Niños'],['piso','Vida en piso']]},
+ {k:'salud',t:'Salud',ops:[['est','Esterilizado'],['vac','Vacunas al día'],['especial','Necesidades especiales']]},
+ {k:'espera',t:'Tiempo esperando',ops:[['6','Más de 6 meses'],['12','Más de un año'],['24','Más de dos años']]},
+ {k:'cand',t:'Solicitudes',ops:[['con','Con candidatos'],['sin','Sin candidatos']]},
+ {k:'nec',t:'Necesidades',cruce:'necesidad',ops:[['con','Con necesidad abierta'],['urg','Con necesidad urgente'],['sin','Sin necesidades']]}
+];
+const F_NECESIDADES=[
+ {k:'estado',t:'Estado',ops:[['abierta','Abierta'],['urgente','Urgente'],['cubierta','Cubierta'],['cerrada','Cerrada']]},
+ {k:'tipo',t:'Tipo de ayuda',ops:[['economica','Ayuda económica'],['recursos','Recursos'],['voluntariado','Tiempo voluntario'],['otros','Otros']]},
+ {k:'plazo',t:'Plazo',ops:[['semana','Vence esta semana'],['mes','Vence este mes'],['vencida','Fuera de plazo'],['sin','Sin fecha límite']]},
+ {k:'prog',t:'Progreso',ops:[['cero','Sin empezar'],['medio','A medias'],['casi','Casi cubierta'],['full','Al 100 %']]},
+ {k:'obj',t:'Objetivo',ops:[['definido','Cantidad concreta'],['ilimitado','Sin límite']]},
+ {k:'entregas',t:'Entregas',ops:[['pend','Con entregas por confirmar']]},
+ {k:'animal',t:'Animal vinculado',cruce:'animal',ops:'ANIMALES'}
+];
+const ETIQ={};
+[...F_ANIMALES,...F_NECESIDADES].forEach(g=>{ if(Array.isArray(g.ops)) g.ops.forEach(([v,t])=>ETIQ[g.k+':'+v]=t); });
+
+/* ======================= predicados ======================= */
+function pasaAnimal(a,f,salta){
+  const p=(k,fn)=>salta===k||!f[k]||!f[k].length||f[k].some(fn);
+  return p('estado',v=>a.estado===v) && p('esp',v=>a.esp===v) && p('edad',v=>grupoEdad(a.meses)===v)
+   && p('tam',v=>a.tam===v) && p('sexo',v=>a.sexo===v) && p('act',v=>a.act===v)
+   && p('conv',v=>a.conv[v]===1) && p('salud',v=>v==='est'?a.est:v==='vac'?a.vac:a.especial)
+   && p('espera',v=>a.espera>=+v) && p('cand',v=>v==='con'?a.cand>0:a.cand===0)
+   && p('nec',v=>{const ns=necDe(a.id);return v==='con'?ns.length>0:v==='urg'?ns.some(urgente):ns.length===0;});
+}
+function pasaNec(n,f,salta){
+  const p=(k,fn)=>salta===k||!f[k]||!f[k].length||f[k].some(fn);
+  return p('estado',v=>v==='urgente'?urgente(n):n.estado===v) && p('tipo',v=>n.tipo===v)
+   && p('plazo',v=>v==='sin'?n.dias===null:n.dias===null?false:v==='semana'?(n.dias>=0&&n.dias<=7):v==='mes'?(n.dias>=0&&n.dias<=31):n.dias<0)
+   && p('prog',v=>{const q=pct(n);return v==='cero'?q===0:v==='medio'?(q>0&&q<0.7):v==='casi'?(q>=0.7&&q<1):q>=1;})
+   && p('obj',v=>v==='definido'?n.obj!==null:n.obj===null)
+   && p('entregas',()=>n.entregas>0)
+   && p('animal',v=>v==='general'?!n.animal:n.animal===v);
+}
+
+/* ======================= app ======================= */
+function crearApp(raiz,modo){
+  const movil=modo==='movil';
+  const est={
+    sec:'animales', q:{animales:'',necesidades:''},
+    orden:{animales:'espera',necesidades:'plazo'},
+    f:{animales:{},necesidades:{}}
+  };
+  const $=s=>raiz.querySelector(s), $$=s=>[...raiz.querySelectorAll(s)];
+  const lienzo=$('.lienzo-vista'), capa=movil?$('.capa'):null;
+  const F=()=>est.sec==='animales'?est.f.animales:est.f.necesidades;
+  const DEF=()=>est.sec==='animales'?F_ANIMALES:F_NECESIDADES;
+  const nActivos=()=>Object.values(F()).reduce((s,v)=>s+v.length,0);
+
+  const opsDe=g=>g.ops==='ANIMALES'
+    ? [['general','Sin animal · generales'],...ANIMALES.filter(a=>NECESIDADES.some(n=>n.animal===a.id)).map(a=>[a.id,a.n])]
+    : g.ops;
+
+  function resultados(salta){
+    const f=F(), q=est.q[est.sec].trim().toLowerCase();
+    if(est.sec==='animales'){
+      let r=ANIMALES.filter(a=>pasaAnimal(a,f,salta)&&(!q||(a.n+' '+a.raza).toLowerCase().includes(q)));
+      const o=est.orden.animales;
+      r.sort((a,b)=>o==='espera'?b.espera-a.espera:o==='cand'?b.cand-a.cand:o==='nombre'?a.n.localeCompare(b.n):a.espera-b.espera);
+      return r;
+    }
+    let r=NECESIDADES.filter(n=>pasaNec(n,f,salta)&&(!q||n.n.toLowerCase().includes(q)));
+    const o=est.orden.necesidades;
+    r.sort((a,b)=>o==='plazo'?((a.dias??999)-(b.dias??999)):o==='prog'?pct(a)-pct(b):o==='nombre'?a.n.localeCompare(b.n):b.id-a.id);
+    return r;
+  }
+  const cuenta=(k,v)=>{
+    const f=F(), q=est.q[est.sec].trim().toLowerCase();
+    const base=est.sec==='animales'
+      ? ANIMALES.filter(a=>pasaAnimal(a,f,k)&&(!q||(a.n+' '+a.raza).toLowerCase().includes(q)))
+      : NECESIDADES.filter(n=>pasaNec(n,f,k)&&(!q||n.n.toLowerCase().includes(q)));
+    const uno={[k]:[v]};
+    return base.filter(x=>est.sec==='animales'?pasaAnimal(x,uno):pasaNec(x,uno)).length;
+  };
+
+  /* ---------- panel de filtros ---------- */
+  function panelFiltros(){
+    return DEF().map(g=>`
+      <div class="grupo">
+        <h3>${g.t}${g.cruce?`<span class="cruce">${g.cruce}</span>`:''}</h3>
+        ${opsDe(g).map(([v,t])=>{
+          const on=(F()[g.k]||[]).includes(v), c=cuenta(g.k,v);
+          const a=g.ops==='ANIMALES'?anim(v):null;
+          return `<button class="op" data-act="filtro" data-k="${g.k}" data-v="${v}" aria-pressed="${on}" ${c===0&&!on?'disabled':''}>
+            <span class="caja">${I.tic}</span>
+            ${a?`<span class="mini" style="background:${COLORES[a.f]}">${a.n[0]}</span>`:''}
+            <span>${t}</span><span class="n">${c}</span></button>`;
+        }).join('')}
+      </div>`).join('');
+  }
+  function chipsActivos(){
+    const f=F(), out=[];
+    Object.entries(f).forEach(([k,vs])=>vs.forEach(v=>{
+      const et = k==='animal' ? (v==='general'?'Sin animal':anim(v)?.n||v) : (ETIQ[k+':'+v]||v);
+      out.push(`<button class="activo" data-act="filtro" data-k="${k}" data-v="${v}">${et} ${I.equis}</button>`);
+    }));
+    if(!out.length) return '';
+    return out.join('')+`<button class="limpiar" data-act="limpiar">Limpiar filtros</button>`;
+  }
+
+  /* ---------- tarjetas ---------- */
+  function tarjetaAnimal(a){
+    const [c,t]=EST_ANIMAL[a.estado], ns=necDe(a.id), urg=ns.some(urgente);
+    return `<div class="tarj" data-act="ficha" data-v="${a.id}" role="button" tabindex="0">
+      <div class="foto" style="background:${FONDOS[a.f]}">
+        <span class="chip ${c} est">${t}</span>${I.huella}
+        ${ns.length?`<button class="nec ${urg?'urg':''}" data-act="ver-nec" data-v="${a.id}">${urg?I.rayo:I.caja}${ns.length} necesidad${ns.length>1?'es':''}</button>`:''}
+      </div>
+      <div class="txt">
+        <h3>${a.n}<span>${a.esp==='gato'?'gato':'perro'}</span></h3>
+        <p class="meta">${a.raza} · ${edadTxt(a.meses)} · ${a.tam.toLowerCase()} · ${a.peso} kg</p>
+        <div class="pies">
+          ${a.cand?`<span class="chip n">${a.cand} candidatos</span>`:''}
+          <span class="chip gris">${esperaTxt(a.espera)}</span>
+          ${a.especial?'<span class="chip ambar">especiales</span>':''}
+        </div>
+      </div></div>`;
+  }
+  function barra(n){
+    if(n.obj===null) return `<span class="barra abierta">${'<i></i>'.repeat(5)}</span>`;
+    const q=pct(n);
+    return `<span class="barra">${[.2,.4,.6,.8,1].map(u=>`<i class="${q>=u-0.001?'on':''}"></i>`).join('')}</span>`;
+  }
+  const estadoNec=n=>urgente(n)?'<span class="chip coral">Urgente</span>'
+    :n.estado==='abierta'?'<span class="chip ambar">Abierta</span>'
+    :n.estado==='cubierta'?'<span class="chip menta">Cubierta</span>':'<span class="chip gris">Cerrada</span>';
+  const plazoNec=n=>n.dias===null?'<span class="t-fecha">—<small>sin fecha</small></span>'
+    :`<span class="t-fecha">${fmt(masDias(n.dias))}<small>${n.dias<0?'fuera de plazo':n.dias===0?'hoy':`en ${n.dias} días`}</small></span>`;
+  const chipAnimal=n=>{const a=anim(n.animal); return a
+    ? `<button class="t-animal" data-act="ver-animal" data-v="${a.id}"><span class="mini" style="background:${COLORES[a.f]}">${a.n[0]}</span>${a.n}</button>`
+    : `<span class="t-animal" style="color:var(--tinta-40)">necesidad general</span>`;};
+
+  function filaNec(n){
+    return `<tr>
+      <td><div class="t-nom">${n.n}</div>${chipAnimal(n)}</td>
+      <td>${TIPO_NOM[n.tipo]}</td>
+      <td><span class="t-prog">${n.obj===null?`${n.log} ${n.uni} · sin tope`:`${n.log}/${n.obj} ${n.uni}`}</span>${barra(n)}</td>
+      <td>${plazoNec(n)}</td>
+      <td>${estadoNec(n)}${n.entregas?`<div style="margin-top:6px"><span class="chip n">${n.entregas} por confirmar</span></div>`:''}</td>
+      <td style="text-align:right"><button class="btn linea peq">${n.estado==='abierta'?'Gestionar':'Ver'}</button></td>
+    </tr>`;
+  }
+  function tarjetaNec(n){
+    return `<div class="nec-card">
+      <div class="fila"><div><h3>${n.n}</h3>${chipAnimal(n)}</div>${estadoNec(n)}</div>
+      <span class="t-prog">${n.obj===null?`${n.log} ${n.uni} · sin tope`:`${n.log}/${n.obj} ${n.uni}`}</span>${barra(n)}
+      <div class="pie"><span>${TIPO_NOM[n.tipo]} · ${n.dias===null?'sin fecha':fmt(masDias(n.dias))}</span>
+        <button class="btn linea peq">${n.estado==='abierta'?'Gestionar':'Ver'}</button></div>
+    </div>`;
+  }
+
+  /* ---------- atajos ---------- */
+  const ATAJOS={
+    animales:[['nec','con','Con necesidades abiertas'],['espera','12','Más de un año esperando'],['cand','con','Con candidatos'],['estado','borrador','Borradores']],
+    necesidades:[['plazo','semana','Vencen esta semana'],['entregas','pend','Entregas por confirmar'],['prog','cero','Sin empezar'],['estado','urgente','Urgentes']]
+  };
+  function atajos(){
+    return ATAJOS[est.sec].map(([k,v,t])=>{
+      const on=(F()[k]||[]).includes(v), c=cuenta(k,v);
+      return `<button class="atajo" data-act="filtro" data-k="${k}" data-v="${v}" aria-pressed="${on}">${t}<span class="p">${c}</span></button>`;
+    }).join('');
+  }
+
+  /* ---------- pintado ---------- */
+  function marcadoEscritorio(){
+    const an=est.sec==='animales';
+    return `
+      <div class="titular">
+        <div><p class="eyebrow">${an?'Ficha de animales':'Peticiones de ayuda'}</p>
+          <h1>${an?'Animales':'Necesidades'}</h1>
+          <p class="sub recuento-cab"></p></div>
+        <button class="btn solido" data-act="crear">${an?'Publicar animal':'Publicar necesidad'}</button>
+      </div>
+      <div class="malla">
+        <aside class="filtros">
+          <div class="filtros-cab"><h2>Filtros</h2><button data-act="limpiar">Limpiar</button></div>
+          <div class="filtros-scroll"></div>
+        </aside>
+        <div>
+          <div class="herr">
+            <div class="buscador">${I.lupa}<input type="search" data-buscar placeholder="${an?'Buscar por nombre o raza':'Buscar necesidad'}"></div>
+            <select class="orden" data-orden>${(an
+              ?[['espera','Más tiempo esperando'],['cand','Más candidatos'],['nombre','Nombre A-Z'],['recientes','Última llegada']]
+              :[['plazo','Plazo más cercano'],['prog','Menos cubiertas'],['recientes','Más recientes'],['nombre','Nombre A-Z']]
+            ).map(([v,t])=>`<option value="${v}">${t}</option>`).join('')}</select>
+          </div>
+          <div class="atajos"></div>
+          <div class="activos"></div>
+          <div class="lista"></div>
+        </div>
+      </div>`;
+  }
+
+  function pintar(){
+    if(!movil){
+      lienzo.innerHTML=marcadoEscritorio();
+      $('.filtros-scroll').innerHTML=panelFiltros();
+      $('[data-buscar]').value=est.q[est.sec];
+      $('[data-orden]').value=est.orden[est.sec];
+      $$('.nav button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.seccion===est.sec)));
+    } else {
+      lienzo.innerHTML=`<div class="atajos"></div><div class="activos"></div><div class="lista"></div>`;
+      $('.mv-titulo').textContent=est.sec==='animales'?'Animales':'Necesidades';
+      $('[data-buscar]').value=est.q[est.sec];
+      $$('.mv-tabs button').forEach(b=>b.setAttribute('aria-current',String(b.dataset.seccion===est.sec)));
+    }
+    actualizar();
+  }
+
+  function actualizar(){
+    const r=resultados();
+    const an=est.sec==='animales';
+    $('.atajos').innerHTML=atajos();
+    $('.activos').innerHTML=chipsActivos();
+    if(!movil){
+      $$('.filtros-scroll .op').forEach(b=>{
+        const on=(F()[b.dataset.k]||[]).includes(b.dataset.v), c=cuenta(b.dataset.k,b.dataset.v);
+        b.setAttribute('aria-pressed',String(on)); b.disabled=c===0&&!on;
+        b.querySelector('.n').textContent=c;
+      });
+      const tot=an?ANIMALES.length:NECESIDADES.length;
+      const extra=an
+        ? `${ANIMALES.filter(a=>necDe(a.id).length).length} con necesidades abiertas · ${ANIMALES.filter(a=>a.cand>0).reduce((s,a)=>s+a.cand,0)} solicitudes`
+        : `${NECESIDADES.filter(n=>n.estado==='abierta').length} abiertas · ${NECESIDADES.filter(n=>urgente(n)).length} urgentes · ${NECESIDADES.reduce((s,n)=>s+n.entregas,0)} entregas por confirmar`;
+      $('.recuento-cab').innerHTML=`<b>${r.length}</b> de ${tot} ${an?'animales':'necesidades'} · ${extra}`;
+    } else {
+      const g=$('.mv-filtro .glob'); g.hidden=!nActivos(); g.textContent=nActivos();
+    }
+
+    const lista=$('.lista');
+    if(!r.length){
+      lista.innerHTML=`<div class="vacio"><div class="h">${I.huella}</div>
+        <h3>Nada encaja con estos filtros</h3>
+        <p>${an?'Prueba a quitar el estado o ampliar la edad. También puedes buscar por raza.':'Prueba a quitar el plazo o el tipo de ayuda: puede que lo que buscas ya esté cubierto.'}</p>
+        <button class="btn linea" data-act="limpiar">Quitar todos los filtros</button></div>`;
+      return;
+    }
+    lista.innerHTML = an
+      ? `<div class="rejilla">${r.map(tarjetaAnimal).join('')}</div>`
+      : (movil ? r.map(tarjetaNec).join('')
+        : `<div class="tabla"><table><thead><tr><th>Necesidad</th><th>Tipo</th><th>Progreso</th><th>Límite</th><th>Estado</th><th></th></tr></thead><tbody>${r.map(filaNec).join('')}</tbody></table></div>`);
+  }
+
+  /* ---------- hoja de filtros (móvil) ---------- */
+  function abrirHoja(){
+    capa.innerHTML=`<div class="hoja">
+      <div class="hoja-cab"><h2>Filtros</h2><button data-act="limpiar">Limpiar</button></div>
+      <div class="hoja-cuerpo">${panelFiltros()}</div>
+      <div class="hoja-pie"><button class="btn solido" style="width:100%" data-act="cerrar-hoja">Ver ${resultados().length} resultados</button></div>
+    </div>`;
+    capa.classList.add('visible');
+  }
+  function refrescarHoja(){
+    if(!capa||!capa.classList.contains('visible')) return;
+    capa.querySelectorAll('.op').forEach(b=>{
+      const on=(F()[b.dataset.k]||[]).includes(b.dataset.v), c=cuenta(b.dataset.k,b.dataset.v);
+      b.setAttribute('aria-pressed',String(on)); b.disabled=c===0&&!on; b.querySelector('.n').textContent=c;
+    });
+    capa.querySelector('[data-act="cerrar-hoja"]').textContent=`Ver ${resultados().length} resultados`;
+  }
+
+  /* ---------- eventos ---------- */
+  raiz.addEventListener('click',e=>{
+    const b=e.target.closest('[data-act],[data-seccion]'); if(!b) return;
+    if(b.dataset.seccion){ est.sec=b.dataset.seccion; pintar(); return; }
+    const a=b.dataset.act;
+    if(a==='filtro'){
+      e.stopPropagation();
+      const f=F(), k=b.dataset.k, v=b.dataset.v;
+      f[k]=f[k]||[];
+      const i=f[k].indexOf(v); i<0?f[k].push(v):f[k].splice(i,1);
+      if(!f[k].length) delete f[k];
+      actualizar(); refrescarHoja(); return;
+    }
+    if(a==='limpiar'){ est.f[est.sec]={}; actualizar(); refrescarHoja(); return; }
+    if(a==='abrir-filtros'){ abrirHoja(); return; }
+    if(a==='cerrar-hoja'){ capa.classList.remove('visible'); return; }
+    if(a==='ver-nec'){ e.stopPropagation(); est.sec='necesidades'; est.f.necesidades={animal:[b.dataset.v]}; est.q.necesidades=''; pintar(); return; }
+    if(a==='ver-animal'){ est.sec='animales'; est.f.animales={}; est.q.animales=anim(b.dataset.v).n; pintar(); return; }
+  });
+  raiz.addEventListener('input',e=>{
+    if(e.target.matches('[data-buscar]')){ est.q[est.sec]=e.target.value; actualizar(); }
+  });
+  raiz.addEventListener('change',e=>{
+    if(e.target.matches('[data-orden]')){ est.orden[est.sec]=e.target.value; actualizar(); }
+  });
+  if(capa) capa.addEventListener('click',e=>{ if(e.target===capa) capa.classList.remove('visible'); });
+
+  pintar();
+}
+crearApp(document.getElementById('app-escritorio'),'escritorio');
+crearApp(document.getElementById('app-movil'),'movil');
+document.querySelectorAll('.conmutador button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.conmutador button').forEach(x=>x.setAttribute('aria-selected',String(x===b)));
+  document.querySelectorAll('.escenario').forEach(s=>s.classList.toggle('activo',s.dataset.vista===b.dataset.vista));
+}));
+</script>
+</body>
+</html>

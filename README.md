@@ -1,3 +1,48 @@
+# Reglas de EQUIPO
+
+1. Ramas develop y main bloqueadas para hacer push (todo se pasa ahí a través de Pull Request) Ruleset en Github
+2. no se sube el .env al repositorio (.gitignore)
+3. no se suben /migrations al repositorio (.gitignore)
+4. documentar siempre en el .env.example y en README con las entradas que necesitemos y qué son
+
+---
+
+## FLUJO de TRABAJO:
+
+| Stage            | Finalidad                                                           | Notas                                                                             |
+| ---------------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Backlog          | todas las ideas a desarrollar                                       | puede ser solo una idea                                                           |
+| Ready to Work    | Tareas aprobadas para realizar                                      | ya hemos aprobado que se hace                                                     |
+| Work in progress | Tareas ya empezada y asignada a alguien que está trabajando en ella | aqui es donde te creas la rama para empezar a desarrollar "git switch -c tareaXX" |
+| Review           | Hay un Pull Request pendiente de revisar                            | ...                                                                               |
+| Done             | Finalizada y Merge en rama Develop                                  | ...                                                                               |
+
+---
+
+## NOTAS (recordatorio):
+
+- git fetch: lista los cambios de la rama
+- git pull: descarga los cambios de la rama
+- git switch RAMA: cambia de rama
+- git add . : añade todo lo modificado al stash de cambios
+- git commit -m "mensaje": commit
+- git push -u origin tareaXXX: sube la rama
+
+## DIRECTORIOS:
+
+| Tipo   | Ruta           | Finalidad                                    |
+| ------ | -------------- | -------------------------------------------- |
+| vistas | /public/vistas | Mockups de las vistas a desarrollar en figma |
+| ...    | ...            | ...                                          |
+
+---
+
+---
+
+---
+
+# README original:
+
 # WebApp boilerplate with React JS and Flask API
 
 Build web applications using React.js for the front end and python/flask for your backend API.
@@ -11,7 +56,7 @@ Build web applications using React.js for the front end and python/flask for you
 
 ### 1) Installation:
 
-> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node 
+> If you use Github Codespaces (recommended) or Gitpod this template will already come with Python, Node and the Posgres Database installed. If you are working locally make sure to install Python 3.10, Node
 
 It is recomended to install the backend first, make sure you have Python 3.10, Pipenv and a database engine (Posgress recomended)
 
@@ -61,11 +106,11 @@ And you will see the following message:
 
 ### **Important note for the database and the data inside it**
 
-Every Github codespace environment will have **its own database**, so if you're working with more people eveyone will have a different database and different records inside it. This data **will be lost**, so don't spend too much time manually creating records for testing, instead, you can automate adding records to your database by editing ```commands.py``` file inside ```/src/api``` folder. Edit line 32 function ```insert_test_data``` to insert the data according to your model (use the function ```insert_test_users``` above as an example). Then, all you need to do is run ```pipenv run insert-test-data```.
+Every Github codespace environment will have **its own database**, so if you're working with more people eveyone will have a different database and different records inside it. This data **will be lost**, so don't spend too much time manually creating records for testing, instead, you can automate adding records to your database by editing `commands.py` file inside `/src/api` folder. Edit line 32 function `insert_test_data` to insert the data according to your model (use the function `insert_test_users` above as an example). Then, all you need to do is run `pipenv run insert-test-data`.
 
 ### Front-End Manual Installation:
 
--   Make sure you are using node version 20 and that you have already successfully installed and runned the backend.
+- Make sure you are using node version 20 and that you have already successfully installed and runned the backend.
 
 1. Install the packages: `$ npm install`
 2. Start coding! start the webpack dev server `$ npm run start`
