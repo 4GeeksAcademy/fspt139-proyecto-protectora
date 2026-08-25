@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cobijo · Savia Cálida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&family=Outfit:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #2e9e63;
+        --verde2: #48bc7d;
+        --verde-osc: #1f7449;
+        --verde-suave: #e4f4ea;
+        --verde-papel: #f1f7f0;
+        --melo: #f0946a;
+        --melo-suave: #fdede4;
+        --miel: #e8b04b;
+        --miel-suave: #fbf0d8;
+        --rosa: #e0756b;
+        --rosa-suave: #fbe8e5;
+        --crema: #fcfaf5;
+        --crema2: #f6f2e9;
+        --blanco: #fff;
+        --tx: #26302a;
+        --mut: #6f7c73;
+        --bd: #e7e3d8;
+        --tinta: #22302a;
+        --r: 20px;
+        --rs: 14px;
+        --som:
+          0 1px 2px rgba(38, 48, 42, 0.04), 0 8px 24px rgba(38, 48, 42, 0.06);
+        --som2:
+          0 2px 4px rgba(38, 48, 42, 0.05), 0 14px 38px rgba(38, 48, 42, 0.09);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--crema);
+        color: var(--tx);
+        font-family: "Nunito Sans", system-ui, sans-serif;
+        font-size: 15.5px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Outfit, sans-serif;
+        margin: 0;
+        line-height: 1.14;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      h1 {
+        font-size: clamp(34px, 5.4vw, 56px);
+      }
+      h3 {
+        font-size: 18px;
+      }
+      p {
+        margin: 0;
+      }
+      .wrap {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        color: transparent;
+      }
+
+      .sw {
+        background: var(--tinta);
+        color: #b4c2ba;
+        padding: 9px 0;
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      .sw .wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .sw b {
+        font-family: Outfit;
+        color: #fff;
+        font-size: 15px;
+      }
+      .sw em {
+        font-style: normal;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.6;
+      }
+      .sw nav {
+        margin-left: auto;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .sw button {
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        color: #b4c2ba;
+        background: transparent;
+        border: 1px solid #3a4a41;
+        border-radius: 99px;
+        padding: 5px 14px;
+      }
+      .sw button[aria-current="true"] {
+        background: var(--verde2);
+        border-color: var(--verde2);
+        color: #0b2418;
+        font-weight: 600;
+      }
+
+      .top {
+        background: rgba(252, 250, 245, 0.9);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 41px;
+        z-index: 30;
+      }
+      .top .wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 76px;
+      }
+      .logo {
+        font-family: Outfit;
+        font-weight: 700;
+        font-size: 21px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: -0.02em;
+      }
+      .logo i {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px 12px 12px 5px;
+        background: var(--verde);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        transform: rotate(-6deg);
+      }
+      .pills {
+        margin-left: auto;
+        display: flex;
+        gap: 3px;
+        background: var(--blanco);
+        border-radius: 99px;
+        padding: 5px;
+        box-shadow: var(--som);
+      }
+      .pills a {
+        padding: 8px 16px;
+        border-radius: 99px;
+        text-decoration: none;
+        color: var(--mut);
+        font-size: 14.5px;
+      }
+      .pills a:hover {
+        color: var(--tx);
+        background: var(--verde-papel);
+      }
+      .pills a.on {
+        background: var(--verde);
+        color: #fff;
+        font-weight: 600;
+      }
+      .top .r {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .btn {
+        font: inherit;
+        font-size: 14.5px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 99px;
+        padding: 11px 22px;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        background: var(--verde);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(46, 158, 99, 0.24);
+      }
+      .btn:hover {
+        background: var(--verde-osc);
+      }
+      .btn.g {
+        background: var(--blanco);
+        color: var(--verde-osc);
+        border-color: var(--bd);
+        box-shadow: var(--som);
+      }
+      .btn.g:hover {
+        background: var(--verde-suave);
+        border-color: var(--verde-suave);
+      }
+      .btn.q {
+        background: transparent;
+        color: var(--mut);
+        border-color: var(--bd);
+        box-shadow: none;
+      }
+      .btn.q:hover {
+        color: var(--tx);
+        background: var(--blanco);
+        box-shadow: var(--som);
+      }
+      .btn.sm {
+        padding: 7px 16px;
+        font-size: 13.5px;
+      }
+
+      .eb {
+        font-family: "IBM Plex Mono";
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--verde);
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: var(--blanco);
+        border-radius: var(--r);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: var(--som);
+      }
+      .card:hover {
+        box-shadow: var(--som2);
+        transform: translateY(-2px);
+      }
+      .card .ph {
+        height: 150px;
+        position: relative;
+        overflow: hidden;
+        background: var(--crema2);
+      }
+      .card .ph img {
+        color: transparent;
+      }
+      .card .bd {
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+        flex: 1;
+      }
+      .card .org {
+        color: var(--mut);
+        font-size: 13.5px;
+        margin-top: 3px;
+      }
+      .tag {
+        position: absolute;
+        top: 13px;
+        left: 13px;
+        font-size: 12.5px;
+        font-weight: 700;
+        padding: 6px 13px;
+        border-radius: 99px;
+        color: #fff;
+      }
+      .tag.r {
+        background: var(--rosa);
+      }
+      .tag.v {
+        background: var(--verde);
+      }
+      .tag.o {
+        background: var(--melo);
+      }
+      .tag.m {
+        background: var(--miel);
+        color: #4a3407;
+      }
+      .chip {
+        display: inline-block;
+        font-size: 12.5px;
+        font-weight: 600;
+        padding: 5px 12px;
+        border-radius: 99px;
+      }
+      .chip.v {
+        background: var(--verde-suave);
+        color: var(--verde-osc);
+      }
+      .chip.n {
+        background: var(--crema2);
+        color: var(--mut);
+      }
+      .ft {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        border-top: 1px solid var(--bd);
+        padding-top: 14px;
+        margin-top: auto;
+      }
+      .ft small {
+        color: var(--mut);
+        font-size: 13.5px;
+      }
+
+      .fwrap {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 32px;
+        align-items: start;
+        margin-top: 6px;
+      }
+      .fgal {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 10px;
+        border-radius: 26px;
+        overflow: hidden;
+        box-shadow: var(--som2);
+        height: 420px;
+      }
+      .fgal .m {
+        grid-row: 1/3;
+        position: relative;
+      }
+      .fgal img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        color: transparent;
+      }
+      .fgal .m span {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+      }
+      .fhead {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 26px;
+        flex-wrap: wrap;
+      }
+      .fhead p {
+        color: var(--mut);
+        font-size: 14.5px;
+      }
+      .fsec {
+        margin-top: 30px;
+      }
+      .fsec h3 {
+        margin-bottom: 11px;
+      }
+      .fsec p {
+        color: var(--mut);
+        font-size: 14.5px;
+        line-height: 1.75;
+      }
+      .fchips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+      .related {
+        margin-top: 8px;
+      }
+
+      .fside {
+        position: sticky;
+        top: 120px;
+        background: var(--blanco);
+        border-radius: var(--r);
+        padding: 26px 24px;
+        box-shadow: var(--som2);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .fside .who2 {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .fside .who2 small {
+        color: var(--mut);
+        font-size: 13px;
+        display: block;
+      }
+      .av {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: var(--verde-suave);
+        color: var(--verde-osc);
+        display: grid;
+        place-items: center;
+        font-size: 12.5px;
+        font-weight: 700;
+      }
+      .facts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px 10px;
+      }
+      .facts div {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .facts small {
+        color: var(--mut);
+        font-size: 12px;
+      }
+      .facts b {
+        font-family: Outfit;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .fside .facts {
+        border-top: 1px solid var(--bd);
+        border-bottom: 1px solid var(--bd);
+        padding: 18px 0;
+      }
+      .fside .note {
+        font-size: 12.5px;
+        color: var(--mut);
+        text-align: center;
+      }
+
+      footer {
+        background: var(--tinta);
+        color: #a9b8af;
+        padding: 52px 0 44px;
+        font-size: 14.5px;
+        border-radius: 34px 34px 0 0;
+        margin-top: 20px;
+      }
+      footer .wrap {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 32px;
+      }
+      footer h4 {
+        font-family: Outfit;
+        color: #fff;
+        font-size: 14px;
+        margin: 0 0 14px;
+        font-weight: 700;
+      }
+      footer a {
+        display: block;
+        color: #a9b8af;
+        text-decoration: none;
+        padding: 5px 0;
+      }
+      footer a:hover {
+        color: var(--verde2);
+      }
+      @media (max-width: 900px) {
+        footer .wrap {
+          grid-template-columns: 1fr;
+        }
+        .fwrap {
+          grid-template-columns: 1fr;
+        }
+        .fside {
+          position: static;
+        }
+        .fgal {
+          height: auto;
+          grid-template-columns: 1fr 1fr;
+        }
+        .fgal .m {
+          grid-row: auto;
+          aspect-ratio: 4/3;
+        }
+      }
+      @media (max-width: 640px) {
+        .pills {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sw">
+      <div class="wrap">
+        <b>Cobijo</b> <em>Savia Cálida</em>
+        <nav>
+          <button aria-current="true">Home</button><button>Protectora</button
+          ><button>Colaborador</button><button>Necesidades</button
+          ><button>Adoptar</button><button>Protectoras</button
+          ><button>Ficha animal</button>
+        </nav>
+      </div>
+    </div>
+
+    <header class="top">
+      <div class="wrap">
+        <div class="logo"><i>C</i>Cobijo</div>
+        <div class="pills">
+          <a href="#">Inicio</a><a href="#">Necesidades</a
+          ><a href="#" class="on">Adoptar</a><a href="#">Protectoras</a
+          ><a href="#">Ayuda</a>
+        </div>
+        <div class="r">
+          <a class="btn q sm" href="#">Entrar</a
+          ><a class="btn sm" href="#">Crear cuenta</a>
+        </div>
+      </div>
+    </header>
+    <div class="wrap">
+      <p class="eb" style="margin-top: 26px">
+        Adoptar <span style="color: var(--mut); font-weight: 400">/ Nala</span>
+      </p>
+
+      <div class="fgal">
+        <div class="m">
+          <span class="tag v">Disponible</span
+          ><img src="https://placedog.net/700/840?id=15" alt="Nala" />
+        </div>
+        <div>
+          <img src="https://placedog.net/500/280?id=52" alt="Nala jugando" />
+        </div>
+        <div>
+          <img
+            src="https://placedog.net/500/280?id=41"
+            alt="Nala en el refugio"
+          />
+        </div>
+      </div>
+
+      <div class="fwrap">
+        <div>
+          <div class="fhead">
+            <h1 style="font-size: 32px">Nala</h1>
+            <span class="chip v">Disponible</span>
+          </div>
+          <p style="color: var(--mut); font-size: 15px; margin-top: 6px">
+            Perra mestiza · 2 años · 14 kg · Protectora Huellas, Alcalá de
+            Henares
+          </p>
+
+          <div class="fsec">
+            <h3>Sobre Nala</h3>
+            <p>
+              Nala llegó a la protectora hace ocho meses tras ser encontrada
+              vagando por un polígono industrial. Es una perra tranquila,
+              cariñosa una vez coge confianza, y se lleva muy bien con otros
+              perros. Le encantan los paseos largos pero también sabe estar
+              tranquila en casa.
+            </p>
+            <p style="margin-top: 10px">
+              Necesita una casa sin escaleras porque tiene una ligera displasia
+              de cadera que no le impide llevar una vida normal, solo requiere
+              algo de cuidado.
+            </p>
+          </div>
+
+          <div class="fsec">
+            <h3>Salud y cuidados</h3>
+            <div class="fchips">
+              <span class="chip n">Esterilizada</span
+              ><span class="chip n">Vacunada</span
+              ><span class="chip n">Chip identificativo</span
+              ><span class="chip n">Displasia leve de cadera</span>
+            </div>
+          </div>
+
+          <div class="fsec">
+            <h3>Cómo es en casa</h3>
+            <div class="fchips">
+              <span class="chip n">Sociable</span
+              ><span class="chip n">Con niños</span
+              ><span class="chip n">Con otros perros</span
+              ><span class="chip n">Sin escaleras</span
+              ><span class="chip n">Tranquila en casa</span>
+            </div>
+          </div>
+
+          <div class="fsec related">
+            <h3>También buscan casa</h3>
+            <div class="grid" style="margin-top: 14px">
+              <article class="card">
+                <div class="ph" style="height: 150px">
+                  <span class="tag o">En proceso</span
+                  ><img
+                    src="https://cataas.com/cat?width=500&height=300&s=20"
+                    alt="Trufa"
+                  />
+                </div>
+                <div class="bd" style="gap: 8px">
+                  <h3 style="font-size: 16px">Trufa</h3>
+                  <p class="org">Gata común europea · 7 meses</p>
+                  <div class="ft" style="padding-top: 10px">
+                    <small>Protectora Huellas</small
+                    ><a class="btn q sm" href="#">Ver ficha</a>
+                  </div>
+                </div>
+              </article>
+              <article class="card">
+                <div class="ph" style="height: 150px">
+                  <span class="tag v">Disponible</span
+                  ><img src="https://placedog.net/500/300?id=33" alt="Bruno" />
+                </div>
+                <div class="bd" style="gap: 8px">
+                  <h3 style="font-size: 16px">Bruno</h3>
+                  <p class="org">Podenco · 5 años</p>
+                  <div class="ft" style="padding-top: 10px">
+                    <small>Colonia Felina Vallecas</small
+                    ><a class="btn q sm" href="#">Ver ficha</a>
+                  </div>
+                </div>
+              </article>
+              <article class="card">
+                <div class="ph" style="height: 150px">
+                  <span class="tag v">Disponible</span
+                  ><img src="https://placedog.net/500/300?id=44" alt="Rex" />
+                </div>
+                <div class="bd" style="gap: 8px">
+                  <h3 style="font-size: 16px">Rex</h3>
+                  <p class="org">Pastor alemán mestizo · 3 años</p>
+                  <div class="ft" style="padding-top: 10px">
+                    <small>Refugio Els Amics</small
+                    ><a class="btn q sm" href="#">Ver ficha</a>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <aside class="fside">
+          <div class="who2">
+            <div
+              class="av"
+              style="width: 44px; height: 44px; border-radius: 14px"
+            >
+              PH
+            </div>
+            <div>
+              <b style="font-family: Outfit; font-size: 15px; display: block"
+                >Protectora Huellas</b
+              ><small>Alcalá de Henares · 2,4 km de ti</small>
+            </div>
+          </div>
+          <div class="facts">
+            <div><small>Especie</small><b>Perra</b></div>
+            <div><small>Raza</small><b>Mestiza</b></div>
+            <div><small>Edad</small><b>2 años</b></div>
+            <div><small>Tamaño</small><b>Mediano · 14 kg</b></div>
+            <div><small>Sexo</small><b>Hembra</b></div>
+            <div><small>En protectora</small><b>8 meses</b></div>
+          </div>
+          <a class="btn" href="#" style="text-align: center"
+            >Quiero adoptar a Nala</a
+          >
+          <a class="btn g" href="#" style="text-align: center"
+            >Escribir a la protectora</a
+          >
+          <p class="note">Suelen responder en menos de 2 días</p>
+        </aside>
+      </div>
+      <div style="height: 20px"></div>
+    </div>
+    <footer>
+      <div class="wrap">
+        <div>
+          <div class="logo" style="color: #fff"><i>C</i>Cobijo</div>
+          <p style="margin-top: 14px; max-width: 34ch">
+            Ayuda concreta para protectoras y refugios. Proyecto final del
+            bootcamp Full Stack.
+          </p>
+        </div>
+        <div>
+          <h4>Plataforma</h4>
+          <a href="#">Necesidades</a><a href="#">Adoptar</a
+          ><a href="#">Protectoras</a><a href="#">Preguntas</a>
+        </div>
+        <div>
+          <h4>Cuenta</h4>
+          <a href="#">Entrar</a><a href="#">Crear cuenta</a
+          ><a href="#">Registrar protectora</a><a href="#">Contacto</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

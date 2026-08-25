@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cobijo · Savia Cálida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&family=Outfit:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #2e9e63;
+        --verde2: #48bc7d;
+        --verde-osc: #1f7449;
+        --verde-suave: #e4f4ea;
+        --verde-papel: #f1f7f0;
+        --melo: #f0946a;
+        --melo-suave: #fdede4;
+        --miel: #e8b04b;
+        --miel-suave: #fbf0d8;
+        --rosa: #e0756b;
+        --rosa-suave: #fbe8e5;
+        --crema: #fcfaf5;
+        --crema2: #f6f2e9;
+        --blanco: #fff;
+        --tx: #26302a;
+        --mut: #6f7c73;
+        --bd: #e7e3d8;
+        --tinta: #22302a;
+        --r: 20px;
+        --rs: 14px;
+        --som:
+          0 1px 2px rgba(38, 48, 42, 0.04), 0 8px 24px rgba(38, 48, 42, 0.06);
+        --som2:
+          0 2px 4px rgba(38, 48, 42, 0.05), 0 14px 38px rgba(38, 48, 42, 0.09);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--crema);
+        color: var(--tx);
+        font-family: "Nunito Sans", system-ui, sans-serif;
+        font-size: 15.5px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Outfit, sans-serif;
+        margin: 0;
+        line-height: 1.14;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        font-size: clamp(25px, 3.4vw, 36px);
+      }
+      h3 {
+        font-size: 18px;
+      }
+      p {
+        margin: 0;
+      }
+      .wrap {
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 22px;
+      }
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        color: transparent;
+      }
+
+      .sw {
+        background: var(--tinta);
+        color: #b4c2ba;
+        padding: 9px 0;
+        position: sticky;
+        top: 0;
+        z-index: 40;
+      }
+      .sw .wrap {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .sw b {
+        font-family: Outfit;
+        color: #fff;
+        font-size: 15px;
+      }
+      .sw em {
+        font-style: normal;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.6;
+      }
+      .sw nav {
+        margin-left: auto;
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .sw button {
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        color: #b4c2ba;
+        background: transparent;
+        border: 1px solid #3a4a41;
+        border-radius: 99px;
+        padding: 5px 14px;
+      }
+      .sw button[aria-current="true"] {
+        background: var(--verde2);
+        border-color: var(--verde2);
+        color: #0b2418;
+        font-weight: 600;
+      }
+
+      .top {
+        background: rgba(252, 250, 245, 0.9);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 41px;
+        z-index: 30;
+      }
+      .top .wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 76px;
+      }
+      .logo {
+        font-family: Outfit;
+        font-weight: 700;
+        font-size: 21px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        letter-spacing: -0.02em;
+      }
+      .logo i {
+        width: 34px;
+        height: 34px;
+        border-radius: 12px 12px 12px 5px;
+        background: var(--verde);
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        transform: rotate(-6deg);
+      }
+      .pills {
+        margin-left: auto;
+        display: flex;
+        gap: 3px;
+        background: var(--blanco);
+        border-radius: 99px;
+        padding: 5px;
+        box-shadow: var(--som);
+      }
+      .pills a {
+        padding: 8px 16px;
+        border-radius: 99px;
+        text-decoration: none;
+        color: var(--mut);
+        font-size: 14.5px;
+      }
+      .pills a:hover {
+        color: var(--tx);
+        background: var(--verde-papel);
+      }
+      .pills a.on {
+        background: var(--verde);
+        color: #fff;
+        font-weight: 600;
+      }
+      .top .r {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .btn {
+        font: inherit;
+        font-size: 14.5px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 99px;
+        padding: 11px 22px;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid transparent;
+        background: var(--verde);
+        color: #fff;
+        box-shadow: 0 2px 10px rgba(46, 158, 99, 0.24);
+      }
+      .btn:hover {
+        background: var(--verde-osc);
+      }
+      .btn.g {
+        background: var(--blanco);
+        color: var(--verde-osc);
+        border-color: var(--bd);
+        box-shadow: var(--som);
+      }
+      .btn.g:hover {
+        background: var(--verde-suave);
+        border-color: var(--verde-suave);
+      }
+      .btn.q {
+        background: transparent;
+        color: var(--mut);
+        border-color: var(--bd);
+        box-shadow: none;
+      }
+      .btn.q:hover {
+        color: var(--tx);
+        background: var(--blanco);
+        box-shadow: var(--som);
+      }
+      .btn.sm {
+        padding: 7px 16px;
+        font-size: 13.5px;
+      }
+
+      .eb {
+        font-family: "IBM Plex Mono";
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--verde);
+        margin-bottom: 12px;
+        font-weight: 500;
+      }
+
+      .fwrap {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr;
+        gap: 32px;
+        align-items: start;
+        margin-top: 6px;
+      }
+
+      .fm {
+        max-width: 740px;
+      }
+      .fmsec {
+        background: var(--blanco);
+        border-radius: var(--r);
+        padding: 26px 24px;
+        box-shadow: var(--som);
+        margin-bottom: 20px;
+      }
+      .fmsec .num {
+        display: block;
+        font-family: "IBM Plex Mono";
+        font-size: 12px;
+        color: var(--verde);
+        letter-spacing: 0.1em;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+      .fmsec h3 {
+        margin-bottom: 4px;
+      }
+      .fmsec > p.sub {
+        color: var(--mut);
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+      .field {
+        margin-bottom: 16px;
+      }
+      .field:last-child {
+        margin-bottom: 0;
+      }
+      .field label {
+        display: block;
+        font-size: 13.5px;
+        font-weight: 600;
+        margin-bottom: 7px;
+      }
+      .field input,
+      .field textarea,
+      .field select {
+        width: 100%;
+        font: inherit;
+        font-size: 14.5px;
+        padding: 11px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--bd);
+        background: var(--crema);
+        color: var(--tx);
+      }
+      .field input:focus,
+      .field textarea:focus,
+      .field select:focus {
+        outline: 2px solid var(--verde);
+        outline-offset: 1px;
+      }
+      .field textarea {
+        resize: vertical;
+        min-height: 88px;
+      }
+      .field small.hint {
+        display: block;
+        color: var(--mut);
+        font-size: 12.5px;
+        margin-top: 6px;
+      }
+      .row2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .optcards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+        gap: 10px;
+      }
+      .optcard {
+        border: 1.5px solid var(--bd);
+        border-radius: 14px;
+        padding: 14px 15px;
+        cursor: pointer;
+        font-size: 14px;
+        background: var(--blanco);
+      }
+      .optcard.on {
+        border-color: var(--verde);
+        background: var(--verde-papel);
+      }
+      .optcard b {
+        display: block;
+        font-family: Outfit;
+        font-size: 14.5px;
+        margin-bottom: 2px;
+      }
+      .optcard small {
+        color: var(--mut);
+        font-size: 12.5px;
+      }
+
+      .sside {
+        position: sticky;
+        top: 120px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .sprev {
+        background: var(--blanco);
+        border-radius: var(--r);
+        padding: 16px;
+        box-shadow: var(--som);
+        display: flex;
+        gap: 13px;
+        align-items: center;
+      }
+      .sprev img {
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        object-fit: cover;
+        flex: none;
+      }
+      .sprev b {
+        display: block;
+        font-family: Outfit;
+        font-size: 15px;
+      }
+      .sprev small {
+        color: var(--mut);
+        font-size: 12.5px;
+        display: block;
+      }
+      .schk {
+        background: var(--blanco);
+        border-radius: var(--r);
+        padding: 20px;
+        box-shadow: var(--som);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .schk .t {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--mut);
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+      .schk div.it {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 13.5px;
+        color: var(--mut);
+      }
+      .schk div.it.ok {
+        color: var(--tx);
+      }
+      .schk div.it u {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        border: 1.5px solid var(--bd);
+        flex: none;
+        display: block;
+      }
+      .schk div.it.ok u {
+        background: var(--verde);
+        border-color: var(--verde);
+      }
+      .schk .note2 {
+        font-size: 12.5px;
+        color: var(--mut);
+        text-align: center;
+        border-top: 1px solid var(--bd);
+        padding-top: 12px;
+        margin-top: 2px;
+      }
+
+      .fmbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0 44px;
+        flex-wrap: wrap;
+        gap: 12px;
+        border-top: 1px solid var(--bd);
+        margin-top: 8px;
+      }
+      .fmbar small {
+        color: var(--mut);
+        font-size: 13.5px;
+      }
+      .fmbar .acts2 {
+        display: flex;
+        gap: 10px;
+      }
+
+      footer {
+        background: var(--tinta);
+        color: #a9b8af;
+        padding: 52px 0 44px;
+        font-size: 14.5px;
+        border-radius: 34px 34px 0 0;
+        margin-top: 20px;
+      }
+      footer .wrap {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 32px;
+      }
+      footer h4 {
+        font-family: Outfit;
+        color: #fff;
+        font-size: 14px;
+        margin: 0 0 14px;
+        font-weight: 700;
+      }
+      footer a {
+        display: block;
+        color: #a9b8af;
+        text-decoration: none;
+        padding: 5px 0;
+      }
+      footer a:hover {
+        color: var(--verde2);
+      }
+      @media (max-width: 900px) {
+        footer .wrap {
+          grid-template-columns: 1fr;
+        }
+        .fwrap {
+          grid-template-columns: 1fr;
+        }
+        .sside {
+          position: static;
+        }
+      }
+      @media (max-width: 640px) {
+        .pills {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sw">
+      <div class="wrap">
+        <b>Cobijo</b> <em>Savia Cálida</em>
+        <nav>
+          <button aria-current="true">Home</button><button>Protectora</button
+          ><button>Colaborador</button><button>Necesidades</button
+          ><button>Adoptar</button><button>Protectoras</button
+          ><button>Ficha animal</button><button>Solicitud adopción</button>
+        </nav>
+      </div>
+    </div>
+
+    <header class="top">
+      <div class="wrap">
+        <div class="logo"><i>C</i>Cobijo</div>
+        <div class="pills">
+          <a href="#">Inicio</a><a href="#">Necesidades</a
+          ><a href="#" class="on">Adoptar</a><a href="#">Protectoras</a
+          ><a href="#">Ayuda</a>
+        </div>
+        <div class="r">
+          <a class="btn q sm" href="#">Entrar</a
+          ><a class="btn sm" href="#">Crear cuenta</a>
+        </div>
+      </div>
+    </header>
+    <div class="wrap">
+      <p class="eb" style="margin-top: 26px">
+        Adoptar / Nala
+        <span style="color: var(--mut); font-weight: 400"
+          >/ Solicitud de adopción</span
+        >
+      </p>
+      <h2 style="margin-top: 8px">Quieres darle un hogar a Nala</h2>
+      <p
+        style="
+          color: var(--mut);
+          max-width: 56ch;
+          margin-top: 10px;
+          font-size: 15px;
+        "
+      >
+        Cuéntale a Protectora Huellas un poco sobre ti y tu casa. No hay
+        respuestas correctas: solo quieren asegurarse de que Nala va a estar
+        bien.
+      </p>
+
+      <div class="fwrap" style="margin-top: 28px">
+        <div class="fm">
+          <div class="fmsec">
+            <span class="num">01 · Sobre ti</span>
+            <h3>Tus datos de contacto</h3>
+            <p class="sub">
+              La protectora los usará solo para hablar contigo sobre esta
+              solicitud.
+            </p>
+            <div class="row2">
+              <div class="field">
+                <label>Nombre completo</label
+                ><input placeholder="Cómo te llamas" />
+              </div>
+              <div class="field">
+                <label>Teléfono</label><input placeholder="600 000 000" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Email</label><input placeholder="tucorreo@ejemplo.com" />
+            </div>
+            <div class="field">
+              <label>Población</label
+              ><input placeholder="Ciudad donde vives" /><small class="hint"
+                >Ayuda a la protectora a saber si Alcalá de Henares te queda
+                cerca.</small
+              >
+            </div>
+          </div>
+
+          <div class="fmsec">
+            <span class="num">02 · Tu hogar</span>
+            <h3>Dónde va a vivir Nala</h3>
+            <p class="sub">Recuerda que necesita una casa sin escaleras.</p>
+            <div class="field">
+              <label>Tipo de vivienda</label>
+              <div class="optcards">
+                <div class="optcard">
+                  <b>Piso</b><small>Sin ascensor</small>
+                </div>
+                <div class="optcard on">
+                  <b>Piso</b><small>Con ascensor</small>
+                </div>
+                <div class="optcard"><b>Casa</b><small>Con jardín</small></div>
+                <div class="optcard"><b>Casa</b><small>Sin jardín</small></div>
+              </div>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label>¿Vives de alquiler?</label
+                ><select>
+                  <option>Sí</option>
+                  <option>No, es mía</option>
+                  <option>Vivo con familia</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Personas en casa</label
+                ><input placeholder="Ej. 2 adultos, 1 niño" />
+              </div>
+            </div>
+          </div>
+
+          <div class="fmsec">
+            <span class="num">03 · Tu experiencia</span>
+            <h3>Con quién va a convivir Nala</h3>
+            <div class="field">
+              <label>¿Tienes otros animales ahora mismo?</label>
+              <div
+                class="optcards"
+                style="
+                  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+                "
+              >
+                <div class="optcard on"><b>No</b></div>
+                <div class="optcard"><b>Sí, perros</b></div>
+                <div class="optcard"><b>Sí, gatos</b></div>
+                <div class="optcard"><b>Sí, otros</b></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>¿Has tenido perros antes?</label
+              ><select>
+                <option>Sí, toda la vida</option>
+                <option>Sí, alguna vez</option>
+                <option>Es mi primer perro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="fmsec">
+            <span class="num">04 · Por qué Nala</span>
+            <h3>Cuéntale esto a la protectora</h3>
+            <div class="field">
+              <label
+                >¿Por qué quieres adoptar a Nala y qué puedes ofrecerle?</label
+              >
+              <textarea
+                placeholder="Cuánto tiempo pasará sola, quién se ocupará de sus paseos, por qué te ha llamado la atención..."
+              ></textarea>
+              <small class="hint"
+                >Cuanto más concreto seas, antes suele responder la
+                protectora.</small
+              >
+            </div>
+          </div>
+
+          <div class="fmbar">
+            <small>Faltan 3 campos obligatorios</small>
+            <div class="acts2">
+              <a class="btn q" href="#">Cancelar</a
+              ><a class="btn g" href="#">Guardar borrador</a
+              ><a class="btn" href="#">Enviar solicitud</a>
+            </div>
+          </div>
+        </div>
+
+        <aside class="sside">
+          <div class="sprev">
+            <img src="https://placedog.net/120/120?id=15" alt="Nala" />
+            <div>
+              <b>Nala</b><small>Perra mestiza · 2 años</small
+              ><small>Protectora Huellas</small>
+            </div>
+          </div>
+          <div class="schk">
+            <p class="t">Antes de enviar</p>
+            <div class="it ok"><u></u>Datos de contacto</div>
+            <div class="it ok"><u></u>Tipo de vivienda</div>
+            <div class="it"><u></u>Cuéntanos por qué</div>
+            <p class="note2">
+              La protectora revisa tu solicitud y te contacta por email o
+              teléfono, normalmente en 2 días.
+            </p>
+          </div>
+        </aside>
+      </div>
+      <div style="height: 40px"></div>
+    </div>
+    <footer>
+      <div class="wrap">
+        <div>
+          <div class="logo" style="color: #fff"><i>C</i>Cobijo</div>
+          <p style="margin-top: 14px; max-width: 34ch">
+            Ayuda concreta para protectoras y refugios. Proyecto final del
+            bootcamp Full Stack.
+          </p>
+        </div>
+        <div>
+          <h4>Plataforma</h4>
+          <a href="#">Necesidades</a><a href="#">Adoptar</a
+          ><a href="#">Protectoras</a><a href="#">Preguntas</a>
+        </div>
+        <div>
+          <h4>Cuenta</h4>
+          <a href="#">Entrar</a><a href="#">Crear cuenta</a
+          ><a href="#">Registrar protectora</a><a href="#">Contacto</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
