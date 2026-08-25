@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Red Protectora · Crear cuenta (centrado)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&family=Outfit:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --verde:#2E9E63;--verde2:#48BC7D;--verde-osc:#1F7449;--verde-suave:#E4F4EA;--verde-papel:#F1F7F0;
+ --miel:#E8B04B;--miel-suave:#FBF0D8;--rosa:#E0756B;
+ --crema:#FCFAF5;--crema2:#F6F2E9;--blanco:#fff;
+ --tx:#26302A;--mut:#6F7C73;--bd:#E7E3D8;
+ --som:0 1px 2px rgba(38,48,42,.04),0 8px 24px rgba(38,48,42,.06);
+ --som2:0 3px 10px rgba(38,48,42,.06),0 24px 60px rgba(38,48,42,.11);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--tx);font-family:"Nunito Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.65;
+ -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow-x:hidden}
+body::before{content:"";position:fixed;width:620px;height:620px;border-radius:50%;background:var(--verde-papel);left:-250px;top:-230px;z-index:0}
+body::after{content:"";position:fixed;width:520px;height:520px;border-radius:50%;background:var(--miel-suave);right:-230px;bottom:-250px;opacity:.55;z-index:0}
+h1,h2,h3{font-family:Outfit,sans-serif;margin:0;line-height:1.15;font-weight:700;letter-spacing:-.02em}
+h1{font-size:30px}
+p{margin:0}
+a{color:var(--verde-osc)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px;width:100%;position:relative;z-index:2}
+
+.top .wrap{display:flex;align-items:center;gap:16px;height:76px}
+.logo{font-family:Outfit;font-weight:700;font-size:19.5px;display:flex;align-items:center;gap:11px;letter-spacing:-.025em;white-space:nowrap;text-decoration:none;color:inherit}
+.logo i{width:36px;height:36px;border-radius:13px 13px 13px 5px;background:var(--verde);display:grid;place-items:center;color:#fff;font-size:13px;font-weight:700;transform:rotate(-6deg);flex:none}
+.top .r{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:14.5px;color:var(--mut)}
+
+.btn{font:inherit;font-size:15px;font-weight:600;cursor:pointer;border-radius:99px;padding:13px 24px;text-decoration:none;display:inline-block;border:1px solid transparent;
+ background:var(--verde);color:#fff;box-shadow:0 2px 10px rgba(46,158,99,.24);width:100%;text-align:center}
+.btn:hover{background:var(--verde-osc)}
+.btn.g{background:var(--blanco);color:var(--verde-osc);border-color:var(--bd);box-shadow:var(--som)}
+.btn.g:hover{background:var(--verde-suave);border-color:var(--verde-suave)}
+.btn.sm{padding:8px 18px;font-size:13.5px;width:auto}
+.btn:focus-visible{outline:2px solid var(--verde-osc);outline-offset:3px}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:24px 0 52px}
+.center{width:100%;max-width:560px;margin:0 auto}
+
+.card{background:var(--blanco);border-radius:26px;box-shadow:var(--som2);padding:40px 40px}
+.mark{width:52px;height:52px;border-radius:18px 18px 18px 7px;background:var(--verde);display:grid;place-items:center;color:#fff;
+ font-family:Outfit;font-size:17px;font-weight:700;transform:rotate(-6deg);margin:0 auto 20px}
+.card .hd{text-align:center}
+.card .hd p{color:var(--mut);margin-top:9px}
+
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:24px}
+.role{background:var(--crema);border:1.5px solid var(--bd);border-radius:16px;padding:15px 16px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.role:hover{border-color:var(--verde2)}
+.role[aria-pressed=true]{border-color:var(--verde);background:var(--verde-suave);box-shadow:0 0 0 3px rgba(46,158,99,.13)}
+.role u{width:32px;height:32px;border-radius:11px;background:var(--blanco);display:grid;place-items:center;margin-bottom:9px;text-decoration:none}
+.role u b{width:12px;height:12px;border-radius:4px;display:block;background:var(--verde)}
+.role strong{display:block;font-family:Outfit;font-size:15px;font-weight:700}
+.role small{color:var(--mut);font-size:13px;display:block;margin-top:3px;line-height:1.42}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{margin-top:17px}
+label{display:block;font-size:14px;font-weight:600;margin-bottom:7px}
+label span{color:var(--mut);font-weight:400}
+.inp{position:relative}
+input[type=email],input[type=password],input[type=text],input[type=tel],select{
+ width:100%;font:inherit;font-size:15.5px;padding:13px 17px;border-radius:14px;border:1px solid var(--bd);background:var(--crema);color:var(--tx)}
+input::placeholder{color:#9AA69E}
+input:focus,select:focus{outline:none;border-color:var(--verde);background:var(--blanco);box-shadow:0 0 0 4px var(--verde-suave)}
+.inp .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;
+ font:inherit;font-size:13px;font-weight:600;color:var(--mut);padding:7px 11px;border-radius:10px}
+.inp .eye:hover{color:var(--verde-osc);background:var(--verde-suave)}
+.hint{font-size:13px;color:var(--mut);margin-top:7px}
+
+.bars{display:flex;gap:5px;margin-top:9px}
+.bars i{flex:1;height:5px;border-radius:99px;background:var(--crema2)}
+.bars i.on{background:var(--miel)}
+.bars i.ok{background:var(--verde)}
+.strength{font-size:13px;color:var(--mut);margin-top:6px}
+.strength b{color:#8A6208}
+.ok-msg{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;color:var(--verde-osc)}
+.ok-msg u{width:16px;height:16px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;font-size:10px;text-decoration:none;flex:none;font-weight:700}
+
+.extra{background:var(--miel-suave);border-radius:16px;padding:16px 18px;margin-top:18px}
+.extra p.t{font-family:Outfit;font-weight:700;font-size:14.5px}
+.extra p.d{color:#7E5B0A;font-size:13.5px;margin-top:4px}
+
+.checks{margin-top:21px;display:grid;gap:11px}
+.check{display:flex;align-items:flex-start;gap:11px;font-size:14.5px;cursor:pointer;color:var(--mut)}
+.check input{width:19px;height:19px;accent-color:var(--verde);cursor:pointer;flex:none;margin-top:3px}
+.check a{font-weight:600;text-decoration:none}.check a:hover{text-decoration:underline}
+
+.foot{margin-top:23px;padding-top:20px;border-top:1px solid var(--bd);font-size:14.5px;color:var(--mut);text-align:center}
+.foot a{font-weight:600;text-decoration:none}.foot a:hover{text-decoration:underline}
+
+/* recuadro informativo pequeño */
+.note{background:var(--verde-papel);border-radius:18px;padding:16px 20px;margin-top:18px}
+.note b{display:block;font-family:Outfit;font-size:14.5px;font-weight:700;margin-bottom:9px}
+.note ul{list-style:none;padding:0;margin:0;display:grid;gap:7px}
+.note li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--mut);line-height:1.45}
+.note li u{width:17px;height:17px;border-radius:50%;background:var(--verde);color:#fff;display:grid;place-items:center;flex:none;
+ font-size:10px;text-decoration:none;margin-top:3px;font-weight:700}
+
+@media(max-width:560px){.card{padding:30px 22px;border-radius:22px}.grid2{grid-template-columns:1fr}.roles{grid-template-columns:1fr}}
+</style></head><body>
+
+<header class="top"><div class="wrap">
+<a class="logo" href="#"><i>RP</i>Red Protectora</a>
+<div class="r"><span>¿Ya tienes cuenta?</span><a class="btn g sm" href="#">Iniciar sesión</a></div>
+</div></header>
+
+<main><div class="wrap"><div class="center">
+
+ <div class="card">
+  <div class="mark">RP</div>
+  <div class="hd">
+   <h1>Crea tu cuenta</h1>
+   <p>Un minuto y ya puedes empezar a colaborar.</p>
+  </div>
+
+  <div class="roles">
+   <button class="role" type="button" aria-pressed="true" data-role="colab">
+    <u><b></b></u><strong>Quiero ayudar</strong>
+    <small>Colaboro con necesidades y puedo solicitar adopciones.</small></button>
+   <button class="role" type="button" aria-pressed="false" data-role="prot">
+    <u><b style="background:var(--miel)"></b></u><strong>Soy protectora</strong>
+    <small>Publico necesidades y gestiono los animales del refugio.</small></button>
+  </div>
+
+  <div class="grid2">
+   <div class="field"><label for="nom">Nombre</label><input id="nom" type="text" placeholder="Joselu" autocomplete="given-name"></div>
+   <div class="field"><label for="ape">Apellidos</label><input id="ape" type="text" placeholder="Martínez Ruiz" autocomplete="family-name"></div>
+  </div>
+
+  <div class="field">
+   <label for="mail">Correo electrónico</label>
+   <input id="mail" type="email" placeholder="tu@correo.com" autocomplete="email">
+   <p class="hint">Lo usarás para entrar y para recibir avisos de tus compromisos.</p>
+  </div>
+
+  <div class="grid2">
+   <div class="field"><label for="tel">Teléfono <span>(opcional)</span></label><input id="tel" type="tel" placeholder="600 000 000" autocomplete="tel"></div>
+   <div class="field"><label for="ciu">Ciudad</label>
+    <select id="ciu"><option>Alcorcón</option><option>Madrid</option><option>Alcalá de Henares</option><option>Getafe</option><option>Otra…</option></select></div>
+  </div>
+
+  <div class="field">
+   <label for="pass">Contraseña</label>
+   <div class="inp">
+    <input id="pass" type="password" placeholder="Mínimo 8 caracteres" autocomplete="new-password" style="padding-right:76px">
+    <button class="eye" type="button" data-for="pass">Mostrar</button>
+   </div>
+   <div class="bars"><i class="ok"></i><i class="ok"></i><i class="on"></i><i></i></div>
+   <p class="strength">Seguridad: <b>media</b> · añade un número o un símbolo</p>
+  </div>
+
+  <div class="field">
+   <label for="pass2">Repite la contraseña</label>
+   <div class="inp">
+    <input id="pass2" type="password" placeholder="Vuelve a escribirla" autocomplete="new-password" style="padding-right:76px">
+    <button class="eye" type="button" data-for="pass2">Mostrar</button>
+   </div>
+   <p class="ok-msg"><u>✓</u>Las contraseñas coinciden</p>
+  </div>
+
+  <div class="extra" id="extra" hidden>
+   <p class="t">Al elegir protectora te pediremos algo más</p>
+   <p class="d">Nombre de la entidad, CIF, dirección y teléfono de contacto. Revisamos cada alta a mano antes de activarla.</p>
+  </div>
+
+  <div class="checks">
+   <label class="check"><input type="checkbox">Acepto los <a href="#">términos de uso</a> y la <a href="#">política de privacidad</a>.</label>
+   <label class="check"><input type="checkbox">Quiero recibir un aviso cuando haya necesidades urgentes cerca de mí.</label>
+  </div>
+
+  <div style="margin-top:22px"><button class="btn" type="button">Crear cuenta</button></div>
+
+  <p class="foot">¿Ya tienes cuenta? <a href="#">Inicia sesión</a></p>
+ </div>
+
+ <div class="note">
+  <b>Qué consigues al registrarte</b>
+  <ul>
+   <li><u>✓</u>Ves qué necesita cada refugio, con cantidades reales y fecha límite</li>
+   <li><u>✓</u>Reservas solo la parte que puedas cubrir</li>
+   <li><u>✓</u>Gratis, sin comisiones y sin pagos por medio</li>
+  </ul>
+ </div>
+
+</div></div></main>
+
+<script>
+document.querySelectorAll('.eye').forEach(b=>b.addEventListener('click',()=>{
+ const i=document.getElementById(b.dataset.for);
+ const on=i.type==='password';
+ i.type=on?'text':'password';
+ b.textContent=on?'Ocultar':'Mostrar';
+}));
+const extra=document.getElementById('extra');
+document.querySelectorAll('.role').forEach(r=>r.addEventListener('click',()=>{
+ document.querySelectorAll('.role').forEach(x=>x.setAttribute('aria-pressed',String(x===r)));
+ extra.hidden = r.dataset.role!=='prot';
+}));
+</script></body></html>
