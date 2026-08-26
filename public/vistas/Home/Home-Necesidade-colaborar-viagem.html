@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cobijo · Savia Cálida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600&family=Outfit:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --verde:#2E9E63;--verde2:#48BC7D;--verde-osc:#1F7449;--verde-suave:#E4F4EA;--verde-papel:#F1F7F0;
+ --melo:#F0946A;--melo-suave:#FDEDE4;--miel:#E8B04B;--miel-suave:#FBF0D8;--rosa:#E0756B;--rosa-suave:#FBE8E5;
+ --crema:#FCFAF5;--crema2:#F6F2E9;--blanco:#fff;
+ --tx:#26302A;--mut:#6F7C73;--bd:#E7E3D8;
+ --tinta:#22302A;
+ --r:20px;--rs:14px;
+ --som:0 1px 2px rgba(38,48,42,.04),0 8px 24px rgba(38,48,42,.06);
+ --som2:0 2px 4px rgba(38,48,42,.05),0 14px 38px rgba(38,48,42,.09);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--crema);color:var(--tx);font-family:"Nunito Sans",system-ui,sans-serif;font-size:15.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Outfit,sans-serif;margin:0;line-height:1.14;font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(25px,3.4vw,36px)}h3{font-size:18px}
+p{margin:0}
+.mono{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+img{display:block;width:100%;height:100%;object-fit:cover;color:transparent}
+
+.sw{background:var(--tinta);color:#B4C2BA;padding:9px 0;position:sticky;top:0;z-index:40}
+.sw .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sw b{font-family:Outfit;color:#fff;font-size:15px}
+.sw em{font-style:normal;font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
+.sw nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+.sw button{font:inherit;font-size:13px;cursor:pointer;color:#B4C2BA;background:transparent;border:1px solid #3A4A41;border-radius:99px;padding:5px 14px}
+.sw button[aria-current=true]{background:var(--verde2);border-color:var(--verde2);color:#0B2418;font-weight:600}
+
+.top{background:rgba(252,250,245,.9);backdrop-filter:blur(10px);position:sticky;top:41px;z-index:30}
+.top .wrap{display:flex;align-items:center;gap:16px;height:76px}
+.logo{font-family:Outfit;font-weight:700;font-size:21px;display:flex;align-items:center;gap:10px;letter-spacing:-.02em}
+.logo i{width:34px;height:34px;border-radius:12px 12px 12px 5px;background:var(--verde);display:grid;place-items:center;color:#fff;font-size:14px;font-weight:700;transform:rotate(-6deg)}
+.pills{margin-left:auto;display:flex;gap:3px;background:var(--blanco);border-radius:99px;padding:5px;box-shadow:var(--som)}
+.pills a{padding:8px 16px;border-radius:99px;text-decoration:none;color:var(--mut);font-size:14.5px}
+.pills a:hover{color:var(--tx);background:var(--verde-papel)}
+.pills a.on{background:var(--verde);color:#fff;font-weight:600}
+.top .r{display:flex;align-items:center;gap:9px}
+
+.btn{font:inherit;font-size:14.5px;font-weight:600;cursor:pointer;border-radius:99px;padding:11px 22px;text-decoration:none;display:inline-block;border:1px solid transparent;
+ background:var(--verde);color:#fff;box-shadow:0 2px 10px rgba(46,158,99,.24)}
+.btn:hover{background:var(--verde-osc)}
+.btn.g{background:var(--blanco);color:var(--verde-osc);border-color:var(--bd);box-shadow:var(--som)}
+.btn.g:hover{background:var(--verde-suave);border-color:var(--verde-suave)}
+.btn.q{background:transparent;color:var(--mut);border-color:var(--bd);box-shadow:none}
+.btn.q:hover{color:var(--tx);background:var(--blanco);box-shadow:var(--som)}
+.btn.sm{padding:7px 16px;font-size:13.5px}
+
+.eb{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--verde);margin-bottom:12px;font-weight:500}
+
+.fwrap{display:grid;grid-template-columns:1.6fr 1fr;gap:32px;align-items:start;margin-top:6px}
+
+.fm{max-width:740px}
+.fmsec{background:var(--blanco);border-radius:var(--r);padding:26px 24px;box-shadow:var(--som);margin-bottom:20px}
+.fmsec h3{margin-bottom:4px}
+.field{margin-bottom:16px}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:7px}
+.field input,.field textarea,.field select{width:100%;font:inherit;font-size:14.5px;padding:11px 14px;border-radius:12px;border:1px solid var(--bd);background:var(--crema);color:var(--tx)}
+.field input:focus,.field textarea:focus,.field select:focus{outline:2px solid var(--verde);outline-offset:1px}
+.field textarea{resize:vertical;min-height:88px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.optcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:10px}
+.optcard{border:1.5px solid var(--bd);border-radius:14px;padding:14px 15px;cursor:pointer;font-size:14px;background:var(--blanco)}
+.optcard.on{border-color:var(--verde);background:var(--verde-papel)}
+.optcard b{display:block;font-family:Outfit;font-size:14.5px;margin-bottom:2px}
+.optcard small{color:var(--mut);font-size:12.5px}
+
+.sside{position:sticky;top:120px;display:flex;flex-direction:column;gap:16px}
+.sprev{background:var(--blanco);border-radius:var(--r);padding:16px;box-shadow:var(--som);display:flex;gap:13px;align-items:center}
+.sprev img{width:60px;height:60px;border-radius:14px;object-fit:cover;flex:none}
+.sprev b{display:block;font-family:Outfit;font-size:15px}
+.sprev small{color:var(--mut);font-size:12.5px;display:block}
+.schk{background:var(--blanco);border-radius:var(--r);padding:20px;box-shadow:var(--som);display:flex;flex-direction:column;gap:12px}
+.schk .t{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:2px}
+.schk .note2{font-size:12.5px;color:var(--mut);text-align:center}
+
+.meter{display:flex;gap:4px;height:24px}
+.meter i{flex:1;border-radius:5px;background:var(--crema2)}
+.meter i.d{background:var(--verde)}
+.meter i.h{background:var(--verde);opacity:.32}
+
+.fmbar{display:flex;justify-content:space-between;align-items:center;padding:8px 0 44px;flex-wrap:wrap;gap:12px;border-top:1px solid var(--bd);margin-top:8px}
+.fmbar small{color:var(--mut);font-size:13.5px}
+.fmbar .acts2{display:flex;gap:10px}
+
+footer{background:var(--tinta);color:#A9B8AF;padding:52px 0 44px;font-size:14.5px;border-radius:34px 34px 0 0;margin-top:20px}
+footer .wrap{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px}
+footer h4{font-family:Outfit;color:#fff;font-size:14px;margin:0 0 14px;font-weight:700}
+footer a{display:block;color:#A9B8AF;text-decoration:none;padding:5px 0}footer a:hover{color:var(--verde2)}
+@media(max-width:900px){footer .wrap{grid-template-columns:1fr}.fwrap{grid-template-columns:1fr}.sside{position:static}}
+@media(max-width:640px){.pills{display:none}}
+</style></head><body>
+
+<div class="sw"><div class="wrap"><b>Cobijo</b> <em>Savia Cálida</em>
+<nav><button aria-current="true">Home</button><button>Protectora</button><button>Colaborador</button><button>Necesidades</button><button>Adoptar</button><button>Protectoras</button><button>Ficha animal</button><button>Solicitud adopción</button><button>Colaborar (€)</button><button>Colaborar (kg)</button><button>Colaborar (arena)</button><button>Colaborar (medicación)</button><button>Colaborar (transporte)</button><button>Colaborar (paseos)</button></nav></div></div>
+
+<header class="top"><div class="wrap">
+<div class="logo"><i>C</i>Cobijo</div>
+<div class="pills"><a href="#" class="on">Necesidades</a><a href="#">Adoptar</a><a href="#">Protectoras</a><a href="#">Ayuda</a></div>
+<div class="r"><a class="btn q sm" href="#">Entrar</a><a class="btn sm" href="#">Crear cuenta</a></div>
+</div></header>
+<div class="wrap">
+<p class="eb" style="margin-top:26px">Necesidades <span style="color:var(--mut);font-weight:400">/ Transporte veterinario / Colaborar</span></p>
+<h2 style="margin-top:8px">Vas a colaborar con esta necesidad</h2>
+<p style="color:var(--mut);max-width:56ch;margin-top:10px;font-size:15px">Protectora Huellas · nadie se ha ofrecido todavía para este viaje.</p>
+
+<div class="fwrap" style="margin-top:26px">
+<div class="fm">
+ <div class="fmsec">
+  <h3>¿Cuándo puedes hacer el viaje?</h3>
+  <div class="optcards" style="margin-top:14px">
+   <div class="optcard on"><b>Jueves mañana</b><small>Antes de las 13h</small></div>
+   <div class="optcard"><b>Jueves tarde</b><small>Después de las 17h</small></div>
+  </div>
+  <div class="field" style="margin-top:16px"><label>¿Cuántos animales puedes llevar?</label><select><option>1</option><option>2</option><option>3 o más</option></select></div>
+  <div class="field"><label>¿Dónde recoges al animal?</label><select><option>En el refugio, Alcalá de Henares</option><option>Puedo pasar a buscarlo por otra zona</option></select></div>
+  <div class="field"><label>Modelo de coche</label><input placeholder="Ej. Turismo, 5 plazas"><small class="hint">Ayuda a la protectora a saber si el transportín cabe.</small></div>
+  <div class="row2">
+   <div class="field"><label>Tu nombre</label><input placeholder="Cómo te llamas"></div>
+   <div class="field"><label>Tu teléfono</label><input placeholder="600 000 000"></div>
+  </div>
+  <div class="field"><label>Tu email</label><input placeholder="tucorreo@ejemplo.com"></div>
+ </div>
+
+ <div class="fmbar">
+  <small>Faltan 2 campos obligatorios</small>
+  <div class="acts2"><a class="btn q" href="#">Cancelar</a><a class="btn" href="#">Confirmar colaboración</a></div>
+ </div>
+</div>
+
+<aside class="sside">
+ <div class="sprev"><img src="https://placedog.net/120/120?id=68" alt="Transporte veterinario"><div><b>Transporte veterinario</b><small>Protectora Huellas</small><small>Voluntariado</small></div></div>
+ <div class="schk">
+  <p class="t">Esta necesidad</p>
+  <div style="display:flex;justify-content:space-between;font-size:13.5px"><span style="color:var(--mut)">Se necesita</span><span class="mono">1 viaje</span></div>
+  <div style="display:flex;justify-content:space-between;font-size:13.5px"><span style="color:var(--mut)">Cubierto</span><span class="mono">0</span></div>
+  <div class="meter" style="height:8px"><i></i></div>
+  <p class="note2">Antes del jueves 20 de agosto</p>
+ </div>
+</aside>
+</div>
+<div style="height:40px"></div>
+</div>
+<footer><div class="wrap">
+<div><div class="logo" style="color:#fff"><i>C</i>Cobijo</div><p style="margin-top:14px;max-width:34ch">Ayuda concreta para protectoras y refugios. Proyecto final del bootcamp Full Stack.</p></div>
+<div><h4>Plataforma</h4><a href="#">Necesidades</a><a href="#">Adoptar</a><a href="#">Protectoras</a><a href="#">Preguntas</a></div>
+<div><h4>Cuenta</h4><a href="#">Entrar</a><a href="#">Crear cuenta</a><a href="#">Registrar protectora</a><a href="#">Contacto</a></div>
+</div></footer>
+
+</body></html>
