@@ -28,6 +28,13 @@
 - git commit -m "mensaje": commit
 - git push -u origin tareaXXX: sube la rama
 
+  #integrar los cambios de develop en mi rama
+
+- git checkout develop
+- git pull origin develop
+- git checkout (nombre de tu rama)
+- git pull origin develpo
+
 ## DIRECTORIOS:
 
 | Tipo   | Ruta                   | Finalidad                                    |
