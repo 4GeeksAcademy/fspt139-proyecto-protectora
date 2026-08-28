@@ -30,10 +30,17 @@
 
 ## DIRECTORIOS:
 
-| Tipo   | Ruta           | Finalidad                                    |
-| ------ | -------------- | -------------------------------------------- |
-| vistas | /public/vistas | Mockups de las vistas a desarrollar en figma |
-| ...    | ...            | ...                                          |
+| Tipo   | Ruta                   | Finalidad                                    |
+| ------ | ---------------------- | -------------------------------------------- |
+| vistas | /public/vistas         | Mockups de las vistas a desarrollar en figma |
+| UML    | /docs/database/uml.txt | documento uml del proyecto                   |
+| ...    | ...                    | ...                                          |
+
+## MODELO DE DATOS:
+
+- UML en formato texto [Ver UML](/docs/database/uml.txt) adaptado a https://dbdiagram.io/
+
+![UML](/docs/database/UML.png)
 
 ---
 
