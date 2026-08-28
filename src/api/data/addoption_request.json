@@ -1,0 +1,30 @@
+[
+  {
+    "addoption_request_id": "adopcion-laura-michi",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "score": 9,
+    "is_accepted": true
+  },
+  {
+    "addoption_request_id": "adopcion-javier-firulais",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
+    "score": 7,
+    "is_accepted": false
+  },
+  {
+    "addoption_request_id": "adopcion-laura-copito",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
+    "score": 8,
+    "is_accepted": true
+  },
+  {
+    "addoption_request_id": "adopcion-javier-salem",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "score": 6,
+    "is_accepted": false
+  }
+]

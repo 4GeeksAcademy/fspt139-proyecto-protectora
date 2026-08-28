@@ -1,0 +1,41 @@
+[
+  {
+    "shelter_id": "f4242244-aedd-4323-add6-7c105ec042e8",
+    "name": "Protectora Luz de Luna",
+    "description": "Protectora dedicada al rescate y adopción de perros y gatos abandonados en la Comunidad de Madrid.",
+    "logo_url": "https://storage.example.com/logos/luz-de-luna.png",
+    "email": "info@luzdelunaprotectora.org",
+    "phone": "+34910123456",
+    "website": "https://luzdelunaprotectora.org",
+    "instagram": "@luzdelunaprotectora",
+    "address": "Calle de la Esperanza 12, Madrid",
+    "map_positioning": "40.4168,-3.7038",
+    "shelter_type_id": "31625471-4850-4d3c-a903-adf222f4abc0"
+  },
+  {
+    "shelter_id": "e97c19b6-ce01-4de1-8dc1-b32660cf4e5e",
+    "name": "Refugio Patitas Felices",
+    "description": "Refugio temporal para animales rescatados en situación de emergencia.",
+    "logo_url": "https://storage.example.com/logos/patitas-felices.png",
+    "email": "contacto@patitasfelices.es",
+    "phone": "+34934567890",
+    "website": "https://patitasfelices.es",
+    "instagram": "@patitasfelices",
+    "address": "Avenida del Rescate 45, Barcelona",
+    "map_positioning": "41.3851,2.1734",
+    "shelter_type_id": "53caad50-7c64-43a4-8eb8-c28af89d96ed"
+  },
+  {
+    "shelter_id": "98507ebe-d8c8-43ab-b2a7-2c581cab1572",
+    "name": "Santuario El Arca",
+    "description": "Santuario que ofrece hogar permanente a animales con necesidades especiales.",
+    "logo_url": "https://storage.example.com/logos/el-arca.png",
+    "email": "adopciones@elarcasantuario.org",
+    "phone": "+34955112233",
+    "website": "https://elarcasantuario.org",
+    "instagram": "@elarcasantuario",
+    "address": "Camino Rural 7, Sevilla",
+    "map_positioning": "37.3891,-5.9845",
+    "shelter_type_id": "2693e779-5455-4e67-aff9-57b8dfb6c785"
+  }
+]
