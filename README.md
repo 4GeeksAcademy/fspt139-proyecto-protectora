@@ -34,6 +34,11 @@
 | ------ | ---------------------- | -------------------------------------------- |
 | vistas | /public/vistas         | Mockups de las vistas a desarrollar en figma |
 | UML    | /docs/database/uml.txt | documento uml del proyecto                   |
+| BACKEND | /src/api/data         | almacen de json para seeds, fixtures y mock data                                                                                         |
+| BACKEND | /src/api/routes       | ficheros de rutas con los ENDPOINT del API                                                                                               |
+| BACKEND | /src/api/models       | modelado de objetos de la base de datos                                                                                                  |
+| BACKEND | /src/api/repositories | capa de acceso a datos de la aplicación: encapsula todas las consultas, inserciones, actualizaciones y eliminaciones de la base de datos |
+| BACKEND | /src/api/services     | logica de la aplicación: aplica las reglas del sistema                                                                                   |
 | ...    | ...                    | ...                                          |
 
 ## MODELO DE DATOS:

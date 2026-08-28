@@ -6,6 +6,9 @@ import { AnimalProfile } from "./pages/AnimalProfile.jsx";
 import { Protectoras } from "./pages/Protectoras.jsx";
 import { Ayuda } from "./pages/Ayuda.jsx";
 import { Necesidades } from "./pages/Necesidades.jsx";
+import { TestApiModels } from "./pages/TestApiModels.jsx";
+
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -27,11 +30,15 @@ export const router = createBrowserRouter([
             {
                 path: "/protectoras",
                 element: <Protectoras />
-            }, {
+            },
+            {
                 path: "/necesidades",
                 element: <Necesidades />
             },
-
+            {
+                path: "/test-api-models",
+                element: <TestApiModels />
+            }, 
             {
                 path: "/ayuda",
                 element: <Ayuda />

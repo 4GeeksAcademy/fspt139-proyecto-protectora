@@ -1,0 +1,42 @@
+[
+  {
+    "request_id": "22e68d0c-43ba-40b1-8cb0-1f5c33260689",
+    "shelter_id": "f4242244-aedd-4323-add6-7c105ec042e8",
+    "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
+    "name": "Cirugía de cadera para Luna",
+    "description": "Luna necesita una intervención quirúrgica urgente en la cadera tras un accidente.",
+    "request_deadline": "2026-09-30T00:00:00",
+    "amount_needed": 850.0,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "bbc982a6-d8ee-4a03-ad4b-d6d565111bfa",
+    "shelter_id": "e97c19b6-ce01-4de1-8dc1-b32660cf4e5e",
+    "animal_id": null,
+    "name": "Alimento para el refugio",
+    "description": "Necesitamos pienso y latas para alimentar a los 20 animales que tenemos actualmente acogidos.",
+    "request_deadline": "2026-09-15T00:00:00",
+    "amount_needed": 300.0,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "76f4e719-2c58-4eab-9da9-4f6584bd1b7b",
+    "shelter_id": "f4242244-aedd-4323-add6-7c105ec042e8",
+    "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
+    "name": "Vacunación y desparasitación de Toby",
+    "description": "Toby necesita completar su calendario de vacunas antes de poder ser adoptado.",
+    "request_deadline": "2026-09-10T00:00:00",
+    "amount_needed": 90.0,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "96af49cf-7ff4-4e06-a732-1871e3efefa5",
+    "shelter_id": "98507ebe-d8c8-43ab-b2a7-2c581cab1572",
+    "animal_id": null,
+    "name": "Mantas para el invierno",
+    "description": "Recogida de mantas y camas para preparar el santuario ante la llegada del frío.",
+    "request_deadline": "2026-11-01T00:00:00",
+    "amount_needed": 150.0,
+    "request_type": "material"
+  }
+]

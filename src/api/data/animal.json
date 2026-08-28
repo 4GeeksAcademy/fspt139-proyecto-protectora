@@ -1,0 +1,68 @@
+[
+  {
+    "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
+    "name": "Firulais",
+    "breed": "Mestizo",
+    "size": "mediano",
+    "weight": 18.5,
+    "birthdate": "2022-03-15",
+    "activity_level": "alto",
+    "story": "Firulais fue encontrado abandonado en una gasolinera y ahora busca una familia activa que le encante pasear.",
+    "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132"
+  },
+  {
+    "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
+    "name": "Luna",
+    "breed": "Labrador",
+    "size": "grande",
+    "weight": 28.0,
+    "birthdate": "2021-07-22",
+    "activity_level": "medio",
+    "story": "Luna es muy cariñosa con los niños y se adapta bien a cualquier hogar.",
+    "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132"
+  },
+  {
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "name": "Michi",
+    "breed": "Comun europeo",
+    "size": "pequeño",
+    "weight": 4.2,
+    "birthdate": "2023-01-10",
+    "activity_level": "bajo",
+    "story": "Michi es un gato tranquilo que disfruta durmiendo al sol la mayor parte del día.",
+    "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a"
+  },
+  {
+    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "name": "Salem",
+    "breed": "Negro comun",
+    "size": "pequeño",
+    "weight": 3.8,
+    "birthdate": "2022-10-05",
+    "activity_level": "medio",
+    "story": "Salem llegó al refugio tras ser rescatado de la calle, es juguetón y muy sociable con otros gatos.",
+    "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a"
+  },
+  {
+    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
+    "name": "Copito",
+    "breed": "Cabeza de leon",
+    "size": "pequeño",
+    "weight": 1.5,
+    "birthdate": "2023-05-20",
+    "activity_level": "bajo",
+    "story": "Copito es un conejo dócil ideal para familias con niños pequeños.",
+    "animal_type_id": "e0bfe06b-c7e8-47e8-8b06-ae127d5a5b8d"
+  },
+  {
+    "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
+    "name": "Toby",
+    "breed": "Beagle",
+    "size": "mediano",
+    "weight": 12.0,
+    "birthdate": "2020-11-30",
+    "activity_level": "alto",
+    "story": "Toby es un perro veterano lleno de energía que necesita ejercicio diario.",
+    "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132"
+  }
+]
