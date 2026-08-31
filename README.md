@@ -33,7 +33,7 @@
 - git checkout develop
 - git pull origin develop
 - git checkout (nombre de tu rama)
-- git pull origin develpo
+- git pull origin develop
 
 ## DIRECTORIOS:
 
