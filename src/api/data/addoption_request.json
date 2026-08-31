@@ -14,13 +14,6 @@
     "is_accepted": false
   },
   {
-    "addoption_request_id": "adopcion-laura-copito",
-    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
-    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
-    "score": 8,
-    "is_accepted": true
-  },
-  {
     "addoption_request_id": "adopcion-javier-salem",
     "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
     "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
