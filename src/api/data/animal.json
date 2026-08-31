@@ -44,17 +44,6 @@
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a"
   },
   {
-    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
-    "name": "Copito",
-    "breed": "Cabeza de leon",
-    "size": "pequeño",
-    "weight": 1.5,
-    "birthdate": "2023-05-20",
-    "activity_level": "bajo",
-    "story": "Copito es un conejo dócil ideal para familias con niños pequeños.",
-    "animal_type_id": "e0bfe06b-c7e8-47e8-8b06-ae127d5a5b8d"
-  },
-  {
     "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
     "name": "Toby",
     "breed": "Beagle",
