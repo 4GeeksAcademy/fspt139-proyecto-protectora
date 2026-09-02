@@ -1,0 +1,26 @@
+[
+  {
+    "review_id": "17c6af7f-e1b1-4d89-858a-e394a979eed7",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "ranking": 5,
+    "review": "Proceso de adopción muy transparente, el equipo de la protectora fue encantador."
+  },
+  {
+    "review_id": "75163730-2b1f-47cf-8474-04c13d89cfe3",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "ranking": 4,
+    "review": "Buena comunicación, aunque el papeleo tardó un poco más de lo esperado."
+  },
+  {
+    "review_id": "58bd7c86-026f-4975-be72-f4010acb4338",
+    "user_id": "f4c64137-e058-49b8-be87-28edbe58fcca",
+    "ranking": 5,
+    "review": "Como voluntaria, destaco el compromiso del santuario con el bienestar animal."
+  },
+  {
+    "review_id": "49f8c440-68f3-4af1-b20c-c974faed5f3c",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "ranking": 5,
+    "review": "Repetiría la experiencia sin dudarlo, Michi está feliz en su nuevo hogar."
+  }
+]
