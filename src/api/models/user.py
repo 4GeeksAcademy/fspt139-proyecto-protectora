@@ -17,7 +17,7 @@ class User(db.Model):
     last_name1: Mapped[str] = mapped_column(String)
     last_name2: Mapped[Optional[str]] = mapped_column(String)
     phone: Mapped[str] = mapped_column(String)
-    email: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String, unique=True)
     password: Mapped[str] = mapped_column(String)
     token_version: Mapped[Optional[int]] = mapped_column()
     rol: Mapped[str] = mapped_column(String)
