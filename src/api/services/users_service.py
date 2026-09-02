@@ -1,5 +1,3 @@
-
-
 from api.repositories.user_repository import UserRepository
 from flask_bcrypt import generate_password_hash
 from flask_bcrypt import check_password_hash
