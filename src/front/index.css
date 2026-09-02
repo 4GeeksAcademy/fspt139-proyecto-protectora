@@ -1,3 +1,32 @@
 .bg-principal {
     background-color: var(--rp-verde-cl);
 }
+
+.card-placeholder {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+}
+
+.img-cat {
+    background-image: url("https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg");
+}
+
+.img-food {
+    background-image: url("https://images.pexels.com/photos/8434633/pexels-photo-8434633.jpeg");
+}
+
+.img-blanket {
+    background-image: url("https://images.pexels.com/photos/4887085/pexels-photo-4887085.jpeg");
+}
+.img-nala {
+    background-image: url("https://images.pexels.com/photos/33744720/pexels-photo-33744720.jpeg");
+}
+
+.img-trufa {
+    background-image: url("https://images.pexels.com/photos/129753/pexels-photo-129753.jpeg");
+}
+
+.img-bruno {
+    background-image: url("https://images.pexels.com/photos/17292032/pexels-photo-17292032.jpeg");
+}

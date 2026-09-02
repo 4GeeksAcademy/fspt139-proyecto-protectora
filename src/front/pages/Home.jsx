@@ -1,3 +1,5 @@
+import { BuscanCasa } from "../components/BuscanCasa";
+import { NecesidadesDestacadas } from "../components/NecesidadesDestacadas";
 import { Statscard } from "../components/Statscard";
 export const Home = () => {
     return (
@@ -47,7 +49,10 @@ export const Home = () => {
                 <Statscard number={6} label="Registered shelters" color="#E8B04B" />
                 <Statscard number={312} label="Collaborations closed" color="#E0756B" />
             </div>
+            <NecesidadesDestacadas />
+            <BuscanCasa />
 
         </div>
+
     );
 };
