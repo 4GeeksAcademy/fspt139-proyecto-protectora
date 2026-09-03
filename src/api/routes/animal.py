@@ -1,13 +1,13 @@
 from flask import jsonify, request
 
-from api.repositories.shelter_repository import FILTERABLE_FIELDS
-from api.services.shelters_service import list_shelters
+from api.repositories.animal_repository import FILTERABLE_FIELDS
+from api.services.animals_service import list_animals
 
 from . import api
 
 
-@api.route('/shelters', methods=['GET'])
-def list_shelters_action():
+@api.route('/animals', methods=['GET'])
+def list_animals_action():
 
     DEFAULT_PAGE = 1
     DEFAULT_PER_PAGE = 10
@@ -33,10 +33,10 @@ def list_shelters_action():
 
     per_page = min(per_page, MAX_PER_PAGE)
 
-    resultados = list_shelters(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page)
+    resultados = list_animals(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page)
 
     response_body = {
-        "items": [shelter.serialize() for shelter in resultados.items],
+        "items": [animal.serialize() for animal in resultados.items],
         "page": resultados.page,
         "per_page": resultados.per_page,
         "total_items": resultados.total,

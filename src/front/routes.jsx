@@ -6,7 +6,9 @@ import { AnimalProfile } from "./pages/AnimalProfile.jsx";
 import { Protectoras } from "./pages/Protectoras.jsx";
 import { Ayuda } from "./pages/Ayuda.jsx";
 import { Necesidades } from "./pages/Necesidades.jsx";
-import { TestApiModels } from "./pages/TestApiModels.jsx";
+import { TestSheltersFilters } from "./pages/TestSheltersFilters.jsx";
+import { TestAnimalFilters } from "./pages/TestAnimalFilters.jsx";
+import { TestRequestsFilters } from "./pages/TestRequestsFilters.jsx";
 
 
 export const router = createBrowserRouter([
@@ -36,9 +38,17 @@ export const router = createBrowserRouter([
                 element: <Necesidades />
             },
             {
-                path: "/test-api-models",
-                element: <TestApiModels />
-            }, 
+                path: "/test-api-shelters",
+                element: <TestSheltersFilters />
+            },
+            {
+                path: "/test-api-animals",
+                element: <TestAnimalFilters />
+            },
+            {
+                path: "/test-api-requests",
+                element: <TestRequestsFilters />
+            },
             {
                 path: "/ayuda",
                 element: <Ayuda />
