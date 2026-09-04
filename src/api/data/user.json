@@ -9,7 +9,7 @@
     "password": "Protectora2026!",
     "token_version": 1,
     "rol": "shelter_admin",
-    "shelter_id": "f4242244-aedd-4323-add6-7c105ec042e8",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
     "ranking": 0,
     "address": "Calle de la Esperanza 12, Madrid",
     "map_positioning": "40.4168,-3.7038"
@@ -24,7 +24,7 @@
     "password": "Patitas2026!",
     "token_version": 1,
     "rol": "shelter_admin",
-    "shelter_id": "e97c19b6-ce01-4de1-8dc1-b32660cf4e5e",
+    "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9",
     "ranking": 0,
     "address": "Avenida del Rescate 45, Barcelona",
     "map_positioning": "41.3851,2.1734"
@@ -69,7 +69,7 @@
     "password": "Santuario2026!",
     "token_version": 1,
     "rol": "shelter_admin",
-    "shelter_id": "98507ebe-d8c8-43ab-b2a7-2c581cab1572",
+    "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2",
     "ranking": 8,
     "address": "Camino Rural 7, Sevilla",
     "map_positioning": "37.3891,-5.9845"
@@ -84,7 +84,7 @@
     "password": "Santuario2027!",
     "token_version": 1,
     "rol": "shelter_admin",
-    "shelter_id": "98507ebe-d8c8-43ab-b2a7-2c581cab1572",
+    "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2",
     "ranking": 9,
     "address": "Camino moderno 8, Sevilla",
     "map_positioning": "37.3891,-5.9845"

@@ -1,3 +1,5 @@
+import { getToken } from "./authServices.js";
+
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const getAnimals = (
@@ -24,5 +26,14 @@ export const getAnimals = (
     url = url + "&breed=" + raza;
   }
 
-  return fetch(url).then((response) => response.json());
+  return fetch(url, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("No se han podido obtener los animales");
+    }
+    return response.json();
+  });
 };
