@@ -1,3 +1,58 @@
 .bg-principal {
-    background-color: var(--rp-verde-cl);
+  background-color: var(--rp-verde-cl);
+}
+
+.card-placeholder {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+}
+
+.img-cat {
+  background-image: url("https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg");
+}
+
+.img-food {
+  background-image: url("https://images.pexels.com/photos/8434633/pexels-photo-8434633.jpeg");
+}
+
+.img-blanket {
+  background-image: url("https://images.pexels.com/photos/4887085/pexels-photo-4887085.jpeg");
+}
+.img-nala {
+  background-image: url("https://images.pexels.com/photos/33744720/pexels-photo-33744720.jpeg");
+}
+
+.img-trufa {
+  background-image: url("https://images.pexels.com/photos/129753/pexels-photo-129753.jpeg");
+}
+
+.img-bruno {
+  background-image: url("https://images.pexels.com/photos/17292032/pexels-photo-17292032.jpeg");
+}
+.img-car {
+  background-image: url("https://images.pexels.com/photos/17956589/pexels-photo-17956589.jpeg");
+}
+
+.img-pills {
+  background-image: url("https://images.pexels.com/photos/3683116/pexels-photo-3683116.jpeg");
+}
+
+.img-walk {
+  background-image: url("https://images.pexels.com/photos/29134542/pexels-photo-29134542.jpeg");
+}
+.img-vet {
+  background-image: url("https://images.pexels.com/photos/7469222/pexels-photo-7469222.jpeg");
+}
+
+.img-social {
+  background-image: url("https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg");
+}
+
+.img-kitten {
+  background-image: url("https://images.pexels.com/photos/17184809/pexels-photo-17184809.jpeg");
+}
+
+.img-puppies {
+  background-image: url("https://images.pexels.com/photos/10403499/pexels-photo-10403499.jpeg");
 }

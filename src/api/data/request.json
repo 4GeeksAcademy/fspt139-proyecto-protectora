@@ -1,7 +1,7 @@
 [
   {
     "request_id": "22e68d0c-43ba-40b1-8cb0-1f5c33260689",
-    "shelter_id": "f4242244-aedd-4323-add6-7c105ec042e8",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
     "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
     "name": "Cirugía de cadera para Luna",
     "description": "Luna necesita una intervención quirúrgica urgente en la cadera tras un accidente.",
@@ -11,7 +11,7 @@
   },
   {
     "request_id": "bbc982a6-d8ee-4a03-ad4b-d6d565111bfa",
-    "shelter_id": "e97c19b6-ce01-4de1-8dc1-b32660cf4e5e",
+    "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54",
     "animal_id": null,
     "name": "Alimento para el refugio",
     "description": "Necesitamos pienso y latas para alimentar a los 20 animales que tenemos actualmente acogidos.",
@@ -21,7 +21,7 @@
   },
   {
     "request_id": "76f4e719-2c58-4eab-9da9-4f6584bd1b7b",
-    "shelter_id": "f4242244-aedd-4323-add6-7c105ec042e8",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
     "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
     "name": "Vacunación y desparasitación de Toby",
     "description": "Toby necesita completar su calendario de vacunas antes de poder ser adoptado.",
@@ -31,12 +31,472 @@
   },
   {
     "request_id": "96af49cf-7ff4-4e06-a732-1871e3efefa5",
-    "shelter_id": "98507ebe-d8c8-43ab-b2a7-2c581cab1572",
+    "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3",
     "animal_id": null,
     "name": "Mantas para el invierno",
     "description": "Recogida de mantas y camas para preparar el santuario ante la llegada del frío.",
     "request_deadline": "2026-11-01T00:00:00",
     "amount_needed": 150.0,
     "request_type": "material"
+  },
+  {
+    "request_id": "cae4ffd5-2b79-4f72-8901-4037a3c116f2",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
+    "name": "Tratamiento veterinario para Luna",
+    "description": "Luna esta en tratamiento por una infeccion y necesita medicacion y revisiones periodicas.",
+    "request_deadline": "2027-01-27T00:00:00",
+    "amount_needed": 188.61,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "5af4cbe3-2a29-4849-94a6-12ce69a7be53",
+    "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9",
+    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
+    "name": "Cartilla sanitaria al dia para Copito",
+    "description": "Queremos poner al dia la cartilla sanitaria de Copito con sus vacunas anuales.",
+    "request_deadline": "2027-01-02T00:00:00",
+    "amount_needed": 28.87,
+    "request_type": "vacunacion"
+  },
+  {
+    "request_id": "3c768890-1c46-4557-8b9d-98f0ee3d8542",
+    "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e",
+    "animal_id": null,
+    "name": "Campana de esterilizacion en Protectora Luz de Luna Sevilla",
+    "description": "Buscamos financiacion para esterilizar a varios animales acogidos en Protectora Luz de Luna Sevilla.",
+    "request_deadline": "2026-12-02T00:00:00",
+    "amount_needed": 796.11,
+    "request_type": "esterilizacion"
+  },
+  {
+    "request_id": "aa7cb6bc-61c8-4e1c-89eb-5b3bbbad9e2a",
+    "shelter_id": "67a0c9b4-f91e-4ff8-be8a-3831d3423b6c",
+    "animal_id": null,
+    "name": "Alimento para el refugio",
+    "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Protectora Luz de Luna Valencia.",
+    "request_deadline": "2027-03-02T00:00:00",
+    "amount_needed": 351.99,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "e3f95e90-282e-4df8-ae16-106f280e9701",
+    "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a",
+    "animal_id": null,
+    "name": "Jaulas de transporte",
+    "description": "Protectora Luz de Luna Bilbao necesita renovar sus jaulas y transportines para traslados seguros.",
+    "request_deadline": "2027-01-18T00:00:00",
+    "amount_needed": 407.54,
+    "request_type": "material"
+  },
+  {
+    "request_id": "90d50ef9-0b54-4547-9235-4c99c7d14208",
+    "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc",
+    "animal_id": null,
+    "name": "Mejora del sistema de climatizacion",
+    "description": "Queremos instalar climatizacion adecuada en las instalaciones de Protectora Luz de Luna Zaragoza para el verano.",
+    "request_deadline": "2026-09-19T00:00:00",
+    "amount_needed": 646.79,
+    "request_type": "mantenimiento"
+  },
+  {
+    "request_id": "7815e694-d114-4d73-9a23-28b139fa86b9",
+    "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a",
+    "animal_id": null,
+    "name": "Traslado de animales rescatados",
+    "description": "Protectora Luz de Luna Malaga necesita cubrir los gastos de combustible y furgoneta para un rescate urgente.",
+    "request_deadline": "2026-10-12T00:00:00",
+    "amount_needed": 129.23,
+    "request_type": "transporte"
+  },
+  {
+    "request_id": "dd29c992-5526-444f-ab00-7d8e1e75a17d",
+    "shelter_id": "a3e4cb94-7085-44e0-86de-10fbc986be16",
+    "animal_id": null,
+    "name": "Rescate de animales abandonados",
+    "description": "Protectora Luz de Luna Murcia ha localizado una colonia de animales abandonados y necesita recursos para el rescate.",
+    "request_deadline": "2026-10-16T00:00:00",
+    "amount_needed": 456.18,
+    "request_type": "rescate"
+  },
+  {
+    "request_id": "5616fba1-f7b0-4dbc-8ba5-b4876c5a73c0",
+    "shelter_id": "88e499a0-9017-4789-ad63-1429bac68e1b",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "name": "Tratamiento veterinario para Michi",
+    "description": "Michi esta en tratamiento por una infeccion y necesita medicacion y revisiones periodicas.",
+    "request_deadline": "2026-12-12T00:00:00",
+    "amount_needed": 131.94,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "c65ccb92-2167-49d5-9932-992abbb2e81c",
+    "shelter_id": "8cb923dc-0704-41dd-becc-7da39a41e59b",
+    "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
+    "name": "Vacunacion y desparasitacion de Toby",
+    "description": "Toby necesita completar su calendario de vacunas antes de poder ser adoptado.",
+    "request_deadline": "2026-11-17T00:00:00",
+    "amount_needed": 59.71,
+    "request_type": "vacunacion"
+  },
+  {
+    "request_id": "54863fe8-ab27-4287-b4e3-66f118bf40fe",
+    "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54",
+    "animal_id": null,
+    "name": "Campana de esterilizacion en Refugio Patitas Felices Madrid",
+    "description": "Buscamos financiacion para esterilizar a varios animales acogidos en Refugio Patitas Felices Madrid.",
+    "request_deadline": "2026-09-04T00:00:00",
+    "amount_needed": 607.16,
+    "request_type": "esterilizacion"
+  },
+  {
+    "request_id": "28a98f60-4a16-47a9-abef-1b3ec0df5a26",
+    "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9",
+    "animal_id": null,
+    "name": "Alimento para el refugio",
+    "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Refugio Patitas Felices Barcelona.",
+    "request_deadline": "2026-12-14T00:00:00",
+    "amount_needed": 163.72,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "025ddb4e-8e3c-4b7a-a7ca-46b2b1e05c60",
+    "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c",
+    "animal_id": null,
+    "name": "Material de limpieza e higiene",
+    "description": "Necesitamos reponer productos de limpieza y desinfeccion para las instalaciones de Refugio Patitas Felices Sevilla.",
+    "request_deadline": "2027-03-26T00:00:00",
+    "amount_needed": 182.57,
+    "request_type": "material"
+  },
+  {
+    "request_id": "dd6c07d8-d982-41d0-8215-edc3ebc5d4a4",
+    "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e",
+    "animal_id": null,
+    "name": "Mejora del sistema de climatizacion",
+    "description": "Queremos instalar climatizacion adecuada en las instalaciones de Refugio Patitas Felices Valencia para el verano.",
+    "request_deadline": "2027-03-16T00:00:00",
+    "amount_needed": 863.92,
+    "request_type": "mantenimiento"
+  },
+  {
+    "request_id": "323cf88f-09f5-4d13-a892-667b7ee8229b",
+    "shelter_id": "38fa0048-d413-4663-9a28-d474466388a5",
+    "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
+    "name": "Transporte a revision veterinaria",
+    "description": "Cubrir los desplazamientos de Firulais a sus citas veterinarias periodicas.",
+    "request_deadline": "2027-02-23T00:00:00",
+    "amount_needed": 113.06,
+    "request_type": "transporte"
+  },
+  {
+    "request_id": "3a476ab7-783e-4cce-9362-3547da99e813",
+    "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2",
+    "animal_id": null,
+    "name": "Rescate de animales abandonados",
+    "description": "Refugio Patitas Felices Zaragoza ha localizado una colonia de animales abandonados y necesita recursos para el rescate.",
+    "request_deadline": "2027-03-27T00:00:00",
+    "amount_needed": 350.54,
+    "request_type": "rescate"
+  },
+  {
+    "request_id": "554810a8-68ab-407b-8293-f65e7df1f6ac",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "name": "Rehabilitacion de Salem",
+    "description": "Salem necesita sesiones de rehabilitacion tras una lesion para recuperar movilidad.",
+    "request_deadline": "2026-12-12T00:00:00",
+    "amount_needed": 150.41,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "fdd8e47d-2147-4c1a-a375-65439d2543f5",
+    "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1",
+    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "name": "Vacunacion y desparasitacion de Salem",
+    "description": "Salem necesita completar su calendario de vacunas antes de poder ser adoptado.",
+    "request_deadline": "2026-11-05T00:00:00",
+    "amount_needed": 74.3,
+    "request_type": "vacunacion"
+  },
+  {
+    "request_id": "a1c36a34-4bef-46da-b320-7415a0f73d9d",
+    "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68",
+    "animal_id": null,
+    "name": "Campana de esterilizacion en Refugio Patitas Felices Palma de Mallorca",
+    "description": "Buscamos financiacion para esterilizar a varios animales acogidos en Refugio Patitas Felices Palma de Mallorca.",
+    "request_deadline": "2027-02-03T00:00:00",
+    "amount_needed": 399.82,
+    "request_type": "esterilizacion"
+  },
+  {
+    "request_id": "e929b6ee-4e3e-454e-8b95-55b862d60fb0",
+    "shelter_id": "aaf8e48d-f096-40a7-8cc8-320c53248989",
+    "animal_id": null,
+    "name": "Reposicion de comida humeda",
+    "description": "Se ha agotado el stock de comida humeda para cachorros y gatitos en Refugio Patitas Felices Vigo.",
+    "request_deadline": "2026-10-27T00:00:00",
+    "amount_needed": 207.63,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "009d8654-eba6-42e5-b6b6-526522d9d614",
+    "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3",
+    "animal_id": null,
+    "name": "Material de limpieza e higiene",
+    "description": "Necesitamos reponer productos de limpieza y desinfeccion para las instalaciones de Santuario El Arca Madrid.",
+    "request_deadline": "2027-02-22T00:00:00",
+    "amount_needed": 183.79,
+    "request_type": "material"
+  },
+  {
+    "request_id": "3337c8c8-dc32-480b-8efb-b1d69043e13a",
+    "shelter_id": "3d4799a2-2bc8-42a6-81a9-b86a04c5514d",
+    "animal_id": null,
+    "name": "Reparacion de instalaciones",
+    "description": "Santuario El Arca Barcelona necesita reparar el vallado y las casetas exteriores danadas por el temporal.",
+    "request_deadline": "2026-10-08T00:00:00",
+    "amount_needed": 695.11,
+    "request_type": "mantenimiento"
+  },
+  {
+    "request_id": "0a0fde1c-bedc-440d-a737-7da44c5bd130",
+    "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2",
+    "animal_id": null,
+    "name": "Traslado de animales rescatados",
+    "description": "Santuario El Arca Sevilla necesita cubrir los gastos de combustible y furgoneta para un rescate urgente.",
+    "request_deadline": "2027-01-09T00:00:00",
+    "amount_needed": 184.58,
+    "request_type": "transporte"
+  },
+  {
+    "request_id": "a62f5bee-ecca-442c-9bfc-b31941f77afe",
+    "shelter_id": "a6b36a36-438b-4a18-9d97-41f4a3553597",
+    "animal_id": null,
+    "name": "Rescate de animales abandonados",
+    "description": "Santuario El Arca Valencia ha localizado una colonia de animales abandonados y necesita recursos para el rescate.",
+    "request_deadline": "2026-11-05T00:00:00",
+    "amount_needed": 460.72,
+    "request_type": "rescate"
+  },
+  {
+    "request_id": "738760ac-c9f3-4b7b-adaf-a0300c15d9f3",
+    "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd",
+    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
+    "name": "Rehabilitacion de Copito",
+    "description": "Copito necesita sesiones de rehabilitacion tras una lesion para recuperar movilidad.",
+    "request_deadline": "2026-12-13T00:00:00",
+    "amount_needed": 219.69,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "2486bf02-b3a6-4afc-aad5-d77a364319e4",
+    "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac",
+    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "name": "Vacunacion y desparasitacion de Salem",
+    "description": "Salem necesita completar su calendario de vacunas antes de poder ser adoptado.",
+    "request_deadline": "2026-09-07T00:00:00",
+    "amount_needed": 56.44,
+    "request_type": "vacunacion"
+  },
+  {
+    "request_id": "bd2e38b3-c108-42f6-83c4-ef0fed17e717",
+    "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "name": "Esterilizacion de Michi",
+    "description": "Michi esta pendiente de esterilizacion para evitar futuras camadas no deseadas.",
+    "request_deadline": "2026-09-19T00:00:00",
+    "amount_needed": 53.61,
+    "request_type": "esterilizacion"
+  },
+  {
+    "request_id": "7ca51adb-0520-48cc-81d4-40c8cf4c3572",
+    "shelter_id": "e7cd4433-abeb-4256-b475-d5db14ac406b",
+    "animal_id": null,
+    "name": "Alimento para el refugio",
+    "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Santuario El Arca Murcia.",
+    "request_deadline": "2027-01-28T00:00:00",
+    "amount_needed": 222.78,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "71afd222-f81a-4740-94b6-25342144c076",
+    "shelter_id": "e0bfcf92-3995-4362-a25d-acf730e35e41",
+    "animal_id": null,
+    "name": "Jaulas de transporte",
+    "description": "Santuario El Arca Palma de Mallorca necesita renovar sus jaulas y transportines para traslados seguros.",
+    "request_deadline": "2027-02-20T00:00:00",
+    "amount_needed": 259.25,
+    "request_type": "material"
+  },
+  {
+    "request_id": "1a112bb9-eef0-4bcc-9b76-a6d6b5b9f64e",
+    "shelter_id": "832de021-7b11-4951-9872-be621593e133",
+    "animal_id": null,
+    "name": "Reparacion de instalaciones",
+    "description": "Santuario El Arca Vigo necesita reparar el vallado y las casetas exteriores danadas por el temporal.",
+    "request_deadline": "2027-02-16T00:00:00",
+    "amount_needed": 590.3,
+    "request_type": "mantenimiento"
+  },
+  {
+    "request_id": "045ad5ff-51cc-4366-a9b2-ad362ff5de94",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "animal_id": null,
+    "name": "Traslado de animales rescatados",
+    "description": "Protectora Luz de Luna Madrid necesita cubrir los gastos de combustible y furgoneta para un rescate urgente.",
+    "request_deadline": "2026-11-24T00:00:00",
+    "amount_needed": 179.43,
+    "request_type": "transporte"
+  },
+  {
+    "request_id": "1bcf5ab6-8cc9-43df-86c5-12c4412a9ae7",
+    "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9",
+    "animal_id": null,
+    "name": "Rescate de animales abandonados",
+    "description": "Protectora Luz de Luna Barcelona ha localizado una colonia de animales abandonados y necesita recursos para el rescate.",
+    "request_deadline": "2026-11-05T00:00:00",
+    "amount_needed": 460.53,
+    "request_type": "rescate"
+  },
+  {
+    "request_id": "d191b950-321f-4ec0-af63-dded75ae35df",
+    "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e",
+    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
+    "name": "Cirugia de mandibula para Copito",
+    "description": "Copito necesita una intervencion quirurgica en mandibula para poder recuperarse por completo.",
+    "request_deadline": "2027-01-23T00:00:00",
+    "amount_needed": 1045.45,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "99997b0d-6b27-4d6a-9baa-bc4a59353cb2",
+    "shelter_id": "67a0c9b4-f91e-4ff8-be8a-3831d3423b6c",
+    "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
+    "name": "Cartilla sanitaria al dia para Luna",
+    "description": "Queremos poner al dia la cartilla sanitaria de Luna con sus vacunas anuales.",
+    "request_deadline": "2027-03-18T00:00:00",
+    "amount_needed": 60.06,
+    "request_type": "vacunacion"
+  },
+  {
+    "request_id": "2c40d789-5a46-4642-8142-efd03bd8c7e9",
+    "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a",
+    "animal_id": null,
+    "name": "Campana de esterilizacion en Protectora Luz de Luna Bilbao",
+    "description": "Buscamos financiacion para esterilizar a varios animales acogidos en Protectora Luz de Luna Bilbao.",
+    "request_deadline": "2027-01-26T00:00:00",
+    "amount_needed": 443.63,
+    "request_type": "esterilizacion"
+  },
+  {
+    "request_id": "3e08fa63-fc49-4eb3-b6c1-2703e7ca59ab",
+    "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc",
+    "animal_id": null,
+    "name": "Reposicion de comida humeda",
+    "description": "Se ha agotado el stock de comida humeda para cachorros y gatitos en Protectora Luz de Luna Zaragoza.",
+    "request_deadline": "2026-12-12T00:00:00",
+    "amount_needed": 282.75,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "b498368d-cb91-44f1-8e3b-289e1f36de91",
+    "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a",
+    "animal_id": null,
+    "name": "Mantas para el invierno",
+    "description": "Recogida de mantas y camas para preparar Protectora Luz de Luna Malaga ante la llegada del frio.",
+    "request_deadline": "2026-10-23T00:00:00",
+    "amount_needed": 213.13,
+    "request_type": "material"
+  },
+  {
+    "request_id": "25aae66d-db01-4837-93ac-fe3656dc7116",
+    "shelter_id": "a3e4cb94-7085-44e0-86de-10fbc986be16",
+    "animal_id": null,
+    "name": "Mejora del sistema de climatizacion",
+    "description": "Queremos instalar climatizacion adecuada en las instalaciones de Protectora Luz de Luna Murcia para el verano.",
+    "request_deadline": "2027-03-12T00:00:00",
+    "amount_needed": 1164.0,
+    "request_type": "mantenimiento"
+  },
+  {
+    "request_id": "e94531eb-e3a4-41c6-8d5b-4f6224d6bf83",
+    "shelter_id": "88e499a0-9017-4789-ad63-1429bac68e1b",
+    "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
+    "name": "Transporte a revision veterinaria",
+    "description": "Cubrir los desplazamientos de Firulais a sus citas veterinarias periodicas.",
+    "request_deadline": "2026-12-07T00:00:00",
+    "amount_needed": 77.15,
+    "request_type": "transporte"
+  },
+  {
+    "request_id": "61db3c3f-e2c3-4585-9c58-dec0dd56db00",
+    "shelter_id": "8cb923dc-0704-41dd-becc-7da39a41e59b",
+    "animal_id": null,
+    "name": "Operativo de rescate urgente",
+    "description": "Financiacion urgente para un operativo de rescate coordinado por Protectora Luz de Luna Vigo.",
+    "request_deadline": "2027-03-27T00:00:00",
+    "amount_needed": 200.95,
+    "request_type": "rescate"
+  },
+  {
+    "request_id": "ac2f662b-4d7a-493b-a113-4020e4336559",
+    "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "name": "Rehabilitacion de Michi",
+    "description": "Michi necesita sesiones de rehabilitacion tras una lesion para recuperar movilidad.",
+    "request_deadline": "2027-01-13T00:00:00",
+    "amount_needed": 334.69,
+    "request_type": "medica"
+  },
+  {
+    "request_id": "04b823e8-a8d8-4931-9840-c80fc5825017",
+    "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9",
+    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "name": "Vacunacion y desparasitacion de Salem",
+    "description": "Salem necesita completar su calendario de vacunas antes de poder ser adoptado.",
+    "request_deadline": "2026-11-03T00:00:00",
+    "amount_needed": 78.05,
+    "request_type": "vacunacion"
+  },
+  {
+    "request_id": "9aee57cf-3977-47b4-ae19-4345b1cf85ad",
+    "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c",
+    "animal_id": null,
+    "name": "Campana de esterilizacion en Refugio Patitas Felices Sevilla",
+    "description": "Buscamos financiacion para esterilizar a varios animales acogidos en Refugio Patitas Felices Sevilla.",
+    "request_deadline": "2026-09-24T00:00:00",
+    "amount_needed": 395.31,
+    "request_type": "esterilizacion"
+  },
+  {
+    "request_id": "2d1330ab-2a88-4481-a25e-a7f28280ccad",
+    "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e",
+    "animal_id": null,
+    "name": "Alimento para el refugio",
+    "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Refugio Patitas Felices Valencia.",
+    "request_deadline": "2026-12-26T00:00:00",
+    "amount_needed": 379.55,
+    "request_type": "alimentacion"
+  },
+  {
+    "request_id": "aac7a814-cf25-422e-8d08-1d799a1719ce",
+    "shelter_id": "38fa0048-d413-4663-9a28-d474466388a5",
+    "animal_id": null,
+    "name": "Material de limpieza e higiene",
+    "description": "Necesitamos reponer productos de limpieza y desinfeccion para las instalaciones de Refugio Patitas Felices Bilbao.",
+    "request_deadline": "2027-03-12T00:00:00",
+    "amount_needed": 81.83,
+    "request_type": "material"
+  },
+  {
+    "request_id": "679dd12a-3685-4c5b-98be-ee671174b940",
+    "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2",
+    "animal_id": null,
+    "name": "Reparacion de instalaciones",
+    "description": "Refugio Patitas Felices Zaragoza necesita reparar el vallado y las casetas exteriores danadas por el temporal.",
+    "request_deadline": "2026-09-17T00:00:00",
+    "amount_needed": 749.7,
+    "request_type": "mantenimiento"
   }
 ]

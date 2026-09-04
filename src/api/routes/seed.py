@@ -3,6 +3,7 @@ import os
 from datetime import date, datetime
 
 from flask import jsonify
+from api.services.users_service import set_password
 
 from api.models import db
 ############################## BLOQUE DE REPOSITORIOS USADOS
@@ -95,7 +96,7 @@ def seed_database():
                 shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
                 shelter_id = shelter.id
 
-            UserRepository.create(
+            user = UserRepository.create(
                 user_id=item["user_id"],
                 name=item["name"],
                 last_name1=item["last_name1"],
@@ -110,6 +111,8 @@ def seed_database():
                 address=item.get("address"),
                 map_positioning=item.get("map_positioning"),
             )
+
+            set_password(user, item["password"])
 
             created["users"] += 1
 
