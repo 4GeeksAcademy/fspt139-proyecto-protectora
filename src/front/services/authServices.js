@@ -15,12 +15,12 @@ export const login = async (usuario, password) => {
 
     const data = await response.json();
     if (!response.ok) {
-        const errorMessage = data.error || "El correo o la contraseña no son correctos";
+        const errorMessage = data.error || data.message || "El correo o la contraseña no son correctos";
         throw new Error(errorMessage);
     }
 
-    sessionStorage.setItem("token", data.token);
-    sessionStorage.setItem("user", JSON.stringify(data.user));
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
 
     return {
         token: data.token,
@@ -34,7 +34,7 @@ export const logout = async () => {
         const response = await fetch(`${BACKEND_URL.replace(/\/$/, "")}/api/logout`, {
             method: "POST",
             body: JSON.stringify({
-                token: sessionStorage.getItem("token")
+                token: localStorage.getItem("token")
             }),
             headers: {
                 Authorization: `Bearer ${getToken()}`,
@@ -44,24 +44,45 @@ export const logout = async () => {
 
         const data = await response.json();
         if (!response.ok) {
-            const errorMessage = data.error || "El correo o la contraseña no son correctos";
+            const errorMessage = data.error || data.message || "Error al cerrar sesión";
             throw new Error(errorMessage);
         }
     } catch (error) {
         console.error("Error al cerrar sesión:", error);
     }
 
+    limpiarSession();
+};
 
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("user");
+export const limpiarSession = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+};
 
+export const fetchProfile = async () => {
+    const response = await fetch(`${BACKEND_URL.replace(/\/$/, "")}/api/profile`, {
+        headers: {
+            Authorization: `Bearer ${getToken()}`,
+        },
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+        const error = new Error(data.error || data.message || "No se ha podido obtener el perfil");
+        error.status = response.status;
+        throw error;
+    }
+
+    localStorage.setItem("user", JSON.stringify(data));
+
+    return data;
 };
 
 export const getToken = () => {
-    return sessionStorage.getItem("token")||null;
+    return localStorage.getItem("token")||null;
 };
 
 export const getUser = () => {
-    const user = sessionStorage.getItem("user");
+    const user = localStorage.getItem("user");
     return user ? JSON.parse(user) : null;
 };

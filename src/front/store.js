@@ -1,4 +1,4 @@
-import { getToken, getUser, logout } from "./services/authServices.js";
+import { getToken, getUser } from "./services/authServices.js";
 
 export const initialStore = () => {
   return {
@@ -46,11 +46,16 @@ export default function storeReducer(store, action = {}) {
       };
 
     case "LOGOUT":
-      logout();
       return {
         ...store,
         token: null,
         user: null,
+      };
+
+    case "set-user":
+      return {
+        ...store,
+        user: action.payload,
       };
 
     default:

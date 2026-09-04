@@ -3,7 +3,7 @@ import os
 from datetime import date, datetime
 
 from flask import jsonify
-from api.services.users_service import set_password
+from api.services.users_service import find_user, create_user, update_user
 
 from api.models import db
 ############################## BLOQUE DE REPOSITORIOS USADOS
@@ -14,7 +14,6 @@ from api.repositories.animal_type_repository import AnimalTypeRepository
 from api.repositories.request_repository import RequestRepository
 from api.repositories.shelter_repository import ShelterRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
-from api.repositories.user_repository import UserRepository
 from api.repositories.user_request_repository import UserRequestRepository
 from api.repositories.user_review_repository import UserReviewRepository
 ##############################
@@ -97,42 +96,30 @@ def seed_database():
             shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
             shelter_id = shelter.id
 
-        user = UserRepository.get_by_user_id(item["user_id"])
+        data = dict(
+            user_id=item["user_id"],
+            name=item["name"],
+            last_name1=item["last_name1"],
+            last_name2=item.get("last_name2"),
+            phone=item["phone"],
+            email=item["email"],
+            password=item["password"],
+            token_version=item.get("token_version"),
+            rol=item["rol"],
+            shelter_id=shelter_id,
+            ranking=item.get("ranking", 0),
+            address=item.get("address"),
+            map_positioning=item.get("map_positioning"),
+        )
+
+        user = find_user(item["user_id"])
 
         if user is None:
-            user = UserRepository.create(
-                user_id=item["user_id"],
-                name=item["name"],
-                last_name1=item["last_name1"],
-                last_name2=item.get("last_name2"),
-                phone=item["phone"],
-                email=item["email"],
-                password=item["password"],
-                token_version=item.get("token_version"),
-                rol=item["rol"],
-                shelter_id=shelter_id,
-                ranking=item.get("ranking", 0),
-                address=item.get("address"),
-                map_positioning=item.get("map_positioning"),
-            )
-
+            create_user(**data)
             created["users"] += 1
         else:
-            user.name = item["name"]
-            user.last_name1 = item["last_name1"]
-            user.last_name2 = item.get("last_name2")
-            user.phone = item["phone"]
-            user.email = item["email"]
-            user.token_version = item.get("token_version")
-            user.rol = item["rol"]
-            user.shelter_id = shelter_id
-            user.ranking = item.get("ranking", 0)
-            user.address = item.get("address")
-            user.map_positioning = item.get("map_positioning")
-
+            update_user(user, **data)
             updated["users"] += 1
-
-        set_password(user, item["password"])
 
 
     ##############################
@@ -196,7 +183,7 @@ def seed_database():
     for item in load("user_request.json"):
         if UserRequestRepository.get_by_user_request_id(item["user_request_id"]) is None:
 
-            user = UserRepository.get_by_user_id(item["user_id"])
+            user = find_user(item["user_id"])
 
             req = RequestRepository.get_by_request_id(item["request_id"])
 
@@ -217,7 +204,7 @@ def seed_database():
     for item in load("addoption_request.json"):
         if AddoptionRequestRepository.get_by_addoption_request_id(item["addoption_request_id"]) is None:
 
-            user = UserRepository.get_by_user_id(item["user_id"])
+            user = find_user(item["user_id"])
 
             animal = AnimalRepository.get_by_animal_id(item["animal_id"])
 
@@ -238,7 +225,7 @@ def seed_database():
     for item in load("user_review.json"):
         if UserReviewRepository.get_by_review_id(item["review_id"]) is None:
 
-            user = UserRepository.get_by_user_id(item["user_id"])
+            user = find_user(item["user_id"])
 
             UserReviewRepository.create(
                 user_id=user.id,
