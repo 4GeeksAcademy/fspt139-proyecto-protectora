@@ -1,8 +1,12 @@
+import { getToken } from "./services/authService.js";
+
+
 export const initialStore=()=>{
   return{
     message: null,
     shelterTypes: [],
     animalTypes: [],
+    token: getToken(),
     todos: [
       {
         id: 1,
@@ -46,7 +50,22 @@ export default function storeReducer(store, action = {}) {
         ...store,
         todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
       };
+
+      case 'LOGIN':
+      return {
+        ...store,
+        token: action.payload
+      };
+
+    case 'LOGOUT':
+      return {
+        ...store,
+        token: null
+      };
+
     default:
       throw Error('Unknown action.');
   }    
 }
+
+
