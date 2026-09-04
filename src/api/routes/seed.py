@@ -35,6 +35,7 @@ def seed_database():
             return json.load(file)
 
     created = {} #contador para el resultado
+    updated = {} #contador de registros actualizados
 
 
     ################ BLOQUE DE MODELOS A CARGAR, SE INSERTAN SI NO EXISTEN YA EN LA BASE DE DATOS ################
@@ -88,14 +89,17 @@ def seed_database():
     # Users
     ##############################
     created["users"] = 0
+    updated["users"] = 0
     for item in load("user.json"):
-        if UserRepository.get_by_user_id(item["user_id"]) is None:
-            shelter_id = None
+        shelter_id = None
 
-            if item.get("shelter_id"):
-                shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
-                shelter_id = shelter.id
+        if item.get("shelter_id"):
+            shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
+            shelter_id = shelter.id
 
+        user = UserRepository.get_by_user_id(item["user_id"])
+
+        if user is None:
             user = UserRepository.create(
                 user_id=item["user_id"],
                 name=item["name"],
@@ -112,9 +116,23 @@ def seed_database():
                 map_positioning=item.get("map_positioning"),
             )
 
-            set_password(user, item["password"])
-
             created["users"] += 1
+        else:
+            user.name = item["name"]
+            user.last_name1 = item["last_name1"]
+            user.last_name2 = item.get("last_name2")
+            user.phone = item["phone"]
+            user.email = item["email"]
+            user.token_version = item.get("token_version")
+            user.rol = item["rol"]
+            user.shelter_id = shelter_id
+            user.ranking = item.get("ranking", 0)
+            user.address = item.get("address")
+            user.map_positioning = item.get("map_positioning")
+
+            updated["users"] += 1
+
+        set_password(user, item["password"])
 
 
     ##############################
@@ -257,4 +275,5 @@ def seed_database():
     return jsonify({
         "message": "Database seed completed",
         "created": created,
+        "updated": updated,
     }), 200

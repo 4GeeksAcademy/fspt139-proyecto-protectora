@@ -1,4 +1,5 @@
 from flask import jsonify, request
+from flask_jwt_extended import jwt_required
 
 from api.repositories.animal_repository import FILTERABLE_FIELDS
 from api.services.animals_service import list_animals
@@ -7,6 +8,7 @@ from . import api
 
 
 @api.route('/animals', methods=['GET'])
+@jwt_required()
 def list_animals_action():
 
     DEFAULT_PAGE = 1
