@@ -1,6 +1,8 @@
 export const initialStore=()=>{
   return{
     message: null,
+    shelterTypes: [],
+    animalTypes: [],
     todos: [
       {
         id: 1,
@@ -24,6 +26,18 @@ export default function storeReducer(store, action = {}) {
         message: action.payload
       };
       
+    case 'set_shelter_types':
+      return {
+        ...store,
+        shelterTypes: action.payload
+      };
+
+    case 'set_animal_types':
+      return {
+        ...store,
+        animalTypes: action.payload
+      };
+
     case 'add_task':
 
       const { id,  color } = action.payload
