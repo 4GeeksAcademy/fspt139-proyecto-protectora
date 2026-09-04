@@ -30,6 +30,6 @@ def profile_action():
     user = UserRepository.get_by_user_id(current_user_id)
 
     if user is None:
-        return jsonify({"error": "Credenciales invalidas"}), 404
+        return jsonify({"error": "Usuario no encontrado"}), 404
 
     return jsonify(user.serialize()), 200
