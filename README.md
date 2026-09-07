@@ -46,7 +46,15 @@
 | BACKEND | /src/api/models       | modelado de objetos de la base de datos                                                                                                  |
 | BACKEND | /src/api/repositories | capa de acceso a datos de la aplicación: encapsula todas las consultas, inserciones, actualizaciones y eliminaciones de la base de datos |
 | BACKEND | /src/api/services     | logica de la aplicación: aplica las reglas del sistema                                                                                   |
-| ...    | ...                    | ...                                          |
+| ... | ... | ... |
+| FRONTEND | /src/front/components | componentes React reutilizables  |
+| FRONTEND | /src/front/components/navigation | navbar y menu de enlaces de usuario  |
+| FRONTEND | /src/front/hooks | custom hooks y store context  |
+| FRONTEND | /src/front/pages | paginas con contenido  |
+| FRONTEND | /src/front/routes | routes.jsx y componentes de guardia  |
+| FRONTEND | /src/front/services | capa de logica de aplicación JS |
+| ... | ... | ... |
+| ... | ... | ... |
 
 ## MODELO DE DATOS:
 
@@ -55,6 +63,17 @@
 ![UML](/docs/database/UML.png)
 
 ---
+
+## ROLES DE USUARIO:
+
+| Rol            | Tipo |
+| ---------------- | ------------------------------------------------------------------- |
+| none          | Visitante sin identificar del sitio web                                       |
+| shelter_admin    | Rol de Usuario de una Protectora, gestiona todo el inventario y solicitudes de la protectora |
+| volunteer | Rol de colaborador, no vinculado a ninguna protectora. Colabora o puede solicitar adoptar animales |
+
+---
+
 
 ---
 

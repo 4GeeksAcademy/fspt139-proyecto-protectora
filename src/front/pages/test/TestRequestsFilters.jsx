@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { getRequests } from "../services/requestsService.js";
+import useGlobalReducer from "../../hooks/useGlobalReducer.jsx";
+import { getRequests } from "../../services/requestsService.js";
 
 
 export const TestRequestsFilters = () => {
