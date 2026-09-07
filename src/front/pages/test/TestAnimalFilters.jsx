@@ -1,34 +1,34 @@
 import { useEffect, useState } from "react";
-import { getShelters } from "../services/sheltersService.js";
+import { getAnimals } from "../../services/animalsService.js";
 
-export const TestSheltersFilters = () => {
+export const TestAnimalFilters = () => {
 
-	const [shelters, setShelters] = useState([]);
+	const [animals, setAnimals] = useState([]);
 	const [error, setError] = useState(null);
 
 	const [nombre, setNombre] = useState("");
-	const [phone, setPhone] = useState("");
+	const [raza, setRaza] = useState("");
 	const [ordenarPor, setOrdenarPor] = useState("name");
 	const [orden, setOrden] = useState("asc");
 	const [pagina, setPagina] = useState(1);
 	const [totalPaginas, setTotalPaginas] = useState(1);
 
 	useEffect(() => {
-		getShelters({ ordenarPor, orden, pagina }, { nombre, phone })
+		getAnimals({ ordenarPor, orden, pagina }, { nombre, raza })
 			.then((data) => {
-				setShelters(data.items);
+				setAnimals(data.items);
 				setTotalPaginas(data.total_pages);
 			})
 			.catch((err) => setError(err.message));
-	}, [nombre, phone, ordenarPor, orden, pagina]);
+	}, [nombre, raza, ordenarPor, orden, pagina]);
 
 	const hayAnterior = pagina > 1;
 	const haySiguiente = pagina < totalPaginas;
 
 	return (
 		<div>
-			<h1>Test Api Models</h1>
-			<p>Listado devuelto por /api/shelters</p>
+			<h1>Test Animal Filters</h1>
+			<p>Listado devuelto por /api/animals</p>
 
 			<input
 				type="text"
@@ -42,10 +42,10 @@ export const TestSheltersFilters = () => {
 
 			<input
 				type="text"
-				placeholder="Buscar por phone..."
-				value={phone}
+				placeholder="Buscar por raza..."
+				value={raza}
 				onChange={(e) => {
-					setPhone(e.target.value);
+					setRaza(e.target.value);
 					setPagina(1);
 				}}
 			/>
@@ -53,7 +53,7 @@ export const TestSheltersFilters = () => {
 
 			<select value={ordenarPor} onChange={(e) => setOrdenarPor(e.target.value)}>
 				<option value="name">Nombre</option>
-				<option value="address">Direccion</option>
+				<option value="breed">Raza</option>
 				<option value="created_at">Fecha de alta</option>
 			</select>
 
@@ -67,10 +67,10 @@ export const TestSheltersFilters = () => {
 
 			{error && <p className="text-danger">{error}</p>}
 
-			{shelters.map((shelter) => (
-				<div key={shelter.id}>
-					<h2>{shelter.name}</h2>
-					<p>{shelter.description}</p>
+			{animals.map((animal) => (
+				<div key={animal.id}>
+					<h2>{animal.name}</h2>
+					<p>{animal.story}</p>
 					<br />
 				</div>
 			))}
