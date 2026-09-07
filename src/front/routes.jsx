@@ -11,11 +11,12 @@ import { TestAnimalFilters } from "./pages/TestAnimalFilters.jsx";
 import { TestRequestsFilters } from "./pages/TestRequestsFilters.jsx";
 
 
-import {SimpleLayout} from "./layouts/SimpleLayout";
-import {Login} from "./pages/Login";
-import {Logout} from "./pages/Logout";
-import {ProtectedRoutes} from "./pages/ProtectedRoutes";
-import {NotFound} from "./pages/NotFound";
+import { SimpleLayout } from "./layouts/SimpleLayout";
+import { Login } from "./pages/Login";
+import { Logout } from "./pages/Logout";
+import { ProtectedRoutes } from "./pages/ProtectedRoutes";
+import { NotFound } from "./pages/NotFound";
+import { Signup } from "./pages/Signup.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -78,11 +79,15 @@ export const router = createBrowserRouter([
                 path: "/logout",
                 element: <Logout />
             },
+            {
+                path: "/signup",
+                element: <Signup />
+            },
             // PAGINA DE ERROR 404
             {
                 path: "*",
                 element: <NotFound />
-            }
+            },
         ]
     },
 
