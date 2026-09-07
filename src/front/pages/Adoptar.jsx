@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { AnimalCard } from "../components/AnimalCard";
-import { Footer } from "../components/Footer";
+
 
 export const Adoptar = () => {
   const [animales, setAnimales] = useState([]);
   const [cargando, setCargando] = useState(true);
-  
+
   const [filtroEspecie, setFiltroEspecie] = useState("todos");
   const [filtroEdad, setFiltroEdad] = useState("todas");
   const [filtroTamano, setFiltroTamano] = useState("todos");
-  
-  const [animalSeleccionado, setAnimalSeleccionado] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+
+
 
   const mockData = [
     {
@@ -213,30 +212,22 @@ export const Adoptar = () => {
     setCargando(false);
   }, []);
 
-  const abrirModal = (animal) => {
-    setAnimalSeleccionado(animal);
-    setShowModal(true);
-    document.body.style.overflow = "hidden";
-  };
 
-  const cerrarModal = () => {
-    setShowModal(false);
-    setAnimalSeleccionado(null);
-    document.body.style.overflow = "auto";
-  };
+
+
 
   const animalesFiltrados = animales.filter((animal) => {
-    const coincideEspecie = 
-      filtroEspecie === "todos" || 
-      (filtroEspecie === "perros" && animal.especie === "perro") || 
+    const coincideEspecie =
+      filtroEspecie === "todos" ||
+      (filtroEspecie === "perros" && animal.especie === "perro") ||
       (filtroEspecie === "gatos" && animal.especie === "gato");
 
-    const coincideEdad = 
-      filtroEdad === "todas" || 
+    const coincideEdad =
+      filtroEdad === "todas" ||
       animal.rangoEdad === filtroEdad;
 
-    const coincideTamano = 
-      filtroTamano === "todos" || 
+    const coincideTamano =
+      filtroTamano === "todos" ||
       animal.tamano === filtroTamano;
 
     return coincideEspecie && coincideEdad && coincideTamano;
@@ -267,29 +258,29 @@ export const Adoptar = () => {
           <div className="p-3 p-md-4 mb-5" style={{ backgroundColor: "var(--rp-papel)", borderRadius: "var(--bs-border-radius-xl)", border: "1px solid var(--rp-linea)" }}>
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
               <div className="d-flex flex-nowrap gap-2 w-100 w-md-auto overflow-auto pb-1 pb-md-0">
-                <button 
+                <button
                   className={`btn rounded-pill px-4 text-nowrap ${filtroEspecie === "todos" ? "btn-primary" : "btn-light"}`}
                   onClick={() => setFiltroEspecie("todos")}
                 >
                   🐶 Todos
                 </button>
-                <button 
+                <button
                   className={`btn rounded-pill px-4 text-nowrap ${filtroEspecie === "perros" ? "btn-primary" : "btn-light"}`}
                   onClick={() => setFiltroEspecie("perros")}
                 >
                   Perros
                 </button>
-                <button 
+                <button
                   className={`btn rounded-pill px-4 text-nowrap ${filtroEspecie === "gatos" ? "btn-primary" : "btn-light"}`}
                   onClick={() => setFiltroEspecie("gatos")}
                 >
                   Gatos
                 </button>
               </div>
-              
+
               <div className="d-flex flex-nowrap gap-2 w-100 w-md-auto justify-content-start justify-content-md-end">
-                <select 
-                  className="form-select form-select-sm rounded-pill text-secondary" 
+                <select
+                  className="form-select form-select-sm rounded-pill text-secondary"
                   style={{ width: "130px", borderColor: "var(--rp-linea)", backgroundColor: "var(--rp-hueso)" }}
                   value={filtroEdad}
                   onChange={(e) => setFiltroEdad(e.target.value)}
@@ -300,8 +291,8 @@ export const Adoptar = () => {
                   <option value="senior">Senior</option>
                 </select>
 
-                <select 
-                  className="form-select form-select-sm rounded-pill text-secondary" 
+                <select
+                  className="form-select form-select-sm rounded-pill text-secondary"
                   style={{ width: "130px", borderColor: "var(--rp-linea)", backgroundColor: "var(--rp-hueso)" }}
                   value={filtroTamano}
                   onChange={(e) => setFiltroTamano(e.target.value)}
@@ -328,17 +319,17 @@ export const Adoptar = () => {
           ) : (
             <>
               {animalesFiltrados.length > 0 ? (
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 row-cols-xl-4">
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 row-cols-xl-3">
                   {animalesFiltrados.map((item) => (
                     <div className="col" key={item.id}>
-                      <AnimalCard animal={item} onConocemeClick={() => abrirModal(item)} />
+                      <AnimalCard animal={item} />
                     </div>
                   ))}
                 </div>
               ) : (
                 <div className="text-center py-5 my-5">
                   <h4 style={{ color: "var(--rp-gris)" }}>No se encontraron animales con los filtros seleccionados 🐾</h4>
-                  <button 
+                  <button
                     className="btn btn-outline-primary rounded-pill mt-3 px-4"
                     onClick={() => { setFiltroEspecie("todos"); setFiltroEdad("todas"); setFiltroTamano("todos"); }}
                   >
@@ -346,7 +337,7 @@ export const Adoptar = () => {
                   </button>
                 </div>
               )}
-              
+
               {animalesFiltrados.length > 0 && (
                 <div className="d-flex justify-content-center mt-5 pt-4">
                   <button className="btn btn-outline-primary rounded-pill px-5 py-3 d-flex align-items-center gap-2">
@@ -359,88 +350,9 @@ export const Adoptar = () => {
         </div>
       </div>
 
-      <Footer />
 
-      {showModal && animalSeleccionado && (
-        <>
-          <div className="modal-backdrop fade show" style={{ backgroundColor: "var(--rp-tinta)", opacity: 0.65 }}></div>
-          <div className="modal fade show d-block" tabIndex="-1" onClick={cerrarModal}>
-            <div className="modal-dialog modal-dialog-centered modal-lg" onClick={(e) => e.stopPropagation()}>
-              <div className="modal-content shadow-lg border-0" style={{ backgroundColor: "var(--rp-papel)", borderRadius: "var(--bs-border-radius-xl)" }}>
-                <div className="modal-header border-bottom-0 pb-0 pt-4 px-4">
-                  <h2 className="modal-title rp-figure mb-0" style={{ color: "var(--rp-pino)" }}>
-                    {animalSeleccionado.nombre}
-                  </h2>
-                  <button type="button" className="btn-close" onClick={cerrarModal}></button>
-                </div>
 
-                <div className="modal-body p-4">
-                  <div className="row g-4">
-                    <div className="col-md-5">
-                      <div className="position-relative h-100">
-                        <div 
-                          className={`card-placeholder ${animalSeleccionado.cssClass} w-100 rounded-4`}
-                          style={{ minHeight: "280px" }}
-                        ></div>
-                        <div className="position-absolute top-0 start-0 p-3">
-                           <span className="badge" style={{ backgroundColor: "var(--rp-verde)", color: "var(--rp-papel)" }}>
-                             {animalSeleccionado.estado}
-                           </span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="col-md-7 d-flex flex-column">
-                      <div className="mb-3 d-flex justify-content-between align-items-center">
-                        <h4 className="mb-0 text-capitalize" style={{ color: "var(--rp-gris)" }}>{animalSeleccionado.tipo}</h4>
-                      </div>
 
-                      <div className="d-flex gap-3 mb-4">
-                        <div className="p-3 rounded-3 flex-fill text-center" style={{ backgroundColor: "var(--rp-hueso)", border: "1px solid var(--rp-linea)" }}>
-                           <span className="rp-eyebrow d-block mb-1">Edad</span>
-                           <strong className="fs-5" style={{ color: "var(--rp-pino)" }}>{animalSeleccionado.edad}</strong>
-                        </div>
-                        <div className="p-3 rounded-3 flex-fill text-center" style={{ backgroundColor: "var(--rp-hueso)", border: "1px solid var(--rp-linea)" }}>
-                           <span className="rp-eyebrow d-block mb-1">Peso</span>
-                           <strong className="fs-5" style={{ color: "var(--rp-pino)" }}>{animalSeleccionado.peso}</strong>
-                        </div>
-                      </div>
-
-                      <p className="fs-6" style={{ color: "var(--rp-tinta)", lineHeight: "1.6" }}>
-                        {animalSeleccionado.descripcion}
-                      </p>
-
-                      <div className="mb-4">
-                        <h6 className="mb-3 rp-eyebrow">Características</h6>
-                        <div className="d-flex flex-wrap gap-2">
-                          {animalSeleccionado.caracteristicas.map((caract, idx) => (
-                            <span key={idx} className="badge" style={{ backgroundColor: "var(--rp-verde-cl)", color: "var(--rp-pino)", fontSize: "0.85rem", padding: "0.5rem 0.8rem" }}>
-                              ✓ {caract}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="mt-auto p-3 rounded-3 d-flex align-items-center gap-3" style={{ backgroundColor: "var(--rp-hueso)" }}>
-                        <div className="rp-thumb" style={{ backgroundColor: "var(--rp-verde)", fontSize: "1.2rem", color: "var(--rp-papel)" }}>📍</div>
-                        <div>
-                          <span className="rp-eyebrow d-block mb-1">Se encuentra en</span>
-                          <strong style={{ color: "var(--rp-pino)" }}>{animalSeleccionado.protectora}</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="modal-footer border-top-0 pt-0 px-4 pb-4">
-                  <button className="btn btn-light" onClick={cerrarModal}>Cerrar</button>
-                  <button className="btn btn-primary px-5">Adoptar a {animalSeleccionado.nombre}</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
     </div>
   );
 };
