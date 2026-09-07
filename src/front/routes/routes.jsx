@@ -20,7 +20,7 @@ import { NotFound } from "../pages/NotFound";
 
 import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
-import { Signup } from "./pages/Signup.jsx";
+import { Signup } from "../pages/Signup.jsx";
 
 
 
