@@ -11,6 +11,12 @@ import { TestAnimalFilters } from "./pages/TestAnimalFilters.jsx";
 import { TestRequestsFilters } from "./pages/TestRequestsFilters.jsx";
 
 
+import {SimpleLayout} from "./layouts/SimpleLayout";
+import {Login} from "./pages/Login";
+import {Logout} from "./pages/Logout";
+import {ProtectedRoutes} from "./pages/ProtectedRoutes";
+import {NotFound} from "./pages/NotFound";
+
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -42,17 +48,42 @@ export const router = createBrowserRouter([
                 element: <TestSheltersFilters />
             },
             {
-                path: "/test-api-animals",
-                element: <TestAnimalFilters />
-            },
-            {
                 path: "/test-api-requests",
                 element: <TestRequestsFilters />
             },
             {
                 path: "/ayuda",
                 element: <Ayuda />
+            },
+            {
+                element: <ProtectedRoutes />,
+                children: [
+                    {
+                        path: "/test-api-animals",
+                        element: <TestAnimalFilters />
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        path: "/",
+        element: <SimpleLayout />,
+        children: [
+            {
+                path: "/login",
+                element: <Login />
+            },
+            {
+                path: "/logout",
+                element: <Logout />
+            },
+            // PAGINA DE ERROR 404
+            {
+                path: "*",
+                element: <NotFound />
             }
         ]
-    }
+    },
+
 ]);

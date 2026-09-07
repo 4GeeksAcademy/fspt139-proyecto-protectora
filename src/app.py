@@ -11,6 +11,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
+from api.services.users_service import is_token_revoked
 
 # from models import Person
 
@@ -22,6 +23,12 @@ app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
 jwt = JWTManager(app)
+
+
+# para las acciones del logout y el token_version
+@jwt.token_in_blocklist_loader
+def check_if_token_revoked(jwt_header, jwt_payload):
+    return is_token_revoked(jwt_header, jwt_payload)
 
 
 # database condiguration
