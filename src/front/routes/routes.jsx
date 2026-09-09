@@ -12,28 +12,29 @@ import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
 import { TestAnimalFilters } from "../pages/test/TestAnimalFilters.jsx";
 import { TestRequestsFilters } from "../pages/test/TestRequestsFilters.jsx";
 
-import {Layout} from "../layouts/Layout.jsx";
-import {SimpleLayout} from "../layouts/SimpleLayout";
+import { Layout } from "../layouts/Layout.jsx";
+import { SimpleLayout } from "../layouts/SimpleLayout";
 
-import {ProtectedRoutes} from "./ProtectedRoutes";
-import {NotFound} from "../pages/NotFound";
+import { ProtectedRoutes } from "./ProtectedRoutes";
+import { NotFound } from "../pages/NotFound";
 
-import {Login} from "../pages/Login";
-import {Logout} from "../pages/Logout";
+import { Login } from "../pages/Login";
+import { Logout } from "../pages/Logout";
+import { Signup } from "../pages/Signup.jsx";
 
 
 
 // PAGINAS DE PROTECTORA
-import {ProtectoraPanel} from "../pages/shelter-admin/ProtectoraPanel.jsx";
-import {ProtectoraAnimales} from "../pages/shelter-admin/ProtectoraAnimales.jsx";
-import {ProtectoraNecesidades} from "../pages/shelter-admin/ProtectoraNecesidades.jsx";
-import {ProtectoraPerfil} from "../pages/shelter-admin/ProtectoraPerfil";
-import {ProtectoraAdopciones} from "../pages/shelter-admin/ProtectoraAdopciones";
+import { ProtectoraPanel } from "../pages/shelter-admin/ProtectoraPanel.jsx";
+import { ProtectoraAnimales } from "../pages/shelter-admin/ProtectoraAnimales.jsx";
+import { ProtectoraNecesidades } from "../pages/shelter-admin/ProtectoraNecesidades.jsx";
+import { ProtectoraPerfil } from "../pages/shelter-admin/ProtectoraPerfil";
+import { ProtectoraAdopciones } from "../pages/shelter-admin/ProtectoraAdopciones";
 
 
 // PAGINAS DE COLABORADOR
-import {ColaboradorActividad} from "../pages/volunteer/ColaboradorActividad";
-import {ColaboradorPerfil} from "../pages/volunteer/ColaboradorPerfil";
+import { ColaboradorActividad } from "../pages/volunteer/ColaboradorActividad";
+import { ColaboradorPerfil } from "../pages/volunteer/ColaboradorPerfil";
 
 
 export const router = createBrowserRouter([
@@ -131,6 +132,10 @@ export const router = createBrowserRouter([
             {
                 path: "/logout",
                 element: <Logout />
+            },
+            {
+                path: "/signup",
+                element: <Signup />
             },
             // PAGINA DE ERROR 404
             {
