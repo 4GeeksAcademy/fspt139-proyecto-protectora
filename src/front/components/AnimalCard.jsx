@@ -1,4 +1,6 @@
-export const AnimalCard = ({ imageClass, badgeText, badgeClass, name, details, org }) => {
+import { Link } from "react-router-dom";
+
+export const AnimalCard = ({ id, imageClass, badgeText, badgeClass, name, details, org }) => {
 
     return (
         <div className="col-12 col-md-4">
@@ -18,7 +20,7 @@ export const AnimalCard = ({ imageClass, badgeText, badgeClass, name, details, o
 
                     <div className="d-flex justify-content-between align-items-center mt-auto">
                         <small className="text-secondary">{org}</small>
-                        <button className="btn btn-outline-success btn-sm">See profile</button>
+                        <Link to={`/adoptar/${id}`} className="btn btn-outline-success btn-sm">See profile</Link>
                     </div>
 
                 </div>
