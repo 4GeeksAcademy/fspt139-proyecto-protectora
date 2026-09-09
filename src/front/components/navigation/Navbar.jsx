@@ -4,8 +4,8 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { UserAvatar } from "../UserAvatar";
 import { closeCollapse } from "./closeCollapse";
 
-import {NavbarProtectora} from "./NavbarProtectora";
-import {NavbarColaborador} from "./NavbarColaborador";
+import { NavbarProtectora } from "./NavbarProtectora";
+import { NavbarColaborador } from "./NavbarColaborador";
 
 const COLLAPSE_ID = "navbarGuestCollapse";
 
@@ -63,7 +63,7 @@ export const Navbar = () => {
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
 
-                                { user?.rol === "shelter_admin" ? (<NavbarProtectora />): <NavbarColaborador /> }
+                                {user?.rol === "shelter_admin" ? (<NavbarProtectora />) : <NavbarColaborador />}
                                 <li>
                                     <Link className="dropdown-item text-end" to="/logout">Salir</Link>
                                 </li>
@@ -83,7 +83,14 @@ export const Navbar = () => {
                             >
                                 Log in
                             </Link>
-                            <button className="btn btn-success btn-sm">Sign up</button>
+
+                            <Link
+                                onClick={closeMenu}
+                                to="/signup"
+                                className="btn btn-success btn-sm"
+                            >
+                                Sign up
+                            </Link>
                         </div>
                         ///////////////////////////////////
                     )}

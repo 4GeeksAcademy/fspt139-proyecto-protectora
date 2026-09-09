@@ -7,16 +7,22 @@ from flask_jwt_extended import create_access_token
 from api.utils import APIException
 
 # busca un usuario por uuid
+
+
 def find_user(user_id):
     return UserRepository.get_by_user_id(user_id)
 # carga un usuario por uuid o falla si no encontrado
+
+
 def get_user(user_id):
     user = UserRepository.get_by_user_id(user_id)
     if user is None:
         raise APIException("Usuario no encontrado", status_code=404)
     return user
 
-#crear, con uuid opcional y password de entrada plana y hash en el servicio
+# crear, con uuid opcional y password de entrada plana y hash en el servicio
+
+
 def create_user(**data):
     password = data.pop("password")
 
@@ -26,6 +32,7 @@ def create_user(**data):
     set_password(user, password)
 
     return user
+
 
 def update_user(user, **data):
     password = data.pop("password", None)
@@ -38,12 +45,15 @@ def update_user(user, **data):
 
     return user
 
-def set_password(user,password):
+
+def set_password(user, password):
     user.password = generate_password_hash(password).decode('utf-8')
     return user
 
+
 def check_password(user, password):
-    return check_password_hash(user.password,password)
+    return check_password_hash(user.password, password)
+
 
 def authenticate_user(email, password):
     user = UserRepository.get_by_email(email)
@@ -53,6 +63,7 @@ def authenticate_user(email, password):
 
     return user
 
+
 def generate_access_token(user):
     token_version = user.token_version or 0
     return create_access_token(
@@ -60,9 +71,11 @@ def generate_access_token(user):
         additional_claims={"token_version": token_version},
     )
 
+
 def revoke_user_tokens(user):
     user.token_version = (user.token_version or 0) + 1
     return UserRepository.save(user)
+
 
 def is_token_revoked(jwt_header, jwt_payload):
     user_id = jwt_payload.get("sub")
@@ -77,3 +90,18 @@ def is_token_revoked(jwt_header, jwt_payload):
 
 def list_users():
     return UserRepository.list_all()
+
+
+def register_user(shelter_data=None, **data):
+    if UserRepository.get_by_email(data["email"]):
+        raise APIException(
+            "Ya existe una cuenta con ese correo", status_code=409)
+
+    if shelter_data:
+        raise APIException(
+            "El registro de protectoras aún no está disponible", status_code=501)
+
+    data["rol"] = "volunteer"
+
+    user = create_user(**data)
+    return UserRepository.save(user)
