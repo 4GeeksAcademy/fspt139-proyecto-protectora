@@ -1,6 +1,6 @@
 import React from "react";
 import { ProtectoraCard } from "../components/protectora/ProtectoraCard";
-import { Footer } from "../components/Footer";
+
 
 export const Protectoras = () => {
   const ejemploProtectora = [
@@ -62,8 +62,6 @@ export const Protectoras = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
