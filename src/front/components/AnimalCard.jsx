@@ -1,4 +1,8 @@
-export const AnimalCard = ({ imageClass, badgeText, badgeClass, name, details, org }) => {
+import React from "react";
+import { Link } from "react-router-dom";
+
+export const AnimalCard = ({ animal }) => {
+  if (!animal) return null;
 
   return (
     <div className="card h-100 border-0 shadow-sm" style={{ backgroundColor: "var(--rp-papel)", borderRadius: "var(--bs-border-radius-lg)" }}>
@@ -22,15 +26,11 @@ export const AnimalCard = ({ imageClass, badgeText, badgeClass, name, details, o
         </div>
       </div>
 
-                <div className="card-body d-flex flex-column">
-
-                    <h5 className="fw-bold">{name}</h5>
-                    <p className="text-secondary small mb-3">{details}</p>
-
-                    <div className="d-flex justify-content-between align-items-center mt-auto">
-                        <small className="text-secondary">{org}</small>
-                        <button className="btn btn-outline-success btn-sm">See profile</button>
-                    </div>
+      <div className="card-body d-flex flex-column p-3">
+        <div className="d-flex justify-content-between align-items-baseline mb-3">
+          <h4 className="card-title mb-0" style={{ color: "var(--rp-pino)", fontFamily: "var(--rp-display)" }}>{animal.nombre}</h4>
+          <span className="text-muted" style={{ fontSize: "0.85rem", color: "var(--rp-gris)" }}>{animal.tipo}</span>
+        </div>
 
         <div className="d-flex gap-2 mb-3">
           <div className="d-flex flex-column align-items-center justify-content-center border rounded py-2 px-3 w-50" style={{ borderColor: "var(--rp-linea) !important", backgroundColor: "var(--rp-hueso)" }}>
@@ -60,12 +60,12 @@ export const AnimalCard = ({ imageClass, badgeText, badgeClass, name, details, o
             <span style={{ color: "var(--rp-arcilla)" }}>📍</span>{animal.protectora}
           </div>
 
-          <button
-            className="btn btn-outline-success w-100 rounded-pill"
+                    <div className="d-flex justify-content-between align-items-center mt-auto">
+                        <small className="text-secondary">{org}</small>
+                        <Link to={`/adoptar/${id}`} className="btn btn-outline-success btn-sm">See profile</Link>
+                    </div>
 
-          >
-            Conóceme
-          </button>
+          
         </div>
       </div>
     </div>
