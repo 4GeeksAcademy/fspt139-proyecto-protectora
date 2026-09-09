@@ -1,4 +1,4 @@
-import { AnimalCard } from "./AnimalCard";
+import { HomeAnimalCard } from "./HomeAnimalCard";
 
 export const BuscanCasa = () => {
 
@@ -9,7 +9,7 @@ export const BuscanCasa = () => {
 
             <div className="row g-4">
 
-                <AnimalCard
+                <HomeAnimalCard
                     imageClass="img-nala"
                     badgeText="Available"
                     badgeClass="bg-success"
@@ -18,7 +18,7 @@ export const BuscanCasa = () => {
                     org="Protectora Huellas"
                 />
 
-                <AnimalCard
+                <HomeAnimalCard
                     imageClass="img-trufa"
                     badgeText="In process"
                     badgeClass="bg-warning text-dark"
@@ -27,7 +27,7 @@ export const BuscanCasa = () => {
                     org="Protectora Huellas"
                 />
 
-                <AnimalCard
+                <HomeAnimalCard
                     imageClass="img-bruno"
                     badgeText="Available"
                     badgeClass="bg-success"
