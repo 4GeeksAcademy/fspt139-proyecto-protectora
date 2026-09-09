@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const AnimalCard = ({ animal }) => {
   if (!animal) return null;
@@ -59,12 +60,12 @@ export const AnimalCard = ({ animal }) => {
             <span style={{ color: "var(--rp-arcilla)" }}>📍</span>{animal.protectora}
           </div>
 
-          <button
-            className="btn btn-outline-success w-100 rounded-pill"
+                    <div className="d-flex justify-content-between align-items-center mt-auto">
+                        <small className="text-secondary">{org}</small>
+                        <Link to={`/adoptar/${id}`} className="btn btn-outline-success btn-sm">See profile</Link>
+                    </div>
 
-          >
-            Conóceme
-          </button>
+          
         </div>
       </div>
     </div>
