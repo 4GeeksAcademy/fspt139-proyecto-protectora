@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../services/authServices";
 
 export const Signup = () => {
+    const navigate = useNavigate()
     const [rol, setRol] = useState("volunteer");
     const [showPassword, setShowPassword] = useState(false);
     const [aceptaTerminos, setAceptaTerminos] = useState(false);
@@ -45,9 +46,8 @@ export const Signup = () => {
         }
 
         try {
-            const { token, user } = await signup({ ...form, rol });
-            dispatch({ type: "LOGIN", payload: { token, user } });
-            navigate("/")
+            await signup({ ...form, rol });
+            navigate("/login")
 
         } catch (error) {
             setError(error.message);
@@ -80,7 +80,16 @@ export const Signup = () => {
                         <div className="col-12 col-md-6">
                             <button
                                 type="button"
-                                onClick={() => setRol("volunteer")}
+                                onClick={() => {
+                                    setRol("volunteer");
+                                    setForm({
+                                        ...form,
+                                        shelter_name: "",
+                                        shelter_type: "",
+                                        shelter_address: "",
+                                        shelter_phone: "",
+                                    });
+                                }}
                                 className={claseRol("volunteer")}
                             >
                                 <span className="d-block fw-bold">Soy voluntario</span>

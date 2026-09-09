@@ -16,13 +16,7 @@ export const signup = async (datos) => {
     throw new Error(errorMessage);
   }
 
-  localStorage.setItem("token", data.token);
-  localStorage.setItem("user", JSON.stringify(data.user));
-
-  return {
-    token: data.token,
-    user: data.user,
-  };
+  return data;
 };
 
 export const login = async (usuario, password) => {
