@@ -61,8 +61,8 @@ export const AnimalCard = ({ animal }) => {
           </div>
 
                     <div className="d-flex justify-content-between align-items-center mt-auto">
-                        <small className="text-secondary">{org}</small>
-                        <Link to={`/adoptar/${id}`} className="btn btn-outline-success btn-sm">See profile</Link>
+                        <small className="text-secondary">{animal.org}</small>
+                        <Link to={`/adoptar/${animal.id}`} className="btn btn-outline-success btn-sm">See profile</Link>
                     </div>
 
           
