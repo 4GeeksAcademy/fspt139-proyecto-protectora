@@ -6,6 +6,8 @@ import { AnimalProfile } from "../pages/AnimalProfile.jsx";
 import { Protectoras } from "../pages/Protectoras.jsx";
 import { Ayuda } from "../pages/Ayuda.jsx";
 import { Necesidades } from "../pages/Necesidades.jsx";
+import { Terminos } from "../pages/Terminos.jsx";
+import { Privacidad } from "../pages/Privacidad.jsx";
 
 //test
 import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
@@ -65,6 +67,14 @@ export const router = createBrowserRouter([
             {
                 path: "/ayuda",
                 element: <Ayuda />
+            },
+            {
+                path: "/terminos",
+                element: <Terminos />
+            },
+            {
+                path: "/privacidad",
+                element: <Privacidad />
             },
             //RUTAS DEL ROL PROTECTORA
             {
