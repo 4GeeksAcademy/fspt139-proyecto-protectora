@@ -30,7 +30,7 @@ export const Signup = () => {
         setError("");
 
         if (!aceptaTerminos) {
-            setError("Debes aceptar los términos de uso para continuar.");
+            setError("Debes aceptar los términos y condiciones para continuar.");
             return;
         }
 
@@ -294,8 +294,7 @@ export const Signup = () => {
                                 required
                             />
                             <label className="form-check-label" htmlFor="terminos">
-                                Acepto los <Link to="/terminos">términos de uso</Link> y la{" "}
-                                <Link to="/privacidad">política de privacidad</Link>.
+                                Acepto los <Link to="/terminos" target="_blank">términos de uso</Link> y la <Link to="/privacidad" target="_blank">política de privacidad</Link>.
                             </label>
                         </div>
 
