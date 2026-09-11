@@ -1,4 +1,6 @@
-export const NecesidadCard = ({ imageClass, title, org, badgeText, badgeClass, current, total, unit, note }) => {
+import { Link } from "react-router-dom";
+
+export const NecesidadCard = ({ id, imageClass, title, org, badgeText, badgeClass, current, total, unit, note }) => {
 
     const percent = (current / total) * 100;
 
@@ -28,7 +30,7 @@ export const NecesidadCard = ({ imageClass, title, org, badgeText, badgeClass, c
 
                     <div className="d-flex justify-content-between align-items-center mt-auto">
                         <small className="text-secondary">{note}</small>
-                        <button className="btn btn-success btn-sm">Help</button>
+                        <Link to={`/necesidades/${id}`} className="btn btn-success btn-sm">Contribute</Link>
                     </div>
 
                 </div>

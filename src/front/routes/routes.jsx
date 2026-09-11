@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import { ContributeProfile } from "../pages/ContributeProfile.jsx";
 import { Home } from "../pages/Home.jsx";
 import { Adoptar } from "../pages/Adoptar.jsx";
 import { AnimalProfile } from "../pages/AnimalProfile.jsx";
@@ -61,6 +61,11 @@ export const router = createBrowserRouter([
             {
                 path: "/necesidades",
                 element: <Necesidades />
+            },
+
+            {
+                path: "/necesidades/:id",
+                element: <ContributeProfile />
             },
             {
                 path: "/ayuda",

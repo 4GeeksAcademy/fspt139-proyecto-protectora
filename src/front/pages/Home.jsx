@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import { BuscanCasa } from "../components/BuscanCasa";
 import { NecesidadesDestacadas } from "../components/NecesidadesDestacadas";
 import { Statscard } from "../components/Statscard";
+
 export const Home = () => {
     return (
         <div className="container py-4">
@@ -27,8 +29,8 @@ export const Home = () => {
                         </p>
 
                         <div className="d-flex gap-2">
-                            <button className="btn btn-success btn-lg">See what's needed</button>
-                            <button className="btn btn-outline-success btn-lg">Register my shelter</button>
+                            <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
+                            <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
                         </div>
                     </div>
 
@@ -49,10 +51,10 @@ export const Home = () => {
                 <Statscard number={6} label="Registered shelters" color="#E8B04B" />
                 <Statscard number={312} label="Collaborations closed" color="#E0756B" />
             </div>
+
             <NecesidadesDestacadas />
             <BuscanCasa />
 
         </div>
-
     );
 };

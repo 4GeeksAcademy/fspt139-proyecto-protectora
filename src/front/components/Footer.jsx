@@ -21,20 +21,20 @@ export const Footer = () => {
                     <div className="col-6 col-md-3">
                         <h6 className="fw-bold mb-3">Platform</h6>
                         <ul className="list-unstyled">
+                            <li className="mb-2"><Link to="/" className="text-secondary text-decoration-none">Home</Link></li>
                             <li className="mb-2"><Link to="/necesidades" className="text-secondary text-decoration-none">Needs</Link></li>
                             <li className="mb-2"><Link to="/adoptar" className="text-secondary text-decoration-none">Adopt</Link></li>
                             <li className="mb-2"><Link to="/protectoras" className="text-secondary text-decoration-none">Shelters</Link></li>
-                            <li className="mb-2"><Link to="/ayuda" className="text-secondary text-decoration-none">Questions</Link></li>
                         </ul>
                     </div>
 
                     <div className="col-6 col-md-3">
                         <h6 className="fw-bold mb-3">Account</h6>
                         <ul className="list-unstyled">
-                            <li className="mb-2"><a href="#" className="text-secondary text-decoration-none">Log in</a></li>
-                            <li className="mb-2"><a href="#" className="text-secondary text-decoration-none">Sign up</a></li>
-                            <li className="mb-2"><a href="#" className="text-secondary text-decoration-none">Register my shelter</a></li>
-                            <li className="mb-2"><a href="#" className="text-secondary text-decoration-none">Contact</a></li>
+                            <li className="mb-2"><Link to="/login" className="text-secondary text-decoration-none">Log in</Link></li>
+                            <li className="mb-2"><Link to="/signup" className="text-secondary text-decoration-none">Sign up</Link></li>
+                            <li className="mb-2"><a href="#" className="text-secondary text-decoration-none">Terms of Use and Privacy Policy</a></li>
+                            <li className="mb-2"><a href="#" className="text-secondary text-decoration-none">Help</a></li>
                         </ul>
                     </div>
 
