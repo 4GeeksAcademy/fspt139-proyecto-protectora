@@ -1,6 +1,7 @@
 import uuid
 
 from api.repositories.user_repository import UserRepository
+from api.services.shelters_service import create_shelter
 from flask_bcrypt import generate_password_hash
 from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token
@@ -94,14 +95,19 @@ def list_users():
 
 def register_user(shelter_data=None, **data):
     if UserRepository.get_by_email(data["email"]):
-        raise APIException(
-            "Ya existe una cuenta con ese correo", status_code=409)
+        raise APIException("Ya existe una cuenta con ese correo", status_code=409)
+
+    shelter = None
 
     if shelter_data:
-        raise APIException(
-            "El registro de protectoras aún no está disponible", status_code=501)
-
-    data["rol"] = "volunteer"
+        shelter = create_shelter(**shelter_data)
+        data["rol"] = "shelter_admin"
+    else:
+        data["rol"] = "volunteer"
 
     user = create_user(**data)
+
+    if shelter:
+        user.shelter = shelter
+
     return UserRepository.save(user)
