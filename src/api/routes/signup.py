@@ -7,7 +7,7 @@ from . import api
 
 
 USER_REQUIRED = ["name", "last_name1", "email", "phone", "password"]
-SHELTER_REQUIRED = ["shelter_name", "shelter_address", "shelter_phone"]
+SHELTER_REQUIRED = ["shelter_name", "shelter_email", "shelter_address", "shelter_phone", "shelter_type"]
 
 
 def get_signup_data():
@@ -25,7 +25,7 @@ def get_signup_data():
         "password": data.get("password"),
     }
 
-    if not data.get("shelter_name"):
+    if not any(data.get(campo) for campo in SHELTER_REQUIRED):
         return user_data, None
 
     if not all(data.get(campo) for campo in SHELTER_REQUIRED):
@@ -33,8 +33,10 @@ def get_signup_data():
 
     shelter_data = {
         "name": data.get("shelter_name"),
+        "email": data.get("shelter_email"),
         "address": data.get("shelter_address"),
         "phone": data.get("shelter_phone"),
+        "shelter_type_id": data.get("shelter_type"),
     }
 
     return user_data, shelter_data

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../services/authServices";
+import { getShelterTypes } from "../services/shelterTypesService";
 
 export const Signup = () => {
     const navigate = useNavigate()
@@ -8,6 +9,7 @@ export const Signup = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [aceptaTerminos, setAceptaTerminos] = useState(false);
     const [error, setError] = useState("");
+    const [shelterTypes, setShelterTypes] = useState([]);
     const [form, setForm] = useState({
         name: "",
         last_name1: "",
@@ -17,10 +19,17 @@ export const Signup = () => {
         password: "",
         password2: "",
         shelter_name: "",
+        shelter_email: "",
         shelter_type: "",
         shelter_address: "",
         shelter_phone: "",
     });
+
+    useEffect(() => {
+        getShelterTypes()
+            .then(setShelterTypes)
+            .catch(() => setShelterTypes([]));
+    }, []);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -85,6 +94,7 @@ export const Signup = () => {
                                     setForm({
                                         ...form,
                                         shelter_name: "",
+                                        shelter_email: "",
                                         shelter_type: "",
                                         shelter_address: "",
                                         shelter_phone: "",
@@ -240,6 +250,25 @@ export const Signup = () => {
                                 </div>
 
                                 <div className="mb-3">
+                                    <label htmlFor="shelter_email" className="form-label">
+                                        Correo de contacto de la protectora
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="shelter_email"
+                                        name="shelter_email"
+                                        className="form-control"
+                                        placeholder="contacto@protectorahuellas.org"
+                                        value={form.shelter_email}
+                                        onChange={handleChange}
+                                        required
+                                    />
+                                    <p className="form-text">
+                                        Este es el que ven los colaboradores, no tu correo personal.
+                                    </p>
+                                </div>
+
+                                <div className="mb-3">
                                     <label htmlFor="shelter_type" className="form-label">Tipo de entidad</label>
                                     <select
                                         id="shelter_type"
@@ -247,13 +276,14 @@ export const Signup = () => {
                                         className="form-select"
                                         value={form.shelter_type}
                                         onChange={handleChange}
+                                        required
                                     >
                                         <option value="">Selecciona una opción…</option>
-                                        <option value="protectora">Protectora</option>
-                                        <option value="asociacion">Asociación</option>
-                                        <option value="rescatista">Rescatista independiente</option>
-                                        <option value="colonia">Colonia felina</option>
-                                        <option value="acogida">Casa de acogida</option>
+                                        {shelterTypes.map((tipo) => (
+                                            <option key={tipo.shelter_type_id} value={tipo.shelter_type_id}>
+                                                {tipo.name}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
 
