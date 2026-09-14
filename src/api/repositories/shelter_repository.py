@@ -29,6 +29,12 @@ class ShelterRepository:
         ).one_or_none()
 
     @staticmethod
+    def get_by_email(email):
+        return db.session.scalars(
+            db.select(Shelter).where(Shelter.email == email)
+        ).one_or_none()
+
+    @staticmethod
     def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
         query = db.select(Shelter)
 

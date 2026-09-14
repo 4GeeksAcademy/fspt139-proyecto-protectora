@@ -10,6 +10,9 @@ def list_shelters(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
 
 
 def create_shelter(**data):
+    if ShelterRepository.get_by_email(data.get("email")):
+        raise APIException("Ya existe una entidad con ese correo", status_code=409)
+
     shelter_type_id = data.pop("shelter_type_id", None)
     shelter_type = ShelterTypeRepository.get_by_shelter_type_id(shelter_type_id)
 

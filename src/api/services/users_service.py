@@ -93,7 +93,19 @@ def list_users():
     return UserRepository.list_all()
 
 
+PASSWORD_MIN_LENGTH = 8
+
+def validate_password(password):
+    if len(password or "") < PASSWORD_MIN_LENGTH:
+        raise APIException(
+            f"La contraseña debe tener al menos {PASSWORD_MIN_LENGTH} caracteres",
+            status_code=400
+        )
+
+
 def register_user(shelter_data=None, **data):
+    validate_password(data.get("password"))
+
     if UserRepository.get_by_email(data["email"]):
         raise APIException("Ya existe una cuenta con ese correo", status_code=409)
 
