@@ -1,15 +1,18 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../services/authServices";
 import { getShelterTypes } from "../services/shelterTypesService";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Signup = () => {
     const navigate = useNavigate()
+    const { store, dispatch } = useGlobalReducer()
     const [rol, setRol] = useState("volunteer");
     const [showPassword, setShowPassword] = useState(false);
     const [aceptaTerminos, setAceptaTerminos] = useState(false);
     const [error, setError] = useState("");
     const [shelterTypes, setShelterTypes] = useState([]);
+    const timerRef = useRef(null);
     const [form, setForm] = useState({
         name: "",
         last_name1: "",
@@ -29,6 +32,14 @@ export const Signup = () => {
         getShelterTypes()
             .then(setShelterTypes)
             .catch(() => setShelterTypes([]));
+    }, []);
+
+    useEffect(() => {
+        return () => {
+            if (timerRef.current) {
+                clearTimeout(timerRef.current);
+            }
+        };
     }, []);
 
     const handleChange = (e) => {
@@ -56,7 +67,13 @@ export const Signup = () => {
 
         try {
             await signup({ ...form, rol });
-            navigate("/login")
+
+            dispatch({ type: "set-success", payload: "Cuenta creada correctamente. Te llevamos a iniciar sesión…" });
+
+            timerRef.current = setTimeout(() => {
+                dispatch({ type: "set-success", payload: null });
+                navigate("/login");
+            }, 4000);
 
         } catch (error) {
             setError(error.message);
@@ -71,6 +88,15 @@ export const Signup = () => {
 
     return (
         <div className="container py-5 d-flex justify-content-center">
+
+            {store.successMessage && (
+                <div className="position-fixed top-50 start-50 translate-middle" style={{ zIndex: 1080 }}>
+                    <div className="bg-success text-white shadow-lg text-center mb-0 px-4 py-3 rounded-3">
+                        <p className="mb-0 fs-5 fw-semibold">{store.successMessage}</p>
+                    </div>
+                </div>
+            )}
+
             <div className="card shadow-sm border-0" style={{ maxWidth: "560px", width: "100%" }}>
                 <div className="card-body p-4 p-md-5">
 
