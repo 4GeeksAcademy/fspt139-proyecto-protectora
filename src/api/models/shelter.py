@@ -16,7 +16,7 @@ class Shelter(db.Model):
     name: Mapped[str] = mapped_column(String)
     description: Mapped[Optional[str]] = mapped_column(Text)
     logo_url: Mapped[Optional[str]] = mapped_column(String)
-    email: Mapped[str] = mapped_column(String)
+    email: Mapped[str] = mapped_column(String, unique=True)
     phone: Mapped[str] = mapped_column(String)
     website: Mapped[Optional[str]] = mapped_column(String)
     instagram: Mapped[Optional[str]] = mapped_column(String)
