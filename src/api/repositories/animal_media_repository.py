@@ -18,6 +18,18 @@ class AnimalMediaRepository:
         return db.session.scalars(db.select(AnimalMedia)).all()
 
     @staticmethod
+    def list_by_animal_id(animal_id):
+        return db.session.scalars(
+            db.select(AnimalMedia).where(AnimalMedia.animal_id == animal_id)
+        ).all()
+
+    @staticmethod
+    def clear_cover(animal_id):
+        for media in AnimalMediaRepository.list_by_animal_id(animal_id):
+            if media.is_cover:
+                media.is_cover = False
+
+    @staticmethod
     def create(**fields):
         animal_media = AnimalMedia(**fields)
         db.session.add(animal_media)

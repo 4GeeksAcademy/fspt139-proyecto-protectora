@@ -30,6 +30,7 @@ class Shelter(db.Model):
     shelter_type: Mapped["ShelterType"] = relationship(back_populates="shelters")
     users: Mapped[List["User"]] = relationship(back_populates="shelter")
     requests: Mapped[List["Request"]] = relationship(back_populates="shelter")
+    animals: Mapped[List["Animal"]] = relationship(back_populates="shelter")
 
     def serialize(self):
         return {

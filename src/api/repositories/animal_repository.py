@@ -7,13 +7,13 @@ LIKE_FILTER_FIELDS = {
 }
 
 #TIPO IGUALDAD
-EQUAL_FILTER_FIELDS = {"animal_type_id"}
+EQUAL_FILTER_FIELDS = {"animal_type_id", "shelter_id", "status"}
 FILTERABLE_FIELDS = LIKE_FILTER_FIELDS | EQUAL_FILTER_FIELDS
 
 #CAMPOS ORDENABLES
 SORTABLE_FIELDS = {
     "id", "animal_id", "name", "breed", "size", "weight", "birthdate",
-    "animal_type_id", "created_at", "update_at"
+    "animal_type_id", "shelter_id", "status", "created_at", "update_at"
 }
 
 

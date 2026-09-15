@@ -131,17 +131,34 @@ def seed_database():
 
             animal_type = AnimalTypeRepository.get_by_animal_type_id(item["animal_type_id"])
 
+            shelter_id = None
+            if item.get("shelter_id"):
+                shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
+                shelter_id = shelter.id
+
             AnimalRepository.create(
                 animal_id=item["animal_id"],
                 name=item["name"],
+                sex=item.get("sex"),
                 breed=item["breed"],
                 size=item["size"],
                 weight=item.get("weight"),
                 birthdate=date.fromisoformat(
                     item["birthdate"]) if item.get("birthdate") else None,
                 activity_level=item.get("activity_level"),
+                vaccines=item.get("vaccines"),
+                has_microchip=item.get("has_microchip", False),
+                is_sterilized=item.get("is_sterilized", False),
+                tests_done=item.get("tests_done"),
+                special_needs=item.get("special_needs"),
+                traits=item.get("traits"),
+                lives_with_kids=item.get("lives_with_kids"),
+                lives_with_dogs=item.get("lives_with_dogs"),
+                lives_with_cats=item.get("lives_with_cats"),
+                ideal_home=item.get("ideal_home"),
                 story=item["story"],
                 animal_type_id=animal_type.id,
+                shelter_id=shelter_id,
             )
 
             created["animals"] += 1
@@ -250,6 +267,7 @@ def seed_database():
                 animal_id=animal.id,
                 format=item["format"],
                 url=item["url"],
+                is_cover=item.get("is_cover", False),
             )
             
             created["animal_media"] += 1

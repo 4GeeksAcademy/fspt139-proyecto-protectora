@@ -84,3 +84,6 @@ __pycache__/
 
 #ignore por indicacion de Javier para evitar colisionar con las bases de datos propias
 migrations
+
+# archivos de animales subidos (version hasta tener cloudinary)
+src/api/uploads/

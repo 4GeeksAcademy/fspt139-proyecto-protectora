@@ -14,8 +14,9 @@ from flask_cors import CORS
 
 api = Blueprint('api', __name__)
 
-# Allow CORS requests to this API
-CORS(api)
+# para los Location de los upsert
+# valorar si no es necesario o solo corrige mi bug
+CORS(api, expose_headers=["Location"])
 
 # Import every sibling module so their @api.route(...) decorators run and
 # register their endpoints on the blueprint above.

@@ -3,36 +3,56 @@
     "media_id": "0ae445cb-eeeb-42a4-ba43-1909d3232e0d",
     "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
     "format": "image",
-    "url": "https://storage.example.com/animals/firulais-1.jpg"
+    "url": "https://images.pexels.com/photos/15943144/pexels-photo-15943144.jpeg",
+    "is_cover": true
   },
   {
     "media_id": "7a250077-5c92-46de-9635-49f97c3484c0",
     "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
     "format": "image",
-    "url": "https://storage.example.com/animals/luna-1.jpg"
+    "url": "https://images.pexels.com/photos/16299046/pexels-photo-16299046.jpeg",
+    "is_cover": true
   },
   {
     "media_id": "6ab63f0a-1ad4-498d-958b-0390c072f1c4",
     "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
     "format": "video",
-    "url": "https://storage.example.com/animals/luna-1.mp4"
+    "url": "https://videos.pexels.com/video-files/6173829/6173829-sd_640_360_30fps.mp4",
+    "is_cover": false
   },
   {
     "media_id": "1bb58d0d-44ef-44b1-9e61-3f2ce551466b",
     "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
     "format": "image",
-    "url": "https://storage.example.com/animals/michi-1.jpg"
+    "url": "https://images.pexels.com/photos/34719941/pexels-photo-34719941.jpeg",
+    "is_cover": true
   },
   {
     "media_id": "486a957b-7e5f-4944-8be1-5e8784359c10",
     "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
     "format": "image",
-    "url": "https://storage.example.com/animals/salem-1.jpg"
+    "url": "https://images.pexels.com/photos/29858717/pexels-photo-29858717.jpeg",
+    "is_cover": true
   },
   {
     "media_id": "3281134a-3289-486d-bf5f-53f647155bca",
     "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
     "format": "image",
-    "url": "https://storage.example.com/animals/toby-1.jpg"
+    "url": "https://images.pexels.com/photos/144608/pexels-photo-144608.jpeg",
+    "is_cover": true
+  },
+  {
+    "media_id": "25e94ac0-f789-4d2c-8351-7f5e651e82a4",
+    "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
+    "format": "image",
+    "url": "https://images.pexels.com/photos/7067205/pexels-photo-7067205.jpeg",
+    "is_cover": true
+  },
+  {
+    "media_id": "6c8b4358-eae6-4852-b830-67e7d49952e3",
+    "animal_id": "6d4b1a7e-2a3f-4b6a-9c0d-1e8f2a3b4c5d",
+    "format": "image",
+    "url": "https://images.pexels.com/photos/13473569/pexels-photo-13473569.jpeg",
+    "is_cover": true
   }
 ]
