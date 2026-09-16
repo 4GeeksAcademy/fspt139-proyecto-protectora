@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import List, Optional
 
-from sqlalchemy import Date, DateTime, Float, ForeignKey, String, Text
+from sqlalchemy import Boolean, Date, DateTime, Float, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -14,18 +14,32 @@ class Animal(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     animal_id: Mapped[str] = mapped_column(String, unique=True)
     name: Mapped[str] = mapped_column(String)
+    sex: Mapped[Optional[str]] = mapped_column(String)
     breed: Mapped[str] = mapped_column(String)
     size: Mapped[str] = mapped_column(String)
     weight: Mapped[Optional[float]] = mapped_column(Float(10, 2), default=0.0)
     birthdate: Mapped[Optional[date]] = mapped_column(Date)
     activity_level: Mapped[Optional[str]] = mapped_column(String)
+    vaccines: Mapped[Optional[str]] = mapped_column(String)
+    has_microchip: Mapped[Optional[bool]] = mapped_column(Boolean, default=False)
+    is_sterilized: Mapped[Optional[bool]] = mapped_column(Boolean, default=False)
+    tests_done: Mapped[Optional[str]] = mapped_column(String)
+    special_needs: Mapped[Optional[str]] = mapped_column(Text)
+    traits: Mapped[Optional[str]] = mapped_column(Text)
+    lives_with_kids: Mapped[Optional[bool]] = mapped_column(Boolean)
+    lives_with_dogs: Mapped[Optional[bool]] = mapped_column(Boolean)
+    lives_with_cats: Mapped[Optional[bool]] = mapped_column(Boolean)
+    ideal_home: Mapped[Optional[str]] = mapped_column(Text)
     story: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String, default='disponible')
     animal_type_id: Mapped[int] = mapped_column(ForeignKey('animal_type.id'))
+    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id'))
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
     update_at: Mapped[Optional[datetime]] = mapped_column(
         DateTime, default=func.now(), onupdate=func.now())
 
     animal_type: Mapped["AnimalType"] = relationship(back_populates="animals")
+    shelter: Mapped[Optional["Shelter"]] = relationship(back_populates="animals")
     media: Mapped[List["AnimalMedia"]] = relationship(back_populates="animal")
     requests: Mapped[List["Request"]] = relationship(back_populates="animal")
     adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="animal")
@@ -35,13 +49,28 @@ class Animal(db.Model):
             "id": self.id,
             "animal_id": self.animal_id,
             "name": self.name,
+            "sex": self.sex,
             "breed": self.breed,
             "size": self.size,
             "weight": self.weight,
             "birthdate": self.birthdate.isoformat() if self.birthdate else None,
             "activity_level": self.activity_level,
+            "vaccines": self.vaccines,
+            "has_microchip": self.has_microchip,
+            "is_sterilized": self.is_sterilized,
+            "tests_done": self.tests_done,
+            "special_needs": self.special_needs,
+            "traits": self.traits,
+            "lives_with_kids": self.lives_with_kids,
+            "lives_with_dogs": self.lives_with_dogs,
+            "lives_with_cats": self.lives_with_cats,
+            "ideal_home": self.ideal_home,
             "story": self.story,
+            "status": self.status,
             "animal_type_id": self.animal_type_id,
+            "shelter_id": self.shelter_id,
+            "media": [media.serialize() for media in self.media],
+            "cover_image": next((media.url for media in self.media if media.is_cover), None),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
         }

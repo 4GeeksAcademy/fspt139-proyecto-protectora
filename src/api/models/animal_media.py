@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime, ForeignKey, String
+from sqlalchemy import Boolean, DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -16,6 +16,7 @@ class AnimalMedia(db.Model):
     animal_id: Mapped[int] = mapped_column(ForeignKey('animal.id'))
     format: Mapped[str] = mapped_column(String)
     url: Mapped[str] = mapped_column(String)
+    is_cover: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
     update_at: Mapped[Optional[datetime]] = mapped_column(
         DateTime, default=func.now(), onupdate=func.now())
@@ -29,6 +30,7 @@ class AnimalMedia(db.Model):
             "animal_id": self.animal_id,
             "format": self.format,
             "url": self.url,
+            "is_cover": self.is_cover,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
         }

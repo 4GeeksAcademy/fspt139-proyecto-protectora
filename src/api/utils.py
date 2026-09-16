@@ -1,4 +1,4 @@
-from flask import jsonify, url_for
+from flask import jsonify, request, url_for
 
 class APIException(Exception):
     status_code = 400
@@ -39,3 +39,25 @@ def generate_sitemap(app):
         <p>Start working on your project by following the <a href="https://start.4geeksacademy.com/starters/full-stack" target="_blank">Quick Start</a></p>
         <p>Remember to specify a real endpoint path like: </p>
         <ul style="text-align: left;">"""+links_html+"</ul></div>"
+
+
+# valida y monta la paginacion (page, per_page) a partir del query string; comun a las rutas de listado
+def paginate_args():
+    DEFAULT_PAGE = 1
+    DEFAULT_PER_PAGE = 10
+    MAX_PER_PAGE = 100
+
+    try:
+        page = int(request.args.get('page', DEFAULT_PAGE))
+    except ValueError:
+        page = DEFAULT_PAGE
+
+    try:
+        per_page = int(request.args.get('per_page', DEFAULT_PER_PAGE))
+    except ValueError:
+        per_page = DEFAULT_PER_PAGE
+
+    page = max(page, 1)
+    per_page = min(max(per_page, 1), MAX_PER_PAGE)
+
+    return page, per_page

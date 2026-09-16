@@ -2,6 +2,7 @@ from flask import jsonify, request
 
 from api.repositories.shelter_repository import FILTERABLE_FIELDS
 from api.services.shelters_service import list_shelters
+from api.utils import paginate_args
 
 from . import api
 
@@ -9,29 +10,10 @@ from . import api
 @api.route('/shelters', methods=['GET'])
 def list_shelters_action():
 
-    DEFAULT_PAGE = 1
-    DEFAULT_PER_PAGE = 10
-    MAX_PER_PAGE = 100
-
-
     filters = {field: value for field in FILTERABLE_FIELDS if (value := request.args.get(field))}
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
-
-    try:
-        page = int(request.args.get('page', DEFAULT_PAGE))
-    except ValueError:
-        page = DEFAULT_PAGE
-
-    try:
-        per_page = int(request.args.get('per_page', DEFAULT_PER_PAGE))
-    except ValueError:
-        per_page = DEFAULT_PER_PAGE
-
-    page = max(page, 1)
-    per_page = max(per_page, 1)
-
-    per_page = min(per_page, MAX_PER_PAGE)
+    page, per_page = paginate_args()
 
     resultados = list_shelters(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page)
 

@@ -37,6 +37,7 @@ import { ProtectoraAdopciones } from "../pages/shelter-admin/ProtectoraAdopcione
 // PAGINAS DE COLABORADOR
 import { ColaboradorActividad } from "../pages/volunteer/ColaboradorActividad";
 import { ColaboradorPerfil } from "../pages/volunteer/ColaboradorPerfil";
+import {ProtectoraAnimalesForm} from "../pages/shelter-admin/ProtectoraAnimalesForm";
 
 
 export const router = createBrowserRouter([
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/adoptar/:id",
+                element: <AnimalProfile />
+            },
+            {
+                path: "/animal/view/:id",
                 element: <AnimalProfile />
             },
             {
@@ -109,6 +114,14 @@ export const router = createBrowserRouter([
                     {
                         path: "/panel/animales",
                         element: <ProtectoraAnimales />
+                    },
+                    {
+                        path: "/panel/animales/create",
+                        element: <ProtectoraAnimalesForm />
+                    },
+                    {
+                        path: "/panel/animales/:id",
+                        element: <ProtectoraAnimalesForm />
                     },
                     {
                         path: "/panel/adopciones",
