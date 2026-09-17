@@ -11,7 +11,7 @@ export const Layout = () => {
     const { store, dispatch } = useGlobalReducer()
 
     useEffect(() => {
-        if (store.shelterTypes.length > 0 && store.animalTypes.length > 0) return
+        if (store.shelterTypes.length > 0 && store.animalTypes.length > 0 && store.requestTypes.length > 0) return
 
         const backendUrl = import.meta.env.VITE_BACKEND_URL
 
@@ -20,6 +20,7 @@ export const Layout = () => {
             .then((data) => {
                 dispatch({ type: "set_shelter_types", payload: data.shelter_types })
                 dispatch({ type: "set_animal_types", payload: data.animal_types })
+                dispatch({ type: "set_request_types", payload: data.request_types })
             })
             .catch(() => { })
     }, [])

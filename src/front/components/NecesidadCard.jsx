@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+//TODO: cargar una need/request en lugar de los props
+
 export const NecesidadCard = ({ id, imageClass, title, org, badgeText, badgeClass, current, total, unit, note }) => {
 
     const percent = (current / total) * 100;

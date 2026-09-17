@@ -46,7 +46,9 @@ class Request(db.Model):
             "update_at": self.update_at.isoformat() if self.update_at else None,
             "unit": self.unit,
             "status": self.status,
-            "request_type_id": self.request_type_id,
+            "request_type_id": self.request_type.id,
+            "request_type_code": self.request_type.code,
+            "request_type_name": self.request_type.name,
             "media": [media.serialize() for media in self.media],
             "cover_image": next((media.url for media in self.media if media.is_cover), None),
         }

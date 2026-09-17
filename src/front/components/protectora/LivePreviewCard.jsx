@@ -1,36 +1,9 @@
 import React from "react";
 import { calcularAgeLabel } from "../../utils/animalAge";
+import { ChecklistRow } from "./ChecklistRow";
+import { ProgressBar } from "./ProgressBar";
 
 //sticky del lateral del formulario de animal y checklist de datos
-const ChecklistRow = ({ label, done }) => (
-  <div className="d-flex align-items-center gap-2 py-1">
-    <span
-      className="d-inline-flex align-items-center justify-content-center flex-shrink-0 rounded-circle"
-      style={{
-        width: "18px",
-        height: "18px",
-        border: `2px solid ${done ? "var(--rp-verde)" : "#c7c1b2"}`,
-        backgroundColor: done ? "var(--rp-verde)" : "transparent",
-        transition: "all 0.2s ease",
-      }}
-    >
-      {done && (
-        <svg width="9" height="7" viewBox="0 0 9 7" fill="none">
-          <path d="M1 3.5L3.2 5.7L8 1" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      )}
-    </span>
-    <span
-      style={{
-        fontSize: "0.85rem",
-        color: done ? "var(--rp-pino)" : "var(--rp-gris)",
-        transition: "color 0.2s ease",
-      }}
-    >
-      {label}
-    </span>
-  </div>
-);
 
 export const LivePreviewCard = ({ species, form, mediaItems, coverId }) => {
   const cover = mediaItems.find((item) => item.id === coverId && item.kind === "image");
@@ -61,7 +34,6 @@ export const LivePreviewCard = ({ species, form, mediaItems, coverId }) => {
   const totalChecks = requiredChecks.length + bonusChecks.length;
   const doneChecks = [...requiredChecks, ...bonusChecks].filter((c) => c.done).length;
   const percent = Math.round((doneChecks / totalChecks) * 100);
-  const segments = 5;
 
   return (
     <div style={{ position: "sticky", top: "65px" }}>
@@ -133,27 +105,7 @@ export const LivePreviewCard = ({ species, form, mediaItems, coverId }) => {
               {percent} %
             </span>
           </div>
-          <div className="d-flex gap-1">
-            {Array.from({ length: segments }).map((_, idx) => {
-              const segmentFill = Math.max(0, Math.min(1, percent / 100 - idx / segments) * segments);
-              return (
-                <div
-                  key={idx}
-                  className="flex-fill rounded-pill overflow-hidden"
-                  style={{ height: "5px", backgroundColor: "var(--rp-linea)" }}
-                >
-                  <div
-                    style={{
-                      width: `${segmentFill * 100}%`,
-                      height: "100%",
-                      backgroundColor: "var(--rp-verde)",
-                      transition: "width 0.3s ease",
-                    }}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          <ProgressBar percent={percent} />
         </div>
       </div>
 
