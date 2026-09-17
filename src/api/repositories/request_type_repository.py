@@ -12,6 +12,10 @@ class RequestTypeRepository:
         return db.session.scalars(db.select(RequestType).where(RequestType.request_type_id == request_type_id)).one_or_none()
 
     @staticmethod
+    def get_by_code(code):
+        return db.session.scalars(db.select(RequestType).where(RequestType.code == code)).one_or_none()
+
+    @staticmethod
     def list_all():
         return db.session.scalars(db.select(RequestType)).all()
 
