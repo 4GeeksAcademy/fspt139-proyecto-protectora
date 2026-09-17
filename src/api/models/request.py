@@ -19,7 +19,9 @@ class Request(db.Model):
     description: Mapped[str] = mapped_column(Text)
     request_deadline: Mapped[Optional[datetime]] = mapped_column(DateTime)
     amount_needed: Mapped[Optional[float]] = mapped_column(Numeric(10, 2), default=0.0)
-    request_type: Mapped[str] = mapped_column(String)
+    unit: Mapped[Optional[str]] = mapped_column(String)
+    status: Mapped[str] = mapped_column(String, default='abierta')
+    request_type_id: Mapped[int] = mapped_column(ForeignKey('request_type.id'))
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
     update_at: Mapped[Optional[datetime]] = mapped_column(
         DateTime, default=func.now(), onupdate=func.now())
@@ -27,6 +29,8 @@ class Request(db.Model):
     shelter: Mapped[Optional["Shelter"]] = relationship(back_populates="requests")
     animal: Mapped[Optional["Animal"]] = relationship(back_populates="requests")
     user_requests: Mapped[List["UserRequest"]] = relationship(back_populates="request", passive_deletes=True)
+    request_type: Mapped["RequestType"] = relationship(back_populates="requests")
+    media: Mapped[List["RequestMedia"]] = relationship(back_populates="request", passive_deletes=True)
 
     def serialize(self):
         return {
@@ -38,7 +42,11 @@ class Request(db.Model):
             "description": self.description,
             "request_deadline": self.request_deadline.isoformat() if self.request_deadline else None,
             "amount_needed": self.amount_needed,
-            "request_type": self.request_type,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
+            "unit": self.unit,
+            "status": self.status,
+            "request_type_id": self.request_type_id,
+            "media": [media.serialize() for media in self.media],
+            "cover_image": next((media.url for media in self.media if media.is_cover), None),
         }

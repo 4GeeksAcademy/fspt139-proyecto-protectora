@@ -1,23 +1,22 @@
 from api.models import Animal, Request, Shelter, db
 
-#FILTROS ADMITIDOS PARA EL REPOSITORIO REQUEST
+#FILTROS ADMITIDOS PARA EL REPOSITORIO ANIMAL
 #TIPO LIKE X
 LIKE_FILTER_FIELDS = {
-    "request_id", "name", "description", "request_type"
+    "request_id", "name", "description"
 }
 
 #TIPO IGUALDAD
-EQUAL_FILTER_FIELDS = {"shelter_id", "animal_id"}
+EQUAL_FILTER_FIELDS = {"shelter_id", "animal_id", "request_type_id", "status"}
 
-#FILTROS QUE REQUIEREN JOIN CON OTRA TABLA (shelter_type_id vive en shelter, animal_type_id vive en animal)
+#FILTROS QUE REQUIEREN JOIN CON OTRA TABLA
 JOIN_FILTER_FIELDS = {"shelter_type_id", "animal_type_id"}
 
 FILTERABLE_FIELDS = LIKE_FILTER_FIELDS | EQUAL_FILTER_FIELDS | JOIN_FILTER_FIELDS
 
 #CAMPOS ORDENABLES
 SORTABLE_FIELDS = {
-    "id", "request_id", "name", "request_deadline", "amount_needed",
-    "request_type", "shelter_id", "animal_id", "created_at", "update_at"
+    "id", "request_id", "name", "request_deadline", "amount_needed", "request_type_id", "status", "shelter_id", "animal_id", "created_at", "update_at"
 }
 
 
