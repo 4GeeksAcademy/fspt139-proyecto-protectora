@@ -359,7 +359,7 @@ export const Signup = () => {
                                 required
                             />
                             <label className="form-check-label" htmlFor="terminos">
-                                Acepto los <Link to="/terminos" target="_blank">términos de uso</Link> y la <Link to="/privacidad" target="_blank">política de privacidad</Link>.
+                                Acepto los <Link to="/terminos" target="_blank">términos de uso y la política de privacidad</Link>
                             </label>
                         </div>
 
