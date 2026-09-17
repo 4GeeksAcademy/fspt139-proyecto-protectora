@@ -28,9 +28,9 @@ class Shelter(db.Model):
         DateTime, default=func.now(), onupdate=datetime.utcnow)
 
     shelter_type: Mapped["ShelterType"] = relationship(back_populates="shelters")
-    users: Mapped[List["User"]] = relationship(back_populates="shelter")
-    requests: Mapped[List["Request"]] = relationship(back_populates="shelter")
-    animals: Mapped[List["Animal"]] = relationship(back_populates="shelter")
+    users: Mapped[List["User"]] = relationship(back_populates="shelter", passive_deletes=True)
+    requests: Mapped[List["Request"]] = relationship(back_populates="shelter", passive_deletes=True)
+    animals: Mapped[List["Animal"]] = relationship(back_populates="shelter", passive_deletes=True)
 
     def serialize(self):
         return {

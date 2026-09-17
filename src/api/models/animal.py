@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import List, Optional
 
-from sqlalchemy import Boolean, Date, DateTime, Float, ForeignKey, String, Text
+from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Numeric, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -17,7 +17,7 @@ class Animal(db.Model):
     sex: Mapped[Optional[str]] = mapped_column(String)
     breed: Mapped[str] = mapped_column(String)
     size: Mapped[str] = mapped_column(String)
-    weight: Mapped[Optional[float]] = mapped_column(Float(10, 2), default=0.0)
+    weight: Mapped[Optional[float]] = mapped_column(Numeric(10, 2), default=0.0)
     birthdate: Mapped[Optional[date]] = mapped_column(Date)
     activity_level: Mapped[Optional[str]] = mapped_column(String)
     vaccines: Mapped[Optional[str]] = mapped_column(String)
@@ -33,16 +33,15 @@ class Animal(db.Model):
     story: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String, default='disponible')
     animal_type_id: Mapped[int] = mapped_column(ForeignKey('animal_type.id'))
-    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id'))
+    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id', ondelete='SET NULL'))
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
-    update_at: Mapped[Optional[datetime]] = mapped_column(
-        DateTime, default=func.now(), onupdate=func.now())
+    update_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now(), onupdate=func.now())
 
     animal_type: Mapped["AnimalType"] = relationship(back_populates="animals")
     shelter: Mapped[Optional["Shelter"]] = relationship(back_populates="animals")
-    media: Mapped[List["AnimalMedia"]] = relationship(back_populates="animal")
-    requests: Mapped[List["Request"]] = relationship(back_populates="animal")
-    adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="animal")
+    media: Mapped[List["AnimalMedia"]] = relationship(back_populates="animal", passive_deletes=True)
+    requests: Mapped[List["Request"]] = relationship(back_populates="animal", passive_deletes=True)
+    adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="animal", passive_deletes=True)
 
     def serialize(self):
         return {

@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Optional
 
-from sqlalchemy import DateTime, Float, ForeignKey, String, Text
+from sqlalchemy import DateTime, ForeignKey, Numeric, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -13,12 +13,12 @@ class Request(db.Model):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     request_id: Mapped[str] = mapped_column(String, unique=True)
-    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id'))
-    animal_id: Mapped[Optional[int]] = mapped_column(ForeignKey('animal.id'))
+    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id', ondelete='SET NULL'))
+    animal_id: Mapped[Optional[int]] = mapped_column(ForeignKey('animal.id', ondelete='SET NULL'))
     name: Mapped[str] = mapped_column(String)
     description: Mapped[str] = mapped_column(Text)
     request_deadline: Mapped[Optional[datetime]] = mapped_column(DateTime)
-    amount_needed: Mapped[Optional[float]] = mapped_column(Float(10, 2), default=0.0)
+    amount_needed: Mapped[Optional[float]] = mapped_column(Numeric(10, 2), default=0.0)
     request_type: Mapped[str] = mapped_column(String)
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
     update_at: Mapped[Optional[datetime]] = mapped_column(
@@ -26,7 +26,7 @@ class Request(db.Model):
 
     shelter: Mapped[Optional["Shelter"]] = relationship(back_populates="requests")
     animal: Mapped[Optional["Animal"]] = relationship(back_populates="requests")
-    user_requests: Mapped[List["UserRequest"]] = relationship(back_populates="request")
+    user_requests: Mapped[List["UserRequest"]] = relationship(back_populates="request", passive_deletes=True)
 
     def serialize(self):
         return {

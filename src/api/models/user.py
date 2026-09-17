@@ -21,7 +21,7 @@ class User(db.Model):
     password: Mapped[str] = mapped_column(String)
     token_version: Mapped[Optional[int]] = mapped_column()
     rol: Mapped[str] = mapped_column(String)
-    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id'))
+    shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id', ondelete='SET NULL'))
     ranking: Mapped[Optional[int]] = mapped_column(default=0)
     address: Mapped[Optional[str]] = mapped_column(String)
     map_positioning: Mapped[Optional[str]] = mapped_column(String)
@@ -30,9 +30,9 @@ class User(db.Model):
         DateTime, default=func.now(), onupdate=func.now())
 
     shelter: Mapped[Optional["Shelter"]] = relationship(back_populates="users")
-    reviews: Mapped[List["UserReview"]] = relationship(back_populates="user")
-    adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="user")
-    user_requests: Mapped[List["UserRequest"]] = relationship(back_populates="user")
+    reviews: Mapped[List["UserReview"]] = relationship(back_populates="user", passive_deletes=True)
+    adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="user", passive_deletes=True)
+    user_requests: Mapped[List["UserRequest"]] = relationship(back_populates="user", passive_deletes=True)
 
     def serialize(self):
         return {

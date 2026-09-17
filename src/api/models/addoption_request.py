@@ -13,8 +13,8 @@ class AddoptionRequest(db.Model):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     addoption_request_id: Mapped[str] = mapped_column(String, unique=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
-    animal_id: Mapped[int] = mapped_column(ForeignKey('animal.id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id', ondelete='CASCADE'))
+    animal_id: Mapped[int] = mapped_column(ForeignKey('animal.id', ondelete='CASCADE'))
     score: Mapped[Optional[int]] = mapped_column(default=0)
     is_accepted: Mapped[bool] = mapped_column(Boolean)
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())

@@ -12,7 +12,7 @@ class UserReview(db.Model):
     __tablename__ = 'user_review'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id', ondelete='CASCADE'))
     review_id: Mapped[str] = mapped_column(String, unique=True)
     ranking: Mapped[Optional[int]] = mapped_column(default=1)
     review: Mapped[Optional[str]] = mapped_column(Text)
