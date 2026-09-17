@@ -1,9 +1,20 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BuscanCasa } from "../components/BuscanCasa";
 import { NecesidadesDestacadas } from "../components/NecesidadesDestacadas";
 import { Statscard } from "../components/Statscard";
+import { getHomeInsights } from "../services/insightsService";
 
 export const Home = () => {
+
+    const [insights, setInsights] = useState(null);
+
+    useEffect(() => {
+        getHomeInsights()
+            .then((data) => setInsights(data))
+            .catch((error) => console.log(error));
+    }, []);
+
     return (
         <div className="container py-4">
 
@@ -46,14 +57,15 @@ export const Home = () => {
             </div>
 
             <div className="row text-center g-3 mb-5">
-                <Statscard number={14} label="Needs open" color="#138f4d" />
-                <Statscard number={38} label="Animals for adoption" color="#F0946A" />
-                <Statscard number={6} label="Registered shelters" color="#E8B04B" />
-                <Statscard number={312} label="Collaborations closed" color="#E0756B" />
+                <Statscard number={insights ? insights.needs_open : 0} label="Needs open" color="#138f4d" />
+                <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animals for adoption" color="#F0946A" />
+                <Statscard number={insights ? insights.registered_shelters : 0} label="Registered shelters" color="#E8B04B" />
+                <Statscard number={insights ? insights.collaborations_closed : 0} label="Collaborations closed" color="#E0756B" />
             </div>
 
-            <NecesidadesDestacadas />
-            <BuscanCasa />
+            {insights && <NecesidadesDestacadas needs={insights.open_needs} />}
+
+            {insights && <BuscanCasa animals={insights.open_adoptions} />}
 
         </div>
     );

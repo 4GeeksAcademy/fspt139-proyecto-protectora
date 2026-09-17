@@ -1,11 +1,16 @@
-export const HomeAnimalCard = ({ imageClass, badgeText, badgeClass, name, details, org }) => {
+export const HomeAnimalCard = ({ imageUrl, badgeText, badgeClass, name, details, org }) => {
 
     return (
         <div className="col-12 col-md-4">
             <div className="card h-100 shadow-sm border-0">
 
                 <div className="position-relative">
-                    <div className={`card-placeholder ${imageClass}`}></div>
+                    <img
+                        src={imageUrl}
+                        alt={name}
+                        className="card-img-top"
+                        style={{ height: "160px", objectFit: "cover" }}
+                    />
                     <div className={`badge ${badgeClass} position-absolute top-0 start-0 m-2`}>
                         {badgeText}
                     </div>
