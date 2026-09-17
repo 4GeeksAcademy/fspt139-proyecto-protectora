@@ -10,6 +10,7 @@ help:
 
 ## Resetea la bbdd
 reset-db:
+	[ -f migrations/env.py ] || { rm -rf migrations && pipenv run init; }
 	pipenv run flask db stamp base --purge
 	pipenv run flask shell <<'EOF'
 	from api.models import db
