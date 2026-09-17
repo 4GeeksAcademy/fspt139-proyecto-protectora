@@ -8,6 +8,7 @@ export const initialStore = () => {
     token: getToken(),
     shelterTypes: [],
     animalTypes: [],
+    requestTypes: [],
   };
 };
 
@@ -35,6 +36,12 @@ export default function storeReducer(store, action = {}) {
       return {
         ...store,
         animalTypes: action.payload,
+      };
+
+    case "set_request_types":
+      return {
+        ...store,
+        requestTypes: action.payload,
       };
 
 
