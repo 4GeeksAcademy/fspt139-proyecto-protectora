@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Logo } from "../Logo";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { UserAvatar } from "../UserAvatar";
@@ -8,6 +8,9 @@ import { NavbarProtectora } from "./NavbarProtectora";
 import { NavbarColaborador } from "./NavbarColaborador";
 
 const COLLAPSE_ID = "navbarGuestCollapse";
+
+const navLinkClass = ({ isActive }) =>
+    `nav-link ${isActive ? "text-success fw-bold" : ""}`;
 
 export const Navbar = () => {
     const { store } = useGlobalReducer();
@@ -39,11 +42,11 @@ export const Navbar = () => {
                     {/*// NAVEGACION PRINCIPAL DE LA WEB */}
                     {/*///////////////////////////////////*/}
                     <div className="navbar-nav mx-lg-auto gap-lg-2">
-                        <Link onClick={closeMenu} to="/" className="nav-link">Home</Link>
-                        <Link onClick={closeMenu} to="/necesidades" className="nav-link">Needs</Link>
-                        <Link onClick={closeMenu} to="/adoptar" className="nav-link">Adopt</Link>
-                        <Link onClick={closeMenu} to="/protectoras" className="nav-link">Shelters</Link>
-                        <Link onClick={closeMenu} to="/ayuda" className="nav-link">Help</Link>
+                        <NavLink onClick={closeMenu} to="/" end className={navLinkClass}>Home</NavLink>
+                        <NavLink onClick={closeMenu} to="/necesidades" className={navLinkClass}>Needs</NavLink>
+                        <NavLink onClick={closeMenu} to="/adoptar" className={navLinkClass}>Adopt</NavLink>
+                        <NavLink onClick={closeMenu} to="/protectoras" className={navLinkClass}>Shelters</NavLink>
+                        <NavLink onClick={closeMenu} to="/ayuda" className={navLinkClass}>Help</NavLink>
                     </div>
                     {/*///////////////////////////////////*/}
                     <hr className="d-lg-none my-2" />

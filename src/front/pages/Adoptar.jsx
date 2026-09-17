@@ -236,22 +236,26 @@ export const Adoptar = () => {
   return (
     <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="bg-principal border-bottom py-5" style={{ borderColor: "var(--rp-linea) !important" }}>
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6">
-              <span className="badge mb-3 rp-eyebrow" style={{ backgroundColor: "var(--rp-papel)", color: "var(--rp-pino)", padding: "0.5rem 1rem" }}>
-                ENCUENTRA A TU MEJOR AMIGO
-              </span>
-              <h1 className="display-5 mb-3">
-                Buscan un <span style={{ color: "var(--rp-verde)" }}>hogar</span>
-              </h1>
-              <p className="fs-5 mb-0" style={{ color: "var(--rp-pino)" }}>
-                Descubre a los animales que están esperando una segunda oportunidad en las protectoras de tu zona.
-              </p>
-            </div>
-          </div>
-        </div>
+  <div className="container">
+    <div className="row align-items-center">
+      <div className="col-lg-6">
+
+        <p className="text-success fw-bold text-uppercase small mb-1">
+          Encuentra a tu mejor amigo
+        </p>
+
+        <h2 className="fw-bold mb-1">
+          Buscan un hogar
+        </h2>
+
+        <p className="text-secondary mb-0">
+          Descubre a los animales que están esperando una segunda oportunidad en las protectoras de tu zona.
+        </p>
+
       </div>
+    </div>
+  </div>
+</div>
 
       <div className="container-fluid py-5 flex-grow-1">
         <div className="container">
