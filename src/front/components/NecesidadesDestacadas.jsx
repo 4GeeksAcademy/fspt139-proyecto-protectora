@@ -1,6 +1,15 @@
 import { NecesidadCard } from "./NecesidadCard";
 
-export const NecesidadesDestacadas = () => {
+const getImageClass = (requestType) => {
+    if (requestType === "medica") return "img-pills";
+    if (requestType === "vacunacion") return "img-vet";
+    if (requestType === "esterilizacion") return "img-vet";
+    if (requestType === "alimento") return "img-food";
+    if (requestType === "transporte") return "img-car";
+    return "img-food";
+};
+
+export const NecesidadesDestacadas = ({ needs }) => {
 
     return (
         <div className="mb-5">
@@ -9,41 +18,21 @@ export const NecesidadesDestacadas = () => {
 
             <div className="row g-4">
 
-                <NecesidadCard
-                    imageClass="img-cat"
-                    title="Take two cats to the vet"
-                    org="Gatos del Sur"
-                    badgeText="Urgent"
-                    badgeClass="bg-danger"
-                    current={0}
-                    total={1}
-                    unit="trip"
-                    note="A car is needed"
-                />
-
-                <NecesidadCard
-                    imageClass="img-food"
-                    title="Puppy food"
-                    org="Protectora Animal Feliz"
-                    badgeText="3 days left"
-                    badgeClass="bg-warning text-dark"
-                    current={12}
-                    total={20}
-                    unit="kg"
-                    note="Pick up at the shelter"
-                />
-
-                <NecesidadCard
-                    imageClass="img-blanket"
-                    title="Blankets and towels"
-                    org="Protectora Croissant"
-                    badgeText="Covered"
-                    badgeClass="bg-success"
-                    current={4}
-                    total={4}
-                    unit="blankets"
-                    note="Closed on August 14"
-                />
+                {needs.map((need) => (
+                    <NecesidadCard
+                        key={need.id}
+                        id={need.id}
+                        imageClass={getImageClass(need.request_type)}
+                        title={need.name}
+                        org={"Shelter " + need.shelter_id}
+                        badgeText={need.request_type}
+                        badgeClass="bg-warning text-dark"
+                        current={0}
+                        total={Number(need.amount_needed).toFixed(2)}
+                        unit="€"
+                        note={need.description}
+                    />
+                ))}
 
             </div>
         </div>
