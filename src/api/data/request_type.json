@@ -1,0 +1,22 @@
+[
+  {
+    "request_type_id": "d3b0d2a1-6e2a-4b6b-9b0a-2f6a7e1c9a01",
+    "name": "Ayuda económica",
+    "description": "Para cubrir un gasto concreto: cirugía, vacunas, chip..."
+  },
+  {
+    "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
+    "name": "Recursos",
+    "description": "Comida, mantas, medicación, arena, material..."
+  },
+  {
+    "request_type_id": "4a7e9b6c-2d8f-4e1a-9c3b-7d5a1f8e9a03",
+    "name": "Tiempo voluntario",
+    "description": "Transporte, paseos, acogida, limpieza, difusión..."
+  },
+  {
+    "request_type_id": "1c6d8a3e-9f4b-4d2c-8a7e-5b3f9d1c9a04",
+    "name": "Otros",
+    "description": "Cualquier ayuda que no encaje en las anteriores."
+  }
+]
