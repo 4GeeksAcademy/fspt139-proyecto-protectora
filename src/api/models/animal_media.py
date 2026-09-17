@@ -13,7 +13,7 @@ class AnimalMedia(db.Model):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     media_id: Mapped[str] = mapped_column(String, unique=True)
-    animal_id: Mapped[int] = mapped_column(ForeignKey('animal.id'))
+    animal_id: Mapped[int] = mapped_column(ForeignKey('animal.id', ondelete='CASCADE'))
     format: Mapped[str] = mapped_column(String)
     url: Mapped[str] = mapped_column(String)
     is_cover: Mapped[bool] = mapped_column(Boolean, default=False)

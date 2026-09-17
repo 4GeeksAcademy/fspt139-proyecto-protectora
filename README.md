@@ -64,6 +64,22 @@
 
 ---
 
+## LIMPIADO DE LAS MIGRACIONES ANTERIORES Y BBDD ACTUAL:
+
+Usa el [`Makefile`](/Makefile) de la raíz del proyecto (`make help` lista los comandos disponibles):
+
+1. Vacia la bbdd actual, el registro de migraciones de la bbdd y la inicializa de nuevo aplicando el migrate/upgrade:
+
+```sh
+$ make reset-db
+```
+2. Repoblar datos de prueba (y tablas auxiliares): `make seed`. 
+Con el backend arrancado (`pipenv run start`), ejecutar make seed llamará a `/api/seed` contra la URL definida en `VITE_BACKEND_URL` (en tu `.env`)
+```sh
+$ make seed
+```
+---
+
 ## ROLES DE USUARIO:
 
 | Rol            | Tipo |

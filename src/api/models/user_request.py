@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import DateTime, Float, ForeignKey, String, Text
+from sqlalchemy import DateTime, ForeignKey, Numeric, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
@@ -12,10 +12,10 @@ class UserRequest(db.Model):
     __tablename__ = 'user_request'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
-    request_id: Mapped[int] = mapped_column(ForeignKey('request.id'))
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id', ondelete='CASCADE'))
+    request_id: Mapped[int] = mapped_column(ForeignKey('request.id', ondelete='CASCADE'))
     user_request_id: Mapped[str] = mapped_column(String, unique=True)
-    amount: Mapped[Optional[float]] = mapped_column(Float(10, 2), default=0.0)
+    amount: Mapped[Optional[float]] = mapped_column(Numeric(10, 2), default=0.0)
     shelter_answer: Mapped[Optional[str]] = mapped_column(Text)
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
     update_at: Mapped[Optional[datetime]] = mapped_column(
