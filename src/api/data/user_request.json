@@ -17,7 +17,7 @@
     "user_request_id": "a1932304-b8bc-4993-877a-cad76a01aed4",
     "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
     "request_id": "76f4e719-2c58-4eab-9da9-4f6584bd1b7b",
-    "amount": 30.0,
+    "amount": 60.0,
     "shelter_answer": "Gracias, con tu ayuda Toby ya tiene todas sus vacunas al día."
   },
   {
@@ -25,6 +25,27 @@
     "user_id": "f4c64137-e058-49b8-be87-28edbe58fcca",
     "request_id": "96af49cf-7ff4-4e06-a732-1871e3efefa5",
     "amount": 25.0,
+    "shelter_answer": null
+  },
+  {
+    "user_request_id": "3f8c1e2a-7d94-4b56-a018-6c2e9f4d7b31",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "request_id": "22e68d0c-43ba-40b1-8cb0-1f5c33260689",
+    "amount": 150.0,
+    "shelter_answer": null
+  },
+  {
+    "user_request_id": "c6b4a9d3-1e57-4f28-9a63-8d0f5c7e2b49",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "request_id": "22e68d0c-43ba-40b1-8cb0-1f5c33260689",
+    "amount": 200.0,
+    "shelter_answer": null
+  },
+  {
+    "user_request_id": "8e2d7f04-5a13-4c69-b8e2-9f1a6d3c05b7",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "request_id": "76f4e719-2c58-4eab-9da9-4f6584bd1b7b",
+    "amount": 30.0,
     "shelter_answer": null
   }
 ]
