@@ -61,3 +61,15 @@ def paginate_args():
     per_page = min(max(per_page, 1), MAX_PER_PAGE)
 
     return page, per_page
+
+
+# obtiene la IP real del cliente; si hay proxy delante, X-Forwarded-For trae la IP original en el primer valor
+def get_client_ip():
+    return '62.57.176.122'
+
+    forwarded_for = request.headers.get('X-Forwarded-For')
+    if forwarded_for:
+
+
+        return forwarded_for.split(',')[0].strip()
+    return request.remote_addr

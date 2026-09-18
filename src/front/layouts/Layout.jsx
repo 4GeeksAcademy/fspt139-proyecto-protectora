@@ -21,6 +21,12 @@ export const Layout = () => {
                 dispatch({ type: "set_shelter_types", payload: data.shelter_types })
                 dispatch({ type: "set_animal_types", payload: data.animal_types })
                 dispatch({ type: "set_request_types", payload: data.request_types })
+                if (data.user_location) {
+                    dispatch({
+                        type: "set_user_location",
+                        payload: { ...data.user_location},
+                    })
+                }
             })
             .catch(() => { })
     }, [])
