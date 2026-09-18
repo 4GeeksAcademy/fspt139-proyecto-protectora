@@ -32,12 +32,12 @@ import { ProtectoraAnimales } from "../pages/shelter-admin/ProtectoraAnimales.js
 import { ProtectoraNecesidades } from "../pages/shelter-admin/ProtectoraNecesidades.jsx";
 import { ProtectoraPerfil } from "../pages/shelter-admin/ProtectoraPerfil";
 import { ProtectoraAdopciones } from "../pages/shelter-admin/ProtectoraAdopciones";
-
+import { ProtectoraAnimalesForm } from "../pages/shelter-admin/ProtectoraAnimalesForm";
+import { ProtectoraNecesidadesForm } from "../pages/shelter-admin/ProtectoraNecesidadesForm";
 
 // PAGINAS DE COLABORADOR
 import { ColaboradorActividad } from "../pages/volunteer/ColaboradorActividad";
 import { ColaboradorPerfil } from "../pages/volunteer/ColaboradorPerfil";
-import {ProtectoraAnimalesForm} from "../pages/shelter-admin/ProtectoraAnimalesForm";
 
 
 export const router = createBrowserRouter([
@@ -110,6 +110,14 @@ export const router = createBrowserRouter([
                     {
                         path: "/panel/necesidades",
                         element: <ProtectoraNecesidades />
+                    },
+                    {
+                        path: "/panel/necesidades/create",
+                        element: <ProtectoraNecesidadesForm />
+                    },
+                    {
+                        path: "/panel/necesidades/:id",
+                        element: <ProtectoraNecesidadesForm />
                     },
                     {
                         path: "/panel/animales",

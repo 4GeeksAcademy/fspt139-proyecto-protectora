@@ -16,6 +16,7 @@ from api.repositories.shelter_repository import ShelterRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.repositories.user_request_repository import UserRequestRepository
 from api.repositories.user_review_repository import UserReviewRepository
+from api.repositories.request_type_repository import RequestTypeRepository
 ##############################
 #1. añadir fichero .json en la carpeta data
 #2. añadir bloque de carga en este fichero, siguiendo el patrón de los bloques existentes
@@ -38,8 +39,10 @@ def seed_database():
 
 
     ################ BLOQUE DE MODELOS A CARGAR, SE INSERTAN SI NO EXISTEN YA EN LA BASE DE DATOS ################
+
+    ################ BLOQUE DE RECURSOS, NECESARIA EN PRODUCCION ################
     ##############################
-    # Shelter types
+    # Shelter types [RECURSO, NECESARIA EN PRODUCCION]
     ##############################
     created["shelter_types"] = 0
     for item in load("shelter_type.json"):
@@ -49,7 +52,7 @@ def seed_database():
             created["shelter_types"] += 1
 
     ##############################
-    # Animal types
+    # Animal types [RECURSO, NECESARIA EN PRODUCCION]
     ##############################
     created["animal_types"] = 0
     for item in load("animal_type.json"):
@@ -57,6 +60,18 @@ def seed_database():
 
             AnimalTypeRepository.create(**item)
             created["animal_types"] += 1
+
+    ##############################
+    # Request types  [RECURSO, NECESARIA EN PRODUCCION]
+    ##############################
+    created["request_types"] = 0
+    for item in load("request_type.json"):
+        if RequestTypeRepository.get_by_request_type_id(item["request_type_id"]) is None:
+
+            RequestTypeRepository.create(**item)
+            created["request_types"] += 1
+
+    ################ FIN BLOQUE DE RECURSOS, DE AQUI EN ADELANTE SON FAKE MOCKS PARA POPULAR LA BASE DE DESARROLLO  ################
 
     ##############################
     # Shelters
@@ -179,6 +194,8 @@ def seed_database():
                 animal = AnimalRepository.get_by_animal_id(item["animal_id"])
                 animal_id = animal.id
 
+            request_type = RequestTypeRepository.get_by_request_type_id(item["request_type_id"])
+
             RequestRepository.create(
                 request_id=item["request_id"],
                 shelter_id=shelter_id,
@@ -187,8 +204,10 @@ def seed_database():
                 description=item["description"],
                 request_deadline=datetime.fromisoformat(
                     item["request_deadline"]) if item.get("request_deadline") else None,
-                amount_needed=item.get("amount_needed", 0.0),
-                request_type=item["request_type"],
+                amount_needed=item.get("amount_needed"),
+                unit=item.get("unit"),
+                status=item.get("status", "abierta"),
+                request_type_id=request_type.id,
             )
 
             created["requests"] += 1
