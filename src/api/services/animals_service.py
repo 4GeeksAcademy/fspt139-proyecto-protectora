@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 
 from api.repositories.animal_repository import AnimalRepository
 from api.repositories.animal_type_repository import AnimalTypeRepository
@@ -14,10 +14,34 @@ ANIMAL_FIELDS = {
 # estados que el formulario puede pedir explícitamente (crear como borrador/disponible, o publicar un borrador ya editado)
 SETTABLE_STATUSES = {"disponible", "borrador"}
 
+# estados visibles para cualquier visitante en el catálogo público y en la ficha
+PUBLIC_STATUSES = {"disponible", "en_proceso"}
 
-def list_animals(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
+# rangos de edad en años que ofrece el catalogo publico (minimo incluido, maximo excluido)
+AGE_RANGES = {
+    "cachorro": (0, 1),
+    "adulto": (1, 8),
+    "senior": (8, None),
+}
+
+
+def age_range_to_dates(age_range):
+    """Traduce 'cachorro' al rango de fechas de nacimiento que le corresponde hoy."""
+    if age_range not in AGE_RANGES:
+        return None, None
+
+    min_age, max_age = AGE_RANGES[age_range]
+    today = date.today()
+
+    birthdate_from = today - timedelta(days=365 * max_age) if max_age is not None else None
+    birthdate_to = today - timedelta(days=365 * min_age)
+
+    return birthdate_from, birthdate_to
+
+def list_animals(filters=None, sort_by=None, dir='asc', page=1, per_page=10, age_range=None):
+    birthdate_from, birthdate_to = age_range_to_dates(age_range)
     return AnimalRepository.list_all(filters=filters, sort_by=sort_by, dir=dir,
-    page=page, per_page=per_page)
+    page=page, per_page=per_page, birthdate_from=birthdate_from, birthdate_to=birthdate_to)
 
 # limita a un animal propio de la protectora (formulario de edicion)
 def get_shelter_animal(animal_id, shelter_id):
@@ -31,7 +55,7 @@ def get_shelter_animal(animal_id, shelter_id):
 # carga un animal publico por id (solo disponibles)
 def get_animal(animal_id):
     animal = AnimalRepository.get_by_animal_id(animal_id)
-    if animal is None or animal.status != "disponible":
+    if animal is None or animal.status not in PUBLIC_STATUSES:
         raise APIException("Animal no encontrado", status_code=404)
     return animal
 

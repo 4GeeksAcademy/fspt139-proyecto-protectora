@@ -9,39 +9,32 @@ export const cargarMediaUrl = (url) => {
   return /^https?:\/\//i.test(url) ? url : `${backendUrl}${url}`;
 };
 
-// listado publico de animales
+// listado publico de animales (no requiere sesion)
 export const getAnimals = async (
-  { ordenarPor, orden, pagina, perPage = 5 },
+  { ordenarPor = "created_at", orden = "desc", pagina = 1, perPage = 12 } = {},
   filters = {},
 ) => {
-  let url =
-    backendUrl +
-    "/api/animals?sort_by=" +
-    ordenarPor +
-    "&dir=" +
-    orden +
-    "&page=" +
-    pagina +
-    "&per_page=" +
-    perPage;
-
-  const { nombre, raza } = filters;
-
-  if (nombre && nombre.trim() !== "") {
-    url = url + "&name=" + nombre;
-  }
-  if (raza && raza.trim() !== "") {
-    url = url + "&breed=" + raza;
-  }
-
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
+  const params = new URLSearchParams({
+    sort_by: ordenarPor,
+    dir: orden,
+    page: pagina,
+    per_page: perPage,
   });
 
+  const { nombre, raza, animalTypeIds, shelterId, edad } = filters;
+
+  if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
+  if (raza && raza.trim() !== "") params.set("breed", raza.trim());
+  if (shelterId) params.set("shelter_id", shelterId);
+  if (edad) params.set("age_range", edad);
+
+  (animalTypeIds || []).forEach((id) => params.append("animal_type_id", id));
+
+  const response = await fetch(`${backendUrl}/api/animals?${params.toString()}`);
+
   if (!response.ok) {
-    throw new Error("No se han podido obtener los animales");
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener los animales");
   }
   return response.json();
 };

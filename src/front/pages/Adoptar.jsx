@@ -1,362 +1,237 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { AnimalCard } from "../components/AnimalCard";
+import { getAnimals } from "../services/animalsService";
+import { getShelters } from "../services/sheltersService";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
+const PER_PAGE = 12;
+
+const PESTANAS = [
+  { key: "todos", label: "Todos" },
+  { key: "perros", label: "Perros" },
+  { key: "gatos", label: "Gatos" },
+  { key: "otros", label: "Otros" },
+];
+
+const EDADES = [
+  { value: "", label: "Cualquier edad" },
+  { value: "cachorro", label: "Cachorro" },
+  { value: "adulto", label: "Adulto" },
+  { value: "senior", label: "Senior" },
+];
 
 export const Adoptar = () => {
+  const { store } = useGlobalReducer();
+  const animalTypes = store.animalTypes;
+
+  // filtros elegidos por el usuario
+  const [especie, setEspecie] = useState("todos");
+  const [edad, setEdad] = useState("");
+  const [shelterId, setShelterId] = useState("");
+  const [pagina, setPagina] = useState(1);
+
+  // lo que responde la API
   const [animales, setAnimales] = useState([]);
+  const [totalAnimales, setTotalAnimales] = useState(0);
+  const [totalPaginas, setTotalPaginas] = useState(1);
   const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [filtroEspecie, setFiltroEspecie] = useState("todos");
-  const [filtroEdad, setFiltroEdad] = useState("todas");
-  const [filtroTamano, setFiltroTamano] = useState("todos");
+  // catalogo para el desplegable de protectoras
+  const [shelters, setShelters] = useState([]);
 
+  // "Otros" no existe en la API: es una agrupacion visual que resolvemos aqui
+  const animalTypeIds = useMemo(() => {
+    if (especie === "todos") return undefined;
 
+    const esPerroOGato = (type) =>
+      ["perro", "gato"].includes(type.species?.toLowerCase());
 
-  const mockData = [
-    {
-      id: 1,
-      nombre: "Nala",
-      especie: "perro",
-      tipo: "Mestiza",
-      edad: "2 años",
-      rangoEdad: "adulto",
-      peso: "14 kg",
-      tamano: "mediano",
-      descripcion: "Tranquila y muy buena con otros perros. Necesita una casa sin escaleras donde poder descansar plácidamente.",
-      estado: "Disponible",
-      urgente: false,
-      protectora: "Protectora Huellas",
-      caracteristicas: ["Sociable", "Esterilizada", "Con niños"],
-      cssClass: "img-nala"
-    },
-    {
-      id: 2,
-      nombre: "Trufa",
-      especie: "gato",
-      tipo: "Común europea",
-      edad: "7 meses",
-      rangoEdad: "cachorro",
-      peso: "2.5 kg",
-      tamano: "pequeno",
-      descripcion: "Muy activa y sociable. Le encanta jugar con cualquier cosa que se mueva. Ya tiene candidatos.",
-      estado: "En proceso",
-      urgente: false,
-      protectora: "Protectora Huellas",
-      caracteristicas: ["Juguetona", "Vacunada", "Piso"],
-      cssClass: "img-trufa"
-    },
-    {
-      id: 3,
-      nombre: "Bruno",
-      especie: "perro",
-      tipo: "Podenco",
-      edad: "5 años",
-      rangoEdad: "adulto",
-      peso: "22 kg",
-      tamano: "grande",
-      descripcion: "Lleva dos años esperando. Es un perro noble, ideal para una casa con jardín y familia paciente.",
-      estado: "Disponible",
-      urgente: true,
-      protectora: "Colonia Felina Vallecas",
-      caracteristicas: ["Tranquilo", "Jardín", "Sin gatos"],
-      cssClass: "img-bruno"
-    },
-    {
-      id: 4,
-      nombre: "Luna",
-      especie: "gato",
-      tipo: "Siamesa",
-      edad: "1 año",
-      rangoEdad: "adulto",
-      peso: "3.5 kg",
-      tamano: "pequeno",
-      descripcion: "Cariñosa y curiosa. Le gusta dormir al sol junto a la ventana. Un amor de compañera.",
-      estado: "Disponible",
-      urgente: false,
-      protectora: "Gatos del Sur",
-      caracteristicas: ["Cariñosa", "Esterilizada", "Piso"],
-      cssClass: "img-cat"
-    },
-    {
-      id: 5,
-      nombre: "Rex",
-      especie: "perro",
-      tipo: "Golden Retriever mix",
-      edad: "3 años",
-      rangoEdad: "adulto",
-      peso: "28 kg",
-      tamano: "grande",
-      descripcion: "Muy obediente, sabe pasear con correa suelta. Busca una familia activa para hacer rutas de montaña.",
-      estado: "Disponible",
-      urgente: false,
-      protectora: "Refugio Els Amics",
-      caracteristicas: ["Adiestrado", "Vacunado", "Activo"],
-      cssClass: "img-walk"
-    },
-    {
-      id: 6,
-      nombre: "Toby",
-      especie: "perro",
-      tipo: "Bulldog Francés",
-      edad: "4 años",
-      rangoEdad: "adulto",
-      peso: "11 kg",
-      tamano: "pequeno",
-      descripcion: "Pequeño y tranquilo, ideal para un piso. Tiene dos candidatos en revisión en este momento.",
-      estado: "En proceso",
-      urgente: false,
-      protectora: "Protectora Huellas",
-      caracteristicas: ["Tranquilo", "Piso", "Mimoso"],
-      cssClass: "img-puppies"
-    },
-    {
-      id: 7,
-      nombre: "Mia",
-      especie: "gato",
-      tipo: "Común tricolor",
-      edad: "6 meses",
-      rangoEdad: "cachorro",
-      peso: "2 kg",
-      tamano: "pequeno",
-      descripcion: "Recién destetada, muy juguetona. Es mejor que conviva con otro gato o tenga mucha atención.",
-      estado: "Disponible",
-      urgente: true,
-      protectora: "Colonia Felina Vallecas",
-      caracteristicas: ["Cachorro", "Sociable", "Interior"],
-      cssClass: "img-kitten"
-    },
-    {
-      id: 8,
-      nombre: "Simba",
-      especie: "gato",
-      tipo: "Gato naranja",
-      edad: "2 años",
-      rangoEdad: "adulto",
-      peso: "4.8 kg",
-      tamano: "mediano",
-      descripcion: "Un gato muy bonachón y glotón. Le encantan los mimos y ronronea muy fuerte cuando le rascas.",
-      estado: "Disponible",
-      urgente: false,
-      protectora: "Gatos del Sur",
-      caracteristicas: ["Tranquilo", "Comilón", "Cariñoso"],
-      cssClass: "img-cat"
-    },
-    {
-      id: 9,
-      nombre: "Rocky",
-      especie: "perro",
-      tipo: "Pastor Alemán",
-      edad: "1 año",
-      rangoEdad: "cachorro",
-      peso: "25 kg",
-      tamano: "grande",
-      descripcion: "Joven y lleno de energía. Necesita espacio para correr y una familia que le dedique tiempo de juego.",
-      estado: "Disponible",
-      urgente: false,
-      protectora: "Refugio Els Amics",
-      caracteristicas: ["Juguetón", "Protector", "Jardín"],
-      cssClass: "img-vet"
-    },
-    {
-      id: 10,
-      nombre: "Kira",
-      especie: "perro",
-      tipo: "Husky Siberiano",
-      edad: "8 años",
-      rangoEdad: "senior",
-      peso: "24 kg",
-      tamano: "mediano",
-      descripcion: "Rescatada recientemente. Es muy inteligente pero necesita dueños con experiencia y mucha energía.",
-      estado: "Disponible",
-      urgente: true,
-      protectora: "Protectora Huellas",
-      caracteristicas: ["Activa", "Inteligente", "Jardín"],
-      cssClass: "img-social"
-    },
-    {
-      id: 11,
-      nombre: "Oreo",
-      especie: "gato",
-      tipo: "Blanco y negro",
-      edad: "3 años",
-      rangoEdad: "adulto",
-      peso: "5 kg",
-      tamano: "mediano",
-      descripcion: "Gato muy casero. Fue abandonado y al principio es un poco tímido, pero luego es un amor.",
-      estado: "En proceso",
-      urgente: false,
-      protectora: "Colonia Felina Vallecas",
-      caracteristicas: ["Tímido", "Esterilizado", "Tranquilo"],
-      cssClass: "img-cat"
-    },
-    {
-      id: 12,
-      nombre: "Milo",
-      especie: "gato",
-      tipo: "Gato Persa",
-      edad: "10 años",
-      rangoEdad: "senior",
-      peso: "4.2 kg",
-      tamano: "mediano",
-      descripcion: "Es un señor gato, muy tranquilo y dormilón. Necesita cepillado constante para mantener su pelaje.",
-      estado: "Disponible",
-      urgente: false,
-      protectora: "Refugio Els Amics",
-      caracteristicas: ["Tranquilo", "Pelo largo", "Piso"],
-      cssClass: "img-kitten"
+    if (especie === "otros") {
+      return animalTypes.filter((type) => !esPerroOGato(type)).map((type) => type.id);
     }
-  ];
+
+    const buscada = especie === "perros" ? "perro" : "gato";
+    return animalTypes
+      .filter((type) => type.species?.toLowerCase() === buscada)
+      .map((type) => type.id);
+  }, [especie, animalTypes]);
+
+  const esperandoCatalogo = especie !== "todos" && animalTypes.length === 0;
 
   useEffect(() => {
-    setAnimales(mockData);
-    setCargando(false);
+    getShelters({ ordenarPor: "name", orden: "asc", pagina: 1, perPage: 100 })
+      .then((data) => setShelters(data.items || []))
+      .catch(() => setShelters([]));
   }, []);
 
+  useEffect(() => {
+    if (esperandoCatalogo) return;
 
+    let cancelado = false;
+    setCargando(true);
+    setError(null);
 
+    getAnimals({ pagina, perPage: PER_PAGE }, { animalTypeIds, shelterId, edad })
+      .then((data) => {
+        if (cancelado) return;
+        setAnimales(data.items || []);
+        setTotalAnimales(data.total_items || 0);
+        setTotalPaginas(data.total_pages || 1);
+      })
+      .catch((err) => {
+        if (cancelado) return;
+        setError(err.message);
+        setAnimales([]);
+      })
+      .finally(() => {
+        if (!cancelado) setCargando(false);
+      });
 
+    return () => {
+      cancelado = true;
+    };
+  }, [pagina, edad, shelterId, animalTypeIds, esperandoCatalogo]);
 
-  const animalesFiltrados = animales.filter((animal) => {
-    const coincideEspecie =
-      filtroEspecie === "todos" ||
-      (filtroEspecie === "perros" && animal.especie === "perro") ||
-      (filtroEspecie === "gatos" && animal.especie === "gato");
+  const cambiarEspecie = (key) => { setEspecie(key); setPagina(1); };
+  const cambiarEdad = (value) => { setEdad(value); setPagina(1); };
+  const cambiarProtectora = (value) => { setShelterId(value); setPagina(1); };
 
-    const coincideEdad =
-      filtroEdad === "todas" ||
-      animal.rangoEdad === filtroEdad;
+  const limpiarFiltros = () => {
+    setEspecie("todos");
+    setEdad("");
+    setShelterId("");
+    setPagina(1);
+  };
 
-    const coincideTamano =
-      filtroTamano === "todos" ||
-      animal.tamano === filtroTamano;
-
-    return coincideEspecie && coincideEdad && coincideTamano;
-  });
+  const sinResultados = !cargando && !error && animales.length === 0;
 
   return (
     <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: "var(--rp-hueso)" }}>
-      <div className="bg-principal border-bottom py-5" style={{ borderColor: "var(--rp-linea) !important" }}>
-  <div className="container">
-    <div className="row align-items-center">
-      <div className="col-lg-6">
-
-        <p className="text-success fw-bold text-uppercase small mb-1">
-          Encuentra a tu mejor amigo
-        </p>
-
-        <h2 className="fw-bold mb-1">
-          Buscan un hogar
-        </h2>
-
-        <p className="text-secondary mb-0">
-          Descubre a los animales que están esperando una segunda oportunidad en las protectoras de tu zona.
-        </p>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-      <div className="container-fluid py-5 flex-grow-1">
+      <div className="bg-success-subtle py-5">
         <div className="container">
-          <div className="p-3 p-md-4 mb-5" style={{ backgroundColor: "var(--rp-papel)", borderRadius: "var(--bs-border-radius-xl)", border: "1px solid var(--rp-linea)" }}>
-            <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-              <div className="d-flex flex-nowrap gap-2 w-100 w-md-auto overflow-auto pb-1 pb-md-0">
-                <button
-                  className={`btn rounded-pill px-4 text-nowrap ${filtroEspecie === "todos" ? "btn-primary" : "btn-light"}`}
-                  onClick={() => setFiltroEspecie("todos")}
-                >
-                  🐶 Todos
-                </button>
-                <button
-                  className={`btn rounded-pill px-4 text-nowrap ${filtroEspecie === "perros" ? "btn-primary" : "btn-light"}`}
-                  onClick={() => setFiltroEspecie("perros")}
-                >
-                  Perros
-                </button>
-                <button
-                  className={`btn rounded-pill px-4 text-nowrap ${filtroEspecie === "gatos" ? "btn-primary" : "btn-light"}`}
-                  onClick={() => setFiltroEspecie("gatos")}
-                >
-                  Gatos
-                </button>
-              </div>
-
-              <div className="d-flex flex-nowrap gap-2 w-100 w-md-auto justify-content-start justify-content-md-end">
-                <select
-                  className="form-select form-select-sm rounded-pill text-secondary"
-                  style={{ width: "130px", borderColor: "var(--rp-linea)", backgroundColor: "var(--rp-hueso)" }}
-                  value={filtroEdad}
-                  onChange={(e) => setFiltroEdad(e.target.value)}
-                >
-                  <option value="todas">Edad</option>
-                  <option value="cachorro">Cachorro</option>
-                  <option value="adulto">Adulto</option>
-                  <option value="senior">Senior</option>
-                </select>
-
-                <select
-                  className="form-select form-select-sm rounded-pill text-secondary"
-                  style={{ width: "130px", borderColor: "var(--rp-linea)", backgroundColor: "var(--rp-hueso)" }}
-                  value={filtroTamano}
-                  onChange={(e) => setFiltroTamano(e.target.value)}
-                >
-                  <option value="todos">Tamaño</option>
-                  <option value="pequeno">Pequeño</option>
-                  <option value="mediano">Mediano</option>
-                  <option value="grande">Grande</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h5 className="fw-bold mb-0" style={{ color: "var(--rp-pino)" }}>Mostrando {animalesFiltrados.length} animales</h5>
-          </div>
-
-          {cargando ? (
-            <div className="d-flex justify-content-center py-5 my-5">
-              <div className="spinner-grow" style={{ color: "var(--rp-verde)" }} role="status">
-                <span className="visually-hidden">Cargando...</span>
-              </div>
-            </div>
-          ) : (
-            <>
-              {animalesFiltrados.length > 0 ? (
-                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 row-cols-xl-3">
-                  {animalesFiltrados.map((item) => (
-                    <div className="col" key={item.id}>
-                      <AnimalCard animal={item} />
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-5 my-5">
-                  <h4 style={{ color: "var(--rp-gris)" }}>No se encontraron animales con los filtros seleccionados 🐾</h4>
-                  <button
-                    className="btn btn-outline-primary rounded-pill mt-3 px-4"
-                    onClick={() => { setFiltroEspecie("todos"); setFiltroEdad("todas"); setFiltroTamano("todos"); }}
-                  >
-                    Restablecer filtros
-                  </button>
-                </div>
-              )}
-
-              {animalesFiltrados.length > 0 && (
-                <div className="d-flex justify-content-center mt-5 pt-4">
-                  <button className="btn btn-outline-primary rounded-pill px-5 py-3 d-flex align-items-center gap-2">
-                    Cargar más animales
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+          <p className="text-success fw-bold text-uppercase small mb-1">Adopciones</p>
+          <h2 className="fw-bold mb-1">Buscan casa</h2>
+          <p className="text-secondary mb-0">
+            {cargando ? "Cargando animales…" : `${totalAnimales} animales esperando una familia`}
+          </p>
         </div>
       </div>
 
+      <div className="container py-5 flex-grow-1">
+        <div
+          className="p-3 p-md-4 mb-4"
+          style={{
+            backgroundColor: "var(--rp-papel)",
+            borderRadius: "var(--bs-border-radius-xl)",
+            border: "1px solid var(--rp-linea)",
+          }}
+        >
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <div className="d-flex flex-nowrap gap-2 overflow-auto pb-1 pb-md-0">
+              {PESTANAS.map((pestana) => (
+                <button
+                  key={pestana.key}
+                  className={`btn rounded-pill px-4 text-nowrap ${
+                    especie === pestana.key ? "btn-primary" : "btn-light"
+                  }`}
+                  onClick={() => cambiarEspecie(pestana.key)}
+                >
+                  {pestana.label}
+                </button>
+              ))}
+            </div>
 
+            <div className="d-flex flex-nowrap gap-2">
+              <select
+                className="form-select form-select-sm rounded-pill"
+                style={{ width: "170px" }}
+                value={edad}
+                onChange={(e) => cambiarEdad(e.target.value)}
+              >
+                {EDADES.map((opcion) => (
+                  <option key={opcion.value} value={opcion.value}>
+                    {opcion.label}
+                  </option>
+                ))}
+              </select>
 
+              <select
+                className="form-select form-select-sm rounded-pill"
+                style={{ width: "190px" }}
+                value={shelterId}
+                onChange={(e) => cambiarProtectora(e.target.value)}
+              >
+                <option value="">Cualquier protectora</option>
+                {shelters.map((shelter) => (
+                  <option key={shelter.shelter_id} value={shelter.id}>
+                    {shelter.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
 
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+
+        {cargando && (
+          <div className="d-flex justify-content-center py-5 my-5">
+            <div className="spinner-grow" style={{ color: "var(--rp-verde)" }} role="status">
+              <span className="visually-hidden">Cargando…</span>
+            </div>
+          </div>
+        )}
+
+        {sinResultados && (
+          <div className="text-center py-5 my-5">
+            <h4 style={{ color: "var(--rp-gris)" }}>
+              No hay animales con estos filtros 🐾
+            </h4>
+            <button className="btn btn-outline-primary rounded-pill mt-3 px-4" onClick={limpiarFiltros}>
+              Restablecer filtros
+            </button>
+          </div>
+        )}
+
+        {!cargando && animales.length > 0 && (
+          <>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              {animales.map((animal) => (
+                <div className="col" key={animal.animal_id}>
+                  <AnimalCard animal={animal} />
+                </div>
+              ))}
+            </div>
+
+            {totalPaginas > 1 && (
+              <div className="d-flex justify-content-center align-items-center gap-3 mt-5 pt-4">
+                <button
+                  className="btn btn-outline-primary rounded-pill px-4"
+                  disabled={pagina <= 1}
+                  onClick={() => setPagina((p) => p - 1)}
+                >
+                  Anterior
+                </button>
+                <span style={{ color: "var(--rp-gris)" }}>
+                  Página {pagina} de {totalPaginas}
+                </span>
+                <button
+                  className="btn btn-outline-primary rounded-pill px-4"
+                  disabled={pagina >= totalPaginas}
+                  onClick={() => setPagina((p) => p + 1)}
+                >
+                  Siguiente
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

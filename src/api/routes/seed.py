@@ -173,6 +173,7 @@ def seed_database():
                 ideal_home=item.get("ideal_home"),
                 story=item["story"],
                 animal_type_id=animal_type.id,
+                status=item.get("status", "disponible"),
                 shelter_id=shelter_id,
             )
 
