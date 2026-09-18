@@ -30,3 +30,30 @@ seed:
 		exit 1
 	fi
 	curl -sf "$$url/api/seed" && echo "Datos de prueba insertados en $$url"
+
+# Instala ambas dependencias
+install: install-back install-front
+
+# Instala dependencias del frontend de forma interactiva
+install-front:
+	@echo "==> Instalando dependencias del Frontend (npm)..."
+	npm install
+
+# Instala dependencias del backend de forma interactiva
+install-back:
+	@echo "==> Instalando dependencias del Backend (pipenv)..."
+	pipenv install
+
+
+# --- EJECUCIÓN ---
+run:
+	@echo "==> Iniciando Backend y Frontend..."
+	$(MAKE) -j2 run-back run-front
+
+run-front:
+	@echo "==> Iniciando servidor Frontend..."
+	npm run start
+
+run-back:
+	@echo "==> Iniciando servidor Backend..."
+	pipenv run start	
