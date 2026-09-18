@@ -30,6 +30,21 @@ export function StoreProvider({ children }) {
             });
     }, []);
 
+    // Al cargar la app pedimos la ubicacion del usuario por navegador; si el usuario pasa o no quiere darla la obtenemos del store
+    useEffect(() => {
+        if (!("geolocation" in navigator)) return;
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                dispatch({
+                    type: "set_user_location",
+                    payload:  `${position.coords.latitude}, ${position.coords.longitude}`
+                });
+            },
+            () => { }
+        );
+    }, []);
+
     // Provide the store and dispatch method to all child components.
     return <StoreContext.Provider value={{ store, dispatch }}>
         {children}
