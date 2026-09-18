@@ -2,7 +2,7 @@ from flask import jsonify, request
 from flask_jwt_extended import jwt_required
 
 from api.repositories.animal_repository import FILTERABLE_FIELDS
-from api.services.animals_service import get_animal, get_shelter_animal, list_animals, upsert_animal
+from api.services.animals_service import PUBLIC_STATUSES, get_animal, get_shelter_animal, list_animals, upsert_animal
 from api.utils import APIException, paginate_args
 from .auth import get_current_user
 
@@ -17,16 +17,21 @@ from . import api
 #ruta para listar los animales publicados visibles a los usuarios
 # ######################
 @api.route('/animals', methods=['GET'])
-@jwt_required()
 def list_animals_action():
 
-    filters = {field: value for field in FILTERABLE_FIELDS if (value := request.args.get(field))}
-    filters['status'] = 'disponible'  # fuerza el status: ignora cualquier status recibido por query
+    filters = {}
+    for field in FILTERABLE_FIELDS:
+        values = [value for value in request.args.getlist(field) if value]
+        if not values:
+            continue
+        filters[field] = values if len(values) > 1 else values[0]
+    filters['status'] = PUBLIC_STATUSES  # fuerza los estados publicos: ignora cualquier status recibido por query
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
+    age_range = request.args.get('age_range')
     page, per_page = paginate_args()
 
-    resultados = list_animals(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page)
+    resultados = list_animals(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page, age_range=age_range)
 
     response_body = {
         "items": [animal.serialize() for animal in resultados.items],

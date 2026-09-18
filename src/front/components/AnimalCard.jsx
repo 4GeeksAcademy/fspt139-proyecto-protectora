@@ -1,71 +1,120 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { calcularAgeLabel } from "../utils/animalAge";
+import { construirTags } from "../utils/animalTags";
+import { cargarMediaUrl } from "../services/animalsService";
+
+const ESTADOS = {
+  disponible: { texto: "Disponible", fondo: "var(--rp-verde)" },
+  en_proceso: { texto: "En proceso", fondo: "var(--rp-miel)" },
+};
+
+const MAX_TAGS = 3;
+
+// "Perro" + hembra -> "Perra". Funciona con Perro/Gato/Conejo; con Hurón devuelve el original.
+const concordarEspecie = (species, sex) => {
+  if (!species) return null;
+  if (sex === "hembra" && species.endsWith("o")) return `${species.slice(0, -1)}a`;
+  return species;
+};
+
+const formatearPeso = (weight) => {
+  const kg = Number(weight);
+  if (!Number.isFinite(kg) || kg <= 0) return null;
+  return `${kg.toLocaleString("es-ES")} kg`;
+};
+
+const truncar = (texto, max) => {
+  if (!texto) return "";
+  return texto.length > max ? `${texto.slice(0, max).trim()}…` : texto;
+};
 
 export const AnimalCard = ({ animal }) => {
   if (!animal) return null;
 
-  return (
-    <div className="card h-100 border-0 shadow-sm" style={{ backgroundColor: "var(--rp-papel)", borderRadius: "var(--bs-border-radius-lg)" }}>
+  const estado = ESTADOS[animal.status] || { texto: animal.status, fondo: "var(--rp-gris)" };
 
+  const subtitulo = [
+    concordarEspecie(animal.species, animal.sex),
+    animal.breed,
+    calcularAgeLabel(animal.birthdate),
+    formatearPeso(animal.weight),
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
+  const tags = construirTags(animal).slice(0, MAX_TAGS);
+
+  return (
+    <div
+      className="card h-100 border-0 shadow-sm overflow-hidden"
+      style={{ backgroundColor: "var(--rp-papel)", borderRadius: "var(--bs-border-radius-lg)" }}
+    >
       <div
-        className={`card-placeholder position-relative ${animal.cssClass || ""}`}
-        style={{
-          borderTopLeftRadius: "var(--bs-border-radius-lg)",
-          borderTopRightRadius: "var(--bs-border-radius-lg)",
-        }}
+        className="position-relative d-flex align-items-center justify-content-center"
+        style={{ height: "200px", backgroundColor: "var(--rp-verde-cl)" }}
       >
-        <div className="position-absolute top-0 start-0 p-3 d-flex flex-column gap-2">
-          <span className="badge" style={{ backgroundColor: "var(--rp-verde)", color: "var(--rp-papel)" }}>
-            {animal.estado}
-          </span>
-          {animal.urgente && (
-            <span className="badge" style={{ backgroundColor: "var(--rp-arcilla)", color: "var(--rp-papel)" }}>
-              ¡Urgente!
-            </span>
-          )}
-        </div>
+        {animal.cover_image ? (
+          <img
+            src={cargarMediaUrl(animal.cover_image)}
+            alt={animal.name}
+            className="w-100 h-100"
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          <span style={{ fontSize: "3rem", opacity: 0.35 }}>🐾</span>
+        )}
+
+        <span
+          className="badge position-absolute top-0 start-0 m-3"
+          style={{ backgroundColor: estado.fondo, color: "var(--rp-papel)" }}
+        >
+          {estado.texto}
+        </span>
       </div>
 
       <div className="card-body d-flex flex-column p-3">
-        <div className="d-flex justify-content-between align-items-baseline mb-3">
-          <h4 className="card-title mb-0" style={{ color: "var(--rp-pino)", fontFamily: "var(--rp-display)" }}>{animal.nombre}</h4>
-          <span className="text-muted" style={{ fontSize: "0.85rem", color: "var(--rp-gris)" }}>{animal.tipo}</span>
-        </div>
+        <h4 className="card-title mb-1" style={{ color: "var(--rp-pino)", fontFamily: "var(--rp-display)" }}>
+          {animal.name}
+        </h4>
 
-        <div className="d-flex gap-2 mb-3">
-          <div className="d-flex flex-column align-items-center justify-content-center border rounded py-2 px-3 w-50" style={{ borderColor: "var(--rp-linea) !important", backgroundColor: "var(--rp-hueso)" }}>
-            <span className="rp-eyebrow mb-1">Edad</span>
-            <strong style={{ color: "var(--rp-tinta)", fontSize: "0.95rem" }}>{animal.edad}</strong>
-          </div>
-          <div className="d-flex flex-column align-items-center justify-content-center border rounded py-2 px-3 w-50" style={{ borderColor: "var(--rp-linea) !important", backgroundColor: "var(--rp-hueso)" }}>
-            <span className="rp-eyebrow mb-1">Peso</span>
-            <strong style={{ color: "var(--rp-tinta)", fontSize: "0.95rem" }}>{animal.peso}</strong>
-          </div>
-        </div>
+        {subtitulo && (
+          <p className="mb-2" style={{ fontSize: "0.85rem", color: "var(--rp-gris)" }}>
+            {subtitulo}
+          </p>
+        )}
 
-        <p className="card-text flex-grow-1" style={{ fontSize: "0.875rem", color: "var(--rp-gris)", lineHeight: "1.5" }}>
-          {animal.descripcion}
+        <p className="card-text flex-grow-1" style={{ fontSize: "0.875rem", color: "var(--rp-gris)", lineHeight: 1.5 }}>
+          {truncar(animal.story, 120)}
         </p>
 
-        <div className="d-flex flex-wrap gap-1 mb-4">
-          {animal.caracteristicas?.map((caract, idx) => (
-            <span key={idx} className="badge border" style={{ backgroundColor: "transparent", color: "var(--rp-verde)", borderColor: "var(--rp-verde) !important", fontSize: "0.75rem", padding: "0.35rem 0.6rem" }}>
-              ✓ {caract}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-auto">
-          <div className="mb-3 d-flex align-items-center gap-2" style={{ color: "var(--rp-gris)", fontSize: "0.85rem" }}>
-            <span style={{ color: "var(--rp-arcilla)" }}>📍</span>{animal.protectora}
+        {tags.length > 0 && (
+          <div className="d-flex flex-wrap gap-1 mb-3">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="badge border"
+                style={{
+                  backgroundColor: "transparent",
+                  color: "var(--rp-verde)",
+                  borderColor: "var(--rp-verde)",
+                  fontSize: "0.75rem",
+                  padding: "0.35rem 0.6rem",
+                }}
+              >
+                ✓ {tag}
+              </span>
+            ))}
           </div>
+        )}
 
-                    <div className="d-flex justify-content-between align-items-center mt-auto">
-                        <small className="text-secondary">{animal.org}</small>
-                        <Link to={`/adoptar/${animal.id}`} className="btn btn-outline-success btn-sm">See profile</Link>
-                    </div>
-
-          
+        <div className="mt-auto d-flex justify-content-between align-items-center gap-2">
+          <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
+            {animal.shelter_name || "Protectora sin asignar"}
+          </small>
+          <Link to={`/adoptar/${animal.animal_id}`} className="btn btn-sm btn-outline-success flex-shrink-0">
+            Ver ficha
+          </Link>
         </div>
       </div>
     </div>
