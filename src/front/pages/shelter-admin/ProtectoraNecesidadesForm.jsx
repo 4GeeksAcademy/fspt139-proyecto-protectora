@@ -79,6 +79,7 @@ export const ProtectoraNecesidadesForm = () => {
     hasLimit: true,
     amountNeeded: "",
     unit: "€",
+    footnote: "",
     hasDeadline: false,
     requestDeadline: "",
     status: "borrador",
@@ -130,6 +131,7 @@ export const ProtectoraNecesidadesForm = () => {
       hasLimit: loadedNecesidad.amount_needed != null,
       amountNeeded: loadedNecesidad.amount_needed != null ? String(Number(loadedNecesidad.amount_needed)) : "",
       unit: loadedNecesidad.unit || "€",
+      footnote: loadedNecesidad.footnote || "",
       hasDeadline: Boolean(loadedNecesidad.request_deadline),
       requestDeadline: loadedNecesidad.request_deadline ? loadedNecesidad.request_deadline.slice(0, 10) : "",
       status: loadedNecesidad.status || "borrador",
@@ -309,6 +311,7 @@ export const ProtectoraNecesidadesForm = () => {
         animal_id: form.animal_id || null,
         amount_needed: form.hasLimit && form.amountNeeded ? Number(form.amountNeeded) : null,
         unit: form.unit,
+        footnote: form.footnote,
         request_deadline: form.hasDeadline && form.requestDeadline ? form.requestDeadline : null,
       });
 
@@ -889,6 +892,22 @@ export const ProtectoraNecesidadesForm = () => {
                     </p>
                   </div>
                 )}
+                
+                <div className="mt-3">
+                  <label className="form-label" htmlFor="footnote">
+                    Nota corta <span className="text-secondary">(opcional)</span>
+                  </label>
+                  <input
+                    id="footnote"
+                    type="text"
+                    className="form-control"
+                    maxLength={60}
+                    value={form.footnote}
+                    onChange={(e) => handleField("footnote", e.target.value)}
+                    placeholder="Ej: Recogen en el refugio"
+                  />
+                  <div className="form-text">Se mostrará debajo de la barra de progreso en el tablón público.</div>
+                </div>
               </SectionCard>
 
               <SectionCard

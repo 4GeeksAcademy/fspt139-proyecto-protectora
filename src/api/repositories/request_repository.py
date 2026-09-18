@@ -1,3 +1,4 @@
+from sqlalchemy.orm import selectinload
 from api.models import Animal, Request, Shelter, db
 
 #FILTROS ADMITIDOS PARA EL REPOSITORIO ANIMAL
@@ -34,7 +35,12 @@ class RequestRepository:
 
     @staticmethod
     def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
-        query = db.select(Request)
+        query = db.select(Request).options(
+            selectinload(Request.request_type),
+            selectinload(Request.shelter),
+            selectinload(Request.media),
+            selectinload(Request.user_requests),
+        )
 
         for field, value in (filters or {}).items():
             if value in (None, ''):
@@ -46,7 +52,9 @@ class RequestRepository:
                     query = query.join(Animal, Request.animal_id == Animal.id).where(Animal.animal_type_id == value)
                 continue
             column = getattr(Request, field)
-            if field in LIKE_FILTER_FIELDS:
+            if isinstance(value, (list, tuple, set)):
+                query = query.where(column.in_(value))
+            elif field in LIKE_FILTER_FIELDS:
                 query = query.where(column.ilike(f"%{value}%"))
             elif field in EQUAL_FILTER_FIELDS:
                 query = query.where(column == value)
