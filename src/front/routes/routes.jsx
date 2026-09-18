@@ -8,6 +8,7 @@ import { Ayuda } from "../pages/Ayuda.jsx";
 import { Necesidades } from "../pages/Necesidades.jsx";
 import { Terminos } from "../pages/Terminos.jsx";
 import { Privacidad } from "../pages/Privacidad.jsx";
+import { TestMapa } from "../pages/TestMapa.jsx";
 
 //test
 import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
@@ -85,6 +86,10 @@ export const router = createBrowserRouter([
             {
                 path: "/privacidad",
                 element: <Privacidad />
+            },
+            {
+                path: "/test-mapa",
+                element: <TestMapa />
             },
             //RUTAS DEL ROL PROTECTORA
             {
