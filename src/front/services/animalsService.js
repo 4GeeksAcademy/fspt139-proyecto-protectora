@@ -39,7 +39,18 @@ export const getAnimals = async (
   return response.json();
 };
 
+// ficha publica de un animal por su UUID (no requiere sesion)
+export const getAnimalById = async (animal_id) => {
+  const response = await fetch(`${backendUrl}/api/animals/${animal_id}`);
 
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    const error = new Error(data.error || data.message || "No se ha podido cargar el animal");
+    error.status = response.status;
+    throw error;
+  }
+  return response.json();
+};
 
 
 // Lista solo los animales de la protectora del usuario logueado como protectora
