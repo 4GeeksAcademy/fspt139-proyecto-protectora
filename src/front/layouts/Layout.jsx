@@ -24,7 +24,7 @@ export const Layout = () => {
                 if (data.user_location) {
                     dispatch({
                         type: "set_user_location",
-                        payload: { ...data.user_location},
+                        payload: data.user_location,
                     })
                 }
             })
