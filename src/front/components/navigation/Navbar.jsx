@@ -42,7 +42,7 @@ export const Navbar = () => {
                     {/*// NAVEGACION PRINCIPAL DE LA WEB */}
                     {/*///////////////////////////////////*/}
                     <div className="navbar-nav mx-lg-auto gap-lg-2">
-                        <NavLink onClick={closeMenu} to="/" end className={navLinkClass}>Home</NavLink>
+                        <NavLink onClick={closeMenu} to="/"className={navLinkClass}>Home</NavLink>
                         <NavLink onClick={closeMenu} to="/necesidades" className={navLinkClass}>Needs</NavLink>
                         <NavLink onClick={closeMenu} to="/adoptar" className={navLinkClass}>Adopt</NavLink>
                         <NavLink onClick={closeMenu} to="/protectoras" className={navLinkClass}>Shelters</NavLink>
