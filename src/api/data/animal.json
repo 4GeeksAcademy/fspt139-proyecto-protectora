@@ -6,7 +6,7 @@
     "breed": "Mestizo",
     "size": "mediano",
     "weight": 18.5,
-    "birthdate": "2022-03-15",
+    "birthdate": "2026-03-15",
     "activity_level": "alto",
     "vaccines": "Rabia, Moquillo, Parvovirus",
     "has_microchip": true,
@@ -19,6 +19,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Firulais fue encontrado abandonado en una gasolinera y ahora busca una familia activa que le encante pasear.",
+    "status": "en_proceso",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
   },
@@ -29,7 +30,7 @@
     "breed": "Labrador",
     "size": "grande",
     "weight": 28.0,
-    "birthdate": "2021-07-22",
+    "birthdate": "2014-07-22",
     "activity_level": "medio",
     "vaccines": "Rabia, Moquillo, Parvovirus, Leptospirosis",
     "has_microchip": true,
@@ -89,7 +90,7 @@
     "ideal_home": "Hogar con otros gatos para que pueda socializar.",
     "story": "Salem llegó al refugio tras ser rescatado de la calle, es juguetón y muy sociable con otros gatos.",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
-    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+    "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
   {
     "animal_id": "ef482c5b-791b-4c15-bc60-f23870794581",
@@ -112,7 +113,7 @@
     "ideal_home": "Familia tranquila con niños que sepan manejar a un conejo con cuidado.",
     "story": "Copito es un conejo dócil ideal para familias con niños pequeños.",
     "animal_type_id": "e0bfe06b-c7e8-47e8-8b06-ae127d5a5b8d",
-    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+    "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
   {
     "animal_id": "c8711170-481a-47b4-b005-a1757fab9ab1",
@@ -135,7 +136,7 @@
     "ideal_home": "Hogar tranquilo, sin escaleras, para un perro veterano.",
     "story": "Toby es un perro veterano lleno de energía que necesita ejercicio diario.",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
-    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+    "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e"
   },
   {
     "animal_id": "6d4b1a7e-2a3f-4b6a-9c0d-1e8f2a3b4c5d",
@@ -158,6 +159,6 @@
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Nube llegó como parte de una camada abandonada y ahora es una gata adulta cariñosa que adora las caricias.",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
-    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+    "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e"
   }
 ]
