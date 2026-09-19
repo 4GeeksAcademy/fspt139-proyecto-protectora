@@ -14,10 +14,12 @@ class AnimalType(db.Model):
     species: Mapped[str] = mapped_column()
 
     animals: Mapped[List["Animal"]] = relationship(back_populates="animal_type")
+    requirements: Mapped[List["AnimalTypeRequirement"]] = relationship(back_populates="animal_type", passive_deletes=True)
 
     def serialize(self):
         return {
             "id": self.id,
             "animal_type_id": self.animal_type_id,
             "species": self.species,
+            "requirements": [r.serialize() for r in sorted(self.requirements, key=lambda r: r.position)],
         }

@@ -17,6 +17,11 @@ from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.repositories.user_request_repository import UserRequestRepository
 from api.repositories.user_review_repository import UserReviewRepository
 from api.repositories.request_type_repository import RequestTypeRepository
+from api.repositories.addoption_process_repository import AddoptionProcessRepository
+from api.repositories.addoption_process_requirement_repository import AddoptionProcessRequirementRepository
+from api.repositories.addoption_request_answer_repository import AddoptionRequestAnswerRepository
+from api.repositories.addoption_request_question_repository import AddoptionRequestQuestionRepository
+from api.repositories.animal_type_requirement_repository import AnimalTypeRequirementRepository
 ##############################
 #1. añadir fichero .json en la carpeta data
 #2. añadir bloque de carga en este fichero, siguiendo el patrón de los bloques existentes
@@ -60,6 +65,25 @@ def seed_database():
 
             AnimalTypeRepository.create(**item)
             created["animal_types"] += 1
+
+    ##############################
+    # Animal type requirements [RECURSO, NECESARIA EN PRODUCCION]
+    ##############################
+    created["animal_type_requirements"] = 0
+    for item in load("animal_type_requirement.json"):
+        if AnimalTypeRequirementRepository.get_by_animal_type_requirement_id(
+                item["animal_type_requirement_id"]) is None:
+
+            animal_type = AnimalTypeRepository.get_by_animal_type_id(item["animal_type_id"])
+
+            AnimalTypeRequirementRepository.create(
+                animal_type_requirement_id=item["animal_type_requirement_id"],
+                animal_type_id=animal_type.id,
+                label=item["label"],
+                is_checked_by_default=item.get("is_checked_by_default", False),
+                position=item.get("position", 0),
+            )
+            created["animal_type_requirements"] += 1
 
     ##############################
     # Request types  [RECURSO, NECESARIA EN PRODUCCION]
@@ -180,6 +204,49 @@ def seed_database():
             created["animals"] += 1
 
     ##############################
+    # Addoption processes (depend on animal/shelter; traen anidados sus requisitos y preguntas)
+    ##############################
+    created["addoption_processes"] = 0
+    for item in load("addoption_process.json"):
+        if AddoptionProcessRepository.get_by_addoption_process_id(item["addoption_process_id"]) is None:
+
+            animal = AnimalRepository.get_by_animal_id(item["animal_id"])
+            shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
+
+            process = AddoptionProcessRepository.create(
+                addoption_process_id=item["addoption_process_id"],
+                animal_id=animal.id,
+                shelter_id=shelter.id,
+                concurrent_requests_limit=item.get("concurrent_requests_limit"),
+                contribution_amount=item.get("contribution_amount"),
+                start_date=date.fromisoformat(item["start_date"]) if item.get("start_date") else None,
+                end_date=date.fromisoformat(item["end_date"]) if item.get("end_date") else None,
+                status=item.get("status", "abierto"),
+            )
+            saved_process = AddoptionProcessRepository.save(process)
+
+            for position, requirement in enumerate(item.get("requirements", [])):
+                AddoptionProcessRequirementRepository.create(
+                    addoption_process_requirement_id=requirement["addoption_process_requirement_id"],
+                    addoption_process_id=saved_process.id,
+                    label=requirement["label"],
+                    position=position,
+                )
+
+            for position, question in enumerate(item.get("questions", [])):
+                AddoptionRequestQuestionRepository.create(
+                    addoption_request_question_id=question["addoption_request_question_id"],
+                    addoption_process_id=saved_process.id,
+                    question=question["question"],
+                    position=position,
+                )
+
+            # igual que hace el servicio real al abrir un proceso desde el formulario
+            animal.status = "en_proceso"
+
+            created["addoption_processes"] += 1
+
+    ##############################
     # Requests (depend on shelter/animal, both optional)
     ##############################
     created["requests"] = 0
@@ -235,7 +302,7 @@ def seed_database():
             created["user_requests"] += 1
 
     ##############################
-    # Adoption requests (depend on user, animal)
+    # Adoption requests (depend on user, animal y opcionalmente el proceso al que aplican)
     ##############################
     created["adoption_requests"] = 0
     for item in load("addoption_request.json"):
@@ -245,13 +312,29 @@ def seed_database():
 
             animal = AnimalRepository.get_by_animal_id(item["animal_id"])
 
-            AddoptionRequestRepository.create(
+            addoption_process_id = None
+            if item.get("addoption_process_id"):
+                process = AddoptionProcessRepository.get_by_addoption_process_id(item["addoption_process_id"])
+                addoption_process_id = process.id if process else None
+
+            addoption_request = AddoptionRequestRepository.create(
                 addoption_request_id=item["addoption_request_id"],
                 user_id=user.id,
                 animal_id=animal.id,
+                addoption_process_id=addoption_process_id,
                 score=item.get("score", 0),
-                is_accepted=item["is_accepted"],
+                status=item.get("status", "pendiente"),
             )
+            saved_request = AddoptionRequestRepository.save(addoption_request)
+
+            for position, answer in enumerate(item.get("answers", [])):
+                AddoptionRequestAnswerRepository.create(
+                    addoption_request_answer_id=answer["addoption_request_answer_id"],
+                    addoption_request_id=saved_request.id,
+                    question=answer["question"],
+                    answer=answer["answer"],
+                    position=position,
+                )
 
             created["adoption_requests"] += 1
 

@@ -31,6 +31,7 @@ class Shelter(db.Model):
     users: Mapped[List["User"]] = relationship(back_populates="shelter", passive_deletes=True)
     requests: Mapped[List["Request"]] = relationship(back_populates="shelter", passive_deletes=True)
     animals: Mapped[List["Animal"]] = relationship(back_populates="shelter", passive_deletes=True)
+    addoption_processes: Mapped[List["AddoptionProcess"]] = relationship(back_populates="shelter", passive_deletes=True)
 
     def serialize(self):
         return {

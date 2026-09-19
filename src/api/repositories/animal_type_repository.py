@@ -1,4 +1,5 @@
 from api.models import AnimalType, db
+from sqlalchemy.orm import selectinload
 
 
 class AnimalTypeRepository:
@@ -16,7 +17,9 @@ class AnimalTypeRepository:
 
     @staticmethod
     def list_all():
-        return db.session.scalars(db.select(AnimalType)).all()
+        return db.session.scalars(
+            db.select(AnimalType).options(selectinload(AnimalType.requirements))
+        ).all()
 
     @staticmethod
     def create(**fields):

@@ -42,6 +42,7 @@ class Animal(db.Model):
     media: Mapped[List["AnimalMedia"]] = relationship(back_populates="animal", passive_deletes=True)
     requests: Mapped[List["Request"]] = relationship(back_populates="animal", passive_deletes=True)
     adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="animal", passive_deletes=True)
+    addoption_processes: Mapped[List["AddoptionProcess"]] = relationship(back_populates="animal", passive_deletes=True)
 
     def serialize(self):
         return {
