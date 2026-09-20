@@ -19,7 +19,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Firulais fue encontrado abandonado en una gasolinera y ahora busca una familia activa que le encante pasear.",
-    "status": "en_proceso",
+    "status": "desactivado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
   },
@@ -181,7 +181,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Yeti llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3"
   },
@@ -205,7 +205,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Tigre fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -229,7 +229,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Pumba es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -253,7 +253,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Kiko llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac"
   },
@@ -277,7 +277,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Momo llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -325,7 +325,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Michi nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3"
   },
@@ -349,7 +349,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Nube fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "e7cd4433-abeb-4256-b475-d5db14ac406b"
   },
@@ -373,7 +373,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Fido llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9"
   },
@@ -397,7 +397,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Nube es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "67a0c9b4-f91e-4ff8-be8a-3831d3423b6c"
   },
@@ -445,7 +445,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Pelusa pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2"
   },
@@ -469,7 +469,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Chispa pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -493,7 +493,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Kiko llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a"
   },
@@ -517,7 +517,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Zeus es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "88e499a0-9017-4789-ad63-1429bac68e1b"
   },
@@ -541,7 +541,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Salem fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
@@ -589,7 +589,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Tigre fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -613,7 +613,7 @@
     "lives_with_cats": null,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Rocky fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9"
   },
@@ -637,7 +637,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Coco fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -661,7 +661,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Mimi fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "a6b36a36-438b-4a18-9d97-41f4a3553597"
   },
@@ -685,7 +685,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Estrella nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -709,7 +709,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Maya fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -733,7 +733,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Minino fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3"
   },
@@ -757,7 +757,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Maya fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "aaf8e48d-f096-40a7-8cc8-320c53248989"
   },
@@ -781,7 +781,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Panter fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a"
   },
@@ -805,7 +805,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Bruno fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2"
   },
@@ -829,7 +829,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Milo nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc"
   },
@@ -853,7 +853,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Luna pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "8cb923dc-0704-41dd-becc-7da39a41e59b"
   },
@@ -877,7 +877,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Pumba llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e7cd4433-abeb-4256-b475-d5db14ac406b"
   },
@@ -901,7 +901,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Kira llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "88e499a0-9017-4789-ad63-1429bac68e1b"
   },
@@ -925,7 +925,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Perla fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -949,7 +949,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Garfield llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -973,7 +973,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Coco llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "a6b36a36-438b-4a18-9d97-41f4a3553597"
   },
@@ -997,7 +997,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Bruno nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd"
   },
@@ -1021,7 +1021,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Rocky nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -1045,7 +1045,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Toro llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3"
   },
@@ -1069,7 +1069,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Chispa fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -1093,7 +1093,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Thor fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "88e499a0-9017-4789-ad63-1429bac68e1b"
   },
@@ -1117,7 +1117,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Frida llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -1141,7 +1141,7 @@
     "lives_with_cats": null,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Felix es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "67a0c9b4-f91e-4ff8-be8a-3831d3423b6c"
   },
@@ -1165,7 +1165,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Bobby fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3"
   },
@@ -1189,7 +1189,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Fido es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2"
   },
@@ -1213,7 +1213,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Lassie fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -1237,7 +1237,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Chispa pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac"
   },
@@ -1261,7 +1261,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Milo fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -1285,7 +1285,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Panter llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "3d4799a2-2bc8-42a6-81a9-b86a04c5514d"
   },
@@ -1309,7 +1309,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Minino fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3"
   },
@@ -1333,7 +1333,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Simón fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54"
   },
@@ -1357,7 +1357,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Loki nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -1381,7 +1381,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Buddy fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd"
   },
@@ -1405,7 +1405,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Estrella fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc"
   },
@@ -1453,7 +1453,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Coco llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a"
   },
@@ -1477,7 +1477,7 @@
     "lives_with_cats": null,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Coco es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -1501,7 +1501,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Sasha pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -1549,7 +1549,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Tom fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -1573,7 +1573,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Chispa pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "a6b36a36-438b-4a18-9d97-41f4a3553597"
   },
@@ -1597,7 +1597,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Otto es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -1621,7 +1621,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Rex pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -1645,7 +1645,7 @@
     "lives_with_cats": null,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Lola fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3"
   },
@@ -1669,7 +1669,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Chispa es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac"
   },
@@ -1717,7 +1717,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Maya llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -1741,7 +1741,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Otto pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac"
   },
@@ -1765,7 +1765,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Aron fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e"
   },
@@ -1789,7 +1789,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Milo fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e"
   },
@@ -1813,7 +1813,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Rufa fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9"
   },
@@ -1837,7 +1837,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Nina pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e0bfcf92-3995-4362-a25d-acf730e35e41"
   },
@@ -1861,7 +1861,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Yuki fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a"
   },
@@ -1885,7 +1885,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Fido fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "832de021-7b11-4951-9872-be621593e133"
   },
@@ -1909,7 +1909,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Yuki nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc"
   },
@@ -1933,7 +1933,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Toro nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -1957,7 +1957,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Bruno fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
@@ -1981,7 +1981,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Nube nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd"
   },
@@ -2005,7 +2005,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Simba es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac"
   },
@@ -2029,7 +2029,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Maya fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9"
   },
@@ -2053,7 +2053,7 @@
     "lives_with_cats": null,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Mia nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a"
   },
@@ -2077,7 +2077,7 @@
     "lives_with_cats": null,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Bobby llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -2101,7 +2101,7 @@
     "lives_with_cats": null,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Manchas fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e"
   },
@@ -2125,7 +2125,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Minino pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
   },
@@ -2149,7 +2149,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Kiko fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -2173,7 +2173,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Perla llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3"
   },
@@ -2221,7 +2221,7 @@
     "lives_with_cats": null,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Bella es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e"
   },
@@ -2245,7 +2245,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Manchas nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -2269,7 +2269,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Zorro llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a"
   },
@@ -2293,7 +2293,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Trueno es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -2341,7 +2341,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Rufa llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3"
   },
@@ -2365,7 +2365,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Rambo es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd"
   },
@@ -2413,7 +2413,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Coco llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -2461,7 +2461,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Rufa llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "aaf8e48d-f096-40a7-8cc8-320c53248989"
   },
@@ -2485,7 +2485,7 @@
     "lives_with_cats": false,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Pumba fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e"
   },
@@ -2509,7 +2509,7 @@
     "lives_with_cats": null,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Loki fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc"
   },
@@ -2533,7 +2533,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Balto fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "3d4799a2-2bc8-42a6-81a9-b86a04c5514d"
   },
@@ -2557,7 +2557,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Nube fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e0bfcf92-3995-4362-a25d-acf730e35e41"
   },
@@ -2581,7 +2581,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Estrella llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -2605,7 +2605,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Boni es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "38fa0048-d413-4663-9a28-d474466388a5"
   },
@@ -2629,7 +2629,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Otto fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd"
   },
@@ -2653,7 +2653,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Duke fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "aaf8e48d-f096-40a7-8cc8-320c53248989"
   },
@@ -2701,7 +2701,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Zeus fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a"
   },
@@ -2725,7 +2725,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Whiskas es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
   },
@@ -2749,7 +2749,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Simón pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -2773,7 +2773,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Luna pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc"
   },
@@ -2797,7 +2797,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Canela fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -2821,7 +2821,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Rufo nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d709a27e-e35b-469d-b8b7-47887b2d8aa3"
   },
@@ -2845,7 +2845,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Balto es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e"
   },
@@ -2869,7 +2869,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Kitty es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
@@ -2893,7 +2893,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Zeus nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2"
   },
@@ -2917,7 +2917,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Panter es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac"
   },
@@ -2941,7 +2941,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Michi fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "3d4799a2-2bc8-42a6-81a9-b86a04c5514d"
   },
@@ -2965,7 +2965,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Rufa pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "67a0c9b4-f91e-4ff8-be8a-3831d3423b6c"
   },
@@ -2989,7 +2989,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Zeus pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -3013,7 +3013,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Tom fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54"
   },
@@ -3037,7 +3037,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Sasha pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e"
   },
@@ -3061,7 +3061,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Chispa es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "d543e9cc-85c4-4e89-8a90-562d2fc0d7d2"
   },
@@ -3085,7 +3085,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Frida nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "a3e4cb94-7085-44e0-86de-10fbc986be16"
   },
@@ -3109,7 +3109,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Whiskas llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -3133,7 +3133,7 @@
     "lives_with_cats": false,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Perla llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
   },
@@ -3181,7 +3181,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Buddy pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
@@ -3205,7 +3205,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Kai nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "ee7e00e8-ccc5-4c0d-a5db-519eb661c3bc"
   },
@@ -3229,7 +3229,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Simba es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "38fa0048-d413-4663-9a28-d474466388a5"
   },
@@ -3253,7 +3253,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Kitty nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -3277,7 +3277,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Michi fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "5f15d39e-fe6b-4c45-8fe7-9aa86cb828dd"
   },
@@ -3301,7 +3301,7 @@
     "lives_with_cats": null,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Suki pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a"
   },
@@ -3325,7 +3325,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Yeti llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "e7b8c6a2-4b3f-4a48-9420-d1931233d3c2"
   },
@@ -3349,7 +3349,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Duke llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -3373,7 +3373,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Lola es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -3397,7 +3397,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Aron llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "3e4013cb-1776-4c27-ad26-ea86ebba219c"
   },
@@ -3421,7 +3421,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Simba nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
   },
@@ -3445,7 +3445,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Bobby es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "a3e4cb94-7085-44e0-86de-10fbc986be16"
   },
@@ -3469,7 +3469,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Kai pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "67a0c9b4-f91e-4ff8-be8a-3831d3423b6c"
   },
@@ -3493,7 +3493,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Bobby llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "236e65ac-3c19-47b2-869d-d6aa6dc4fdc1"
   },
@@ -3517,7 +3517,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Zara nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e"
   },
@@ -3541,7 +3541,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Minino pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "a3e4cb94-7085-44e0-86de-10fbc986be16"
   },
@@ -3565,7 +3565,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Luna llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "36111b12-a412-4d65-945a-94f7591c97a9"
   },
@@ -3613,7 +3613,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Frida fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9"
   },
@@ -3637,7 +3637,7 @@
     "lives_with_cats": true,
     "ideal_home": "Piso tranquilo con acceso a un rincón soleado.",
     "story": "Lassie nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "a3e4cb94-7085-44e0-86de-10fbc986be16"
   },
@@ -3661,7 +3661,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Lassie pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "38fa0048-d413-4663-9a28-d474466388a5"
   },
@@ -3685,7 +3685,7 @@
     "lives_with_cats": null,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Kira nació en el refugio y no conoce otro hogar, está deseando encontrar uno.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "4d8d61a3-d6f5-4c01-977f-15d879fd731e"
   },
@@ -3709,7 +3709,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Rufa es un superviviente nato, a pesar de su pasado difícil mantiene un carácter noble.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "7bfdaf3e-5baf-406e-9428-b3dce9e6cf68"
   },
@@ -3733,7 +3733,7 @@
     "lives_with_cats": true,
     "ideal_home": "Casa con jardín y familia activa que disfrute de paseos largos.",
     "story": "Coco fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "disponible",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "aaf8e48d-f096-40a7-8cc8-320c53248989"
   },
@@ -3757,8 +3757,100 @@
     "lives_with_cats": true,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Milo pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "en_proceso",
+    "status": "activado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184"
+  },
+  {
+    "animal_id": "97e9e393-2476-4e19-9d74-3d725570c8cc",
+    "name": "Rocco",
+    "sex": "macho",
+    "breed": "Bulldog frances",
+    "size": "pequeño",
+    "weight": 11.5,
+    "birthdate": "2023-04-02",
+    "activity_level": "medio",
+    "vaccines": "Rabia, Moquillo, Parvovirus",
+    "has_microchip": true,
+    "is_sterilized": true,
+    "tests_done": "Leishmania negativo",
+    "special_needs": null,
+    "traits": "Cariñoso, Tranquilo, Sociable",
+    "lives_with_kids": true,
+    "lives_with_dogs": true,
+    "lives_with_cats": null,
+    "ideal_home": "Piso en Madrid con paseos cortos y frecuentes.",
+    "story": "Rocco llegó al refugio tras el fallecimiento de su anterior familia.",
+    "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+  },
+  {
+    "animal_id": "f566ff7a-0599-4c02-ab07-7eedfda2438e",
+    "name": "Duna",
+    "sex": "hembra",
+    "breed": "Podenco",
+    "size": "mediano",
+    "weight": 16.0,
+    "birthdate": "2022-11-20",
+    "activity_level": "alto",
+    "vaccines": "Rabia, Moquillo, Parvovirus, Leptospirosis",
+    "has_microchip": true,
+    "is_sterilized": true,
+    "tests_done": "Leishmania y Ehrlichia negativos",
+    "special_needs": null,
+    "traits": "Activa, Independiente, Curiosa",
+    "lives_with_kids": null,
+    "lives_with_dogs": true,
+    "lives_with_cats": false,
+    "ideal_home": "Familia activa con jardín vallado.",
+    "story": "Duna fue rescatada de una perrera de caza en Toledo y trasladada a Madrid.",
+    "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+  },
+  {
+    "animal_id": "179da19e-7e4e-4272-b605-c27faae8efd4",
+    "name": "Nube",
+    "sex": "hembra",
+    "breed": "Comun europeo",
+    "size": "pequeño",
+    "weight": 3.9,
+    "birthdate": "2024-02-14",
+    "activity_level": "bajo",
+    "vaccines": "Trivalente felina, Rabia",
+    "has_microchip": true,
+    "is_sterilized": false,
+    "tests_done": "FIV/FeLV negativos",
+    "special_needs": null,
+    "traits": "Tranquila, Cariñosa",
+    "lives_with_kids": true,
+    "lives_with_dogs": null,
+    "lives_with_cats": true,
+    "ideal_home": "Hogar tranquilo, sin necesidad de exterior.",
+    "story": "Nube nació en una colonia felina controlada por la protectora.",
+    "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
+  },
+  {
+    "animal_id": "77bb3b58-c0b4-4273-ac34-51e994b61c04",
+    "name": "Simba",
+    "sex": "macho",
+    "breed": "Naranja comun",
+    "size": "mediano",
+    "weight": 5.2,
+    "birthdate": "2021-06-01",
+    "activity_level": "medio",
+    "vaccines": "Trivalente felina",
+    "has_microchip": true,
+    "is_sterilized": true,
+    "tests_done": "FIV/FeLV negativos",
+    "special_needs": "Necesita dieta de control de peso.",
+    "traits": "Glotón, Sociable, Juguetón",
+    "lives_with_kids": true,
+    "lives_with_dogs": false,
+    "lives_with_cats": true,
+    "ideal_home": "Casa con otros gatos y horarios de comida controlados.",
+    "story": "Simba fue entregado por su anterior familia por un cambio de vivienda.",
+    "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885"
   }
 ]

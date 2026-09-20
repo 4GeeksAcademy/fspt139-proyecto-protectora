@@ -2,20 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { calcularAgeLabel } from "../../utils/animalAge";
 import { cargarMediaUrl } from "../../services/animalsService";
-
-const STATUS_LABELS = {
-  disponible: "Disponible",
-  en_proceso: "En proceso",
-  adoptado: "Adoptado",
-  borrador: "Borrador",
-};
-
-const STATUS_BADGE_CLASS = {
-  disponible: "bg-success",
-  en_proceso: "bg-warning text-dark",
-  adoptado: "bg-secondary",
-  borrador: "bg-light text-dark border",
-};
+import { ANIMAL_STATUS_LABELS, ANIMAL_STATUS_BADGE_CLASS } from "../../utils/format";
 
 const truncate = (text, max) => {
   if (!text) return "";
@@ -31,18 +18,34 @@ export const ShelterAnimalCard = ({ animal }) => {
     .map((trait) => trait.trim())
     .filter(Boolean);
   const sexLabel = animal.sex === "macho" ? "Macho" : animal.sex === "hembra" ? "Hembra" : null;
+  const tieneProceso = Boolean(animal.addoption_process_id);
 
   return (
     <div className="card h-100 shadow-sm">
       <div
-        className="position-relative bg-light d-flex align-items-center justify-content-center overflow-hidden"
+        className="position-relative bg-light d-flex align-items-center justify-content-center overflow-hidden rounded-top"
         style={{ height: "160px" }}
       >
-        <span
-          className={`badge position-absolute top-0 start-0 m-2 ${STATUS_BADGE_CLASS[animal.status] || "bg-secondary"}`}
-        >
-          {STATUS_LABELS[animal.status] || animal.status}
-        </span>
+        {/*<div className="position-absolute top-0 start-0 m-3 d-flex flex-column gap-1 align-items-start">*/}
+
+        <div className="position-absolute top-0 start-0 m-2 d-flex align-items-top gap-1 justify-content-between" style={{width:"95%"}}>
+          <div className="d-flex align-items-start gap-1 flex-column ">
+            <span className={`badge ${ANIMAL_STATUS_BADGE_CLASS[animal.status] || "bg-secondary"}`}>
+              {ANIMAL_STATUS_LABELS[animal.status] || animal.status}
+            </span>
+            {tieneProceso && (
+              <span className="badge" style={{ backgroundColor: "var(--rp-miel)", color: "var(--rp-papel)" }}>
+                En adopción
+              </span>
+            )}
+          </div>
+          <Link to={`/panel/adopciones/${animal.addoption_process_id}`}>
+          <span className="badge bg-success text-white" title="Solicitudes de adopción recibidas">
+            <i className="fa fa-envelope me-1"></i>
+            {animal.addoption_requests_count ?? 0}
+          </span>
+          </Link>
+        </div>
         {animal.cover_image ? (
           <img
             src={cargarMediaUrl(animal.cover_image)}

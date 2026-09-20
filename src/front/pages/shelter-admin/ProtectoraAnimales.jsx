@@ -3,14 +3,7 @@ import { Link } from "react-router-dom";
 import { getShelterAnimals } from "../../services/animalsService";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { ShelterAnimalCard } from "../../components/protectora/ShelterAnimalCard";
-
-
-//todo: mover a store con datos de la aplicacion o leer de bbdd si normalizamos animal.status a una tabla
-const STATUS_OPTIONS = [
-  { value: "", label: "Todos los estados" },
-  { value: "disponible", label: "Disponible" },
-  { value: "borrador", label: "Borrador" },
-];
+import { ANIMAL_STATUS_OPTIONS } from "../../utils/format";
 
 const PER_PAGE = 8;
 
@@ -121,7 +114,7 @@ export const ProtectoraAnimales = () => {
             </div>
             <div className="col-6 col-md-3">
               <select className="form-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
-                {STATUS_OPTIONS.map((opt) => (
+                {ANIMAL_STATUS_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
                     {opt.label}
                   </option>

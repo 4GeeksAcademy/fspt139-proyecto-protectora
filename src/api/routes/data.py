@@ -7,6 +7,7 @@ from flask import jsonify
 from api.repositories.animal_type_repository import AnimalTypeRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.repositories.request_type_repository import RequestTypeRepository
+from api.services.animals_service import PUBLIC_STATUSES
 
 from api.services.geolocation_service import locate_ip
 from api.utils import get_client_ip
@@ -38,7 +39,7 @@ def home_insights_action():
 
     needs_open_count = RequestRepository.list_all(per_page=1).total
     animals_available_count = AnimalRepository.list_all(
-        filters={"status": "disponible"}, per_page=1).total
+        filters={"status": PUBLIC_STATUSES}, per_page=1).total
     shelters_count = ShelterRepository.list_all(per_page=1).total
 
     collaborations_closed_count = 0
@@ -53,7 +54,7 @@ def home_insights_action():
         open_needs.append(request.serialize())
 
     open_adoptions_page = AnimalRepository.list_all(
-        filters={"status": "disponible"},
+        filters={"status": PUBLIC_STATUSES},
         sort_by="created_at",
         dir="desc",
         per_page=3
