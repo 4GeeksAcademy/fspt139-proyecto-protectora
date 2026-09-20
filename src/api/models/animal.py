@@ -73,7 +73,7 @@ class Animal(db.Model):
             "status": self.status,
             "animal_type_id": self.animal_type_id,
             "species": self.animal_type.species if self.animal_type else None,
-            "shelter_id": self.shelter_id,
+            "shelter_id": self.shelter.shelter_id if self.shelter else None,
             "shelter_name": self.shelter.name if self.shelter else None,
             "map_positioning": self.shelter.map_positioning if self.shelter else None,
             "media": [media.serialize() for media in self.media],
