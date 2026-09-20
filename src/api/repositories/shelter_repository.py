@@ -1,4 +1,10 @@
-from api.models import Shelter, db
+from datetime import datetime, timedelta
+
+from sqlalchemy.orm import selectinload
+
+from api.models import Animal, Request, Shelter, db
+from api.services.animals_service import PUBLIC_STATUSES as ANIMAL_PUBLIC_STATUSES
+
 
 #FILTROS ADMITIDOS PARA EL REPOSITORIO SHELTER
 #TIPO LIKE X
@@ -15,6 +21,30 @@ SORTABLE_FIELDS = {
     "id", "shelter_id", "name", "email", "phone", "address", "shelter_type_id", "created_at", "update_at"
 }
 
+DIAS_URGENTE = 2
+
+# ¿tiene la protectora alguna necesidad abierta que venza en los proximos dias?
+def _tiene_necesidad_urgente():
+    ahora = datetime.now()
+    limite = ahora + timedelta(days=DIAS_URGENTE + 1)
+    return (
+        db.select(Request.id)
+        .where(Request.shelter_id == Shelter.id)
+        .where(Request.status == "abierta")
+        .where(Request.request_deadline >= ahora)
+        .where(Request.request_deadline <= limite)
+        .exists()
+    )
+
+
+# ¿tiene la protectora algun animal visible en el catalogo publico?
+def _tiene_animales_publicados():
+    return (
+        db.select(Animal.id)
+        .where(Animal.shelter_id == Shelter.id)
+        .where(Animal.status.in_(ANIMAL_PUBLIC_STATUSES))
+        .exists()
+    )
 
 class ShelterRepository:
 
@@ -35,8 +65,18 @@ class ShelterRepository:
         ).one_or_none()
 
     @staticmethod
-    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
-        query = db.select(Shelter)
+    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10,
+                 has_urgent=False, has_animals=False):
+        query = db.select(Shelter).options(
+            selectinload(Shelter.animals),
+            selectinload(Shelter.requests).selectinload(Request.user_requests),
+        )
+
+        if has_urgent:
+            query = query.where(_tiene_necesidad_urgente())
+
+        if has_animals:
+            query = query.where(_tiene_animales_publicados())
 
         for field, value in (filters or {}).items():
             if value in (None, ''):
