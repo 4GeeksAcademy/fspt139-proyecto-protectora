@@ -27,12 +27,8 @@ class AnimalTypeRequirement(db.Model):
 
     def serialize(self):
         return {
-            "id": self.id,
             "animal_type_requirement_id": self.animal_type_requirement_id,
-            "animal_type_id": self.animal_type_id,
             "label": self.label,
             "is_checked_by_default": self.is_checked_by_default,
             "position": self.position,
-            "created_at": self.created_at.isoformat() if self.created_at else None,
-            "update_at": self.update_at.isoformat() if self.update_at else None,
         }

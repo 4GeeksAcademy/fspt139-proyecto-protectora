@@ -22,6 +22,9 @@ from api.repositories.addoption_process_requirement_repository import AddoptionP
 from api.repositories.addoption_request_answer_repository import AddoptionRequestAnswerRepository
 from api.repositories.addoption_request_question_repository import AddoptionRequestQuestionRepository
 from api.repositories.animal_type_requirement_repository import AnimalTypeRequirementRepository
+from api.services.animals_service import ACTIVADO
+from api.services.addoption_process_service import ABIERTO
+from api.services.addoption_request_service import PENDIENTE
 ##############################
 #1. añadir fichero .json en la carpeta data
 #2. añadir bloque de carga en este fichero, siguiendo el patrón de los bloques existentes
@@ -197,7 +200,7 @@ def seed_database():
                 ideal_home=item.get("ideal_home"),
                 story=item["story"],
                 animal_type_id=animal_type.id,
-                status=item.get("status", "disponible"),
+                status=item.get("status", ACTIVADO),
                 shelter_id=shelter_id,
             )
 
@@ -221,7 +224,7 @@ def seed_database():
                 contribution_amount=item.get("contribution_amount"),
                 start_date=date.fromisoformat(item["start_date"]) if item.get("start_date") else None,
                 end_date=date.fromisoformat(item["end_date"]) if item.get("end_date") else None,
-                status=item.get("status", "abierto"),
+                status=item.get("status", ABIERTO),
             )
             saved_process = AddoptionProcessRepository.save(process)
 
@@ -240,9 +243,6 @@ def seed_database():
                     question=question["question"],
                     position=position,
                 )
-
-            # igual que hace el servicio real al abrir un proceso desde el formulario
-            animal.status = "en_proceso"
 
             created["addoption_processes"] += 1
 
@@ -323,7 +323,7 @@ def seed_database():
                 animal_id=animal.id,
                 addoption_process_id=addoption_process_id,
                 score=item.get("score", 0),
-                status=item.get("status", "pendiente"),
+                status=item.get("status", PENDIENTE),
             )
             saved_request = AddoptionRequestRepository.save(addoption_request)
 

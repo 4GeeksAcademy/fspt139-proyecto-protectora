@@ -4,11 +4,6 @@ import { calcularAgeLabel } from "../utils/animalAge";
 import { construirTags } from "../utils/animalTags";
 import { cargarMediaUrl } from "../services/animalsService";
 
-const ESTADOS = {
-  disponible: { texto: "Disponible", fondo: "var(--rp-verde)" },
-  en_proceso: { texto: "En proceso", fondo: "var(--rp-miel)" },
-};
-
 const MAX_TAGS = 3;
 
 // "Perro" + hembra -> "Perra". Funciona con Perro/Gato/Conejo; con Hurón devuelve el original.
@@ -32,7 +27,8 @@ const truncar = (texto, max) => {
 export const AnimalCard = ({ animal }) => {
   if (!animal) return null;
 
-  const estado = ESTADOS[animal.status] || { texto: animal.status, fondo: "var(--rp-gris)" };
+  const tieneProceso = Boolean(animal.addoption_process_id);
+  const tieneRequests = Boolean(animal.animal_request_ids?.length);
 
   const subtitulo = [
     concordarEspecie(animal.species, animal.sex),
@@ -65,12 +61,20 @@ export const AnimalCard = ({ animal }) => {
           <span style={{ fontSize: "3rem", opacity: 0.35 }}>🐾</span>
         )}
 
-        <span
-          className="badge position-absolute top-0 start-0 m-3"
-          style={{ backgroundColor: estado.fondo, color: "var(--rp-papel)" }}
-        >
-          {estado.texto}
-        </span>
+        {(tieneProceso || tieneRequests) && (
+          <div className="position-absolute top-0 start-0 m-3 d-flex flex-column gap-1 align-items-start">
+            {tieneProceso && (
+              <span className="badge" style={{ backgroundColor: "var(--rp-miel)", color: "var(--rp-papel)" }}>
+                En adopción
+              </span>
+            )}
+            {tieneRequests && (
+              <span className="badge" style={{ backgroundColor: "var(--rp-arcilla)", color: "var(--rp-papel)" }}>
+                Te necesita
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
       <div className="card-body d-flex flex-column p-3">

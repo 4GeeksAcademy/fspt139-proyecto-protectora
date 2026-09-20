@@ -1,6 +1,6 @@
 from sqlalchemy.orm import selectinload
 
-from api.models import Animal, AddoptionProcess, db
+from api.models import Animal, AddoptionProcess, AddoptionRequest, db
 
 
 class AddoptionProcessRepository:
@@ -34,6 +34,10 @@ class AddoptionProcessRepository:
         status = (filters or {}).get("status")
         if status:
             query = query.where(AddoptionProcess.status == status)
+
+        pending_status = (filters or {}).get("pending_status")
+        if pending_status:
+            query = query.where(AddoptionProcess.addoption_requests.any(AddoptionRequest.status == pending_status))
 
         search = (filters or {}).get("search")
         if search:

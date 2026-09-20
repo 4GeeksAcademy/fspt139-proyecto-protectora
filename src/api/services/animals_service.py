@@ -11,11 +11,17 @@ ANIMAL_FIELDS = {
     "lives_with_cats", "ideal_home",
 }
 
-# estados que el formulario puede pedir explícitamente (crear como borrador/disponible, o publicar un borrador ya editado)
-SETTABLE_STATUSES = {"disponible", "borrador"}
+# unica fuente de verdad de Animal.status: activado (visible al publico) / desactivado
+# (oculto, reversible) / borrador (incompleto, nunca publico)
+ACTIVADO = "activado"
+DESACTIVADO = "desactivado"
+BORRADOR = "borrador"
+
+# estados que el formulario puede pedir explícitamente (crear, publicar, desactivar/reactivar o volver a borrador)
+SETTABLE_STATUSES = {ACTIVADO, DESACTIVADO, BORRADOR}
 
 # estados visibles para cualquier visitante en el catálogo público y en la ficha
-PUBLIC_STATUSES = {"disponible", "en_proceso"}
+PUBLIC_STATUSES = {ACTIVADO}
 
 # rangos de edad en años que ofrece el catalogo publico (minimo incluido, maximo excluido)
 AGE_RANGES = {
@@ -122,6 +128,6 @@ def upsert_animal(animal_id, shelter_id=None, **data):
 
     animal = AnimalRepository.create(
         animal_id=animal_id, animal_type_id=animal_type.id, shelter_id=shelter_id,
-        status=status or "disponible", **fields
+        status=status or ACTIVADO, **fields
     )
     return AnimalRepository.save(animal), True          # creado nuevo
