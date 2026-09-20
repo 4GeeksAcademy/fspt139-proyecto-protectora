@@ -11,17 +11,19 @@ export const BuscanCasa = ({ animals }) => {
 
                 {animals.map((animal) => (
                     <HomeAnimalCard
-                        key={animal.id}
+                        key={animal.animal_id}
+                        animalId={animal.animal_id}
                         imageUrl={animal.cover_image}
                         badgeText={animal.status}
                         badgeClass="bg-success"
                         name={animal.name}
                         details={animal.breed + " · " + animal.size}
-                        org={"Shelter " + animal.shelter_id}
+                        org={animal.shelter_name}
                     />
                 ))}
 
             </div>
         </div>
+        
     );
 };

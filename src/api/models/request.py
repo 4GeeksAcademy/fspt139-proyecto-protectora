@@ -20,6 +20,7 @@ class Request(db.Model):
     request_deadline: Mapped[Optional[datetime]] = mapped_column(DateTime)
     amount_needed: Mapped[Optional[float]] = mapped_column(Numeric(10, 2), default=0.0)
     unit: Mapped[Optional[str]] = mapped_column(String)
+    footnote: Mapped[Optional[str]] = mapped_column(String)
     status: Mapped[str] = mapped_column(String, default='abierta')
     request_type_id: Mapped[int] = mapped_column(ForeignKey('request_type.id'))
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
@@ -33,6 +34,8 @@ class Request(db.Model):
     media: Mapped[List["RequestMedia"]] = relationship(back_populates="request", passive_deletes=True)
 
     def serialize(self):
+        colaboraciones = self.user_requests or []
+
         return {
             "id": self.id,
             "request_id": self.request_id,
@@ -42,9 +45,13 @@ class Request(db.Model):
             "description": self.description,
             "request_deadline": self.request_deadline.isoformat() if self.request_deadline else None,
             "amount_needed": self.amount_needed,
+            "amount_current": float(sum(c.amount or 0 for c in colaboraciones)),
+            "collaborators": len({c.user_id for c in colaboraciones}),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
             "unit": self.unit,
+            "footnote": self.footnote,
+            "shelter_name": self.shelter.name if self.shelter else None,
             "status": self.status,
             "request_type_id": self.request_type.id,
             "request_type_code": self.request_type.code,

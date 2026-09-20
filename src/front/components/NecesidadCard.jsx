@@ -1,42 +1,133 @@
 import { Link } from "react-router-dom";
+import { construirBadge } from "../utils/necesidadDeadline";
+import { cargarMediaUrl } from "../services/animalsService";
 
-//TODO: cargar una need/request en lugar de los props
+const formatearCantidad = (valor) => {
+  const numero = Number(valor);
+  if (!Number.isFinite(numero)) return null;
+  return numero.toLocaleString("es-ES", { maximumFractionDigits: 2 });
+};
 
-export const NecesidadCard = ({ id, imageClass, title, org, badgeText, badgeClass, current, total, unit, note }) => {
+export const NecesidadCard = ({ necesidad }) => {
+  if (!necesidad) return null;
 
-    const percent = (current / total) * 100;
+  const badge = construirBadge(necesidad);
+  const cubierta = necesidad.status === "cerrada";
 
-    return (
-        <div className="col-12 col-md-4">
-            <div className="card h-100 shadow-sm border-0">
+  const actual = Number(necesidad.amount_current) || 0;
+  const objetivo = Number(necesidad.amount_needed) || 0;
+  const porcentaje = objetivo > 0 ? Math.min((actual / objetivo) * 100, 100) : 0;
 
-                <div className="position-relative">
-                    <div className={`card-placeholder ${imageClass}`}></div>
-                    <div className={`badge ${badgeClass} position-absolute top-0 start-0 m-2`}>
-                        {badgeText}
-                    </div>
-                </div>
+  const colaboradores = necesidad.collaborators || 0;
+  const textoColaboradores =
+    colaboradores === 0
+      ? "nadie aún"
+      : colaboradores === 1
+        ? "1 persona"
+        : `${colaboradores} personas`;
 
-                <div className="card-body d-flex flex-column">
+  return (
+    <div
+      className="card h-100 border-0 shadow-sm overflow-hidden"
+      style={{ backgroundColor: "var(--rp-papel)" }}
+    >
 
-                    <h5 className="fw-bold">{title}</h5>
-                    <p className="text-secondary small mb-3">{org}</p>
+      <div
+        className="position-relative d-flex align-items-center justify-content-center flex-shrink-0"
+        style={{ height: "160px", backgroundColor: "var(--rp-verde-cl)" }}
+      >
+        {necesidad.cover_image ? (
+          <img
+            src={cargarMediaUrl(necesidad.cover_image)}
+            alt={necesidad.name}
+            className="w-100 h-100"
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          <span style={{ fontSize: "2.5rem", opacity: 0.35 }}>🐾</span>
+        )}
 
-                    <p className="mb-1">
-                        <strong>{current}</strong> / {total} {unit}
-                    </p>
+        {badge && (
+          <span
+            className="badge position-absolute top-0 start-0 m-2"
+            style={{ backgroundColor: badge.fondo, color: "var(--rp-papel)" }}
+          >
+            {badge.texto}
+          </span>
+        )}
+      </div>
 
-                    <div className="progress mb-3" style={{ height: "8px" }}>
-                        <div className="progress-bar bg-success" style={{ width: `${percent}%` }}></div>
-                    </div>
+      <div className="card-body d-flex flex-column p-3">
 
-                    <div className="d-flex justify-content-between align-items-center mt-auto">
-                        <small className="text-secondary">{note}</small>
-                        <Link to={`/necesidades/${id}`} className="btn btn-success btn-sm">Contribute</Link>
-                    </div>
+        <h5
+          className="fw-bold mb-1"
+          style={{
+            color: "var(--rp-pino)",
+            fontSize: "1.05rem",
+            lineHeight: 1.3,
+            minHeight: "2.73rem",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {necesidad.name}
+        </h5>
 
-                </div>
-            </div>
+        <p className="small mb-3 text-truncate" style={{ color: "var(--rp-gris)" }}>
+          {[necesidad.shelter_name, necesidad.request_type_name].filter(Boolean).join(" · ")}
+        </p>
+
+        <div className="mt-auto">
+
+          {objetivo > 0 && (
+            <>
+              <div className="d-flex justify-content-between align-items-baseline mb-1 gap-2">
+                <span style={{ fontSize: "0.9rem" }}>
+                  <strong>{formatearCantidad(actual)}</strong>
+                  <span style={{ color: "var(--rp-gris)" }}>
+                    {" "}/ {formatearCantidad(objetivo)} {necesidad.unit}
+                  </span>
+                </span>
+                <small className="text-nowrap" style={{ color: "var(--rp-gris)" }}>
+                  {textoColaboradores}
+                </small>
+              </div>
+
+              <div
+                className="progress mb-3"
+                style={{ height: "8px", backgroundColor: "var(--rp-verde-cl)" }}
+              >
+                <div
+                  className="progress-bar"
+                  style={{ width: `${porcentaje}%`, backgroundColor: "var(--rp-verde)" }}
+                  role="progressbar"
+                  aria-valuenow={porcentaje}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                />
+              </div>
+            </>
+          )}
+
+          <div
+            className="d-flex justify-content-between align-items-center gap-2"
+            style={{ minHeight: "2rem" }}
+          >
+            <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
+              {necesidad.footnote}
+            </small>
+            <Link
+              to={`/necesidades/${necesidad.request_id}`}
+              className={`btn btn-sm flex-shrink-0 ${cubierta ? "btn-outline-secondary" : "btn-success"}`}
+            >
+              {cubierta ? "Ver detalle" : "Colaborar"}
+            </Link>
+          </div>
+
         </div>
-    );
+      </div>
+    </div>
+  );
 };

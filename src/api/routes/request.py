@@ -2,7 +2,7 @@ from flask import jsonify, request
 from flask_jwt_extended import jwt_required
 
 from api.repositories.request_repository import FILTERABLE_FIELDS
-from api.services.requests_service import crear_necesidad, list_requests, obtener_necesidad_shelter
+from api.services.requests_service import PUBLIC_STATUSES, get_request, crear_necesidad, list_requests, obtener_necesidad_shelter
 from api.utils import APIException, paginate_args
 from .auth import get_current_user
 
@@ -12,7 +12,14 @@ from . import api
 @api.route('/requests', methods=['GET'])
 def list_requests_action():
 
-    filters = {field: value for field in FILTERABLE_FIELDS if (value := request.args.get(field))}
+    filters = {}
+    for field in FILTERABLE_FIELDS:
+        values = [value for value in request.args.getlist(field) if value]
+        if not values:
+            continue
+        filters[field] = values if len(values) > 1 else values[0]
+
+    filters['status'] = PUBLIC_STATUSES  # fuerza los estados publicos: ignora cualquier status recibido por query
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
     page, per_page = paginate_args()
@@ -28,6 +35,11 @@ def list_requests_action():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/requests/<request_id>', methods=['GET'])
+def get_request_action(request_id):
+    necesidad = get_request(request_id)
+    return jsonify(necesidad.serialize()), 200
 
 
 # ####################### ####################### ######################

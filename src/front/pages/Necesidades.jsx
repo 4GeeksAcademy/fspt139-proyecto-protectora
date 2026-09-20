@@ -1,156 +1,205 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NecesidadCard } from "../components/NecesidadCard";
+import { getRequests } from "../services/requestsService";
+import { getShelters } from "../services/sheltersService";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+
+const PER_PAGE = 12;
 
 export const Necesidades = () => {
+  const { store } = useGlobalReducer();
+  const requestTypes = store.requestTypes || [];
 
-    return (
-        <>
-            <div className="bg-success-subtle py-5">
-                <div className="container">
-                    <p className="text-success fw-bold text-uppercase small mb-1">Public board</p>
-                    <h2 className="fw-bold mb-1">Open needs</h2>
-                    <p className="text-secondary mb-0">27 needs from 6 shelters, updated today</p>
-                </div>
+  const [categoria, setCategoria] = useState("");
+  const [shelterId, setShelterId] = useState("");
+  const [busqueda, setBusqueda] = useState("");
+  const [pagina, setPagina] = useState(1);
+
+  const [necesidades, setNecesidades] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPaginas, setTotalPaginas] = useState(1);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
+
+  const [shelters, setShelters] = useState([]);
+
+  useEffect(() => {
+    getShelters({ ordenarPor: "name", orden: "asc", pagina: 1, perPage: 100 })
+      .then((data) => setShelters(data.items || []))
+      .catch(() => setShelters([]));
+  }, []);
+
+  // espera a que el usuario deje de teclear antes de llamar a la API
+  const [busquedaAplicada, setBusquedaAplicada] = useState("");
+
+  useEffect(() => {
+    const temporizador = setTimeout(() => {
+      setBusquedaAplicada(busqueda);
+      setPagina(1);
+    }, 400);
+
+    return () => clearTimeout(temporizador);
+  }, [busqueda]);
+
+  useEffect(() => {
+    let cancelado = false;
+    setCargando(true);
+    setError(null);
+
+    getRequests(
+      { pagina, perPage: PER_PAGE },
+      { nombre: busquedaAplicada, requestTypeId: categoria, shelterId },
+    )
+      .then((data) => {
+        if (cancelado) return;
+        setNecesidades(data.items || []);
+        setTotalItems(data.total_items || 0);
+        setTotalPaginas(data.total_pages || 1);
+      })
+      .catch((err) => {
+        if (cancelado) return;
+        setError(err.message);
+        setNecesidades([]);
+      })
+      .finally(() => {
+        if (!cancelado) setCargando(false);
+      });
+
+    return () => { cancelado = true; };
+  }, [pagina, categoria, shelterId, busquedaAplicada]);
+
+  const cambiarCategoria = (id) => { setCategoria(id); setPagina(1); };
+  const cambiarProtectora = (id) => { setShelterId(id); setPagina(1); };
+
+  const limpiarFiltros = () => {
+    setCategoria("");
+    setShelterId("");
+    setBusqueda("");
+    setPagina(1);
+  };
+
+   const sinResultados = !cargando && !error && necesidades.length === 0;
+
+  return (
+    <div style={{ backgroundColor: "var(--rp-hueso)" }}>
+      <div className="bg-success-subtle py-5">
+        <div className="container">
+          <p className="text-success fw-bold text-uppercase small mb-1">Tablón público</p>
+          <h2 className="fw-bold mb-1">Necesidades abiertas</h2>
+          <p className="text-secondary mb-0">
+            {cargando ? "Cargando necesidades…" : `${totalItems} necesidades esperando ayuda`}
+          </p>
+        </div>
+      </div>
+
+      <div className="container py-5">
+        <div
+          className="p-3 p-md-4 mb-4"
+          style={{
+            backgroundColor: "var(--rp-papel)",
+            borderRadius: "var(--bs-border-radius-xl)",
+            border: "1px solid var(--rp-linea)",
+          }}
+        >
+          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div className="d-flex flex-nowrap gap-2 overflow-auto pb-1">
+              <button
+                className={`btn rounded-pill px-4 text-nowrap ${categoria === "" ? "btn-primary" : "btn-light"}`}
+                onClick={() => cambiarCategoria("")}
+              >
+                Todas
+              </button>
+              {requestTypes.map((tipo) => (
+                <button
+                  key={tipo.request_type_id}
+                  className={`btn rounded-pill px-4 text-nowrap ${categoria === String(tipo.id) ? "btn-primary" : "btn-light"}`}
+                  onClick={() => cambiarCategoria(String(tipo.id))}
+                >
+                  {tipo.name}
+                </button>
+              ))}
             </div>
 
-            <div className="container py-4">
+            <div className="d-flex flex-nowrap gap-2">
+              <select
+                className="form-select form-select-sm rounded-pill"
+                style={{ width: "190px" }}
+                value={shelterId}
+                onChange={(e) => cambiarProtectora(e.target.value)}
+              >
+                <option value="">Cualquier protectora</option>
+                {shelters.map((shelter) => (
+                  <option key={shelter.shelter_id} value={shelter.id}>
+                    {shelter.name}
+                  </option>
+                ))}
+              </select>
 
-                <div className="d-flex flex-wrap gap-2 align-items-center mb-4">
-
-                    <div className="d-flex gap-2 flex-wrap">
-                        <button className="btn btn-success btn-sm rounded-pill">All</button>
-                        <button className="btn btn-outline-secondary btn-sm rounded-pill">Financial</button>
-                        <button className="btn btn-outline-secondary btn-sm rounded-pill">Supplies</button>
-                        <button className="btn btn-outline-secondary btn-sm rounded-pill">Volunteering</button>
-                        <button className="btn btn-outline-secondary btn-sm rounded-pill">Other</button>
-                        <button className="btn btn-outline-secondary btn-sm rounded-pill">Any shelter ▾</button>
-                    </div>
-
-                    <input
-                        type="text"
-                        className="form-control form-control-sm rounded-pill w-auto ms-auto"
-                        placeholder="Search need..."
-                    />
-
-                </div>
-
-                <div className="row g-4">
-
-                    <NecesidadCard
-                        imageClass="img-vet"
-                        title="Nala's surgery fund"
-                        org="Protectora Huellas"
-                        badgeText="Urgent"
-                        badgeClass="bg-danger"
-                        current={340}
-                        total={600}
-                        unit="€"
-                        note="Surgery Sept 3"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-food"
-                        title="Puppy food"
-                        org="Protectora Huellas"
-                        badgeText="3 days left"
-                        badgeClass="bg-warning text-dark"
-                        current={12}
-                        total={20}
-                        unit="kg"
-                        note="Pick up at the shelter"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-car"
-                        title="Vet transport"
-                        org="Protectora Huellas"
-                        badgeText="Urgent"
-                        badgeClass="bg-danger"
-                        current={0}
-                        total={1}
-                        unit="trip"
-                        note="A car is needed, Thursday"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-blanket"
-                        title="Blankets and towels"
-                        org="Protectora Huellas"
-                        badgeText="Covered"
-                        badgeClass="bg-success"
-                        current={4}
-                        total={4}
-                        unit="blankets"
-                        note="Closed on August 14"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-social"
-                        title="Social media outreach"
-                        org="Colonia Felina Vallecas"
-                        badgeText="7 days left"
-                        badgeClass="bg-warning text-dark"
-                        current={2}
-                        total={5}
-                        unit="posts"
-                        note="Photos and animal bios"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-walk"
-                        title="Weekend walks"
-                        org="Colonia Felina Vallecas"
-                        badgeText="5 days left"
-                        badgeClass="bg-warning text-dark"
-                        current={3}
-                        total={6}
-                        unit="shifts"
-                        note="Saturdays and Sundays"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-pills"
-                        title="Trufa's medication"
-                        org="Gatos del Sur"
-                        badgeText="Urgent"
-                        badgeClass="bg-danger"
-                        current={80}
-                        total={120}
-                        unit="€"
-                        note="2-week treatment"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-kitten"
-                        title="Cat litter"
-                        org="Gatos del Sur"
-                        badgeText="10 days left"
-                        badgeClass="bg-warning text-dark"
-                        current={18}
-                        total={30}
-                        unit="kg"
-                        note="Pick up locally"
-                    />
-
-                    <NecesidadCard
-                        imageClass="img-puppies"
-                        title="Temporary foster for litter"
-                        org="Refugio Els Amics"
-                        badgeText="Urgent"
-                        badgeClass="bg-danger"
-                        current={0}
-                        total={1}
-                        unit="home"
-                        note="4 puppies, 2 weeks old"
-                    />
-
-                </div>
-
-                <div className="text-center mt-4">
-                    <button className="btn btn-outline-success">Load more needs</button>
-                </div>
-
+              <input
+                type="search"
+                className="form-control form-control-sm rounded-pill"
+                style={{ width: "200px" }}
+                placeholder="Buscar necesidad…"
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+              />
             </div>
-        </>
-    );
+          </div>
+        </div>
+
+        {error && <div className="alert alert-danger">{error}</div>}
+
+        {cargando && (
+          <div className="d-flex justify-content-center py-5 my-5">
+            <div className="spinner-grow" style={{ color: "var(--rp-verde)" }} role="status">
+              <span className="visually-hidden">Cargando…</span>
+            </div>
+          </div>
+        )}
+
+        {sinResultados && (
+          <div className="text-center py-5 my-5">
+            <h4 style={{ color: "var(--rp-gris)" }}>No hay necesidades con estos filtros 🐾</h4>
+            <button className="btn btn-outline-primary rounded-pill mt-3 px-4" onClick={limpiarFiltros}>
+              Restablecer filtros
+            </button>
+          </div>
+        )}
+
+        {!cargando && necesidades.length > 0 && (
+          <>
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              {necesidades.map((necesidad) => (
+                <div className="col" key={necesidad.request_id}>
+                  <NecesidadCard necesidad={necesidad} />
+                </div>
+              ))}
+            </div>
+
+            {totalPaginas > 1 && (
+              <div className="d-flex justify-content-center align-items-center gap-3 mt-5 pt-4">
+                <button
+                  className="btn btn-outline-primary rounded-pill px-4"
+                  disabled={pagina <= 1}
+                  onClick={() => setPagina((p) => p - 1)}
+                >
+                  Anterior
+                </button>
+                <span style={{ color: "var(--rp-gris)" }}>Página {pagina} de {totalPaginas}</span>
+                <button
+                  className="btn btn-outline-primary rounded-pill px-4"
+                  disabled={pagina >= totalPaginas}
+                  onClick={() => setPagina((p) => p + 1)}
+                >
+                  Siguiente
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
+
+export default Necesidades;

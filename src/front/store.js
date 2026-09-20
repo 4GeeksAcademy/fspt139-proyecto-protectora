@@ -5,6 +5,7 @@ export const initialStore = () => {
     errorMessage: null,
     successMessage: null,
     user: getUser(),
+    user_location: null,
     token: getToken(),
     shelterTypes: [],
     animalTypes: [],
@@ -44,6 +45,11 @@ export default function storeReducer(store, action = {}) {
         requestTypes: action.payload,
       };
 
+    case "set_user_location":
+      return {
+        ...store,
+        user_location: action.payload,
+      };
 
     case "LOGIN":
       return {

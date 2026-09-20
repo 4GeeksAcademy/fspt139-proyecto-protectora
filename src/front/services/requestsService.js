@@ -2,34 +2,47 @@ import { getToken } from "./authServices.js";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-export const getRequests = (
-  { ordenarPor, orden, pagina, perPage = 5 },
+// tablon publico de necesidades (no requiere sesion)
+export const getRequests = async (
+  { ordenarPor = "created_at", orden = "desc", pagina = 1, perPage = 12 } = {},
   filters = {},
 ) => {
-  let url =
-    backendUrl +
-    "/api/requests?sort_by=" +
-    ordenarPor +
-    "&dir=" +
-    orden +
-    "&page=" +
-    pagina +
-    "&per_page=" +
-    perPage;
+  const params = new URLSearchParams({
+    sort_by: ordenarPor,
+    dir: orden,
+    page: pagina,
+    per_page: perPage,
+  });
 
-  const { nombre, tipoShelter, tipoAnimal } = filters;
+  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId } = filters;
 
-  if (nombre && nombre.trim() !== "") {
-    url = url + "&name=" + nombre;
-  }
-  if (tipoShelter) {
-    url = url + "&shelter_type_id=" + tipoShelter;
-  }
-  if (tipoAnimal) {
-    url = url + "&animal_type_id=" + tipoAnimal;
-  }
+  if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
+  if (tipoShelter) params.set("shelter_type_id", tipoShelter);
+  if (tipoAnimal) params.set("animal_type_id", tipoAnimal);
+  if (requestTypeId) params.set("request_type_id", requestTypeId);
+  if (shelterId) params.set("shelter_id", shelterId);
 
-  return fetch(url).then((response) => response.json());
+  const response = await fetch(`${backendUrl}/api/requests?${params.toString()}`);
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener las necesidades");
+  }
+  return response.json();
+};
+
+
+// ficha publica de una necesidad por su UUID (no requiere sesion)
+export const getRequestById = async (request_id) => {
+  const response = await fetch(`${backendUrl}/api/requests/${request_id}`);
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    const error = new Error(data.error || data.message || "No se ha podido cargar la necesidad");
+    error.status = response.status;
+    throw error;
+  }
+  return response.json();
 };
 
 

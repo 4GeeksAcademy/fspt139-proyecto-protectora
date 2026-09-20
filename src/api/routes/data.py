@@ -9,6 +9,9 @@ from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.repositories.request_type_repository import RequestTypeRepository
 from api.services.animals_service import PUBLIC_STATUSES
 
+from api.services.geolocation_service import locate_ip
+from api.utils import get_client_ip
+
 from . import api
 
 
@@ -18,10 +21,14 @@ def application_shared_data_action():
     animal_types = AnimalTypeRepository.list_all()
     request_types = RequestTypeRepository.list_all()
 
+    # aqui modificar con devolver la del usuario si la tenemos
+    user_location = locate_ip(get_client_ip())
+
     response_body = {
         "shelter_types": [shelter_type.serialize() for shelter_type in shelter_types],
         "animal_types": [animal_type.serialize() for animal_type in animal_types],
         "request_types": [request_type.serialize() for request_type in request_types],
+        "user_location": user_location,
     }
 
     return jsonify(response_body), 200

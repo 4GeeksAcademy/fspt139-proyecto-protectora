@@ -25,6 +25,7 @@ from api.repositories.animal_type_requirement_repository import AnimalTypeRequir
 from api.services.animals_service import ACTIVADO
 from api.services.addoption_process_service import ABIERTO
 from api.services.addoption_request_service import PENDIENTE
+from api.repositories.request_media_repository import RequestMediaRepository
 ##############################
 #1. añadir fichero .json en la carpeta data
 #2. añadir bloque de carga en este fichero, siguiendo el patrón de los bloques existentes
@@ -274,6 +275,7 @@ def seed_database():
                     item["request_deadline"]) if item.get("request_deadline") else None,
                 amount_needed=item.get("amount_needed"),
                 unit=item.get("unit"),
+                footnote=item.get("footnote"),
                 status=item.get("status", "abierta"),
                 request_type_id=request_type.id,
             )
@@ -374,6 +376,26 @@ def seed_database():
             )
             
             created["animal_media"] += 1
+
+    ##############################
+    # Request media (depend request)
+    ##############################
+    created["request_media"] = 0
+    for item in load("request_media.json"):
+        if RequestMediaRepository.get_by_media_id(item["media_id"]) is None:
+
+            necesidad = RequestRepository.get_by_request_id(item["request_id"])
+            if necesidad is None:
+                continue
+
+            RequestMediaRepository.create(
+                media_id=item["media_id"],
+                request_id=necesidad.id,
+                format=item["format"],
+                url=item["url"],
+                is_cover=item.get("is_cover", False),
+            )
+            created["request_media"] += 1
 
     ########## FIN DE CARGA DE MODELOS, HACEMOS COMMIT DE LA SESION PARA GUARDAR LOS CAMBIOS EN LA BASE DE DATOS ##########
     ##############################

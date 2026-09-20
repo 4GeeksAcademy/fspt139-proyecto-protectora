@@ -1,4 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 import { AnimalCard } from "../components/AnimalCard";
 import { getAnimals } from "../services/animalsService";
 import { getShelters } from "../services/sheltersService";
@@ -24,11 +26,23 @@ export const Adoptar = () => {
   const { store } = useGlobalReducer();
   const animalTypes = store.animalTypes;
 
+  // Por defecto centramos el mapa en Madrid
+  let centroMapa = [40.4168, -3.7038];
+
+  // Si el usuario tiene ubicacion guardada, centramos ahi
+  if (store.user_location) {
+    const partes = store.user_location.split(",");
+    centroMapa = [Number(partes[0]), Number(partes[1])];
+  }
+
   // filtros elegidos por el usuario
   const [especie, setEspecie] = useState("todos");
   const [edad, setEdad] = useState("");
   const [shelterId, setShelterId] = useState("");
   const [pagina, setPagina] = useState(1);
+
+  // controla si el mapa esta a pantalla completa
+  const [mapaGrande, setMapaGrande] = useState(false);
 
   // lo que responde la API
   const [animales, setAnimales] = useState([]);
@@ -118,6 +132,55 @@ export const Adoptar = () => {
         </div>
       </div>
 
+      <div className="container mt-4">
+        <div style={{ position: "relative" }}>
+
+          <MapContainer
+            center={centroMapa}
+            zoom={11}
+            style={{
+              height: mapaGrande ? "100vh" : "260px",
+              borderRadius: "var(--bs-border-radius-xl)"
+            }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              url="https://tile.openstreetmap.de/{z}/{x}/{y}.png"
+            />
+            {animales.map((animal, index) => {
+              const partes = animal.map_positioning.split(",");
+              const latitud = Number(partes[0]) + (index * 0.01);
+              const longitud = Number(partes[1]) + (index * 0.01);
+
+              return (
+                <Marker key={animal.animal_id} position={[latitud, longitud]}>
+                  <Popup>
+                    <b>{animal.name}</b><br />
+                    {animal.breed}<br />
+                    {animal.shelter_name}
+                  </Popup>
+                </Marker>
+              );
+            })}
+          </MapContainer>
+
+          <button
+            className="btn btn-light btn-sm shadow"
+            style={{
+              position: "absolute",
+              bottom: "15px",
+              right: "15px",
+              zIndex: 400
+            }}
+            title={mapaGrande ? "Reducir mapa" : "Ampliar mapa"}
+            onClick={() => setMapaGrande(!mapaGrande)}
+          >
+            <i className={mapaGrande ? "fa-solid fa-compress" : "fa-solid fa-expand"}></i>
+          </button>
+
+        </div>
+      </div>
+
       <div className="container py-5 flex-grow-1">
         <div
           className="p-3 p-md-4 mb-4"
@@ -201,6 +264,7 @@ export const Adoptar = () => {
         {!cargando && animales.length > 0 && (
           <>
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              
               {animales.map((animal) => (
                 <div className="col" key={animal.animal_id}>
                   <AnimalCard animal={animal} />

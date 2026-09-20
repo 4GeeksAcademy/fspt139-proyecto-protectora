@@ -5,10 +5,13 @@ from api.repositories.request_repository import RequestRepository
 from api.repositories.request_type_repository import RequestTypeRepository
 from api.utils import APIException
 
-NECESIDAD_FIELDS = {"unit"}
+NECESIDAD_FIELDS = {"unit", "footnote"}
 
 # estados que el formulario puede pedir (crear/guardar como borrador, o publicar)
 SETTABLE_STATUSES = {"abierta", "borrador"}
+
+# estados visibles para cualquier visitante en el tablon publico
+PUBLIC_STATUSES = {"abierta", "cerrada"}
 
 
 def list_requests(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
@@ -24,6 +27,12 @@ def obtener_necesidad_shelter(request_id, shelter_id):
         raise APIException("No tienes permiso para ver esta necesidad", status_code=403)
     return necesidad
 
+# carga una necesidad publica por su request_id (solo estados publicos)
+def get_request(request_id):
+    necesidad = RequestRepository.get_by_request_id(request_id)
+    if necesidad is None or necesidad.status not in PUBLIC_STATUSES:
+        raise APIException("Necesidad no encontrada", status_code=404)
+    return necesidad
 
 # crea o actualiza una necesidad (request) de una protectora
 def crear_necesidad(request_id, shelter_id=None, **data):
