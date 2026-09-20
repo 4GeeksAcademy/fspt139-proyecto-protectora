@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { Mapa } from "../components/Mapa";
 import { AnimalCard } from "../components/AnimalCard";
 import { getAnimals } from "../services/animalsService";
 import { getShelters } from "../services/sheltersService";
@@ -26,35 +25,23 @@ export const Adoptar = () => {
   const { store } = useGlobalReducer();
   const animalTypes = store.animalTypes;
 
-  // Por defecto centramos el mapa en Madrid
-  let centroMapa = [40.4168, -3.7038];
 
-  // Si el usuario tiene ubicacion guardada, centramos ahi
-  if (store.user_location) {
-    const partes = store.user_location.split(",");
-    centroMapa = [Number(partes[0]), Number(partes[1])];
-  }
-
-  // filtros elegidos por el usuario
   const [especie, setEspecie] = useState("todos");
   const [edad, setEdad] = useState("");
   const [shelterId, setShelterId] = useState("");
   const [pagina, setPagina] = useState(1);
 
-  // controla si el mapa esta a pantalla completa
-  const [mapaGrande, setMapaGrande] = useState(false);
 
-  // lo que responde la API
   const [animales, setAnimales] = useState([]);
   const [totalAnimales, setTotalAnimales] = useState(0);
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
-  // catalogo para el desplegable de protectoras
+
   const [shelters, setShelters] = useState([]);
 
-  // "Otros" no existe en la API: es una agrupacion visual que resolvemos aqui
+
   const animalTypeIds = useMemo(() => {
     if (especie === "todos") return undefined;
 
@@ -62,19 +49,28 @@ export const Adoptar = () => {
       ["perro", "gato"].includes(type.species?.toLowerCase());
 
     if (especie === "otros") {
-      return animalTypes.filter((type) => !esPerroOGato(type)).map((type) => type.id);
+      return animalTypes
+        .filter((type) => !esPerroOGato(type))
+        .map((type) => type.id);
     }
 
     const buscada = especie === "perros" ? "perro" : "gato";
+
     return animalTypes
       .filter((type) => type.species?.toLowerCase() === buscada)
       .map((type) => type.id);
   }, [especie, animalTypes]);
 
-  const esperandoCatalogo = especie !== "todos" && animalTypes.length === 0;
+  const esperandoCatalogo =
+    especie !== "todos" && animalTypes.length === 0;
 
   useEffect(() => {
-    getShelters({ ordenarPor: "name", orden: "asc", pagina: 1, perPage: 100 })
+    getShelters({
+      ordenarPor: "name",
+      orden: "asc",
+      pagina: 1,
+      perPage: 100,
+    })
       .then((data) => setShelters(data.items || []))
       .catch(() => setShelters([]));
   }, []);
@@ -86,15 +82,20 @@ export const Adoptar = () => {
     setCargando(true);
     setError(null);
 
-    getAnimals({ pagina, perPage: PER_PAGE }, { animalTypeIds, shelterId, edad })
+    getAnimals(
+      { pagina, perPage: PER_PAGE },
+      { animalTypeIds, shelterId, edad }
+    )
       .then((data) => {
         if (cancelado) return;
+
         setAnimales(data.items || []);
         setTotalAnimales(data.total_items || 0);
         setTotalPaginas(data.total_pages || 1);
       })
       .catch((err) => {
         if (cancelado) return;
+
         setError(err.message);
         setAnimales([]);
       })
@@ -107,9 +108,20 @@ export const Adoptar = () => {
     };
   }, [pagina, edad, shelterId, animalTypeIds, esperandoCatalogo]);
 
-  const cambiarEspecie = (key) => { setEspecie(key); setPagina(1); };
-  const cambiarEdad = (value) => { setEdad(value); setPagina(1); };
-  const cambiarProtectora = (value) => { setShelterId(value); setPagina(1); };
+  const cambiarEspecie = (key) => {
+    setEspecie(key);
+    setPagina(1);
+  };
+
+  const cambiarEdad = (value) => {
+    setEdad(value);
+    setPagina(1);
+  };
+
+  const cambiarProtectora = (value) => {
+    setShelterId(value);
+    setPagina(1);
+  };
 
   const limpiarFiltros = () => {
     setEspecie("todos");
@@ -118,67 +130,32 @@ export const Adoptar = () => {
     setPagina(1);
   };
 
-  const sinResultados = !cargando && !error && animales.length === 0;
+  const sinResultados =
+    !cargando && !error && animales.length === 0;
 
   return (
-    <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: "var(--rp-hueso)" }}>
+    <div
+      className="d-flex flex-column min-vh-100"
+      style={{ backgroundColor: "var(--rp-hueso)" }}
+    >
       <div className="bg-success-subtle py-5">
         <div className="container">
-          <p className="text-success fw-bold text-uppercase small mb-1">Adopciones</p>
+          <p className="text-success fw-bold text-uppercase small mb-1">
+            Adopciones
+          </p>
+
           <h2 className="fw-bold mb-1">Buscan casa</h2>
+
           <p className="text-secondary mb-0">
-            {cargando ? "Cargando animales…" : `${totalAnimales} animales esperando una familia`}
+            {cargando
+              ? "Cargando animales…"
+              : `${totalAnimales} animales esperando una familia`}
           </p>
         </div>
       </div>
 
       <div className="container mt-4">
-        <div style={{ position: "relative" }}>
-
-          <MapContainer
-            center={centroMapa}
-            zoom={11}
-            style={{
-              height: mapaGrande ? "100vh" : "260px",
-              borderRadius: "var(--bs-border-radius-xl)"
-            }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://tile.openstreetmap.de/{z}/{x}/{y}.png"
-            />
-            {animales.map((animal, index) => {
-              const partes = animal.map_positioning.split(",");
-              const latitud = Number(partes[0]) + (index * 0.01);
-              const longitud = Number(partes[1]) + (index * 0.01);
-
-              return (
-                <Marker key={animal.animal_id} position={[latitud, longitud]}>
-                  <Popup>
-                    <b>{animal.name}</b><br />
-                    {animal.breed}<br />
-                    {animal.shelter_name}
-                  </Popup>
-                </Marker>
-              );
-            })}
-          </MapContainer>
-
-          <button
-            className="btn btn-light btn-sm shadow"
-            style={{
-              position: "absolute",
-              bottom: "15px",
-              right: "15px",
-              zIndex: 400
-            }}
-            title={mapaGrande ? "Reducir mapa" : "Ampliar mapa"}
-            onClick={() => setMapaGrande(!mapaGrande)}
-          >
-            <i className={mapaGrande ? "fa-solid fa-compress" : "fa-solid fa-expand"}></i>
-          </button>
-
-        </div>
+        <Mapa datos={animales} />
       </div>
 
       <div className="container py-5 flex-grow-1">
@@ -195,9 +172,10 @@ export const Adoptar = () => {
               {PESTANAS.map((pestana) => (
                 <button
                   key={pestana.key}
-                  className={`btn rounded-pill px-4 text-nowrap ${
-                    especie === pestana.key ? "btn-primary" : "btn-light"
-                  }`}
+                  className={`btn rounded-pill px-4 text-nowrap ${especie === pestana.key
+                    ? "btn-primary"
+                    : "btn-light"
+                    }`}
                   onClick={() => cambiarEspecie(pestana.key)}
                 >
                   {pestana.label}
@@ -226,6 +204,7 @@ export const Adoptar = () => {
                 onChange={(e) => cambiarProtectora(e.target.value)}
               >
                 <option value="">Cualquier protectora</option>
+
                 {shelters.map((shelter) => (
                   <option key={shelter.shelter_id} value={shelter.id}>
                     {shelter.name}
@@ -244,7 +223,11 @@ export const Adoptar = () => {
 
         {cargando && (
           <div className="d-flex justify-content-center py-5 my-5">
-            <div className="spinner-grow" style={{ color: "var(--rp-verde)" }} role="status">
+            <div
+              className="spinner-grow"
+              style={{ color: "var(--rp-verde)" }}
+              role="status"
+            >
               <span className="visually-hidden">Cargando…</span>
             </div>
           </div>
@@ -255,7 +238,11 @@ export const Adoptar = () => {
             <h4 style={{ color: "var(--rp-gris)" }}>
               No hay animales con estos filtros 🐾
             </h4>
-            <button className="btn btn-outline-primary rounded-pill mt-3 px-4" onClick={limpiarFiltros}>
+
+            <button
+              className="btn btn-outline-primary rounded-pill mt-3 px-4"
+              onClick={limpiarFiltros}
+            >
               Restablecer filtros
             </button>
           </div>
@@ -264,7 +251,6 @@ export const Adoptar = () => {
         {!cargando && animales.length > 0 && (
           <>
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-              
               {animales.map((animal) => (
                 <div className="col" key={animal.animal_id}>
                   <AnimalCard animal={animal} />
@@ -281,9 +267,11 @@ export const Adoptar = () => {
                 >
                   Anterior
                 </button>
+
                 <span style={{ color: "var(--rp-gris)" }}>
                   Página {pagina} de {totalPaginas}
                 </span>
+
                 <button
                   className="btn btn-outline-primary rounded-pill px-4"
                   disabled={pagina >= totalPaginas}
