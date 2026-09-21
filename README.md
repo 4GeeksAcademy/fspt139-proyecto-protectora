@@ -100,6 +100,19 @@ Los campos `status` del dominio de adopción tienen su fuente de verdad en el se
 - `accept_addoption_request`: marca la solicitud como `aceptada`, cierra el proceso asociado (`close_addoption_process`) y descarta automáticamente (`descartada`) el resto de solicitudes `pendiente` del mismo proceso, para que nunca quede más de una aceptada.
 - `discard_addoption_requests`: descarte en bloque, solo afecta a las que siguen `pendiente`.
 
+## Necesidades y Colaborar:
+
+### `Request.status` — lo controla: [`requests_service.py`](/src/api/services/requests_service.py)
+
+| Valor | Significado |
+| --- | --- |
+| `abierta` | Admite nuevas `UserRequest` (colaboraciones) — ver `is_request_contributable`. |
+| `cerrada` | Ya no admite colaboraciones nuevas: se alcanza automáticamente cuando la suma de colaboraciones cubre `amount_needed`. |
+| `borrador` | Necesidad incompleta, nunca visible públicamente. |
+
+- Punto que cierra una necesidad: `_close_request_if_conseguido` en [`user_request_service.py`](/src/api/services/user_request_service.py), invocado tras cada colaboración creada. Solo aplica si la necesidad tiene `amount_needed` definido; sin objetivo (`amount_needed=None`) no hay cierre automático por acumulado.
+- A diferencia de `AddoptionProcess`, hoy no existe una vía para que la protectora reabra o cierre una necesidad a mano (`SETTABLE_STATUSES` solo admite `abierta`/`borrador` desde el formulario).
+
 ---
 
 ## LOGICA DE NEGOCION DE ADOPCIONES:
@@ -135,6 +148,19 @@ Restricciones que aplican a (`animal`, `addoption_process`, `addoption_request`)
 
 ## LÓGICA DE NEGOCIO DE PETICIONES:
 
+Restricciones que aplican a (`request`, `user_request`) al gestionar necesidades y colaboraciones.
+
+**Necesidades**
+
+- Solo las necesidades en estado `abierta` o `cerrada` son visibles públicamente (`/necesidades`, `/necesidades/:id`); las que están en `borrador` quedan ocultas aunque sigan existiendo.
+- Una protectora solo puede ver y editar sus propias necesidades.
+- Una necesidad puede tener un objetivo concreto (`amount_needed` definido, en la `unit` que corresponda: €, kg, turnos...) o quedar sin límite (`amount_needed=None`); solo las que tienen objetivo se cierran solas al cubrirse.
+
+**Colaboraciones (`UserRequest`)**
+
+- Solo se puede colaborar con una necesidad mientras está `abierta` y, si tiene fecha límite (`request_deadline`) configurada, dentro de ese plazo — ver `is_request_contributable`.
+- Cada colaboración aporta una cantidad (`amount`, obligatoria si la necesidad tiene objetivo) y/o unos detalles en texto libre (`details`, p.ej. cómo o cuándo se va a entregar); hace falta al menos uno de los dos. La transacción no existe en esta parte del proyecto, si continuamos adelante se integraría un sistema de pagos o de transacciones.
+- Un mismo usuario puede colaborar varias veces con la misma necesidad (no hay restricción).
 
 ---
 

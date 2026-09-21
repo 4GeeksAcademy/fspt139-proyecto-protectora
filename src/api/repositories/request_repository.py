@@ -40,6 +40,8 @@ class RequestRepository:
             selectinload(Request.shelter),
             selectinload(Request.media),
             selectinload(Request.user_requests),
+            selectinload(Request.animal).selectinload(Animal.media),
+            selectinload(Request.animal).selectinload(Animal.animal_type),
         )
 
         for field, value in (filters or {}).items():

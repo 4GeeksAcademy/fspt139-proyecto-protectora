@@ -30,6 +30,13 @@ export const esUrgente = (deadline) => {
   return dias !== null && dias >= 0 && dias <= UMBRAL_DIAS_URGENTE;
 };
 
+// true si la fecha límite ya ha pasado (sin fecha = nunca fuera de plazo)
+export const esFueraDePlazo = (deadline) => {
+  if (!deadline) return false;
+  const dias = diasHastaLimite(deadline);
+  return dias !== null && dias < 0;
+};
+
 // decide el badge de la tarjeta: texto + color, o null si no hay nada que mostrar
 export const construirBadge = (necesidad) => {
   if (!necesidad) return null;

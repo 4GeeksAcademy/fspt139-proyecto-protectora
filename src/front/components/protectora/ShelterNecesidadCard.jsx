@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ProgressBar } from "./ProgressBar";
 import { calcularDeadlineLabel, esUrgente } from "../../utils/necesidadDeadline";
 import { cargarMediaUrl } from "../../services/animalsService";
+import {AnimalMiniAvatar} from "./AnimalMiniAvatar";
 
 //TODO: determinare los estados de una necesidad
 
@@ -18,13 +19,13 @@ export const ShelterNecesidadCard = ({ necesidad, requestTypeName, animalName })
 
   const estado = getEstadoDisplay(necesidad);
   const tieneObjetivo = necesidad.amount_needed != null;
+  const actual = Number(necesidad.amount_current) || 0;
+  const objetivo = Number(necesidad.amount_needed) || 0;
   const objetivoLabel = tieneObjetivo
-    ? `0/${Number(necesidad.amount_needed)} ${necesidad.unit || ""}`.trim()
-    : `0 · sin tope`;
+    ? `${actual}/${objetivo} ${necesidad.unit || ""}`.trim()
+    : `${actual} · sin tope`;
 
-  const percent = 0;
-
-  const esCerrada = necesidad.status === "cerrada";
+  const percent = tieneObjetivo && objetivo > 0 ? Math.min((actual / objetivo) * 100, 100) : 0;
 
   return (
     <div className="card shadow-sm rounded-4">
@@ -53,15 +54,10 @@ export const ShelterNecesidadCard = ({ necesidad, requestTypeName, animalName })
 
           <p className="text-muted small mb-2">
             {animalName ? (
-              <span className="d-inline-flex align-items-center gap-2">
-                <span
-                  className="d-inline-flex align-items-center justify-content-center rounded-circle bg-light border"
-                  style={{ width: "22px", height: "22px", fontSize: "0.7rem" }}
-                >
-                  {animalName.charAt(0).toUpperCase()}
-                </span>
-                {animalName}
-              </span>
+                <div className="d-flex align-items-center gap-2">
+                  <AnimalMiniAvatar animal={{ cover_image: necesidad.animal_cover_image}} />
+                  {animalName}
+                </div>
             ) : (
               "Necesidad general"
             )}
@@ -82,7 +78,7 @@ export const ShelterNecesidadCard = ({ necesidad, requestTypeName, animalName })
               to={`/panel/necesidades/${necesidad.request_id}`}
               className="btn btn-outline-success btn-sm rounded-pill px-3"
             >
-              {esCerrada ? "Ver" : "Gestionar"}
+              Gestionar
             </Link>
           </div>
         </div>
