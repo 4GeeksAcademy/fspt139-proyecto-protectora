@@ -47,6 +47,7 @@ class Shelter(db.Model):
             "address": self.address,
             "map_positioning": self.map_positioning,
             "shelter_type_id": self.shelter_type_id,
+            "shelter_type_name": self.shelter_type.name if self.shelter_type else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
         }

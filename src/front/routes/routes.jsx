@@ -8,6 +8,7 @@ import { Ayuda } from "../pages/Ayuda.jsx";
 import { Necesidades } from "../pages/Necesidades.jsx";
 import { TerminosyPrivacidad } from "../pages/TerminosyPrivacidad.jsx";
 import { TestMapa } from "../pages/TestMapa.jsx";
+import { ProtectoraProfile } from "../pages/ProtectoraProfile.jsx";
 
 import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
 import { TestAnimalFilters } from "../pages/test/TestAnimalFilters.jsx";
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
             {
                 path: "/protectoras",
                 element: <Protectoras />
+            },
+            {
+                path: "/protectoras/:id",
+                element: <ProtectoraProfile />
             },
             {
                 path: "/necesidades",
