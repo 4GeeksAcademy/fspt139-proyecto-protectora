@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, time, timedelta
 
 from sqlalchemy.orm import selectinload
 
@@ -25,14 +25,14 @@ DIAS_URGENTE = 2
 
 # ¿tiene la protectora alguna necesidad abierta que venza en los proximos dias?
 def _tiene_necesidad_urgente():
-    ahora = datetime.now()
-    limite = ahora + timedelta(days=DIAS_URGENTE + 1)
+    inicio = datetime.combine(date.today(), time.min)
+    fin = inicio + timedelta(days=DIAS_URGENTE + 1)
     return (
         db.select(Request.id)
         .where(Request.shelter_id == Shelter.id)
         .where(Request.status == "abierta")
-        .where(Request.request_deadline >= ahora)
-        .where(Request.request_deadline <= limite)
+        .where(Request.request_deadline >= inicio)
+        .where(Request.request_deadline < fin)
         .exists()
     )
 

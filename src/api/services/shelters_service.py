@@ -1,22 +1,19 @@
 import uuid
 
-from datetime import datetime, timedelta
+from datetime import date
 
-from api.repositories.shelter_repository import ShelterRepository
+from api.repositories.shelter_repository import DIAS_URGENTE, ShelterRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.services.animals_service import PUBLIC_STATUSES as ANIMAL_PUBLIC_STATUSES
 from api.utils import APIException
 
-# una necesidad es urgente si esta abierta y vence dentro de este margen
-DIAS_URGENTE = 2
 
 
 def _es_urgente(necesidad):
     if necesidad.status != "abierta" or necesidad.request_deadline is None:
         return False
-    ahora = datetime.now()
-    limite = ahora + timedelta(days=DIAS_URGENTE + 1)
-    return ahora <= necesidad.request_deadline <= limite
+    dias = (necesidad.request_deadline.date() - date.today()).days
+    return 0 <= dias <= DIAS_URGENTE
 
 
 def shelter_metrics(shelter):

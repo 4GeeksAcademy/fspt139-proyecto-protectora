@@ -349,7 +349,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar con otro animal para que pueda socializar.",
     "story": "Nube fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "e7cd4433-abeb-4256-b475-d5db14ac406b"
   },
@@ -781,7 +781,7 @@
     "lives_with_cats": true,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Panter fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a"
   },
@@ -853,7 +853,7 @@
     "lives_with_cats": true,
     "ideal_home": "Familia tranquila y paciente que respete su ritmo.",
     "story": "Luna pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "8cb923dc-0704-41dd-becc-7da39a41e59b"
   },
@@ -877,7 +877,7 @@
     "lives_with_cats": false,
     "ideal_home": "Familia con experiencia en la raza y tiempo para entrenamiento.",
     "story": "Pumba llegó al refugio tras ser rescatado de la calle, es muy sociable con todo el mundo.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e7cd4433-abeb-4256-b475-d5db14ac406b"
   },
@@ -1333,7 +1333,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Simón fue entregado por su anterior familia por un cambio de circunstancias, sigue siendo muy cariñoso.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54"
   },
@@ -1837,7 +1837,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Nina pasó su vida en una perrera municipal y ahora sueña con un hogar definitivo.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e0bfcf92-3995-4362-a25d-acf730e35e41"
   },
@@ -1885,7 +1885,7 @@
     "lives_with_cats": true,
     "ideal_home": "Hogar cálido con ratos de mimos diarios.",
     "story": "Fido fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "832de021-7b11-4951-9872-be621593e133"
   },
@@ -2557,7 +2557,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Nube fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "e0bfcf92-3995-4362-a25d-acf730e35e41"
   },
@@ -2701,7 +2701,7 @@
     "lives_with_cats": false,
     "ideal_home": "Cualquier hogar con espacio para jugar, ideal con niños.",
     "story": "Zeus fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "6739090c-bb1b-4b62-bd95-a45a75e81132",
     "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a"
   },
@@ -3013,7 +3013,7 @@
     "lives_with_cats": false,
     "ideal_home": "Hogar tranquilo, sin escaleras, para un animal veterano.",
     "story": "Tom fue encontrado abandonado y ahora busca una familia que le dé una segunda oportunidad.",
-    "status": "activado",
+    "status": "desactivado",
     "animal_type_id": "304f33ed-0be0-4ba8-9ba9-cc854960a14a",
     "shelter_id": "31d6d3c8-b7fc-4fb9-80e7-5bee29652b54"
   },
