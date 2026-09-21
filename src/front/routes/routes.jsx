@@ -6,10 +6,8 @@ import { AnimalProfile } from "../pages/AnimalProfile.jsx";
 import { Protectoras } from "../pages/Protectoras.jsx";
 import { Ayuda } from "../pages/Ayuda.jsx";
 import { Necesidades } from "../pages/Necesidades.jsx";
-import { Terminos } from "../pages/Terminos.jsx";
-import { Privacidad } from "../pages/Privacidad.jsx";
+import { TerminosyPrivacidad } from "../pages/TerminosyPrivacidad.jsx";
 
-//test
 import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
 import { TestAnimalFilters } from "../pages/test/TestAnimalFilters.jsx";
 import { TestRequestsFilters } from "../pages/test/TestRequestsFilters.jsx";
@@ -24,8 +22,6 @@ import { Login } from "../pages/Login";
 import { Logout } from "../pages/Logout";
 import { Signup } from "../pages/Signup.jsx";
 
-
-
 // PAGINAS DE PROTECTORA
 import { ProtectoraPanel } from "../pages/shelter-admin/ProtectoraPanel.jsx";
 import { ProtectoraAnimales } from "../pages/shelter-admin/ProtectoraAnimales.jsx";
@@ -38,7 +34,6 @@ import { ProtectoraNecesidadesForm } from "../pages/shelter-admin/ProtectoraNece
 // PAGINAS DE COLABORADOR
 import { ColaboradorActividad } from "../pages/volunteer/ColaboradorActividad";
 import { ColaboradorPerfil } from "../pages/volunteer/ColaboradorPerfil";
-
 
 export const router = createBrowserRouter([
     {
@@ -69,7 +64,6 @@ export const router = createBrowserRouter([
                 path: "/necesidades",
                 element: <Necesidades />
             },
-
             {
                 path: "/necesidades/:id",
                 element: <ContributeProfile />
@@ -80,13 +74,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/terminos",
-                element: <Terminos />
+                element: <TerminosyPrivacidad />
             },
             {
                 path: "/privacidad",
-                element: <Privacidad />
+                element: <TerminosyPrivacidad />
             },
-            //RUTAS DEL ROL PROTECTORA
+            {
+                path: "/terminos-y-privacidad",
+                element: <TerminosyPrivacidad />
+            },
+            // RUTAS DEL ROL PROTECTORA
             {
                 element: <ProtectedRoutes rolesPermitidos={["shelter_admin"]} />,
                 children: [
@@ -102,7 +100,6 @@ export const router = createBrowserRouter([
                         path: "/test-api-requests",
                         element: <TestRequestsFilters />
                     },
-
                     {
                         path: "/panel",
                         element: <ProtectoraPanel />
@@ -137,11 +134,11 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "/panel/perfil",
-                        element: < ProtectoraPerfil />
+                        element: <ProtectoraPerfil />
                     },
                 ]
             },
-            //RUTAS DEL ROL COLABORADOR
+            // RUTAS DEL ROL COLABORADOR
             {
                 element: <ProtectedRoutes rolesPermitidos={["volunteer"]} />,
                 children: [
@@ -180,5 +177,4 @@ export const router = createBrowserRouter([
             }
         ]
     },
-
 ]);
