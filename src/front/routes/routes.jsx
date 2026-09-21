@@ -9,6 +9,7 @@ import { Necesidades } from "../pages/Necesidades.jsx";
 import { Terminos } from "../pages/Terminos.jsx";
 import { Privacidad } from "../pages/Privacidad.jsx";
 import { TestMapa } from "../pages/TestMapa.jsx";
+import { ProtectoraProfile } from "../pages/ProtectoraProfile.jsx";
 
 //test
 import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
             {
                 path: "/protectoras",
                 element: <Protectoras />
+            },
+            {
+                path: "/protectoras/:id",
+                element: <ProtectoraProfile />
             },
             {
                 path: "/necesidades",

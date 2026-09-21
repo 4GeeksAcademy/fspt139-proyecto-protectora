@@ -1,5 +1,6 @@
 import React from "react";
 import { generarIniciales } from "../../utils/iniciales";
+import { Link } from "react-router-dom";
 
 const TIPOS = {
   1: "Protectora",
@@ -7,7 +8,9 @@ const TIPOS = {
   3: "Santuario",
 };
 
-const Metrica = ({ valor, etiqueta, destacada }) => (
+
+
+export const Metrica = ({ valor, etiqueta, destacada }) => (
   <div className="flex-fill">
     <p
       className="fw-bold mb-0 fs-5"
@@ -109,23 +112,15 @@ export const ProtectoraCard = ({ protectora }) => {
         </div>
 
         <div className="d-flex justify-content-end">
-          {protectora.website ? (
-            <a
-
-              href={protectora.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-success btn-sm rounded-pill px-4"
-            >
-              Ver perfil
-            </a>
-          ) : (
-            <span className="small" style={{ color: "var(--rp-gris)" }}>Sin web</span>
-          )}
+          <Link
+            to={`/protectoras/${protectora.shelter_id}`}
+            className="btn btn-success btn-sm rounded-pill px-4"
+          >
+            Ver perfil
+          </Link>
+        </div>
       </div>
-
     </div>
-    </div >
   );
 };
 
