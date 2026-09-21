@@ -31,6 +31,7 @@ import { ProtectoraPerfil } from "../pages/shelter-admin/ProtectoraPerfil";
 import { ProtectoraAdopciones } from "../pages/shelter-admin/ProtectoraAdopciones";
 import { ProtectoraAnimalesForm } from "../pages/shelter-admin/ProtectoraAnimalesForm";
 import { ProtectoraNecesidadesForm } from "../pages/shelter-admin/ProtectoraNecesidadesForm";
+import { ProtectoraNecesidad } from "../pages/shelter-admin/ProtectoraNecesidad";
 import { ProtectoraAdopcionProceso } from "../pages/shelter-admin/ProtectoraAdopcionProceso";
 
 // PAGINAS DE COLABORADOR
@@ -120,6 +121,10 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "/panel/necesidades/:id",
+                        element: <ProtectoraNecesidad />
+                    },
+                    {
+                        path: "/panel/necesidades/:id/editar",
                         element: <ProtectoraNecesidadesForm />
                     },
                     {

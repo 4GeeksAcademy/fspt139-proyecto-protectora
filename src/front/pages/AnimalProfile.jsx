@@ -6,10 +6,12 @@ import { calcularAgeLabel } from "../utils/animalAge";
 import { construirTags } from "../utils/animalTags";
 import { NotFound } from "./NotFound";
 import { SolicitarAdopcionModal } from "../components/adopcion/SolicitarAdopcionModal";
+import { AnimalNeeds } from "../components/necesidades/AnimalNeeds";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { ANIMAL_PUBLIC_STATUS_LABELS } from "../utils/format";
 
 // una fila etiqueta/valor que desaparece sola si no hay valor
+// todo: refactorizar y sacar a componente fuera cuando jose rodriguez termine pagina de shelter
 const Dato = ({ etiqueta, children }) => {
   if (children === null || children === undefined || children === "") return null;
   return (
@@ -89,14 +91,14 @@ export const AnimalProfile = () => {
   }
 
     if (noEncontrado) {
-    return <NotFound />;
-  }7
+      return <NotFound />;
+    }
 
   if (error || !animal) {
     return (
       <div className="container py-5">
         <div className="alert alert-danger">{error || "No se ha podido cargar la ficha"}</div>
-        <Link to="/adoptar" className="btn btn-outline-secondary">← Volver a Adoptar</Link>
+        <Link to="/adoptar" className="btn btn-outline-secondary"><i className="fa fa-arrow-left text-danger me-1" /> Volver al listado</Link>
       </div>
     );
   }
@@ -119,11 +121,11 @@ export const AnimalProfile = () => {
     <div style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="container py-5">
         <Link to="/adoptar" className="btn btn-outline-secondary rounded-pill mb-4">
-          ← Volver a Adoptar
+          <i className="fa fa-arrow-left text-danger me-1" /> Volver al listado
         </Link>
 
         <div className="row g-4">
-          <div className="col-lg-6">
+          <div className="col-lg-6" id="animal-media">
             <div
               className="position-relative rounded overflow-hidden d-flex align-items-center justify-content-center"
               style={{ height: "400px", backgroundColor: "var(--rp-verde-cl)" }}
@@ -146,13 +148,14 @@ export const AnimalProfile = () => {
               ) : (
                 <span style={{ fontSize: "4rem", opacity: 0.35 }}>🐾</span>
               )}
-              <span
-                className="badge position-absolute top-0 start-0 m-3"
-                style={{ backgroundColor: estado.fondo, color: "var(--rp-papel)" }}
-              >
-                {estado.texto}
-              </span>
             </div>
+
+            <span
+              className="badge d-inline-block mt-3"
+              style={{ backgroundColor: estado.fondo, color: "var(--rp-papel)" }}
+            >
+              {estado.texto}
+            </span>
 
             {media.length > 1 && (
               <div className="d-flex gap-2 mt-3 overflow-auto">
@@ -193,6 +196,9 @@ export const AnimalProfile = () => {
                 })}
               </div>
             )}
+
+            <AnimalNeeds animal={animal}/>
+
           </div>
 
           <div className="col-lg-6">
@@ -256,14 +262,14 @@ export const AnimalProfile = () => {
                   className="btn btn-success btn-lg w-100 mt-4 rounded-pill"
                   onClick={() => setModalSolicitudAbierto(true)}
                 >
-                  Solicitar adopción
+                  Adoptar
                 </button>
               ) : (
                 <Link
                   to="/login"
                   className="btn btn-success btn-lg w-100 mt-4 rounded-pill d-block text-center"
                 >
-                  Inicia sesión para solicitar adopción
+                  Adoptar (FALTA CAMBIAR Login)
                 </Link>
               )
             ) : (

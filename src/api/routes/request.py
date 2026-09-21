@@ -3,10 +3,25 @@ from flask_jwt_extended import jwt_required
 
 from api.repositories.request_repository import FILTERABLE_FIELDS
 from api.services.requests_service import PUBLIC_STATUSES, get_request, crear_necesidad, list_requests, obtener_necesidad_shelter
+from api.services.user_request_service import (
+    answer_user_request,
+    answer_user_requests_bulk,
+    create_user_request,
+    list_shelter_user_requests,
+    serialize_user_request_for_shelter,
+)
+
 from api.utils import APIException, paginate_args
 from .auth import get_current_user
 
 from . import api
+
+
+def _require_shelter_user():
+    user = get_current_user()
+    if not user.shelter_id:
+        raise APIException("El usuario no pertenece a ninguna protectora", status_code=403)
+    return user
 
 
 @api.route('/requests', methods=['GET'])
@@ -107,10 +122,76 @@ def crear_necesidad_action(request_id):
         necesidad, created = crear_necesidad(request_id, shelter_id=user.shelter_id, **data)
         response = jsonify(necesidad.serialize())
         response.status_code = 201 if created else 200
-        response.headers['Location'] = f"/panel/necesidades"
+#         response.headers['Location'] = f"/panel/necesidades"
+        response.headers['Location'] = f"/panel/necesidades/{necesidad.request_id}"
 
         return response
     except APIException:
         raise
     except Exception:
         return jsonify({"error": "Ha ocurrido un error inesperado"}), 500
+
+
+# ######################
+# ruta para que un usuario logueado colabore con una necesidad
+# ######################
+@api.route('/requests/<request_id>/user-requests', methods=['POST'])
+@jwt_required()
+def create_colaboracion_action(request_id):
+    user = get_current_user()
+    data = request.get_json() or {}
+
+    user_request = create_user_request(request_id, user, amount=data.get("amount"), details=data.get("details"))
+    return jsonify(user_request.serialize()), 201
+
+
+# ######################
+# ruta para listar (paginado) las contribuciones de una necesidad propia de la protectora
+# ######################
+@api.route('/shelter/requests/<request_id>/user-requests', methods=['GET'])
+@jwt_required()
+def list_shelter_user_requests_action(request_id):
+    user = _require_shelter_user()
+    page, per_page = paginate_args()
+
+    resultados = list_shelter_user_requests(request_id, user.shelter_id, page=page, per_page=per_page)
+
+    response_body = {
+        "items": [serialize_user_request_for_shelter(r) for r in resultados.items],
+        "page": resultados.page,
+        "per_page": resultados.per_page,
+        "total_items": resultados.total,
+        "total_pages": resultados.pages,
+    }
+
+    return jsonify(response_body), 200
+
+
+# ######################
+# ruta para responder a una contribucion de una en una: escribe la respuesta de la protectora
+# (shelter_answer) y, opcionalmente, deja una valoracion (UserReview) sobre quien ha colaborado
+# ######################
+@api.route('/shelter/user-requests/<user_request_id>/answer', methods=['POST'])
+@jwt_required()
+def answer_user_request_action(user_request_id):
+    user = _require_shelter_user()
+    data = request.get_json() or {}
+
+    user_request = answer_user_request(
+        user_request_id, user.shelter_id, data.get("shelter_answer"), review=data.get("review"))
+    return jsonify(serialize_user_request_for_shelter(user_request)), 200
+
+
+# ######################
+# ruta para responder en bloque a varias contribuciones (seleccion multiple tipo Gmail), con el
+# mismo mensaje para todas
+# ######################
+@api.route('/shelter/user-requests/answer', methods=['POST'])
+@jwt_required()
+def answer_user_requests_bulk_action():
+    user = _require_shelter_user()
+    data = request.get_json() or {}
+
+    answered = answer_user_requests_bulk(
+        data.get("user_request_ids"), user.shelter_id, data.get("shelter_answer"))
+    return jsonify({"answered": [serialize_user_request_for_shelter(r) for r in answered]}), 200

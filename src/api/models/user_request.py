@@ -16,6 +16,7 @@ class UserRequest(db.Model):
     request_id: Mapped[int] = mapped_column(ForeignKey('request.id', ondelete='CASCADE'))
     user_request_id: Mapped[str] = mapped_column(String, unique=True)
     amount: Mapped[Optional[float]] = mapped_column(Numeric(10, 2), default=0.0)
+    details: Mapped[Optional[str]] = mapped_column(Text)
     shelter_answer: Mapped[Optional[str]] = mapped_column(Text)
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
     update_at: Mapped[Optional[datetime]] = mapped_column(
@@ -31,6 +32,7 @@ class UserRequest(db.Model):
             "request_id": self.request_id,
             "user_request_id": self.user_request_id,
             "amount": self.amount,
+            "details": self.details,
             "shelter_answer": self.shelter_answer,
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,

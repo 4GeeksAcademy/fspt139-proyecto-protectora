@@ -67,3 +67,11 @@ export const ANIMAL_STATUS_OPTIONS = [
 export const ANIMAL_PUBLIC_STATUS_LABELS = {
     [ACTIVADO]: { texto: "Publicado", fondo: "var(--rp-verde)" },
 };
+
+
+export const formatearCantidad = (valor) => {
+    const numero = Number(valor);
+    if (!Number.isFinite(numero)) return null;
+    return numero.toLocaleString("es-ES", { maximumFractionDigits: 2 });
+};
+
