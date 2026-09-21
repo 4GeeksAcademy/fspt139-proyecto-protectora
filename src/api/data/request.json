@@ -5,8 +5,7 @@
     "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
     "name": "Cirugía de cadera para Luna",
     "description": "Luna necesita una intervención quirúrgica urgente en la cadera tras un accidente.",
-"request_deadline": "2026-09-21T00:00:00",
-"footnote": "Cirugía 19 sept"
+    "request_deadline": "2026-09-21T00:00:00",
     "amount_needed": 850.0,
     "request_type_id": "d3b0d2a1-6e2a-4b6b-9b0a-2f6a7e1c9a01",
     "status": "abierta",
@@ -47,7 +46,7 @@
 "description": "Recogida de mantas y camas para preparar el santuario ante la llegada del frío.",
 "request_deadline": "2026-09-21T00:00:00",
 "amount_needed": 20,
-"request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02"
+"request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
     "status": "abierta",
     "unit": "€",
     "footnote": null
@@ -332,7 +331,7 @@
 "name": "Alimento para el refugio",
 "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Refugio Patitas Felices Barcelona.",
 "request_deadline": "2026-12-14T00:00:00",
-"amount_needed": 163.72
+"amount_needed": 163.72,
     "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
     "status": "abierta",
     "unit": "€",

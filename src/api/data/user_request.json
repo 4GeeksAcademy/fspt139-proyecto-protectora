@@ -42,41 +42,6 @@
     "shelter_answer": "Toby ya tiene todas sus vacunas al día."
   },
   {
-    "user_request_id": "1e3c6915-5947-47da-bcd0-339ff1b700ea",
-    "user_id": "a7369b1f-05d8-45bf-9089-12ee9f0ac124",
-    "request_id": "25851438-0fa4-4912-a49a-fba303983dfa",
-    "amount": 20.0,
-    "shelter_answer": null
-  },
-  {
-    "user_request_id": "98a659ee-bafe-4406-ba9d-1ef7ca423042",
-    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
-    "request_id": "23615367-00c3-4bb8-b0cb-a959bd5c1f1a",
-    "amount": 300.0,
-    "shelter_answer": null
-  },
-  {
-    "user_request_id": "ca4cca6b-1dd6-40ef-a64e-17aaa1643652",
-    "user_id": "a63700dc-2e09-4641-8d18-ce6df1c0e27f",
-    "request_id": "23615367-00c3-4bb8-b0cb-a959bd5c1f1a",
-    "amount": 250.0,
-    "shelter_answer": null
-  },
-  {
-    "user_request_id": "9716e455-419e-4bf4-ad13-578e114f2156",
-    "user_id": "d9d9d453-56a2-41d4-b48f-1dbce6348dd8",
-    "request_id": "23615367-00c3-4bb8-b0cb-a959bd5c1f1a",
-    "amount": 150.0,
-    "shelter_answer": "Ánimo Copito, ya falta menos."
-  },
-  {
-    "user_request_id": "ac697674-0549-4796-8365-87e9d6b2f210",
-    "user_id": "3c6d7be1-1ec7-4f4a-b3f8-90f6474a0837",
-    "request_id": "ffde3582-bffb-4785-9024-6fec8d62c3bb",
-    "amount": 60.0,
-    "shelter_answer": null
-  },
-  {
     "user_request_id": "d2aa0a16-ebe2-4fe8-9ae5-36d1dcd8ed1c",
     "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
     "request_id": "bbc23cf7-6ffb-404f-8a14-3ecc72afe527",
