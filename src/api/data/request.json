@@ -5,8 +5,7 @@
     "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
     "name": "Cirugía de cadera para Luna",
     "description": "Luna necesita una intervención quirúrgica urgente en la cadera tras un accidente.",
-"request_deadline": "2026-09-21T00:00:00",
-"footnote": "Cirugía 19 sept"
+    "request_deadline": "2026-09-21T00:00:00",
     "amount_needed": 850.0,
     "request_type_id": "d3b0d2a1-6e2a-4b6b-9b0a-2f6a7e1c9a01",
     "status": "abierta",
@@ -40,14 +39,14 @@
     "footnote": "¡Conseguido, gracias!"
   },
   {
-"request_id": "96af49cf-7ff4-4e06-a732-1871e3efefa5",
-"shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3",
-"animal_id": null,
-"name": "Mantas para el invierno",
-"description": "Recogida de mantas y camas para preparar el santuario ante la llegada del frío.",
-"request_deadline": "2026-09-21T00:00:00",
-"amount_needed": 20,
-"request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02"
+    "request_id": "96af49cf-7ff4-4e06-a732-1871e3efefa5",
+    "shelter_id": "443eb329-77aa-4c43-910b-dd2d4f26fdb3",
+    "animal_id": null,
+    "name": "Mantas para el invierno",
+    "description": "Recogida de mantas y camas para preparar el santuario ante la llegada del frío.",
+    "request_deadline": "2026-09-21T00:00:00",
+    "amount_needed": 20,
+    "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
     "status": "abierta",
     "unit": "€",
     "footnote": null
@@ -329,10 +328,10 @@
     "request_id": "d8fd8fe7-bcb5-4926-ac4e-10dfd0ce9c82",
     "shelter_id": "d083c0f1-b38f-4e1f-b224-fcbe8ff3efe9",
     "animal_id": null,
-"name": "Alimento para el refugio",
-"description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Refugio Patitas Felices Barcelona.",
-"request_deadline": "2026-12-14T00:00:00",
-"amount_needed": 163.72
+    "name": "Alimento para el refugio",
+    "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Refugio Patitas Felices Barcelona.",
+    "request_deadline": "2026-12-14T00:00:00",
+    "amount_needed": 163.72,
     "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
     "status": "abierta",
     "unit": "€",
@@ -451,8 +450,8 @@
     "request_deadline": null,
     "amount_needed": 0,
     "request_type_id": "4a7e9b6c-2d8f-4e1a-9c3b-7d5a1f8e9a03",
-"status": "borrador",
-"unit": null,
-"footnote": null
+    "status": "borrador",
+    "unit": null,
+    "footnote": null
   }
 ]
