@@ -68,6 +68,7 @@ class ShelterRepository:
     def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10,
                  has_urgent=False, has_animals=False):
         query = db.select(Shelter).options(
+            selectinload(Shelter.shelter_type),
             selectinload(Shelter.animals),
             selectinload(Shelter.requests).selectinload(Request.user_requests),
         )
