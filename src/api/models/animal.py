@@ -44,10 +44,15 @@ class Animal(db.Model):
     adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="animal", passive_deletes=True)
     addoption_processes: Mapped[List["AddoptionProcess"]] = relationship(back_populates="animal", passive_deletes=True)
 
+    NECESIDADES_PUBLIC_STATUSES = {"abierta", "cerrada"}
+
     def serialize(self):
-        # no me gusta, debería sacarlo de un service pero por prisa lo meto aqui
+        # no me gusta demasiado, idealmente deberíamos sacarlo de un service pero por prisa lo meto aqui,
         # todo: crear animal_serialize propio en el service y ahí meter esta logica
+        # estados de necesidad visibles en el frontend publico (PASAR tmb el NECESIDADES_PUBLIC_STATUSES)
+
         last_process = max(self.addoption_processes, key=lambda p: p.created_at or datetime.min, default=None)
+        necesidades_visibles = [r for r in self.requests if r.status in self.NECESIDADES_PUBLIC_STATUSES]
 
         return {
             "id": self.id,
@@ -83,4 +88,5 @@ class Animal(db.Model):
             "addoption_requests_count": len(self.adoption_requests),
             "addoption_process_id": last_process.addoption_process_id if last_process else None,
             "animal_request_ids": [request.request_id for request in self.requests],
+            "necesidades": [necesidad.serialize() for necesidad in necesidades_visibles],
         }

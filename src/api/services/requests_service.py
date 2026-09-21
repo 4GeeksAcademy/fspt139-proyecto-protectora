@@ -7,11 +7,16 @@ from api.utils import APIException
 
 NECESIDAD_FIELDS = {"unit", "footnote"}
 
-# estados que el formulario puede pedir (crear/guardar como borrador, o publicar)
-SETTABLE_STATUSES = {"abierta", "borrador"}
+# status: abierta (admite colaboraciones) / cerrada no / borrador = en edicion
+ABIERTA = "abierta"
+CERRADA = "cerrada"
+BORRADOR = "borrador"
 
-# estados visibles para cualquier visitante en el tablon publico
-PUBLIC_STATUSES = {"abierta", "cerrada"}
+# estados que el formulario puede definir (crear/guardar como borrador, o publicar)
+SETTABLE_STATUSES = {ABIERTA, BORRADOR}
+
+# estados visibles en listado publico de necesidades
+PUBLIC_STATUSES = {ABIERTA, CERRADA}
 
 
 def list_requests(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
@@ -107,3 +112,11 @@ def crear_necesidad(request_id, shelter_id=None, **data):
         status=status, **fields
     )
     return RequestRepository.save(necesidad), True        # creada nueva
+
+# determina el estado de si una necesidad puede ser colaborada o no en base a estado y fecha
+def is_request_contributable(necesidad):
+    if necesidad.status != ABIERTA:
+        return False
+    if necesidad.request_deadline and necesidad.request_deadline < datetime.utcnow():
+        return False
+    return True

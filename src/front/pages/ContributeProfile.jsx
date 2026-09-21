@@ -2,22 +2,37 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getRequestById } from "../services/requestsService";
 import { cargarMediaUrl } from "../services/animalsService";
-import { construirBadge, calcularDeadlineLabel } from "../utils/necesidadDeadline";
+import { construirBadge, calcularDeadlineLabel, esFueraDePlazo } from "../utils/necesidadDeadline";
 import { NotFound } from "./NotFound";
+import { ColaborarModal } from "../components/necesidades/ColaborarModal";
+import { NecesidadAnimalCard } from "../components/necesidades/NecesidadAnimalCard";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import {formatearCantidad} from "../utils/format";
 
-const formatearCantidad = (valor) => {
-  const numero = Number(valor);
-  if (!Number.isFinite(numero)) return null;
-  return numero.toLocaleString("es-ES", { maximumFractionDigits: 2 });
+// una fila etiqueta/valor que desaparece sola si no hay valor
+const Dato = ({ etiqueta, children }) => {
+  if (children === null || children === undefined || children === "") return null;
+  return (
+    <div className="d-flex justify-content-between align-items-start border-bottom py-2 gap-3">
+      <span style={{ color: "var(--rp-gris)" }}>{etiqueta}</span>
+      <span className="fw-semibold text-end">{children}</span>
+    </div>
+  );
 };
 
 export const ContributeProfile = () => {
   const { id } = useParams();
+  const { store } = useGlobalReducer();
 
   const [necesidad, setNecesidad] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [noEncontrada, setNoEncontrada] = useState(false);
+  const [modalColaborarAbierto, setModalColaborarAbierto] = useState(false);
+
+  const recargarNecesidad = () => {
+    getRequestById(id).then(setNecesidad).catch(() => {});
+  };
 
   useEffect(() => {
     let cancelado = false;
@@ -58,13 +73,14 @@ export const ContributeProfile = () => {
     return (
       <div className="container py-5">
         <div className="alert alert-danger">{error || "No se ha podido cargar la necesidad"}</div>
-        <Link to="/necesidades" className="btn btn-outline-secondary">← Volver al tablón</Link>
+        <Link to="/necesidades" className="btn btn-outline-secondary"><i className="fa fa-arrow-left text-danger me-1"></i> Volver al listado</Link>
       </div>
     );
   }
 
-    const badge = construirBadge(necesidad);
+  const badge = construirBadge(necesidad);
   const cubierta = necesidad.status === "cerrada";
+  const fueraDePlazo = esFueraDePlazo(necesidad.request_deadline);
 
   const actual = Number(necesidad.amount_current) || 0;
   const objetivo = Number(necesidad.amount_needed) || 0;
@@ -79,49 +95,48 @@ export const ContributeProfile = () => {
         ? "1 persona ha colaborado"
         : `${colaboradores} personas han colaborado`;
 
+  const subtitulo = [necesidad.shelter_name, necesidad.request_type_name].filter(Boolean).join(" · ");
+
   return (
     <div style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="container py-5">
-
         <Link to="/necesidades" className="btn btn-outline-secondary rounded-pill mb-4">
-          ← Volver al tablón
+          <i className="fa fa-arrow-left text-danger me-1"></i> Volver al listado
         </Link>
 
-        <div className="card border-0 shadow-sm overflow-hidden" style={{ backgroundColor: "var(--rp-papel)" }}>
-
-          <div
-            className="position-relative d-flex align-items-center justify-content-center"
-            style={{ height: "260px", backgroundColor: "var(--rp-verde-cl)" }}
-          >
-            {necesidad.cover_image ? (
-              <img
-                src={cargarMediaUrl(necesidad.cover_image)}
-                alt={necesidad.name}
-                className="w-100 h-100"
-                style={{ objectFit: "cover" }}
-              />
-            ) : (
-              <span style={{ fontSize: "4rem", opacity: 0.35 }}>🐾</span>
-            )}
+        <div className="row g-4">
+          <div className="col-lg-6">
+            <div
+              className="position-relative rounded overflow-hidden d-flex align-items-center justify-content-center"
+              style={{ height: "400px", backgroundColor: "var(--rp-verde-cl)" }}
+            >
+              {necesidad.cover_image ? (
+                <img
+                  src={cargarMediaUrl(necesidad.cover_image)}
+                  alt={necesidad.name}
+                  className="w-100 h-100"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <span style={{ fontSize: "4rem", opacity: 0.35 }}>🐾</span>
+              )}
+            </div>
 
             {badge && (
               <span
-                className="badge position-absolute top-0 start-0 m-3"
+                className="badge d-inline-block mt-3"
                 style={{ backgroundColor: badge.fondo, color: "var(--rp-papel)" }}
               >
                 {badge.texto}
               </span>
             )}
+
+            <NecesidadAnimalCard necesidad={necesidad} />
           </div>
 
-          <div className="card-body p-4">
-
-            <h2 className="fw-bold mb-1" style={{ color: "var(--rp-pino)" }}>
-              {necesidad.name}
-            </h2>
-            <p className="mb-4" style={{ color: "var(--rp-gris)" }}>
-              {[necesidad.shelter_name, necesidad.request_type_name].filter(Boolean).join(" · ")}
-            </p>
+          <div className="col-lg-6">
+            <h1 className="fw-bold mb-1" style={{ color: "var(--rp-pino)" }}>{necesidad.name}</h1>
+            {subtitulo && <p className="text-secondary mb-3">{subtitulo}</p>}
 
             {objetivo > 0 && (
               <div className="mb-4">
@@ -154,38 +169,54 @@ export const ContributeProfile = () => {
               </div>
             )}
 
-            <p className="mb-4" style={{ lineHeight: 1.7 }}>{necesidad.description}</p>
+            {necesidad.description && <p className="mb-4" style={{ lineHeight: 1.7 }}>{necesidad.description}</p>}
 
-            <div className="d-flex flex-wrap gap-4 mb-4 pt-3 border-top">
-              <div>
-                <p className="rp-eyebrow mb-1">Fecha límite</p>
-                <p className="fw-semibold mb-0">{calcularDeadlineLabel(necesidad.request_deadline)}</p>
-              </div>
-              <div>
-                <p className="rp-eyebrow mb-1">Protectora</p>
-                <p className="fw-semibold mb-0">{necesidad.shelter_name || "Sin asignar"}</p>
-              </div>
-              {necesidad.footnote && (
-                <div>
-                  <p className="rp-eyebrow mb-1">A tener en cuenta</p>
-                  <p className="fw-semibold mb-0">{necesidad.footnote}</p>
-                </div>
-              )}
+            <h5 className="fw-bold mt-4 mb-2">Sobre esta necesidad</h5>
+            <Dato etiqueta="Fecha límite">{calcularDeadlineLabel(necesidad.request_deadline)}</Dato>
+            <Dato etiqueta="A tener en cuenta">{necesidad.footnote}</Dato>
+
+            <div className="mt-4 p-3 rounded" style={{ backgroundColor: "var(--rp-papel)" }}>
+              <p className="rp-eyebrow mb-1">Protectora</p>
+              <p className="fw-semibold mb-0">{necesidad.shelter_name || "Sin asignar"}</p>
             </div>
 
             {cubierta ? (
-              <div className="alert alert-success mb-0">
+              <div className="alert alert-success mt-4 mb-0">
                 Esta necesidad ya está cubierta. ¡Gracias a quienes colaboraron!
               </div>
-            ) : (
-              <button className="btn btn-success btn-lg w-100 rounded-pill">
+            ) : fueraDePlazo ? (
+              <div className="alert alert-secondary mt-4 mb-0">
+                El plazo para colaborar ha finalizado.
+              </div>
+            ) : store.token ? (
+              <button
+                className="btn btn-success btn-lg w-100 mt-4 rounded-pill"
+                onClick={() => setModalColaborarAbierto(true)}
+              >
                 Colaborar
               </button>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-success btn-lg w-100 mt-4 rounded-pill d-block text-center"
+              >
+                Colaborar (FALTA LOGIN)
+              </Link>
             )}
-
           </div>
         </div>
       </div>
+
+      {modalColaborarAbierto && (
+        <ColaborarModal
+          necesidad={necesidad}
+          onCerrar={() => {
+            setModalColaborarAbierto(false);
+            recargarNecesidad();
+          }}
+          onColaboracionCreada={() => recargarNecesidad()}
+        />
+      )}
     </div>
   );
 };

@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import { construirBadge } from "../utils/necesidadDeadline";
+import { construirBadge, esFueraDePlazo } from "../utils/necesidadDeadline";
 import { cargarMediaUrl } from "../services/animalsService";
+import {formatearCantidad} from "../utils/format";
 
-const formatearCantidad = (valor) => {
-  const numero = Number(valor);
-  if (!Number.isFinite(numero)) return null;
-  return numero.toLocaleString("es-ES", { maximumFractionDigits: 2 });
-};
 
 export const NecesidadCard = ({ necesidad }) => {
   if (!necesidad) return null;
 
   const badge = construirBadge(necesidad);
   const cubierta = necesidad.status === "cerrada";
+  const fueraDePlazo = esFueraDePlazo(necesidad.request_deadline);
+  const puedeColaborar = !cubierta && !fueraDePlazo;
 
   const actual = Number(necesidad.amount_current) || 0;
   const objetivo = Number(necesidad.amount_needed) || 0;
@@ -120,9 +118,9 @@ export const NecesidadCard = ({ necesidad }) => {
             </small>
             <Link
               to={`/necesidades/${necesidad.request_id}`}
-              className={`btn btn-sm flex-shrink-0 ${cubierta ? "btn-outline-secondary" : "btn-success"}`}
+              className={`btn btn-sm flex-shrink-0 ${puedeColaborar ? "btn-success" : "btn-outline-secondary"}`}
             >
-              {cubierta ? "Ver detalle" : "Colaborar"}
+              {puedeColaborar ? "Colaborar" : "Ver detalle"}
             </Link>
           </div>
 

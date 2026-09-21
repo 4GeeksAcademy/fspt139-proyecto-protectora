@@ -254,7 +254,7 @@ export const ProtectoraAdopcionProceso = () => {
 
 
 
-          <div className="d-flex flex-nowrap gap-3 align-items-center">
+          <div className="d-flex flex-nowrap gap-3 align-items-start">
             <div
               className="flex-shrink-0 rounded-3 overflow-hidden bg-light d-flex align-items-center justify-content-center"
               style={{ width: "72px", height: "72px" }}
@@ -269,7 +269,6 @@ export const ProtectoraAdopcionProceso = () => {
             <div className="flex-grow-1 min-w-0">
               <div className="d-flex align-items-center gap-2 mb-1">
                 <h4 className="fw-bold mb-0">{animal?.name || "Animal sin asignar"}</h4>
-                <span className={`badge ${estado.badgeClass}`}>{estado.label}</span>
               </div>
               <p className="text-muted mb-0" style={{ fontSize: "0.875rem" }}>
                 {proceso.questions?.length || 0} {proceso.questions?.length === 1 ? "pregunta" : "preguntas"} en el
@@ -323,6 +322,7 @@ export const ProtectoraAdopcionProceso = () => {
             </div>
           </div>
 
+          <span className={`badge ${estado.badgeClass} mt-3`}>{estado.label}</span>
           <hr />
 
           <div className="row g-3">

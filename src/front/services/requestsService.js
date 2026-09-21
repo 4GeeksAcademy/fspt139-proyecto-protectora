@@ -14,13 +14,14 @@ export const getRequests = async (
     per_page: perPage,
   });
 
-  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId } = filters;
+  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId, animalId } = filters;
 
   if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
   if (tipoShelter) params.set("shelter_type_id", tipoShelter);
   if (tipoAnimal) params.set("animal_type_id", tipoAnimal);
   if (requestTypeId) params.set("request_type_id", requestTypeId);
   if (shelterId) params.set("shelter_id", shelterId);
+  if (animalId) params.set("animal_id", animalId);
 
   const response = await fetch(`${backendUrl}/api/requests?${params.toString()}`);
 
@@ -113,7 +114,7 @@ export const crearNecesidad = async (necesidad) => {
   }
 
   const data = await response.json();
-  const location = response.headers.get("Location") || `/panel/necesidades`;
+  const location = response.headers.get("Location") || `/panel/necesidades/${request_id}`;
 
   return { ...data, request_id, location };
 };
@@ -167,6 +168,77 @@ export const setNecesidadMediaCover = async (request_id, media_id) => {
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.error || data.message || "No se ha podido marcar como portada");
+  }
+  return response.json();
+};
+
+// envia la colaboracion del usuario logueado con una necesidad (cantidad o detalles de como puede ayudar)
+export const crearColaboracion = async (request_id, { amount, details } = {}) => {
+  const response = await fetch(`${backendUrl}/api/requests/${request_id}/user-requests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify({ amount, details }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se ha podido enviar tu colaboración");
+  }
+  return response.json();
+};
+
+// listado (paginado) de las contribuciones de una necesidad propia de la protectora
+export const getShelterUserRequests = async (request_id, { pagina = 1, perPage = 20 } = {}) => {
+  const params = new URLSearchParams({ page: pagina, per_page: perPage });
+
+  const response = await fetch(`${backendUrl}/api/shelter/requests/${request_id}/user-requests?${params.toString()}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener las contribuciones");
+  }
+  return response.json();
+};
+
+// responde a una contribucion de una en una y deja tambien una valoracion
+export const responderContribucion = async (user_request_id, { shelter_answer, review } = {}) => {
+  const response = await fetch(`${backendUrl}/api/shelter/user-requests/${user_request_id}/answer`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify({ shelter_answer, review }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se ha podido enviar la respuesta");
+  }
+  return response.json();
+};
+
+// responde en bloque (mismo mensaje) a varias contribuciones seleccionadas
+export const responderContribucionesEnBloque = async (user_request_ids, shelter_answer) => {
+  const response = await fetch(`${backendUrl}/api/shelter/user-requests/answer`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify({ user_request_ids, shelter_answer }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido enviar las respuestas");
   }
   return response.json();
 };
