@@ -1,28 +1,29 @@
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
-export const getShelters = (
-  { ordenarPor, orden, pagina, perPage = 5 },
+export const getShelters = async (
+  { ordenarPor = "name", orden = "asc", pagina = 1, perPage = 5 } = {},
   filters = {},
 ) => {
-  let url =
-    backendUrl +
-    "/api/shelters?sort_by=" +
-    ordenarPor +
-    "&dir=" +
-    orden +
-    "&page=" +
-    pagina +
-    "&per_page=" +
-    perPage;
+  const params = new URLSearchParams({
+    sort_by: ordenarPor,
+    dir: orden,
+    page: pagina,
+    per_page: perPage,
+  });
 
-  const { nombre, phone } = filters;
+  const { nombre, phone, shelterTypeId, hasUrgent, hasAnimals } = filters;
 
-  if (nombre && nombre.trim() !== "") {
-    url = url + "&name=" + nombre;
+  if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
+  if (phone && phone.trim() !== "") params.set("phone", phone.trim());
+  if (shelterTypeId) params.set("shelter_type_id", shelterTypeId);
+  if (hasUrgent) params.set("has_urgent", "true");
+  if (hasAnimals) params.set("has_animals", "true");
+
+  const response = await fetch(`${backendUrl}/api/shelters?${params.toString()}`);
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener las protectoras");
   }
-  if (phone && phone.trim() !== "") {
-    url = url + "&phone=" + phone;
-  }
-
-  return fetch(url).then((response) => response.json());
-}
+  return response.json();
+};

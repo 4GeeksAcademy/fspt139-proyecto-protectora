@@ -1,94 +1,131 @@
 import React from "react";
+import { generarIniciales } from "../../utils/iniciales";
+
+const TIPOS = {
+  1: "Protectora",
+  2: "Refugio",
+  3: "Santuario",
+};
+
+const Metrica = ({ valor, etiqueta, destacada }) => (
+  <div className="flex-fill">
+    <p
+      className="fw-bold mb-0 fs-5"
+      style={{ color: destacada ? "var(--rp-verde)" : "var(--rp-pino)" }}
+    >
+      {valor ?? 0}
+    </p>
+    <small
+      className="text-lowercase"
+      style={{ color: "var(--rp-gris)", fontSize: "0.75rem" }}
+    >
+      {etiqueta}
+    </small>
+  </div>
+);
 
 export const ProtectoraCard = ({ protectora }) => {
   if (!protectora) return null;
 
-  const nombre = protectora.nombre || protectora.name || "Sin nombre";
-  const ubicacion = protectora.ubicacion || protectora.ciudad || protectora.location || "Ubicación no especificada";
-  const descripcion = protectora.descripcion || protectora.description || "Sin descripción disponible.";
-  const iniciales = protectora.iniciales || nombre.substring(0, 2).toUpperCase();
-  
-  const necesidades = protectora.necesidades ?? protectora.necesidades_count ?? 0;
-  const animales = protectora.animales ?? protectora.animales_count ?? 0;
-  const colaboraciones = protectora.colaboraciones ?? protectora.colaboraciones_count ?? 0;
-  
-  const distancia = protectora.distancia_ciudad || protectora.distancia || "Ubicación web";
-  const enlaceWeb = protectora.web || protectora.url || "#";
+  const iniciales = generarIniciales(protectora.name);
+  const tipo = TIPOS[protectora.shelter_type_id];
 
   return (
-    <div 
-      className="card h-100 border-0 rounded-4 overflow-hidden" 
-      style={{ 
-        backgroundColor: '#ffffff', 
-        boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-6px)';
-        e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.12)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.06)';
-      }}
+    <div
+      className="card h-100 border-0 shadow-sm overflow-hidden"
+      style={{ backgroundColor: "var(--rp-papel)" }}
     >
-      <div style={{ height: '6px', background: 'linear-gradient(90deg, #198754, #20c997)' }}></div>
-      
+      <div style={{ height: "6px", backgroundColor: "var(--rp-verde)" }} />
+
       <div className="card-body d-flex flex-column p-4">
-        <div className="d-flex align-items-center mb-4">
-          <div 
-            className="rounded-circle d-flex justify-content-center align-items-center me-3 shadow-sm text-white fw-bold" 
-            style={{ 
-              width: '55px', 
-              height: '55px', 
-              background: 'linear-gradient(135deg, #198754, #20c997)',
-              fontSize: '1.2rem',
-              flexShrink: 0 
+
+        <div className="d-flex align-items-center gap-3 mb-3">
+          <div
+            className="rounded-circle d-flex justify-content-center align-items-center fw-bold flex-shrink-0"
+            style={{
+              width: "52px",
+              height: "52px",
+              backgroundColor: "var(--rp-verde-cl)",
+              color: "var(--rp-verde)",
+              fontSize: "1.1rem",
             }}
           >
             {iniciales}
           </div>
-          <div>
-            <h5 className="card-title fw-bold mb-1 text-dark" style={{ lineHeight: '1.2' }}>{nombre}</h5>
-            <span className="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-2 py-1 rounded-pill fw-medium">
-              📍 {ubicacion}
-            </span>
+
+          <div className="overflow-hidden">
+            <h5
+              className="fw-bold mb-1 text-truncate"
+              style={{ color: "var(--rp-pino)", fontSize: "1.05rem" }}
+            >
+              {protectora.name}
+            </h5>
+            <div className="d-flex flex-wrap gap-1">
+              {tipo && (
+                <span className="badge rounded-pill" style={{ backgroundColor: "var(--rp-verde-cl)", color: "var(--rp-verde)" }}>
+                  {tipo}
+                </span>
+              )}
+              {protectora.has_urgent && (
+                <span className="badge rounded-pill" style={{ backgroundColor: "var(--rp-arcilla)", color: "var(--rp-papel)" }}>
+                  Necesidad urgente
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
-        <p className="card-text text-secondary mb-4 flex-grow-1" style={{ fontSize: '0.95rem', lineHeight: '1.5' }}>
-          {descripcion}
+        {protectora.address && (
+          <p className="small mb-2 text-truncate" style={{ color: "var(--rp-gris)" }}>
+            📍 {protectora.address}
+          </p>
+        )}
+
+        <p
+          className="mb-3"
+          style={{
+            color: "var(--rp-gris)",
+            fontSize: "0.9rem",
+            lineHeight: 1.5,
+            minHeight: "4.05rem",
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
+          {protectora.description}
         </p>
 
-        <div className="d-flex justify-content-between text-center bg-light rounded-4 p-3 mb-4 border" style={{ borderColor: '#f0f0f0' }}>
-          <div>
-            <h5 className="fw-bold text-success mb-0">{necesidades}</h5>
-            <small className="text-muted fw-bold" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Necesidades</small>
-          </div>
-          <div className="border-end border-start px-3" style={{ borderColor: '#e0e0e0' }}>
-            <h5 className="fw-bold text-dark mb-0">{animales}</h5>
-            <small className="text-muted fw-bold" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Animales</small>
-          </div>
-          <div>
-            <h5 className="fw-bold text-dark mb-0">{colaboraciones}</h5>
-            <small className="text-muted fw-bold" style={{ fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Apoyos</small>
-          </div>
+        <div
+          className="d-flex text-center rounded-3 py-2 mb-3 mt-auto"
+          style={{ backgroundColor: "var(--rp-hueso)" }}
+        >
+          <Metrica valor={protectora.open_requests} etiqueta="necesidades" destacada />
+          <div className="vr" style={{ backgroundColor: "var(--rp-linea)" }} />
+          <Metrica valor={protectora.published_animals} etiqueta="animales" />
+          <div className="vr" style={{ backgroundColor: "var(--rp-linea)" }} />
+          <Metrica valor={protectora.supporters} etiqueta="apoyos" />
         </div>
 
-        <div className="d-flex justify-content-between align-items-center mt-auto pt-2">
-          <small className="text-muted fw-medium" style={{ fontSize: '0.85rem' }}>
-            {distancia}
-          </small>
-          <a 
-            href={enlaceWeb} 
-            className="btn btn-success shadow-sm rounded-pill px-4 py-2 fw-bold" 
-            style={{ fontSize: '0.85rem', transition: 'background-color 0.2s ease' }}
-          >
-            Ver perfil
-          </a>
-        </div>
+        <div className="d-flex justify-content-end">
+          {protectora.website ? (
+            <a
+
+              href={protectora.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-success btn-sm rounded-pill px-4"
+            >
+              Ver perfil
+            </a>
+          ) : (
+            <span className="small" style={{ color: "var(--rp-gris)" }}>Sin web</span>
+          )}
       </div>
+
     </div>
+    </div >
   );
 };
 
