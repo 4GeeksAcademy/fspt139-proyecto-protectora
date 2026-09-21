@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getAnimalById, cargarMediaUrl } from "../services/animalsService";
+import { getPublicAddoptionProcess } from "../services/addoptionRequestService";
 import { calcularAgeLabel } from "../utils/animalAge";
 import { construirTags } from "../utils/animalTags";
 import { NotFound } from "./NotFound";
-
-const ESTADOS = {
-  disponible: { texto: "Disponible", fondo: "var(--rp-verde)" },
-  en_proceso: { texto: "En proceso", fondo: "var(--rp-miel)" },
-};
+import { SolicitarAdopcionModal } from "../components/adopcion/SolicitarAdopcionModal";
+import useGlobalReducer from "../hooks/useGlobalReducer";
+import { ANIMAL_PUBLIC_STATUS_LABELS } from "../utils/format";
 
 // una fila etiqueta/valor que desaparece sola si no hay valor
 const Dato = ({ etiqueta, children }) => {
@@ -32,12 +31,19 @@ const SiNo = (valor) => (valor === true ? "Sí" : valor === false ? "No" : null)
 
 export const AnimalProfile = () => {
   const { id } = useParams();
+  const { store } = useGlobalReducer();
 
   const [animal, setAnimal] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [noEncontrado, setNoEncontrado] = useState(false);
   const [mediaActivo, setMediaActivo] = useState(null);
+  const [proceso, setProceso] = useState(null);
+  const [modalSolicitudAbierto, setModalSolicitudAbierto] = useState(false);
+
+  const recargarProceso = () => {
+    getPublicAddoptionProcess(id).then(setProceso).catch(() => setProceso(null));
+  };
 
   useEffect(() => {
     let cancelado = false;
@@ -59,6 +65,14 @@ export const AnimalProfile = () => {
       })
       .finally(() => {
         if (!cancelado) setCargando(false);
+      });
+
+    getPublicAddoptionProcess(id)
+      .then((data) => {
+        if (!cancelado) setProceso(data);
+      })
+      .catch(() => {
+        if (!cancelado) setProceso(null);
       });
 
     return () => { cancelado = true; };
@@ -87,7 +101,7 @@ export const AnimalProfile = () => {
     );
   }
 
-  const estado = ESTADOS[animal.status] || { texto: animal.status, fondo: "var(--rp-gris)" };
+  const estado = ANIMAL_PUBLIC_STATUS_LABELS[animal.status] || { texto: animal.status, fondo: "var(--rp-gris)" };
   const tags = construirTags(animal);
   const media = animal.media || [];
   const edad = calcularAgeLabel(animal.birthdate);
@@ -236,12 +250,42 @@ export const AnimalProfile = () => {
               <p className="fw-semibold mb-0">{animal.shelter_name || "Sin asignar"}</p>
             </div>
 
-            <button className="btn btn-success btn-lg w-100 mt-4 rounded-pill">
-              Solicitar adopción
-            </button>
+            {proceso?.is_open_for_requests ? (
+              store.token ? (
+                <button
+                  className="btn btn-success btn-lg w-100 mt-4 rounded-pill"
+                  onClick={() => setModalSolicitudAbierto(true)}
+                >
+                  Solicitar adopción
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  className="btn btn-success btn-lg w-100 mt-4 rounded-pill d-block text-center"
+                >
+                  Inicia sesión para solicitar adopción
+                </Link>
+              )
+            ) : (
+              <p className="mt-4 mb-0 text-center text-muted" style={{ fontSize: "0.875rem" }}>
+                Este animal no tiene un proceso de adopción abierto en este momento.
+              </p>
+            )}
           </div>
         </div>
       </div>
+
+      {modalSolicitudAbierto && proceso && (
+        <SolicitarAdopcionModal
+          animal={animal}
+          proceso={proceso}
+          onCerrar={() => {
+            setModalSolicitudAbierto(false);
+            recargarProceso();
+          }}
+          onSolicitudEnviada={() => recargarProceso()}
+        />
+      )}
     </div>
   );
 };

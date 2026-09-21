@@ -31,7 +31,7 @@ class Animal(db.Model):
     lives_with_cats: Mapped[Optional[bool]] = mapped_column(Boolean)
     ideal_home: Mapped[Optional[str]] = mapped_column(Text)
     story: Mapped[str] = mapped_column(Text)
-    status: Mapped[str] = mapped_column(String, default='disponible')
+    status: Mapped[str] = mapped_column(String, default='activado')
     animal_type_id: Mapped[int] = mapped_column(ForeignKey('animal_type.id'))
     shelter_id: Mapped[Optional[int]] = mapped_column(ForeignKey('shelter.id', ondelete='SET NULL'))
     created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
@@ -42,8 +42,13 @@ class Animal(db.Model):
     media: Mapped[List["AnimalMedia"]] = relationship(back_populates="animal", passive_deletes=True)
     requests: Mapped[List["Request"]] = relationship(back_populates="animal", passive_deletes=True)
     adoption_requests: Mapped[List["AddoptionRequest"]] = relationship(back_populates="animal", passive_deletes=True)
+    addoption_processes: Mapped[List["AddoptionProcess"]] = relationship(back_populates="animal", passive_deletes=True)
 
     def serialize(self):
+        # no me gusta, debería sacarlo de un service pero por prisa lo meto aqui
+        # todo: crear animal_serialize propio en el service y ahí meter esta logica
+        last_process = max(self.addoption_processes, key=lambda p: p.created_at or datetime.min, default=None)
+
         return {
             "id": self.id,
             "animal_id": self.animal_id,
@@ -68,10 +73,14 @@ class Animal(db.Model):
             "status": self.status,
             "animal_type_id": self.animal_type_id,
             "species": self.animal_type.species if self.animal_type else None,
-            "shelter_id": self.shelter_id,
+            "shelter_id": self.shelter.shelter_id if self.shelter else None,
             "shelter_name": self.shelter.name if self.shelter else None,
+            "map_positioning": self.shelter.map_positioning if self.shelter else None,
             "media": [media.serialize() for media in self.media],
             "cover_image": next((media.url for media in self.media if media.is_cover), None),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
+            "addoption_requests_count": len(self.adoption_requests),
+            "addoption_process_id": last_process.addoption_process_id if last_process else None,
+            "animal_request_ids": [request.request_id for request in self.requests],
         }

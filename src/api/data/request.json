@@ -5,7 +5,8 @@
     "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
     "name": "Cirugía de cadera para Luna",
     "description": "Luna necesita una intervención quirúrgica urgente en la cadera tras un accidente.",
-    "request_deadline": "2026-09-30T00:00:00",
+    "request_deadline": "2026-09-21T00:00:00",
+    "footnote": "Cirugía 19 sept",
     "amount_needed": 850.0,
     "request_type_id": "d3b0d2a1-6e2a-4b6b-9b0a-2f6a7e1c9a01",
     "status": "abierta",
@@ -17,10 +18,11 @@
     "animal_id": null,
     "name": "Alimento para el refugio",
     "description": "Necesitamos pienso y latas para alimentar a los 20 animales que tenemos actualmente acogidos.",
-    "request_deadline": "2026-09-15T00:00:00",
+    "request_deadline": "2026-09-21T00:00:00",
+    "footnote": "Entrega en clínica",
     "amount_needed": 300.0,
     "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
-    "status": "abierta",
+    "status": "borrador",
     "unit": "€"
   },
   {
@@ -32,8 +34,9 @@
     "request_deadline": "2026-09-10T00:00:00",
     "amount_needed": 90.0,
     "request_type_id": "d3b0d2a1-6e2a-4b6b-9b0a-2f6a7e1c9a01",
-    "status": "abierta",
-    "unit": "€"
+    "status": "cerrada",
+    "unit": "€",
+    "footnote": "¡Conseguido, gracias!"
   },
   {
     "request_id": "96af49cf-7ff4-4e06-a732-1871e3efefa5",
@@ -41,11 +44,12 @@
     "animal_id": null,
     "name": "Mantas para el invierno",
     "description": "Recogida de mantas y camas para preparar el santuario ante la llegada del frío.",
-    "request_deadline": "2026-11-01T00:00:00",
-    "amount_needed": 150.0,
+    "request_deadline": "2026-09-21T00:00:00",
+    "amount_needed": 20,
     "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
     "status": "abierta",
-    "unit": "€"
+    "unit": "mantas",
+    "footnote": "Recogen en el refugio"
   },
   {
     "request_id": "cae4ffd5-2b79-4f72-8901-4037a3c116f2",
@@ -185,7 +189,7 @@
     "animal_id": null,
     "name": "Alimento para el refugio",
     "description": "Necesitamos pienso y latas para alimentar a los animales que tenemos actualmente acogidos en Refugio Patitas Felices Barcelona.",
-    "request_deadline": "2026-12-14T00:00:00",
+    "request_deadline": "2026-09-21T00:00:00",
     "amount_needed": 163.72,
     "request_type_id": "8f2c1e4d-5a3b-4c7e-8d1a-3b9c6f2e9a02",
     "status": "abierta",
@@ -457,11 +461,11 @@
   },
   {
     "request_id": "2c40d789-5a46-4642-8142-efd03bd8c7e9",
-    "shelter_id": "43fb7a6c-30ef-4678-b179-4a7314ecc68a",
+    "shelter_id": "38fa0048-d413-4663-9a28-d474466388a5",
     "animal_id": null,
     "name": "Campana de esterilizacion en Protectora Luz de Luna Bilbao",
     "description": "Buscamos financiacion para esterilizar a varios animales acogidos en Protectora Luz de Luna Bilbao.",
-    "request_deadline": "2027-01-26T00:00:00",
+    "request_deadline": "2026-09-21T00:00:00",
     "amount_needed": 443.63,
     "request_type_id": "d3b0d2a1-6e2a-4b6b-9b0a-2f6a7e1c9a01",
     "status": "abierta",
@@ -481,7 +485,7 @@
   },
   {
     "request_id": "b498368d-cb91-44f1-8e3b-289e1f36de91",
-    "shelter_id": "2f46f6f8-a867-4203-a4ac-aed52daf1a6a",
+    "shelter_id": "c7752703-4da3-4554-b50f-a9669744d55e",
     "animal_id": null,
     "name": "Mantas para el invierno",
     "description": "Recogida de mantas y camas para preparar Protectora Luz de Luna Malaga ante la llegada del frio.",
@@ -517,7 +521,7 @@
   },
   {
     "request_id": "61db3c3f-e2c3-4585-9c58-dec0dd56db00",
-    "shelter_id": "8cb923dc-0704-41dd-becc-7da39a41e59b",
+    "shelter_id": "4789deb9-acf3-46f8-a661-21f2f36238ac",
     "animal_id": null,
     "name": "Operativo de rescate urgente",
     "description": "Financiacion urgente para un operativo de rescate coordinado por Protectora Luz de Luna Vigo.",

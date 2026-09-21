@@ -64,6 +64,80 @@
 
 ---
 
+## LÓGICA DE ESTADOS:
+
+## Animal y Adoptar:
+Los campos `status` del dominio de adopción tienen su fuente de verdad en el service que "posee" cada entidad — no en el modelo, ni en el repositorio, ni en el frontend. Modelos y repositorios son agnósticos del valor concreto (solo el `default` de columna hardcodea un literal, por ser inevitable); rutas y frontend consumen constantes/mapas importados desde ahí en vez de repetir los strings.
+
+### `Animal.status` — lo controla: [`animals_service.py`](/src/api/services/animals_service.py)
+
+| Valor | Significado |
+| --- | --- |
+| `activado` | Único estado visible en las vistas públicas (`/adoptar`, `/adoptar/:id`) — `PUBLIC_STATUSES`. |
+| `desactivado` | Oculto del catálogo público, reversible desde el panel de la protectora (botón Desactivar/Reactivar). |
+| `borrador` | Ficha incompleta, nunca visible públicamente. |
+
+
+
+### `AddoptionProcess.status` — lo controla: [`addoption_process_service.py`](/src/api/services/addoption_process_service.py)
+
+| Valor | Significado |
+| --- | --- |
+| `abierto` | El proceso admite nuevas `AddoptionRequest` (sujeto también al rango de fechas) — ver `is_process_open_for_requests`. |
+| `cerrado` | Ya no admite solicitudes nuevas. |
+
+- Punto que cierra un proceso: `close_addoption_process(process)`. Lo invocan tanto el cierre automático al alcanzar el límite de solicitudes simultáneas como la aceptación de una solicitud.
+- Abrir/Editar un proceso siempre lo deja en `abierto`, incluso si estaba `cerrado` (permite relanzarlo).
+
+### `AddoptionRequest.status` — lo controla: [`addoption_request_service.py`](/src/api/services/addoption_request_service.py)
+
+| Valor | Significado |
+| --- | --- |
+| `pendiente` | Recién creada, sin revisar. |
+| `aceptada` | La protectora la ha aprobado. |
+| `descartada` | Rechazada (individualmente o en bloque). |
+
+- `accept_addoption_request`: marca la solicitud como `aceptada`, cierra el proceso asociado (`close_addoption_process`) y descarta automáticamente (`descartada`) el resto de solicitudes `pendiente` del mismo proceso, para que nunca quede más de una aceptada.
+- `discard_addoption_requests`: descarte en bloque, solo afecta a las que siguen `pendiente`.
+
+---
+
+## LOGICA DE NEGOCION DE ADOPCIONES:
+
+Restricciones que aplican a (`animal`, `addoption_process`, `addoption_request`) al gestionar animales, procesos y solicitudes de adopción.
+
+**Animales**
+
+- Solo los animales en estado `activado` aparecen en el catálogo público y en su ficha; los que están en `borrador` o `desactivado` quedan ocultos aunque sigan existiendo.
+- Una protectora solo puede ver y editar sus propios animales.
+- Animales funciona como un catálogo de recursos de la protectora para mostrar tanto animales tanto que pueden ser adoptados como que tienen necesidades vinculadas.
+
+**Procesos de adopción**
+
+- Cada animal solo puede tener un proceso de adopción a la vez.
+- Un proceso solo admite solicitudes nuevas mientras está `abierto` y, si tiene fechas configuradas, dentro de ese rango.
+- Si se configura un límite de solicitudes simultáneas, el proceso se cierra cuando se alcanza ese número.
+- El proceso se cierra solo en dos casos: cuando la protectora acepta una solicitud, o cuando se alcanza el límite de solicitudes simultáneas que ella misma configuró.
+- Las fechas del proceso son opcionales y pueden ser configuradas por la protectora. Fuera de esas fechas el proceso sigue abierto pero no puede ser accesible.
+- Reabrir o editar un proceso siempre lo deja `abierto`, aunque estuviera cerrado.
+- Un proceso solo se puede eliminar si todavía no ha recibido ninguna solicitud; si ya tiene alguna, la única opción es cerrarlo (se conserva el historial).
+
+**Solicitudes de adopción**
+
+- Un usuario solo puede enviar una solicitud por proceso de adopción, y no puede repetirla aunque la anterior haya sido descartada.
+- Solo se puede solicitar la adopción de un animal si su proceso está abierto en ese momento.
+- Hay que responder todas las preguntas del proceso para poder enviar la solicitud.
+- Aprobar una solicitud es una acción individual (no en bloque) y descarta automáticamente el resto de solicitudes pendientes del mismo proceso, para que nunca quede más de una aceptada.
+- Descartar en bloque solo afecta a las solicitudes que siguen pendientes; ignora las que ya estaban aprobadas o descartadas.
+- Una protectora solo puede ver y gestionar las solicitudes de sus propios procesos de adopción.
+
+---
+
+## LÓGICA DE NEGOCIO DE PETICIONES:
+
+
+---
+
 ## LIMPIADO DE LAS MIGRACIONES ANTERIORES Y BBDD ACTUAL:
 
 Usa el [`Makefile`](/Makefile) de la raíz del proyecto (`make help` lista los comandos disponibles):

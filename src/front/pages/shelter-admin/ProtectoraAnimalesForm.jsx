@@ -14,6 +14,9 @@ import { SectionCard } from "../../components/protectora/SectionCard";
 import { LivePreviewCard } from "../../components/protectora/LivePreviewCard";
 import { TogglePill } from "../../components/protectora/FormsProtectora/TogglePill";
 import { SiNoUndefinedRow } from "../../components/protectora/FormsProtectora/SiNoUndefinedRow";
+import { AbrirProcesoAdopcionModal } from "../../components/protectora/FormsProtectora/AbrirProcesoAdopcionModal";
+import { getAddoptionProcess } from "../../services/addoptionProcessService";
+import { ACTIVADO, DESACTIVADO, BORRADOR } from "../../utils/format";
 
 // para los casos principales de la aplicacion,
 // dejamos otros por si metemos periquitos o tortugas
@@ -90,7 +93,8 @@ export const ProtectoraAnimalesForm = () => {
   const [loadedAnimal, setLoadedAnimal] = useState(null);
   const [loadingAnimal, setLoadingAnimal] = useState(isEditMode);
   const [loadError, setLoadError] = useState("");
-  const isDraft = isEditMode && loadedAnimal?.status === "borrador";
+  const isDraft = isEditMode && loadedAnimal?.status === BORRADOR;
+  const isDeactivated = isEditMode && loadedAnimal?.status === DESACTIVADO;
   const prefilledRef = useRef(false);
   const initialMediaIdsRef = useRef([]);
 
@@ -124,6 +128,25 @@ export const ProtectoraAnimalesForm = () => {
   const [coverId, setCoverId] = useState(null);
   const [hoveredMediaId, setHoveredMediaId] = useState(null);
   const [isDraggingMedia, setIsDraggingMedia] = useState(false);
+
+  const [procesoAdopcion, setProcesoAdopcion] = useState(null);
+  const [mostrarModalProceso, setMostrarModalProceso] = useState(false);
+
+  // en modo edición, comprueba si ya hay un proceso de adopción abierto para precargar el modal
+  useEffect(() => {
+    if (!isEditMode) return;
+    let cancelled = false;
+
+    getAddoptionProcess(id)
+      .then((proceso) => {
+        if (!cancelled) setProcesoAdopcion(proceso);
+      })
+      .catch(() => {});
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id, isEditMode]);
 
   // en modo edición, trae el animal a actualizar
   useEffect(() => {
@@ -221,7 +244,8 @@ export const ProtectoraAnimalesForm = () => {
     });
   };
 
-  const selectedSpecies = animalTypes.find((t) => t.animal_type_id === form.animal_type_id)?.species;
+  const selectedAnimalType = animalTypes.find((t) => t.animal_type_id === form.animal_type_id);
+  const selectedSpecies = selectedAnimalType?.species;
   const sizeHints = PISTAS_TAMANO_POR_ESPECIE[selectedSpecies] || PISTAS_TAMANO_POR_DEFECTO;
   const sizeThresholds = UMBRALES_TAMANO_POR_ESPECIE[selectedSpecies] || UMBRALES_TAMANO_POR_DEFECTO;
   const isIdentityValid = Boolean(form.animal_type_id) && form.name.trim().length > 0;
@@ -394,8 +418,10 @@ export const ProtectoraAnimalesForm = () => {
 
       const successMessage =
         (isEditMode
-          ? `${form.name.trim()} se ha actualizado correctamente.`
-          : status === "borrador"
+          ? status === DESACTIVADO
+            ? `${form.name.trim()} se ha desactivado y ya no aparece en el catálogo público.`
+            : `${form.name.trim()} se ha actualizado correctamente.`
+          : status === BORRADOR
             ? `${form.name.trim()} se ha guardado como borrador.`
             : `${form.name.trim()} se ha publicado correctamente.`) + mediaWarning;
       dispatch({ type: mediaWarning ? "set-error" : "set-success", payload: successMessage });
@@ -411,15 +437,23 @@ export const ProtectoraAnimalesForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveAnimal(isEditMode ? undefined : "disponible");
+    saveAnimal(isEditMode ? undefined : ACTIVADO);
   };
 
   const handleGuardarBorrador = () => {
-    saveAnimal("borrador");
+    saveAnimal(BORRADOR);
   };
 
   const handlePublicar = () => {
-    saveAnimal("disponible");
+    saveAnimal(ACTIVADO);
+  };
+
+  const handleDesactivar = () => {
+    saveAnimal(DESACTIVADO);
+  };
+
+  const handleReactivar = () => {
+    saveAnimal(ACTIVADO);
   };
 
   return (
@@ -432,13 +466,33 @@ export const ProtectoraAnimalesForm = () => {
               <p className="mb-0">Actualiza los datos de la ficha. Los cambios se guardan sobre el mismo animal.</p>
             ) : (
               <p className="mb-0">
-                  La ficha se publica como <b>disponible</b>. Cuando decidáis abrir el proceso de adopción, cambiará a <b>en proceso</b>.
+                  La ficha se publica como <b>disponible</b> y queda visible en el catálogo público. Podréis desactivarla en cualquier momento desde la edición.
               </p>
             )}
           </div>
-          <Link to="/panel/animales" className="btn btn-outline-secondary rounded-pill px-4">
-            Volver
-          </Link>
+          <div className="d-flex flex-wrap gap-2">
+            {isEditMode && (
+              procesoAdopcion?.addoption_process_id ? (
+                <Link
+                  to={`/panel/adopciones/${procesoAdopcion.addoption_process_id}`}
+                  className="btn btn-success rounded-pill px-4"
+                >
+                  Editar proceso de adopción
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-success rounded-pill px-4"
+                  onClick={() => setMostrarModalProceso(true)}
+                >
+                  Abrir proceso de adopción
+                </button>
+              )
+            )}
+            <Link to="/panel/animales" className="btn btn-outline-secondary rounded-pill px-4">
+              Volver
+            </Link>
+          </div>
         </div>
 
         {loadingAnimal ? (
@@ -1045,7 +1099,7 @@ export const ProtectoraAnimalesForm = () => {
                   disabled={saving}
                   onClick={handleGuardarBorrador}
                 >
-                  {saving && pendingStatus === "borrador" ? "Guardando…" : "Guardar como borrador"}
+                  {saving && pendingStatus === BORRADOR ? "Guardando…" : "Guardar como borrador"}
                 </button>
               )}
               <button
@@ -1053,7 +1107,7 @@ export const ProtectoraAnimalesForm = () => {
                 className={`btn rounded-pill px-4 ${isDraft ? "btn-outline-secondary" : "btn-success"}`}
                 disabled={saving}
               >
-                {saving && pendingStatus === (isEditMode ? null : "disponible")
+                {saving && pendingStatus === (isEditMode ? null : ACTIVADO)
                   ? "Guardando…"
                   : isEditMode
                     ? isDraft
@@ -1068,12 +1122,42 @@ export const ProtectoraAnimalesForm = () => {
                   disabled={saving}
                   onClick={handlePublicar}
                 >
-                  {saving && pendingStatus === "disponible" ? "Publicando…" : "Publicar"}
+                  {saving && pendingStatus === ACTIVADO ? "Publicando…" : "Publicar"}
+                </button>
+              )}
+              {isEditMode && !isDraft && !isDeactivated && (
+                <button
+                  type="button"
+                  className="btn btn-outline-danger rounded-pill px-4"
+                  disabled={saving}
+                  onClick={handleDesactivar}
+                >
+                  {saving && pendingStatus === DESACTIVADO ? "Desactivando…" : "Desactivar"}
+                </button>
+              )}
+              {isDeactivated && (
+                <button
+                  type="button"
+                  className="btn btn-warning rounded-pill px-4"
+                  disabled={saving}
+                  onClick={handleReactivar}
+                >
+                  {saving && pendingStatus === ACTIVADO ? "Reactivando…" : "Reactivar"}
                 </button>
               )}
             </div>
         </div>
         </form>
+        )}
+
+        {mostrarModalProceso && (
+          <AbrirProcesoAdopcionModal
+            animal={{ animal_id: id, name: form.name || loadedAnimal?.name || "este animal" }}
+            procesoExistente={procesoAdopcion}
+            catalogoRequisitos={selectedAnimalType?.requirements || []}
+            onCerrar={() => setMostrarModalProceso(false)}
+            onProcesoAbierto={(proceso) => setProcesoAdopcion(proceso)}
+          />
         )}
     </div>
   );

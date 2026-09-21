@@ -12,6 +12,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from api.services.users_service import is_token_revoked
+from datetime import timedelta
 
 # from models import Person
 
@@ -22,6 +23,9 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=30)      # 30 mins
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(hours=1)      # 1 hora
+
 jwt = JWTManager(app)
 
 

@@ -1,0 +1,1034 @@
+[
+  {
+    "addoption_process_id": "c55a2229-eb33-4df3-99bc-b7002402f388",
+    "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 1,
+    "contribution_amount": null,
+    "start_date": null,
+    "end_date": null,
+    "status": "cerrado",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "978cc0f4-9915-46ba-a669-3d6da20389b7",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "c1f77d3f-1a02-4d74-9c0b-8e8c07dd55dc",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "a7eb9fad-8728-43d7-858f-5e7853eb6ea2",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "7c669b1d-a888-49c3-9922-8e6224686f4a",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "6259bb9e-779a-4dbc-a1f3-205724758689",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "4f131b3d-1b70-4c45-8a70-fec94ebcbe4f",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "191e8f3d-4384-4fae-866f-a619a2f9a3ca",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "3cab167a-e375-4a9f-9ea4-cdffe9915255",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "fe7e510c-247b-45eb-a0d0-adf7b794b3d2",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "205c8d9b-721d-4c84-91f2-fa93b1354386",
+    "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 1,
+    "contribution_amount": null,
+    "start_date": null,
+    "end_date": "2026-09-29",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "1550230c-e2de-42cf-9320-35f31947b242",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "976daee9-1edf-43f1-a284-036a8de40104",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "2b7f66e2-eca5-4b24-99ac-cae76f100c5b",
+        "label": "Experiencia previa con perros"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "2121ede6-3e3d-434f-9228-d2018fa78512",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "778e78f7-c059-41b4-929d-eb122497f554",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "84f4e029-129c-43b6-ab49-24687134dcbd",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "9edf1b3c-7e74-4d2d-a02f-5906a822e837",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 3,
+    "contribution_amount": 0,
+    "start_date": "2026-09-17",
+    "end_date": "2026-10-24",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "66ffb014-4fc9-4bcc-95e5-2b2d0c05ff39",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "26793f16-d823-4bee-90f0-4d83fecf8f65",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "598dde07-e438-4dae-beb0-5f7eb4e9caa7",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "c315a73b-5b9e-4c7a-ab7e-900977bfd298",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "ae2d9adb-35cf-40a2-94e3-6eb660e2f4e2",
+        "label": "Compromiso de esterilización"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "c4efd6c4-89aa-4c28-b235-8c655b1d0ad5",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "fea9cc89-c316-4f2c-9021-e8d2ccada427",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "f9d99f41-a2ec-4583-b5ac-8f4fef8d2b12",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "3c6a18bc-3c21-43b0-9e70-6ba2ef1d6e92",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "b0bd4302-aa45-4cb8-b207-bcdd6e30c5ba",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "3bb76da7-4091-4dcc-a317-40c69444be7f",
+    "animal_id": "6c6fc04b-1c7c-46a5-878e-12d8a39808e8",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 5,
+    "contribution_amount": 30,
+    "start_date": null,
+    "end_date": null,
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "e76d962a-9de4-44a1-9529-9682553f736a",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "74c2b1de-1fa7-43ed-8bf4-d86ed4d9cdf1",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "44e44b9e-4fea-4ea0-84ee-2949af46da5c",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "07bde326-e5c0-438b-97db-ba460fd2e95c",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "f7e6de19-63ac-4bdc-acc8-bb9a9dc57e59",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "3f329125-ab0a-4ea5-8326-da345e532d1a",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "dea47ebb-df15-485c-b3a0-fdb0d7352ccc",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "3c942c2b-0887-4eed-9646-9d187466ab09",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "86e2237e-aa3d-4143-b328-17bcd74b5e59",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "73b87771-7bc0-4143-9f40-d6c823b3b270",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "979b8f07-12a9-4012-8451-619b69aad6c4",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      },
+      {
+        "addoption_request_question_id": "4f9cca90-aa8f-41d6-8638-c4eacf61219f",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "b97e4406-f68c-4ba7-b0c5-9786e580d251",
+    "animal_id": "4dfc43a0-ddcd-4431-b8f8-3c6f40d6f49b",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 10,
+    "contribution_amount": 50,
+    "start_date": null,
+    "end_date": "2026-11-17",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "90f72f90-ef35-4efc-a084-d9d9c0055655",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "623be1de-5f24-42ae-a981-5d585c5e7c61",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "3c5e9862-4062-4f1b-9d72-c52b5eabe68d",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "7f543419-56e7-4c21-9b2f-233944b362e2",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "2264768c-96f9-49fc-bb28-853e40f12b9a",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "6d41ef11-846d-4259-b442-603f2d4b3a59",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "72206a4b-8181-49c3-a714-775f9af9bb2d",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "3686c5fa-b4f7-49e6-9a64-37949fd7f7e5",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "a90d933e-04aa-4185-bced-cac4a7b53609",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      },
+      {
+        "addoption_request_question_id": "44ab96b4-258d-485e-9d58-f86649762639",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "1043ba75-53a9-4a1e-b7cc-7b0401044c2a",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "71078868-6470-438a-b991-71078d1a1b11",
+    "animal_id": "a4b6e25d-8309-42ef-91d6-5e8327337a6f",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": null,
+    "contribution_amount": 80,
+    "start_date": "2026-09-04",
+    "end_date": "2026-10-16",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "725e5ba0-5a0b-4c69-9cce-da9094c2c8bd",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "b6b5da9c-ca56-4015-8d8c-222d7195f472",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "d6200f97-4cdf-4198-8626-022d7e94aacd",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "951496b9-7bd0-4ac3-a303-c9c79e0fd5fa",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "f08f7ec7-e5cc-47e6-b6a7-9c588d514ecc",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      },
+      {
+        "addoption_request_question_id": "2cc28bb6-9be5-4578-a5dd-8b1e2fba4031",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "d1ed8e19-d4d1-40cc-9600-75b30ac08c12",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "0b31ae81-cde3-4d21-8829-0afa64d2378f",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      },
+      {
+        "addoption_request_question_id": "7a67a350-6b5e-4b5a-8d20-15c2fce26874",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "5c6c080f-1639-4923-b388-f0e52c5f19ea",
+    "animal_id": "97e9e393-2476-4e19-9d74-3d725570c8cc",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": null,
+    "contribution_amount": 120,
+    "start_date": null,
+    "end_date": null,
+    "status": "cerrado",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "9a4a9845-99f1-4579-ac82-713b9a6d1543",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "971f9971-2ea4-493d-aa72-10a541c546f3",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "f51650e6-a359-4fc8-914c-b7d7884123f6",
+        "label": "Paseos diarios garantizados"
+      },
+      {
+        "addoption_process_requirement_id": "1afe8d3e-ed54-442a-97c9-8c22bf47a85c",
+        "label": "Experiencia previa con perros"
+      },
+      {
+        "addoption_process_requirement_id": "389f06c2-27ef-48e8-b315-30018b54f396",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "bae8084f-ef0b-4c49-898c-2b3ee1652d9d",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "6e9e83e6-f1bb-4e47-8c8e-e3602afdc3e7",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "bb853743-da0a-4dbf-8d87-21d527e8af5d",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "6dfc1fe0-3d16-4f5f-ac22-c6381b4904eb",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      },
+      {
+        "addoption_request_question_id": "2bb1a664-daed-4064-83ba-e4c92e8c2885",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "a531892d-2647-45e7-a4b1-1c209ffc2da8",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "91126c97-91dc-4dcc-b0bb-115b3a21e58a",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      },
+      {
+        "addoption_request_question_id": "b50e2378-9c9b-4dfe-bf19-173ede432d01",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "bf36aec3-dadf-4cfc-b19f-94256b82e74a",
+    "animal_id": "f566ff7a-0599-4c02-ab07-7eedfda2438e",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 1,
+    "contribution_amount": 150,
+    "start_date": null,
+    "end_date": "2026-10-28",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "87a481ae-5df1-4435-b4c8-20fafcfa1888",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "d2e25c41-0a6b-4b42-a205-1447a775bac7",
+        "label": "Compromiso de esterilización"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "b5d1f89c-1b1f-49f5-b019-8ca6646af607",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "47bc6ffc-a580-4069-b5b2-b4cb39ddfa01",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "afc72140-5679-457a-85cb-c2ee04676a79",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "488b1245-1fe5-4493-81be-d8471b96126c",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "9cba5f80-fe73-4365-93f7-39d2b0e570e2",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      },
+      {
+        "addoption_request_question_id": "fb3d0b34-26d6-41f4-ab01-80c557c9823a",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "e5a24022-8c8e-46ca-b8e6-5371e701bfa2",
+    "animal_id": "179da19e-7e4e-4272-b605-c27faae8efd4",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 1,
+    "contribution_amount": null,
+    "start_date": "2026-09-05",
+    "end_date": "2026-10-24",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "7e2939a9-8c29-4c4b-ac27-f056b95fd849",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "2796eead-b43b-437f-9e34-638c124c1742",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "cd1ee4c9-4096-4a16-8851-6e9402fb02f9",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "52848f28-3b62-49f7-8368-3b344b2e7e0d",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "be26ff7b-ef3c-4f7b-bf02-55dbbf18db18",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "df75ff7a-cdfa-4d29-81e0-9242c7d27bac",
+        "label": "Compromiso de esterilización"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "d7cf21f7-ac38-4c08-9d76-6d4e8aeb05e6",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "2b04c104-d1a5-4573-977f-138c587e8a2d",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "b7405dba-d8fd-4c60-9c34-01e64c3b678f",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "427e662f-12b1-4b41-9b88-14e12c86112e",
+    "animal_id": "77bb3b58-c0b4-4273-ac34-51e994b61c04",
+    "shelter_id": "6f0b6815-e42b-4333-9148-954d81927885",
+    "concurrent_requests_limit": 3,
+    "contribution_amount": null,
+    "start_date": null,
+    "end_date": null,
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "8b5156d1-8050-436e-8b22-6fca67336477",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "3e8fd17b-57ab-4806-ad45-04c54392e5b9",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "8dfc86ae-3e02-4d44-9855-f51f784ae3c3",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "d5715b93-3a2a-407a-990a-854197413565",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "50d64d03-8bf5-4c2f-ad68-23d1b43798e2",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "5b57bbb9-37a7-44c9-8063-aae0e0ec2b7a",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "080e4a87-9871-4325-9e16-c9f751902f00",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "882833e7-d55b-49e7-9fbe-be4bfc1ab5bb",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "aa3ae67f-0f88-4e41-a5e0-8fbad47c48c2",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "c32c8894-092e-4aaa-8d38-cfe324192495",
+    "animal_id": "f3d02e37-4a89-436c-a880-4a622168b7e4",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 5,
+    "contribution_amount": 0,
+    "start_date": null,
+    "end_date": "2026-10-06",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "d6aff10c-1627-460f-b700-71dd23fcf0c4",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "bf33e839-6070-491d-870c-9fb1af5405dd",
+        "label": "Paseos diarios garantizados"
+      },
+      {
+        "addoption_process_requirement_id": "135d192e-9742-4082-9172-3c2a548b1c76",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "66f57a16-4b4f-41f8-a027-69713bbb2c79",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "ba85d715-5b32-49e1-9da0-19edb0b94b3e",
+        "label": "Seguimiento a los 3 meses"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "731b62fd-a1b8-4b48-8570-1cddf38e7392",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "c52f9be3-6d03-42c5-a2de-848c445f949f",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "af50f478-b6cf-416e-b2e6-061fc723c225",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "7b9659f0-bb1d-416a-bfc8-367cd584ac62",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "9b035c64-6981-4cb3-8c28-ff79c35f39b9",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "14c95e03-e451-415c-a38f-4150879d556d",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "8b6f80d2-1ed9-497b-af38-18d12a844eb0",
+    "animal_id": "9a9fe64e-72f4-49ed-9928-5d4a3aacc627",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 10,
+    "contribution_amount": 30,
+    "start_date": "2026-09-12",
+    "end_date": "2026-10-17",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "8b220830-7058-4dd3-a875-da9f6c31e83b",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "e3b445cf-4d43-438a-874f-f371fb656a0e",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "02b5b98a-b443-4189-9424-5bc5eae226f5",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "99b6638a-64f8-4351-aa73-a5c8aac0e70d",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "d1491957-26ad-4eaa-9929-171adf0a3852",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "1426398b-ffb1-4439-a0b3-dde92e22cd0a",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "26dd9f47-d31a-4ce8-baa2-6b51f0027e56",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "b8c68602-4775-40ad-84b9-64e84ef74351",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "66f4d512-341f-4f96-bbb8-ddffe53d92cb",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "4c87a2e4-7ee8-4a64-bc5f-baaa831e73b8",
+    "animal_id": "7d4470cd-b9e6-451b-a18b-ecae3cdbd758",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": null,
+    "contribution_amount": 50,
+    "start_date": null,
+    "end_date": null,
+    "status": "cerrado",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "142f974d-8289-419c-8d6e-2b31453c5a40",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "a69bb6cf-0587-4e3c-97df-75e7eb433c29",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "5c60975a-6935-4e01-89f8-baa4e0761af2",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "5eb1a283-dd67-466c-a4e3-3bc8a5b6d1ea",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "f8d319b3-fd97-4273-83c0-db56daa70673",
+        "label": "Experiencia previa con perros"
+      },
+      {
+        "addoption_process_requirement_id": "e0932636-9d18-4d76-ae5c-10620272b10e",
+        "label": "Paseos diarios garantizados"
+      },
+      {
+        "addoption_process_requirement_id": "c79a049c-09db-434f-96e5-3c9173706e05",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "21afedbf-0d94-4979-a738-05c962b9c94a",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "cd4cd508-2948-4f24-8d34-0149a7f874e1",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "7a143a7a-2aef-4851-b4ed-e73c14cc2b8f",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "87378bb1-9325-4ada-a9e4-c67ab468514d",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "2139caed-f627-49c3-bc7d-179a140d8d1b",
+    "animal_id": "378321b4-bdec-4bc8-a3bf-6964e9b661c2",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": null,
+    "contribution_amount": 80,
+    "start_date": null,
+    "end_date": "2026-10-02",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "5802afcd-c92e-4be0-992b-5301391dcd80",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "6440abd3-579f-4d9a-8afe-cb41bc835ead",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "8eb5fdda-b831-4f5a-af14-45eb9e7f9d5b",
+        "label": "Vivienda con ventanas o balcón seguros"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "0b19f2aa-8e84-4dc0-85d8-ac0f93854a59",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "d08fea5c-4ef7-43d8-a83b-edc8ad2e18c6",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "52c9b9c5-14de-49db-8e28-d888ceea50ac",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "bd7a478b-b73c-49e4-9dcc-101919818f29",
+    "animal_id": "6db30e3a-ade1-40c6-8fcc-81d4cd9bd84c",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 1,
+    "contribution_amount": 120,
+    "start_date": "2026-09-05",
+    "end_date": "2026-10-13",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "c7a7bf7b-499e-468c-a775-7311a4336c94",
+        "label": "Experiencia previa con perros"
+      },
+      {
+        "addoption_process_requirement_id": "e615c596-5f4b-4c4d-b55d-64555217a859",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "88008ca8-e384-4e60-8fdb-3a4e799f71a6",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "9a18f07d-5e78-40f6-ab9a-70ce4495a4dd",
+        "label": "Paseos diarios garantizados"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "6f2f13b7-77a8-4415-affc-095dd037cbc5",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "5e7db8ae-a773-426a-8c48-3176d03f270f",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "aac6cf56-c2a7-46f5-848e-229acfa1aeb3",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "c3bfd4e4-276c-4096-8e5b-753c96fa5efb",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      },
+      {
+        "addoption_request_question_id": "c124f262-d61e-4856-9594-59f14e4bce35",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      },
+      {
+        "addoption_request_question_id": "90f8affc-ba6a-4407-8bd8-02dec2231dee",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "fe20fc97-b38c-4e27-95a0-40d53ecd501b",
+    "animal_id": "03c74b37-ddc5-4df5-9a85-d3a8f25c402e",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 1,
+    "contribution_amount": 150,
+    "start_date": null,
+    "end_date": null,
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "b835f3d6-3f1b-40cc-b183-142cede7916c",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "7df90f82-8c0e-4498-acc2-a96ef8e1aa21",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "20683396-8e5b-47bd-a4a1-04ca89838d0d",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "906088c9-e9ae-415b-9cf4-cb9046a5a18c",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "26c5781f-cfcf-44bf-977c-b1485e10a11f",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "8dd25530-957b-4deb-8d51-cb79ce9e1672",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "236e2f7c-d6d1-4cf3-a420-c91d217d19ff",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "e5c204b4-dc19-4341-870d-d34ca232dc49",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "9fc61fee-c1b8-4be8-af87-048bd4f301b5",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "2c89c5c7-fd90-44bd-abe0-6f1e3ee86566",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "9ebd97bd-1b7e-4f35-8c79-153963556d53",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "4cdbac20-8311-496d-9b75-f9eda8b75bba",
+    "animal_id": "3699f853-cb84-425e-a0db-61201c32f957",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 3,
+    "contribution_amount": null,
+    "start_date": null,
+    "end_date": "2026-11-13",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "471e93d4-7b9e-41fe-9a02-983d5b6abad6",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "b6c84f88-4812-48bd-b8bf-0ba9ef204971",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "f83b4c8e-2e45-45aa-b1aa-e027f6c17744",
+        "label": "Visita previa en el refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "441397e0-85d5-47c1-8a6f-e85d27ddb2b4",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "7e5244c1-5b27-4ac5-8f9c-815076251e97",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      },
+      {
+        "addoption_request_question_id": "56eecd57-2af1-440c-bcfd-b5e3c2c6a1ae",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "b9224dfe-faf1-413a-a766-a5957fa08305",
+    "animal_id": "b63a6b69-60c8-427d-901d-d1d420cc388c",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 5,
+    "contribution_amount": null,
+    "start_date": "2026-09-14",
+    "end_date": "2026-10-16",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "a6095c52-673e-4775-9630-3b7e47f3a68f",
+        "label": "Contrato de adopción"
+      },
+      {
+        "addoption_process_requirement_id": "ccb02b33-2b8b-46bd-8818-ef65dae51a3c",
+        "label": "Compromiso de esterilización"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "6c6780e1-17b1-40c0-b932-96b265695eeb",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "b9dfacdc-971b-4d2d-8aec-ed19be5678d1",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      },
+      {
+        "addoption_request_question_id": "bf9e54c1-c52e-4257-9041-337f9f076c52",
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?"
+      },
+      {
+        "addoption_request_question_id": "c88bbcf2-b1c8-4e24-9f90-ecb38b79e06b",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "b2b44195-8f51-4b57-90fe-2d3416a7be12",
+    "animal_id": "56fbaba0-7c6b-4ab0-8950-34d24e9598a6",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": 10,
+    "contribution_amount": 0,
+    "start_date": null,
+    "end_date": null,
+    "status": "cerrado",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "714027d6-915c-4c7d-a05a-9145ac477ba6",
+        "label": "Vivienda con ventanas o balcón seguros"
+      },
+      {
+        "addoption_process_requirement_id": "09afc689-ed69-48b3-97b2-332a28f03491",
+        "label": "Compromiso de esterilización"
+      },
+      {
+        "addoption_process_requirement_id": "3730b6c8-47dd-4876-9244-a7c4375c3b22",
+        "label": "Espacio interior enriquecido (rascador, escondites)"
+      },
+      {
+        "addoption_process_requirement_id": "db9c40b5-03a7-41a1-9321-18f93c30e9c3",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "0cc5ec1a-38d7-4774-ad03-ee8f5ba39f83",
+        "label": "Residencia habitual en la misma provincia del refugio"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "064c5082-8550-4ad4-96db-974b0fb244c7",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "5b381b44-dece-44eb-a143-5b08adcbf87b",
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?"
+      },
+      {
+        "addoption_request_question_id": "5f11a053-2382-4e6b-ab51-c14f7ec77b07",
+        "question": "¿Tienes experiencia previa cuidando animales?"
+      },
+      {
+        "addoption_request_question_id": "9606ce92-d43f-41a9-b0ba-bf1d3c2bb021",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "1a48f54b-3ef0-4cad-9c3f-f6ee08d6fb18",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      },
+      {
+        "addoption_request_question_id": "3d5cb83c-859e-4648-a49c-984e30d94555",
+        "question": "¿Has convivido antes con un animal así? Cuéntanos."
+      }
+    ]
+  },
+  {
+    "addoption_process_id": "e1a912ab-afb9-4459-8390-c2ccf18cd115",
+    "animal_id": "5abe8650-31b2-43dd-b534-47796625f71b",
+    "shelter_id": "2cbe5a59-369a-4ae2-a082-e5357665e184",
+    "concurrent_requests_limit": null,
+    "contribution_amount": 30,
+    "start_date": null,
+    "end_date": "2026-10-13",
+    "status": "abierto",
+    "requirements": [
+      {
+        "addoption_process_requirement_id": "03e0006e-6c7a-41f1-8aa1-32c2332ac132",
+        "label": "Paseos diarios garantizados"
+      },
+      {
+        "addoption_process_requirement_id": "4f1c3c21-3d71-4e33-b8b2-1fa1182cf034",
+        "label": "Seguimiento a los 3 meses"
+      },
+      {
+        "addoption_process_requirement_id": "fb1bc321-0cad-40a8-bcc9-dbdcd3f20ce3",
+        "label": "Experiencia previa con perros"
+      },
+      {
+        "addoption_process_requirement_id": "8d9b1c65-c005-4202-907a-acc66b99cea0",
+        "label": "Visita previa en el refugio"
+      },
+      {
+        "addoption_process_requirement_id": "9a5d6aa4-5920-4a17-8b79-57e29dfa461c",
+        "label": "Contrato de adopción"
+      }
+    ],
+    "questions": [
+      {
+        "addoption_request_question_id": "2b8ca766-7cba-4b60-ab84-ae9070d5a665",
+        "question": "¿Dispones de espacio exterior o terraza?"
+      },
+      {
+        "addoption_request_question_id": "b856fe87-295e-4bd9-bc92-acbd09a5fb2b",
+        "question": "¿Cuántas horas pasaría solo al día?"
+      },
+      {
+        "addoption_request_question_id": "30cbb878-53ab-4355-962c-8ffb90db254f",
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?"
+      },
+      {
+        "addoption_request_question_id": "a2529ef2-39c4-4803-bdba-42fe712fee47",
+        "question": "¿Por qué quieres adoptar a este animal en concreto?"
+      },
+      {
+        "addoption_request_question_id": "5c210f9c-2fe0-4547-b3c8-18353d2cc31b",
+        "question": "¿Con quién vives y hay otros animales en casa?"
+      },
+      {
+        "addoption_request_question_id": "6293fd6e-8ca3-45fb-b419-4a0b1f19b689",
+        "question": "¿Quién se hará cargo si te vas de vacaciones?"
+      }
+    ]
+  }
+]

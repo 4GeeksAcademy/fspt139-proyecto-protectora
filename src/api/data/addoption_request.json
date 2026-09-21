@@ -1,23 +1,1117 @@
 [
   {
-    "addoption_request_id": "adopcion-laura-michi",
-    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
-    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
-    "score": 9,
-    "is_accepted": true
-  },
-  {
-    "addoption_request_id": "adopcion-javier-firulais",
+    "addoption_request_id": "330336ce-f669-41a6-a06c-8bf377e7b3a6",
     "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
     "animal_id": "a9937576-1d92-4987-8c5e-ef4a688d61ac",
-    "score": 7,
-    "is_accepted": false
+    "addoption_process_id": "c55a2229-eb33-4df3-99bc-b7002402f388",
+    "score": 5,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "7554b72d-22a5-43e9-9742-270d126516d4"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "9e470016-8d20-4cc3-b0a9-880469ee39ba"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Tengo una terraza cerrada de tamaño medio.",
+        "addoption_request_answer_id": "d4daf4dd-daae-40c8-91c5-ded0d4545283"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "b07876bb-5f15-45f8-bbd6-9bd156465a02"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Lo asumiría sin problema, es parte de la responsabilidad.",
+        "addoption_request_answer_id": "2adfe6b2-53a9-4d5a-a7b2-f158ff9fc29b"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Tuve un gato parecido durante 12 años, falleció el año pasado.",
+        "addoption_request_answer_id": "c2377c0b-22ef-4356-9add-045a3f4f5bbf"
+      }
+    ]
   },
   {
-    "addoption_request_id": "adopcion-javier-salem",
+    "addoption_request_id": "7f092c84-2457-47bf-ae6b-40d7ec4e3ed8",
+    "user_id": "3c6d7be1-1ec7-4f4a-b3f8-90f6474a0837",
+    "animal_id": "9e14b16d-8385-439c-9396-502f48d55b92",
+    "addoption_process_id": "205c8d9b-721d-4c84-91f2-fa93b1354386",
+    "score": 9,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Cuento con ahorros destinados a imprevistos veterinarios.",
+        "addoption_request_answer_id": "a7be0629-5beb-45bb-9265-291d1344a793"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "508d1dbd-ca06-4aab-a726-22ed3f8570f1"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Tengo una terraza cerrada de tamaño medio.",
+        "addoption_request_answer_id": "3d0f6d19-0445-4593-b56c-80875315ffc7"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "046ed901-36c3-4705-bb54-73f96428f10c",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "addoption_process_id": "9edf1b3c-7e74-4d2d-a02f-5906a822e837",
+    "score": 4,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "Sí, he sido voluntario en una protectora durante 2 años.",
+        "addoption_request_answer_id": "bb829c0f-914a-4464-8dbf-5887ce05bd2e"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Buscaba justo ese tamaño y ese carácter tranquilo.",
+        "addoption_request_answer_id": "2e940015-0999-43f3-8855-e67b2e539a9f"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Trabajo desde casa, estaría acompañado casi todo el día.",
+        "addoption_request_answer_id": "6bda9cc5-9749-4631-93a1-c9a31ff7a8e5"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, sin ningún problema.",
+        "addoption_request_answer_id": "bafcd72a-33ad-4604-a527-6da1a3e0b644"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en mi habitación, como el resto de mis mascotas.",
+        "addoption_request_answer_id": "bdd9bf09-d989-4390-90db-e2af7d641ea3"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "2df5cabf-a835-43ab-a035-466b0c1c30b4",
     "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
-    "animal_id": "4f93194f-f625-4c1b-89bc-2167e482633b",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "addoption_process_id": "9edf1b3c-7e74-4d2d-a02f-5906a822e837",
+    "score": 4,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "1fdc97ac-0592-4e71-a997-9f739ba847aa"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "d9ca035c-7a14-4a71-9df8-e83ae7483998"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Trabajo desde casa, estaría acompañado casi todo el día.",
+        "addoption_request_answer_id": "54cc904c-d915-42b3-887b-3c2aa83f8eed"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "d9f36d28-0e25-4a6c-aa6e-0c6faeeae55c"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en mi habitación, como el resto de mis mascotas.",
+        "addoption_request_answer_id": "9bc916e7-cb66-4748-9299-179815d002ab"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "91821697-e049-4e25-bd67-4d34681b88d7",
+    "user_id": "11bad395-e59c-4425-ad0e-182c12a8d991",
+    "animal_id": "4a9868fe-08c1-4e89-8621-6cb2848f964d",
+    "addoption_process_id": "9edf1b3c-7e74-4d2d-a02f-5906a822e837",
     "score": 6,
-    "is_accepted": false
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "No mucha, pero estoy dispuesto/a a aprender lo necesario.",
+        "addoption_request_answer_id": "b8701e41-0489-4a6c-9332-172adb856ae4"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Buscaba justo ese tamaño y ese carácter tranquilo.",
+        "addoption_request_answer_id": "3de7981d-187c-487c-8cb8-18c3f9f47a2a"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Entre 4 y 5 horas por las mañanas.",
+        "addoption_request_answer_id": "0db3a08c-2275-41d0-9011-26c3f2470c18"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "04c84c34-754d-4bb6-a360-2a6ef94bdbe3"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en el salón, tiene su propia cama.",
+        "addoption_request_answer_id": "5af42a94-71ae-4fad-b1b6-f90defeb2cfe"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "4787e4b9-bf11-44a1-9c4a-2257c77cedec",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "6c6fc04b-1c7c-46a5-878e-12d8a39808e8",
+    "addoption_process_id": "3bb76da7-4091-4dcc-a317-40c69444be7f",
+    "score": 7,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "638b1776-0535-45c2-bda4-fe2cb5df9c6a"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Sí, tengo un patio vallado de unos 30 m².",
+        "addoption_request_answer_id": "28743ff5-bc97-44a2-896e-39b3f78eafab"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Vi su ficha y conecté enseguida con su historia.",
+        "addoption_request_answer_id": "2858d641-980e-4726-b151-48d67d76b221"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo sola, tengo un perro mayor muy tranquilo.",
+        "addoption_request_answer_id": "981dcc9e-fd9d-43cd-891d-58e8f2a9b50e"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Es mi primera mascota, pero me he informado bien.",
+        "addoption_request_answer_id": "5750dc87-f4c8-423e-bb4a-47ce614bfa51"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "2e469bf6-bc18-450f-a1d2-3d918e3eb385",
+    "user_id": "11bad395-e59c-4425-ad0e-182c12a8d991",
+    "animal_id": "6c6fc04b-1c7c-46a5-878e-12d8a39808e8",
+    "addoption_process_id": "3bb76da7-4091-4dcc-a317-40c69444be7f",
+    "score": 6,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "Sí, he sido voluntario en una protectora durante 2 años.",
+        "addoption_request_answer_id": "f6176e4f-a862-496c-944d-1e34bc495996"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Sí, tengo un patio vallado de unos 30 m².",
+        "addoption_request_answer_id": "738631a5-186f-4aa6-b243-1d3f3dcb2cd8"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Vi su ficha y conecté enseguida con su historia.",
+        "addoption_request_answer_id": "ffd98576-47fc-40be-a0d1-fbdc49f5ecb2"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo en pareja, sin otros animales en casa.",
+        "addoption_request_answer_id": "ec36f34c-5b5f-4f09-bc2e-32d7d97eecc4"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Sí, crecí con perros de la misma raza en casa de mis padres.",
+        "addoption_request_answer_id": "4bd11c7f-55c7-4693-bf14-3db0c5144642"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "59e12b71-46f2-4a37-880e-0672c23a1fae",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "animal_id": "4dfc43a0-ddcd-4431-b8f8-3c6f40d6f49b",
+    "addoption_process_id": "b97e4406-f68c-4ba7-b0c5-9786e580d251",
+    "score": 10,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "07c23db1-46b8-43dd-ad43-b3239e6a713e"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "d6ddc633-e975-42c0-9254-ee352d2eb35d"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo con mis padres y dos gatos esterilizados.",
+        "addoption_request_answer_id": "d5b4a57a-178a-49a4-bfd1-3e8712854cb8"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Cuento con ahorros destinados a imprevistos veterinarios.",
+        "addoption_request_answer_id": "249cd89f-cc3c-4648-98b1-e7a991105244"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Entre 4 y 5 horas por las mañanas.",
+        "addoption_request_answer_id": "32614cc8-f7c9-4763-b8aa-a855178b03c0"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "35491ea1-6765-4b7f-a305-f5fb5f2f2b14",
+    "user_id": "3c6d7be1-1ec7-4f4a-b3f8-90f6474a0837",
+    "animal_id": "a4b6e25d-8309-42ef-91d6-5e8327337a6f",
+    "addoption_process_id": "71078868-6470-438a-b991-71078d1a1b11",
+    "score": 7,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Tengo una terraza cerrada de tamaño medio.",
+        "addoption_request_answer_id": "926ff3ea-fe19-4a8a-ba81-3edb0d5933fa"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Tendrá acceso a toda la casa, incluida una terraza cerrada.",
+        "addoption_request_answer_id": "6a4cea34-0eb8-44d5-a804-f534209919a8"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "2eb47b14-2c3d-4b79-9aae-0494bac779b8"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Trabajo desde casa, estaría acompañado casi todo el día.",
+        "addoption_request_answer_id": "0b068545-eef1-49a1-b38e-5c5f397558ef"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo con mis padres y dos gatos esterilizados.",
+        "addoption_request_answer_id": "f2fc7f67-b9b2-4655-8ee2-fd0c75d52810"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Es mi primera mascota, pero me he informado bien.",
+        "addoption_request_answer_id": "4383662a-18d6-418e-a659-64f84d1cb440"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "755a4ce2-5bba-41e0-8b61-f7d08e6061be",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "animal_id": "a4b6e25d-8309-42ef-91d6-5e8327337a6f",
+    "addoption_process_id": "71078868-6470-438a-b991-71078d1a1b11",
+    "score": 6,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "6da73241-df2f-4284-b10d-b8ff392829c7"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en el salón, tiene su propia cama.",
+        "addoption_request_answer_id": "816107bc-fd7b-422e-b671-b4bd97ac8052"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "de3245d1-4508-4465-b138-7500131e9f0b"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Entre 4 y 5 horas por las mañanas.",
+        "addoption_request_answer_id": "c4a53687-1cca-4e8c-a915-4411d5e7fda8"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo con mis padres y dos gatos esterilizados.",
+        "addoption_request_answer_id": "73d5c138-2b86-4131-b765-a762ed85f17a"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Tuve un gato parecido durante 12 años, falleció el año pasado.",
+        "addoption_request_answer_id": "576ba45e-e860-4c61-97c9-8d22605a2547"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "b5f25821-5005-4424-a7d8-0a96b8048ea7",
+    "user_id": "11bad395-e59c-4425-ad0e-182c12a8d991",
+    "animal_id": "97e9e393-2476-4e19-9d74-3d725570c8cc",
+    "addoption_process_id": "5c6c080f-1639-4923-b388-f0e52c5f19ea",
+    "score": 9,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Vi su ficha y conecté enseguida con su historia.",
+        "addoption_request_answer_id": "29b853b1-b571-4e94-a9fc-3865944508c9"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Tuve un gato parecido durante 12 años, falleció el año pasado.",
+        "addoption_request_answer_id": "1e8ef70d-f798-46a8-8c38-3e278ba864a3"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Lo asumiría sin problema, es parte de la responsabilidad.",
+        "addoption_request_answer_id": "ab2007e5-786c-4540-8666-a5465a4fda45"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Por supuesto, prefiero que haya seguimiento.",
+        "addoption_request_answer_id": "d83cb9e3-9daf-4661-bdfa-ee04546747f9"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en el salón, tiene su propia cama.",
+        "addoption_request_answer_id": "0c72399b-51bf-4a51-954a-33c0234310c1"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo sola, tengo un perro mayor muy tranquilo.",
+        "addoption_request_answer_id": "ed0c9ba3-cc21-4e8d-81a6-e8d4c87f3046"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "d5fcf0bd-38ed-414a-bcb0-0a5c3dfd3569",
+    "user_id": "75e856f2-dfd2-4c9c-be79-85ea97bc89f2",
+    "animal_id": "97e9e393-2476-4e19-9d74-3d725570c8cc",
+    "addoption_process_id": "5c6c080f-1639-4923-b388-f0e52c5f19ea",
+    "score": 6,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Buscaba justo ese tamaño y ese carácter tranquilo.",
+        "addoption_request_answer_id": "37d2525f-d185-450f-a6a7-5f4ff7d212b9"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Es mi primera mascota, pero me he informado bien.",
+        "addoption_request_answer_id": "6f2f90c8-2bb2-4493-85bf-671a0dc209ae"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Lo asumiría sin problema, es parte de la responsabilidad.",
+        "addoption_request_answer_id": "66c646f5-0e93-4378-96ec-874ffbaabb1a"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, sin ningún problema.",
+        "addoption_request_answer_id": "8c66629c-d8ca-4d26-89b4-59c058176bf9"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Tendrá acceso a toda la casa, incluida una terraza cerrada.",
+        "addoption_request_answer_id": "a221aa15-13a5-4263-97bc-86c532c458b7"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo sola, tengo un perro mayor muy tranquilo.",
+        "addoption_request_answer_id": "b8f4099c-bbc2-4af6-83cf-aaf8629d4b72"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "8edfe4a7-1567-4827-a0a2-4a3018f324c2",
+    "user_id": "3c6d7be1-1ec7-4f4a-b3f8-90f6474a0837",
+    "animal_id": "f566ff7a-0599-4c02-ab07-7eedfda2438e",
+    "addoption_process_id": "bf36aec3-dadf-4cfc-b19f-94256b82e74a",
+    "score": 9,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Mi familia se queda con él, ya conocen a mis mascotas.",
+        "addoption_request_answer_id": "75a8303e-1ab7-4547-a06d-7b7c5b16950e"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "4ded07ef-7b55-42a7-b485-bf7e06cae923"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "ae54cb05-82a8-4ae4-a00d-d14673f40a8a"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Trabajo desde casa, estaría acompañado casi todo el día.",
+        "addoption_request_answer_id": "67da33b2-fb9c-468f-9c3b-d77fc12896de"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en mi habitación, como el resto de mis mascotas.",
+        "addoption_request_answer_id": "18bb2a7a-0b09-4608-8689-78940d41b702"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Sí, crecí con perros de la misma raza en casa de mis padres.",
+        "addoption_request_answer_id": "09dc58f1-d476-4e6a-9141-f538939eea0b"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "6ea5c4d9-1af0-4add-8ec3-75c4916cad7c",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "animal_id": "179da19e-7e4e-4272-b605-c27faae8efd4",
+    "addoption_process_id": "e5a24022-8c8e-46ca-b8e6-5371e701bfa2",
+    "score": 4,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Sí, tengo un patio vallado de unos 30 m².",
+        "addoption_request_answer_id": "e8f9fce6-443f-4f81-90ef-1dc660450d1b"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "b6f5f8f8-5c2e-483a-ba2b-14616026bbed"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Tengo seguro veterinario contratado desde ya.",
+        "addoption_request_answer_id": "2b06cf02-7119-4cce-b194-6516c9f03786"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "efa415ae-6670-459d-a767-7d34c0258260",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "77bb3b58-c0b4-4273-ac34-51e994b61c04",
+    "addoption_process_id": "427e662f-12b1-4b41-9b88-14e12c86112e",
+    "score": 6,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "ebf654ce-6d55-4bd4-9db0-6b560f0e2c68"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "51f76cb6-87f0-4252-a575-f50feeb4fc71"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "b02bd35c-8b63-474b-8097-ce5cd59e1c02"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "e2d7a471-e2c3-455b-865a-cc11cba1ed3d"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "1582f13b-5bd9-4bdd-b800-728699387687"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "b5fb1f5d-3bb4-445c-8416-ea6d35a3fbbf",
+    "user_id": "a7369b1f-05d8-45bf-9089-12ee9f0ac124",
+    "animal_id": "f3d02e37-4a89-436c-a880-4a622168b7e4",
+    "addoption_process_id": "c32c8894-092e-4aaa-8d38-cfe324192495",
+    "score": 5,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "7123ee8e-73bb-4bcc-81e1-cdc666b43cf4"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Mi familia se queda con él, ya conocen a mis mascotas.",
+        "addoption_request_answer_id": "4d00123f-a959-42bb-9510-92abb84958a1"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Entre 4 y 5 horas por las mañanas.",
+        "addoption_request_answer_id": "743c7f92-2c55-49de-9b85-5b3d14031399"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Cuento con ahorros destinados a imprevistos veterinarios.",
+        "addoption_request_answer_id": "7f746114-37ca-4d57-824e-af1bafb4262e"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Tengo una terraza cerrada de tamaño medio.",
+        "addoption_request_answer_id": "20154750-6550-488c-8358-d711368332c6"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "c4c9ff97-b593-4796-8cca-208368698054"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "bc513a32-0108-4083-9445-f26e90b5a1f6",
+    "user_id": "3fa7a965-a74d-4325-95d9-f5a811b3e3b5",
+    "animal_id": "9a9fe64e-72f4-49ed-9928-5d4a3aacc627",
+    "addoption_process_id": "8b6f80d2-1ed9-497b-af38-18d12a844eb0",
+    "score": 9,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "Sí, he sido voluntario en una protectora durante 2 años.",
+        "addoption_request_answer_id": "c9067a8c-3b6c-4067-8fd6-6289656e2d5b"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "1243581c-c7ac-401d-ab5d-0a48e86cd455"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en el salón, tiene su propia cama.",
+        "addoption_request_answer_id": "e02979de-692f-48c6-9e48-4ab73f46db73"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "3de7f34e-da34-4847-9ea4-ac518014f90b",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "9a9fe64e-72f4-49ed-9928-5d4a3aacc627",
+    "addoption_process_id": "8b6f80d2-1ed9-497b-af38-18d12a844eb0",
+    "score": 8,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "No mucha, pero estoy dispuesto/a a aprender lo necesario.",
+        "addoption_request_answer_id": "3beb3e40-4c26-43a4-b7d8-357957f3926c"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "ce3732e6-66ba-4268-89dd-8f17dcb0be57"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en mi habitación, como el resto de mis mascotas.",
+        "addoption_request_answer_id": "4c1a5270-ee9d-4424-894a-45817e17e431"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "5bc313fa-d0fd-42ff-baae-3d0b6b3cc8a2",
+    "user_id": "11bad395-e59c-4425-ad0e-182c12a8d991",
+    "animal_id": "7d4470cd-b9e6-451b-a18b-ecae3cdbd758",
+    "addoption_process_id": "4c87a2e4-7ee8-4a64-bc5f-baaa831e73b8",
+    "score": 8,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, sin ningún problema.",
+        "addoption_request_answer_id": "86faba5c-8638-4cb4-995e-5b56acd5452b"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Tengo seguro veterinario contratado desde ya.",
+        "addoption_request_answer_id": "3ae51619-ea26-4da4-bb6a-27ec04b53f15"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Vi su ficha y conecté enseguida con su historia.",
+        "addoption_request_answer_id": "c8afca4c-1b48-4683-91e8-dad1bc46efa0"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Es mi primera mascota, pero me he informado bien.",
+        "addoption_request_answer_id": "da5398f4-4247-4291-becb-155694a29180"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "a63fd5fd-eb05-4379-8633-3ce955d6f475",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "7d4470cd-b9e6-451b-a18b-ecae3cdbd758",
+    "addoption_process_id": "4c87a2e4-7ee8-4a64-bc5f-baaa831e73b8",
+    "score": 5,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Por supuesto, prefiero que haya seguimiento.",
+        "addoption_request_answer_id": "39ca34ff-67be-4d03-b097-97a9d57bb0ba"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Cuento con ahorros destinados a imprevistos veterinarios.",
+        "addoption_request_answer_id": "561c21f4-357f-40ee-a9f6-91879710f954"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Buscaba justo ese tamaño y ese carácter tranquilo.",
+        "addoption_request_answer_id": "83c4eecd-3496-4f78-9cd8-a52c54b075c2"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Es mi primera mascota, pero me he informado bien.",
+        "addoption_request_answer_id": "b25b7876-189e-49ba-a318-88ee898ae1a1"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "827d9db2-b71f-4a63-b336-41323e03da38",
+    "user_id": "3c6d7be1-1ec7-4f4a-b3f8-90f6474a0837",
+    "animal_id": "378321b4-bdec-4bc8-a3bf-6964e9b661c2",
+    "addoption_process_id": "2139caed-f627-49c3-bc7d-179a140d8d1b",
+    "score": 10,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "ac4f5502-3914-4095-9e5a-253c304af1ce"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Vi su ficha y conecté enseguida con su historia.",
+        "addoption_request_answer_id": "0e3bf229-f75b-42c5-ae91-25ca6c5f513a"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "ef5eb915-9e53-4d89-bb6a-c940cbc8df2e"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "14ecf299-2033-4517-b471-17b7d957b60e",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "animal_id": "378321b4-bdec-4bc8-a3bf-6964e9b661c2",
+    "addoption_process_id": "2139caed-f627-49c3-bc7d-179a140d8d1b",
+    "score": 9,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "c6b8e989-3015-436c-a268-02f52f259a0c"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Buscaba justo ese tamaño y ese carácter tranquilo.",
+        "addoption_request_answer_id": "428dca9b-da63-443f-b548-7fdb8eea304f"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Por supuesto, prefiero que haya seguimiento.",
+        "addoption_request_answer_id": "0a349d1c-49f1-487b-8db2-9dfc05e2ddba"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "5fe9184d-1c8e-4b3e-8801-a6c074595d72",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "378321b4-bdec-4bc8-a3bf-6964e9b661c2",
+    "addoption_process_id": "2139caed-f627-49c3-bc7d-179a140d8d1b",
+    "score": 4,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "de540424-6dff-4e23-951b-37d400476d05"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "5638d37d-3ed3-405a-884e-21d138dc4ae1"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Por supuesto, prefiero que haya seguimiento.",
+        "addoption_request_answer_id": "04242b18-3ac4-4127-bdbc-1d908364f1d3"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "ba6fa0ff-f95f-4ecf-9300-a3a2c2ffe6d1",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "animal_id": "6db30e3a-ade1-40c6-8fcc-81d4cd9bd84c",
+    "addoption_process_id": "bd7a478b-b73c-49e4-9dcc-101919818f29",
+    "score": 8,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "No mucha, pero estoy dispuesto/a a aprender lo necesario.",
+        "addoption_request_answer_id": "8a17daa7-b0bc-4287-8d01-92c8b2098973"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Tengo seguro veterinario contratado desde ya.",
+        "addoption_request_answer_id": "2ab499c2-1c0b-4b15-9490-44aa16dcdf2a"
+      },
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Tengo una terraza cerrada de tamaño medio.",
+        "addoption_request_answer_id": "543f255a-0149-4106-9356-aebe49fd32a3"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en el salón, tiene su propia cama.",
+        "addoption_request_answer_id": "1d31893a-2523-41df-9d5d-a4813e5b5649"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo en pareja, sin otros animales en casa.",
+        "addoption_request_answer_id": "cece4a55-bd96-4c03-b1f0-b9ab92c8c8c2"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Tuve un gato parecido durante 12 años, falleció el año pasado.",
+        "addoption_request_answer_id": "a3e2d41e-ade7-4015-8fb8-0371a14d75a6"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "1f7ef63e-4a8b-4ed7-b90d-d3d3ab0b24ce",
+    "user_id": "9183f0db-f93f-42d6-af68-8843e1dca3e7",
+    "animal_id": "03c74b37-ddc5-4df5-9a85-d3a8f25c402e",
+    "addoption_process_id": "fe20fc97-b38c-4e27-95a0-40d53ecd501b",
+    "score": 10,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "70dcae70-12b0-4d19-bb63-deae56bb44f3"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Contrato una cuidadora de confianza que ya conozco.",
+        "addoption_request_answer_id": "46a6a515-bc7b-443c-a44d-3c2b5f80f5eb"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "485f8a9b-272d-47a1-a700-34ab4b3e0dca"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo sola, tengo un perro mayor muy tranquilo.",
+        "addoption_request_answer_id": "becc47b6-4405-4475-ba0e-0adc6efdb5e4"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "f2d24754-5488-495a-8e55-9f427540b911",
+    "user_id": "d9d9d453-56a2-41d4-b48f-1dbce6348dd8",
+    "animal_id": "3699f853-cb84-425e-a0db-61201c32f957",
+    "addoption_process_id": "4cdbac20-8311-496d-9b75-f9eda8b75bba",
+    "score": 6,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Tengo una terraza cerrada de tamaño medio.",
+        "addoption_request_answer_id": "f5e88829-523e-4a49-ac12-f56f814477bb"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Es mi primera mascota, pero me he informado bien.",
+        "addoption_request_answer_id": "2e446041-3b94-4786-a92a-3d9b43d8635c"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, sin ningún problema.",
+        "addoption_request_answer_id": "40b35631-fa9c-4940-af7b-09129adec315"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "710a8975-adda-42fd-b7c2-946f254e7e8c",
+    "user_id": "a63700dc-2e09-4641-8d18-ce6df1c0e27f",
+    "animal_id": "b63a6b69-60c8-427d-901d-d1d420cc388c",
+    "addoption_process_id": "b9224dfe-faf1-413a-a766-a5957fa08305",
+    "score": 6,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "9e5f7030-8d8e-4a6f-b81d-dac87dd798d0"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Tendrá acceso a toda la casa, incluida una terraza cerrada.",
+        "addoption_request_answer_id": "8b492fc5-b227-4e29-a488-ba3dee64b2cd"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "836d41f3-489c-44a4-b764-6d89a4142b75"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "No mucha, pero estoy dispuesto/a a aprender lo necesario.",
+        "addoption_request_answer_id": "dcf39eee-7925-4865-948a-8da213b7e33c"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "6a943143-e2c7-4e5c-bbd1-80ce72347e09",
+    "user_id": "3c6d7be1-1ec7-4f4a-b3f8-90f6474a0837",
+    "animal_id": "b63a6b69-60c8-427d-901d-d1d420cc388c",
+    "addoption_process_id": "b9224dfe-faf1-413a-a766-a5957fa08305",
+    "score": 5,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Mi familia se queda con él, ya conocen a mis mascotas.",
+        "addoption_request_answer_id": "7668666a-8c78-4303-911e-d13cbfe5bbd0"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en el salón, tiene su propia cama.",
+        "addoption_request_answer_id": "e98ad992-fdde-47fe-afaa-78d031440589"
+      },
+      {
+        "question": "¿Estás dispuesto/a a firmar un contrato de seguimiento post-adopción?",
+        "answer": "Sí, entiendo que es parte del proceso.",
+        "addoption_request_answer_id": "9768da5d-8934-4278-a6ec-72809b8f4e17"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "ffedf56e-4593-4d58-b091-6bcd07d46d60"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "aabf7145-3b14-4106-b5d7-f6e1403fbb97",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "animal_id": "56fbaba0-7c6b-4ab0-8950-34d24e9598a6",
+    "addoption_process_id": "b2b44195-8f51-4b57-90fe-2d3416a7be12",
+    "score": 4,
+    "status": "aceptada",
+    "answers": [
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Lo asumiría sin problema, es parte de la responsabilidad.",
+        "addoption_request_answer_id": "18b37722-c725-4a07-b202-ded7c9467689"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Dormirá en mi habitación, como el resto de mis mascotas.",
+        "addoption_request_answer_id": "0f6262e3-dc60-4382-b4ad-179f91bcb4d2"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "He cuidado mascotas de amigos y familiares varias veces.",
+        "addoption_request_answer_id": "7e901cad-3c16-47a1-87ab-4a6d7679b1bf"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Trabajo desde casa, estaría acompañado casi todo el día.",
+        "addoption_request_answer_id": "4b42fce7-2beb-4b1c-aa38-e58ac6fc7c37"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "6ab61e6f-7d25-42ed-ae73-40e74d2a8028"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Sí, crecí con perros de la misma raza en casa de mis padres.",
+        "addoption_request_answer_id": "d534dd17-3c8e-46a5-b399-bac866d93a82"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "8cb197ed-dfed-4238-bd7d-fd95ac88833f",
+    "user_id": "75e856f2-dfd2-4c9c-be79-85ea97bc89f2",
+    "animal_id": "56fbaba0-7c6b-4ab0-8950-34d24e9598a6",
+    "addoption_process_id": "b2b44195-8f51-4b57-90fe-2d3416a7be12",
+    "score": 9,
+    "status": "descartada",
+    "answers": [
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Cuento con ahorros destinados a imprevistos veterinarios.",
+        "addoption_request_answer_id": "3ef57092-dd5c-4f5c-b7b8-a864e110047a"
+      },
+      {
+        "question": "¿Dónde dormirá y dónde estará cuando no estéis?",
+        "answer": "Tendrá acceso a toda la casa, incluida una terraza cerrada.",
+        "addoption_request_answer_id": "aa73385f-b944-47e4-842d-16eed7505ae4"
+      },
+      {
+        "question": "¿Tienes experiencia previa cuidando animales?",
+        "answer": "No mucha, pero estoy dispuesto/a a aprender lo necesario.",
+        "addoption_request_answer_id": "bc7ba2c8-700c-4a1c-a7a9-f42faa7c4dc2"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "cbd1606e-d519-46aa-a74d-a92e9ed7d522"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Contrato una cuidadora de confianza que ya conozco.",
+        "addoption_request_answer_id": "11f43e0a-4624-4af0-818f-9d7757c9c3ee"
+      },
+      {
+        "question": "¿Has convivido antes con un animal así? Cuéntanos.",
+        "answer": "Sí, crecí con perros de la misma raza en casa de mis padres.",
+        "addoption_request_answer_id": "c1f09136-eb70-4a88-a36d-6f5415eb8eed"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "8bca9279-927b-4b9b-8a43-af4f406bb804",
+    "user_id": "693d4f88-3f32-48e1-be1a-85ca041cf608",
+    "animal_id": "5abe8650-31b2-43dd-b534-47796625f71b",
+    "addoption_process_id": "e1a912ab-afb9-4459-8390-c2ccf18cd115",
+    "score": 7,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "174ff51a-b400-420a-a7be-466a5405c8ce"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "9525fb31-e5f8-4905-95e8-d7085434ec6f"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Cuento con ahorros destinados a imprevistos veterinarios.",
+        "addoption_request_answer_id": "ec8a56e9-d8b7-489b-91af-be236c8918ee"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "ffc58045-3b9a-4db1-8f5a-2678256353f5"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo en pareja, sin otros animales en casa.",
+        "addoption_request_answer_id": "eddf73e6-36ec-4d13-99f4-901c934b05c8"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Contrato una cuidadora de confianza que ya conozco.",
+        "addoption_request_answer_id": "8e0eb56e-802c-429c-aa5a-dbb71904b9b5"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "3339c400-5707-4393-9153-d6550b7fb29f",
+    "user_id": "d29cef9f-da80-4188-84ca-b6c21f3c631b",
+    "animal_id": "5abe8650-31b2-43dd-b534-47796625f71b",
+    "addoption_process_id": "e1a912ab-afb9-4459-8390-c2ccf18cd115",
+    "score": 4,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "No tengo exterior, pero salgo a pasear varias veces al día.",
+        "addoption_request_answer_id": "6f8d0871-595d-45d2-a892-a55e0f101a0c"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Máximo 6 horas, tengo horario partido.",
+        "addoption_request_answer_id": "838be9d1-8a92-4b68-acf0-9e116b4e0594"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Lo asumiría sin problema, es parte de la responsabilidad.",
+        "addoption_request_answer_id": "70e81bee-996a-4a51-82fd-f49142379cc8"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Mis hijos se enamoraron de él en la última feria de adopción.",
+        "addoption_request_answer_id": "cdd77291-5518-4f20-a311-db01fa1e9b97"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo en pareja, sin otros animales en casa.",
+        "addoption_request_answer_id": "8efd6db1-83b4-4eff-8255-96c93a10220c"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "86ff0bdc-0efd-44e7-a737-d2f8c121fc76"
+      }
+    ]
+  },
+  {
+    "addoption_request_id": "ddccb39b-8657-4d5d-b516-329953f04915",
+    "user_id": "3fa7a965-a74d-4325-95d9-f5a811b3e3b5",
+    "animal_id": "5abe8650-31b2-43dd-b534-47796625f71b",
+    "addoption_process_id": "e1a912ab-afb9-4459-8390-c2ccf18cd115",
+    "score": 6,
+    "status": "pendiente",
+    "answers": [
+      {
+        "question": "¿Dispones de espacio exterior o terraza?",
+        "answer": "Sí, tengo un patio vallado de unos 30 m².",
+        "addoption_request_answer_id": "edd67668-5372-4976-aa8b-806e9ec8b961"
+      },
+      {
+        "question": "¿Cuántas horas pasaría solo al día?",
+        "answer": "Trabajo desde casa, estaría acompañado casi todo el día.",
+        "addoption_request_answer_id": "b6ac892b-6bcc-40fb-b2a6-672f69c205f0"
+      },
+      {
+        "question": "¿Qué harías si necesitara un tratamiento largo y caro?",
+        "answer": "Lo asumiría sin problema, es parte de la responsabilidad.",
+        "addoption_request_answer_id": "bb0a2a3b-3a7c-4ac0-9d9e-b2539955f6c1"
+      },
+      {
+        "question": "¿Por qué quieres adoptar a este animal en concreto?",
+        "answer": "Buscaba justo ese tamaño y ese carácter tranquilo.",
+        "addoption_request_answer_id": "96de8186-055c-412c-b598-a49f68669ee6"
+      },
+      {
+        "question": "¿Con quién vives y hay otros animales en casa?",
+        "answer": "Vivo sola, tengo un perro mayor muy tranquilo.",
+        "addoption_request_answer_id": "8fd2566f-f07d-4613-9605-4f0fa3d1cf4c"
+      },
+      {
+        "question": "¿Quién se hará cargo si te vas de vacaciones?",
+        "answer": "Suelo viajar con mis mascotas, tengo transportín homologado.",
+        "addoption_request_answer_id": "fda1ec84-1509-4695-ac8c-b1902859694d"
+      }
+    ]
   }
 ]
