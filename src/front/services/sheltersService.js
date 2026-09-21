@@ -1,6 +1,14 @@
 import { getToken } from "./authServices.js";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
+// lanza un error con el status http, para poder distinguir un 404 en la vista
+const lanzarError = async (response, mensaje) => {
+  const data = await response.json().catch(() => ({}));
+  const error = new Error(data.error || data.message || mensaje);
+  error.status = response.status;
+  throw error;
+};
+
 export const getShelters = async (
   { ordenarPor = "name", orden = "asc", pagina = 1, perPage = 5 } = {},
   filters = {},
@@ -22,19 +30,8 @@ export const getShelters = async (
 
   const response = await fetch(`${backendUrl}/api/shelters?${params.toString()}`);
 
-  if (!response.ok) {
-    const data = await response.json().catch(() => ({}));
-    throw new Error(data.error || data.message || "No se han podido obtener las protectoras");
-  }
+  if (!response.ok) await lanzarError(response, "No se han podido obtener las protectoras");
   return response.json();
-};
-
-// lanza un error con el status http, para poder distinguir un 404 en la vista
-const lanzarError = async (response, mensaje) => {
-  const data = await response.json().catch(() => ({}));
-  const error = new Error(data.error || data.message || mensaje);
-  error.status = response.status;
-  throw error;
 };
 
 export const getShelterById = async (shelter_id) => {

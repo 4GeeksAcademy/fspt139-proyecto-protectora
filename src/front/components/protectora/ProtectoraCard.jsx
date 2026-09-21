@@ -2,12 +2,6 @@ import React from "react";
 import { generarIniciales } from "../../utils/iniciales";
 import { Link } from "react-router-dom";
 
-const TIPOS = {
-  1: "Protectora",
-  2: "Refugio",
-  3: "Santuario",
-};
-
 
 
 export const Metrica = ({ valor, etiqueta, destacada }) => (
@@ -31,7 +25,6 @@ export const ProtectoraCard = ({ protectora }) => {
   if (!protectora) return null;
 
   const iniciales = generarIniciales(protectora.name);
-  const tipo = TIPOS[protectora.shelter_type_id];
 
   return (
     <div
@@ -64,9 +57,9 @@ export const ProtectoraCard = ({ protectora }) => {
               {protectora.name}
             </h5>
             <div className="d-flex flex-wrap gap-1">
-              {tipo && (
+              {protectora.shelter_type_name && (
                 <span className="badge rounded-pill" style={{ backgroundColor: "var(--rp-verde-cl)", color: "var(--rp-verde)" }}>
-                  {tipo}
+                  {protectora.shelter_type_name}
                 </span>
               )}
               {protectora.has_urgent && (

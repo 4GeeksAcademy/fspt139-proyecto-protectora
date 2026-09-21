@@ -8,9 +8,18 @@ import { generarIniciales } from "../utils/iniciales";
 import { NecesidadCard } from "../components/NecesidadCard";
 import { AnimalCard } from "../components/AnimalCard";
 import { Metrica } from "../components/protectora/ProtectoraCard";
-import { Dato } from "../components/Dato";
 import { NotFound } from "./NotFound";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+
+const Dato = ({ etiqueta, children }) => {
+  if (children == null || children === "" || children === false) return null;
+  return (
+    <div className="d-flex justify-content-between align-items-start border-bottom py-2 gap-3">
+      <span style={{ color: "var(--rp-gris)" }}>{etiqueta}</span>
+      <span className="fw-semibold text-end">{children}</span>
+    </div>
+  );
+};
 
 const MAX_NECESIDADES = 3;
 const MAX_ANIMALES = 6;
@@ -177,11 +186,8 @@ export const ProtectoraProfile = () => {
               <p className="mb-4" style={{ lineHeight: 1.7 }}>{protectora.description}</p>
             )}
 
-            <h5 className="fw-bold mt-4 mb-2">Sobre la protectora</h5>
-            <Dato etiqueta="Tipo">{tipo}</Dato>
-            <Dato etiqueta="Dirección">{protectora.address}</Dato>
-
             <h5 className="fw-bold mt-4 mb-2">Contacto</h5>
+            <Dato etiqueta="Dirección">{protectora.address}</Dato>
             <Dato etiqueta="Email">
               {protectora.email && <a href={`mailto:${protectora.email}`}>{protectora.email}</a>}
             </Dato>
