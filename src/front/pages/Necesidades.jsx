@@ -4,6 +4,7 @@ import { NecesidadCard } from "../components/NecesidadCard";
 import { Mapa } from "../components/Mapa";
 import { getRequests } from "../services/requestsService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { getShelters } from "../services/sheltersService";
 
 const PER_PAGE = 12;
 
@@ -269,28 +270,20 @@ export const Necesidades = () => {
             </div>
 
             <div className="d-flex flex-wrap flex-sm-nowrap gap-2">
-              <select
-                aria-label="Filtrar por protectora"
-                className="form-select form-select-sm rounded-pill"
-                style={{ width: "190px", maxWidth: "100%" }}
-                value={shelterId}
-                onChange={(e) => cambiarProtectora(e.target.value)}
-              >
-                <option value="">Cualquier protectora</option>
-                {shelters.map((shelter) => (
-                  <option key={shelter.id ?? shelter.shelter_id} value={shelter.id ?? shelter.shelter_id}>
-                    {shelter.name}
-                style={{ width: "190px" }}
-                value={tipoId}
-                onChange={(e) => cambiarTipo(e.target.value)}
-              >
-                <option value="">Cualquier tipo</option>
-                {shelterTypes.map((tipo) => (
-                  <option key={tipo.shelter_type_id} value={tipo.id}>
-                    {tipo.name}
-                  </option>
-                ))}
-              </select>
+  <select
+    aria-label="Filtrar por tipo de protectora"
+    className="form-select form-select-sm rounded-pill"
+    style={{ width: "190px", maxWidth: "100%" }}
+    value={tipoId}
+    onChange={(e) => cambiarTipo(e.target.value)}
+  >
+    <option value="">Cualquier tipo</option>
+    {shelterTypes.map((tipo) => (
+      <option key={tipo.shelter_type_id} value={tipo.id}>
+        {tipo.name}
+      </option>
+    ))}
+  </select>
 
               <input
                 type="search"
