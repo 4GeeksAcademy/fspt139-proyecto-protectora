@@ -81,14 +81,6 @@ export const router = createBrowserRouter([
                 element: <Ayuda />
             },
             {
-                path: "/terminos",
-                element: <TerminosyPrivacidad />
-            },
-            {
-                path: "/privacidad",
-                element: <TerminosyPrivacidad />
-            },
-            {
                 path: "/terminos-y-privacidad",
                 element: <TerminosyPrivacidad />
             },

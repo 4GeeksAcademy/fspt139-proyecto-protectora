@@ -11,7 +11,6 @@ export const TerminosyPrivacidad = () => {
           <li className="breadcrumb-item">
             <Link to="/" className="text-decoration-none text-muted">Inicio</Link>
           </li>
-          <li className="breadcrumb-item text-muted">Legal</li>
           <li className="breadcrumb-item active" aria-current="page">Términos y Privacidad</li>
         </ol>
       </nav>
