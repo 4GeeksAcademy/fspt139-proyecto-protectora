@@ -3,17 +3,34 @@ import { Link } from "react-router-dom";
 import { BuscanCasa } from "../components/BuscanCasa";
 import { NecesidadesDestacadas } from "../components/NecesidadesDestacadas";
 import { Statscard } from "../components/Statscard";
+import { ResumenProtectora } from "../components/protectora/ResumenProtectora";
 import { getHomeInsights } from "../services/insightsService";
+import { getShelterProfile } from "../services/sheltersService";
+import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Home = () => {
 
+    const { store } = useGlobalReducer();
+    const esProtectora = store.user?.rol === "shelter_admin";
+
     const [insights, setInsights] = useState(null);
+    const [protectora, setProtectora] = useState(null);
 
     useEffect(() => {
+        if (esProtectora) return;
+
         getHomeInsights()
             .then((data) => setInsights(data))
             .catch((error) => console.log(error));
-    }, []);
+    }, [esProtectora]);
+
+    useEffect(() => {
+        if (!esProtectora) return;
+
+        getShelterProfile()
+            .then((datos) => setProtectora(datos))
+            .catch((error) => console.log(error));
+    }, [esProtectora]);
 
     return (
         <div className="container py-4">
@@ -24,25 +41,48 @@ export const Home = () => {
 
                     <div className="col-12 col-md-6">
 
-                        <div className="badge bg-white text-success rounded-pill px-3 py-2 mb-3">
-                            ● 14 needs open today
-                        </div>
+                        {esProtectora ? (
+                            <>
+                                <h1 className="fw-bold display-5">
+                                    Hola,
+                                    <br />
+                                    <div className="text-success d-inline">{protectora?.name}</div>
+                                </h1>
 
-                        <h1 className="fw-bold display-5">
-                            They don't ask for money.
-                            <br />
-                            <div className="text-success d-inline">They ask for specific things.</div>
-                        </h1>
+                                <p className="text-secondary my-3">
+                                    Gracias por cuidar de ellos cada día. Publicad lo que
+                                    necesitáis y la comunidad se encarga del resto.
+                                </p>
 
-                        <p className="text-secondary my-3">
-                            Shelters post exactly what they need, how much, and by when.
-                            You choose the part you can cover and see it get filled.
-                        </p>
+                                <div className="d-flex gap-2">
+                                    <Link to="/panel/necesidades/create" className="btn btn-success btn-lg">Publicar necesidad</Link>
+                                    <Link to="/panel/animales/create" className="btn btn-outline-success btn-lg">Publicar animal</Link>
+                                    <Link to="/panel/animales" className="btn btn-outline-success btn-lg">Ver mis animales</Link>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="badge bg-white text-success rounded-pill px-3 py-2 mb-3">
+                                    ● 14 needs open today
+                                </div>
 
-                        <div className="d-flex gap-2">
-                            <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
-                            <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
-                        </div>
+                                <h1 className="fw-bold display-5">
+                                    They don't ask for money.
+                                    <br />
+                                    <div className="text-success d-inline">They ask for specific things.</div>
+                                </h1>
+
+                                <p className="text-secondary my-3">
+                                    Shelters post exactly what they need, how much, and by when.
+                                    You choose the part you can cover and see it get filled.
+                                </p>
+
+                                <div className="d-flex gap-2">
+                                    <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
+                                    <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
+                                </div>
+                            </>
+                        )}
                     </div>
 
                     <div className="col-12 col-md-6 mt-4 mt-md-0">
@@ -56,16 +96,22 @@ export const Home = () => {
                 </div>
             </div>
 
-            <div className="row text-center g-3 mb-5">
-                <Statscard number={insights ? insights.needs_open : 0} label="Needs open" color="#138f4d" />
-                <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animals for adoption" color="#F0946A" />
-                <Statscard number={insights ? insights.registered_shelters : 0} label="Registered shelters" color="#E8B04B" />
-                <Statscard number={insights ? insights.collaborations_closed : 0} label="Collaborations closed" color="#E0756B" />
-            </div>
+            {esProtectora ? (
+                protectora && <ResumenProtectora protectora={protectora} />
+            ) : (
+                <>
+                    <div className="row text-center g-3 mb-5">
+                        <Statscard number={insights ? insights.needs_open : 0} label="Needs open" color="#138f4d" />
+                        <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animals for adoption" color="#F0946A" />
+                        <Statscard number={insights ? insights.registered_shelters : 0} label="Registered shelters" color="#E8B04B" />
+                        <Statscard number={insights ? insights.collaborations_closed : 0} label="Collaborations closed" color="#E0756B" />
+                    </div>
 
-            {insights && <NecesidadesDestacadas needs={insights.open_needs} />}
+                    {insights && <NecesidadesDestacadas needs={insights.open_needs} />}
 
-            {insights && <BuscanCasa animals={insights.open_adoptions} />}
+                    {insights && <BuscanCasa animals={insights.open_adoptions} />}
+                </>
+            )}
 
         </div>
     );

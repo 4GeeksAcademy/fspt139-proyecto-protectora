@@ -1,4 +1,4 @@
-from api.models import Animal, db
+from api.models import Animal, Shelter, db
 from sqlalchemy.orm import selectinload
 
 # FILTROS ADMITIDOS PARA EL REPOSITORIO ANIMAL
@@ -9,7 +9,8 @@ LIKE_FILTER_FIELDS = {
 
 # TIPO IGUALDAD
 EQUAL_FILTER_FIELDS = {"animal_type_id", "shelter_id", "status"}
-FILTERABLE_FIELDS = LIKE_FILTER_FIELDS | EQUAL_FILTER_FIELDS
+JOIN_FILTER_FIELDS = {"shelter_type_id"}
+FILTERABLE_FIELDS = LIKE_FILTER_FIELDS | EQUAL_FILTER_FIELDS | JOIN_FILTER_FIELDS
 
 # CAMPOS ORDENABLES
 SORTABLE_FIELDS = {
@@ -40,6 +41,9 @@ class AnimalRepository:
 
         for field, value in (filters or {}).items():
             if value in (None, ''):
+                continue
+            if field == "shelter_type_id":
+                query = query.join(Shelter, Animal.shelter_id == Shelter.id).where(Shelter.shelter_type_id == value)
                 continue
             column = getattr(Animal, field)
             if isinstance(value, (list, tuple, set)):
