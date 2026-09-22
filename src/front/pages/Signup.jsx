@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signup } from "../services/authServices";
 import { getShelterTypes } from "../services/shelterTypesService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { sanitizeRedirectTarget } from "../utils/redirect";
 
 export const Signup = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+    // la pagina a la que volver tras el login que sigue a este registro (ver Login.jsx)
+    const redirectTo = sanitizeRedirectTarget(location.state?.from)
     const { store, dispatch } = useGlobalReducer()
     const [rol, setRol] = useState("volunteer");
     const [showPassword, setShowPassword] = useState(false);
@@ -72,7 +76,7 @@ export const Signup = () => {
 
             timerRef.current = setTimeout(() => {
                 dispatch({ type: "set-success", payload: null });
-                navigate("/login");
+                navigate("/login", { state: { from: redirectTo } });
             }, 4000);
 
         } catch (error) {
@@ -370,7 +374,7 @@ export const Signup = () => {
 
                     <p className="text-center small mb-0 mt-4 text-secondary">
                         ¿Ya tienes cuenta?{" "}
-                        <Link to="/login" className="fw-semibold text-primary">Inicia sesión</Link>
+                        <Link to="/login" state={{ from: redirectTo }} className="fw-semibold text-primary">Inicia sesión</Link>
                     </p>
                 </div>
             </div>
