@@ -52,7 +52,7 @@ export const ShelterNecesidadCard = ({ necesidad, requestTypeName, animalName })
             <span className={`badge ${estado.badgeClass}`}>{estado.label}</span>
           </div>
 
-          <p className="text-muted small mb-2">
+          <div className="text-muted small mb-2">
             {animalName ? (
                 <div className="d-flex align-items-center gap-2">
                   <AnimalMiniAvatar animal={{ cover_image: necesidad.animal_cover_image}} />
@@ -61,7 +61,7 @@ export const ShelterNecesidadCard = ({ necesidad, requestTypeName, animalName })
             ) : (
               "Necesidad general"
             )}
-          </p>
+          </div>
 
           <div className="mb-2">
             <strong style={{ fontSize: "0.9rem" }}>{objetivoLabel}</strong>
