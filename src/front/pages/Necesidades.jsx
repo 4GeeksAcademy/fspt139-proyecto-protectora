@@ -269,7 +269,7 @@ export const Necesidades = () => {
             </div>
 
             <div className="d-flex flex-wrap flex-sm-nowrap gap-2">
-              <select
+              <select> </select>
                 aria-label="Filtrar por protectora"
                 className="form-select form-select-sm rounded-pill"
                 style={{ width: "190px", maxWidth: "100%" }}
