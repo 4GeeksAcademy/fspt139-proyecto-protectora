@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Mapa } from "../components/Mapa";
 import { ProtectoraCard } from "../components/protectora/ProtectoraCard";
-import { getShelters } from "../services/sheltersService";
+import { getShelters, getShelterProfile } from "../services/sheltersService";
 import { getAnimals, cargarMediaUrl } from "../services/animalsService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
@@ -72,19 +72,14 @@ const PopupProtectora = ({ protectora }) => {
               to={`/adoptar/${animal.animal_id}`}
               className="d-flex align-items-center gap-3 text-decoration-none text-reset border-bottom pb-1 mb-1"
             >
-              {/* Nombre del animal */}
               <strong
                 className="text-dark text-truncate"
-                style={{
-                  width: "65%",
-                  minWidth: 0,
-                }}
+                style={{ width: "65%", minWidth: 0 }}
                 title={animal.name}
               >
                 {animal.name}
               </strong>
 
-              {/* Avatar alineado a la derecha */}
               {animal.cover_image ? (
                 <img
                   src={cargarMediaUrl(animal.cover_image)}
@@ -117,20 +112,12 @@ const PopupProtectora = ({ protectora }) => {
         </>
       )}
 
-      {protectora.website ? (
-        <a
-          href={protectora.website}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-success btn-sm w-100 text-white mt-2"
-        >
-          Ver protectora
-        </a>
-      ) : (
-        <div className="small text-secondary mt-2">
-          Esta protectora no tiene web.
-        </div>
-      )}
+      <Link
+        to={`/protectoras/${protectora.shelter_id}`}
+        className="btn btn-success btn-sm w-100 text-white mt-2"
+      >
+        Ver protectora
+      </Link>
     </div>
   );
 };
@@ -138,6 +125,17 @@ const PopupProtectora = ({ protectora }) => {
 export const Protectoras = () => {
   const { store } = useGlobalReducer();
   const shelterTypes = store.shelterTypes || [];
+
+  const esProtectora = store.user?.rol === "shelter_admin";
+  const [miShelterUuid, setMiShelterUuid] = useState(null);
+
+  useEffect(() => {
+    if (!esProtectora) return;
+
+    getShelterProfile()
+      .then((datos) => setMiShelterUuid(datos.shelter_id))
+      .catch(() => setMiShelterUuid(null));
+  }, [esProtectora]);
 
   const [pestana, setPestana] = useState("todas");
   const [tipoId, setTipoId] = useState("");
@@ -204,10 +202,11 @@ export const Protectoras = () => {
   const sinResultados =
     !cargando && !error && protectoras.length === 0;
 
-  const textoContador =
-    totalItems === 1
-      ? "1 protectora en toda España"
-      : `${totalItems} protectoras en toda España`;
+  const textoContador = esProtectora
+  ? `${totalItems} protectoras registradas, incluida la vuestra`
+  : totalItems === 1
+    ? "1 protectora en toda España"
+    : `${totalItems} protectoras en toda España`;
 
   return (
     <div
@@ -232,17 +231,28 @@ export const Protectoras = () => {
               </p>
             </div>
 
-            <Link
-              to="/signup"
-              className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
-            >
-              Registrar mi protectora
-            </Link>
+            {!store.user && (
+              <Link
+                to="/signup"
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Registrar mi protectora
+              </Link>
+            )}
+
+            {esProtectora && miShelterUuid && (
+              <Link
+                to={`/protectoras/${miShelterUuid}`}
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Ver mi perfil publico
+              </Link>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Mapa con la misma altura que en Adoptar */}
+      {/* Mapa */}
       <div className="container mt-4">
         <Mapa
           datos={cargando || error ? [] : protectoras}
@@ -263,10 +273,7 @@ export const Protectoras = () => {
                 <div
                   key={protectora.shelter_id}
                   className="border rounded-3 p-2"
-                  style={{
-                    flex: "1 1 220px",
-                    minWidth: 0,
-                  }}
+                  style={{ flex: "1 1 220px", minWidth: 0 }}
                 >
                   <div className="fw-bold text-success text-break border-bottom pb-2 mb-2">
                     {protectora.name}
@@ -295,8 +302,9 @@ export const Protectoras = () => {
               {PESTANAS.map((p) => (
                 <button
                   key={p.key}
-                  className={`btn rounded-pill px-4 text-nowrap ${pestana === p.key ? "btn-primary" : "btn-light"
-                    }`}
+                  className={`btn rounded-pill px-4 text-nowrap ${
+                    pestana === p.key ? "btn-primary" : "btn-light"
+                  }`}
                   onClick={() => cambiarPestana(p.key)}
                 >
                   {p.label}
@@ -360,12 +368,15 @@ export const Protectoras = () => {
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
               {protectoras.map((protectora) => (
                 <div className="col" key={protectora.shelter_id}>
-                  <ProtectoraCard protectora={protectora} />
+                  <ProtectoraCard
+                    protectora={protectora}
+                    esMiProtectora={esProtectora && protectora.id === store.user?.shelter_id}
+                  />
                 </div>
               ))}
             </div>
 
-            {/* Paginacion */}
+            {/* Paginación */}
             {totalPaginas > 1 && (
               <div className="d-flex justify-content-center align-items-center gap-3 mt-5 pt-4">
                 <button

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getShelterProfile } from "../../services/sheltersService";
 import { getShelterNecesidades } from "../../services/requestsService";
 import { getShelterAddoptionProcesses } from "../../services/addoptionProcessService";
 import { calcularDeadlineLabel, construirBadge } from "../../utils/necesidadDeadline";
@@ -63,20 +62,18 @@ const Fila = ({ to, nombre, etiqueta, fondo }) => (
   </Link>
 );
 
-export const ProtectoraPanel = () => {
-  const [resumen, setResumen] = useState(null);
+export const ResumenProtectora = ({ protectora }) => {
+  const [datos, setDatos] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     Promise.all([
-      getShelterProfile(),
       getShelterNecesidades({ ordenarPor: "request_deadline", orden: "asc", perPage: 20 }, { status: "abierta" }),
       getShelterAddoptionProcesses({ perPage: MAX_FILAS }, { hasPending: true }),
     ])
-      .then(([protectora, necesidades, adopciones]) =>
-        setResumen({
-          protectora,
+      .then(([necesidades, adopciones]) =>
+        setDatos({
           plazos: necesidades.items.filter((necesidad) => necesidad.request_deadline).slice(0, MAX_FILAS),
           adopciones,
         }),
@@ -85,23 +82,18 @@ export const ProtectoraPanel = () => {
       .finally(() => setCargando(false));
   }, []);
 
-   if (cargando) return <div className="container py-5 text-center text-muted">Cargando resumen…</div>;
+  if (cargando) return <div className="py-5 text-center text-muted">Cargando resumen…</div>;
   if (error)
     return (
-      <div className="container py-5">
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
+      <div className="alert alert-danger" role="alert">
+        {error}
       </div>
     );
 
-  const { protectora, plazos, adopciones } = resumen;
+  const { plazos, adopciones } = datos;
 
   return (
-    <div className="container py-5">
-      <h2 className="fw-bold mb-2">Hola, {protectora.name}</h2>
-      <p className="mb-4">Esto es lo que tenéis en marcha ahora mismo.</p>
-
+    <>
       <div className="row g-3 mb-4">
         <Cifra numero={protectora.open_requests} texto="Necesidades abiertas" color="#138f4d" to="/panel/necesidades" />
         <Cifra numero={protectora.published_animals} texto="Animales en adopción" color="#F0946A" to="/panel/animales" />
@@ -136,6 +128,8 @@ export const ProtectoraPanel = () => {
           ))}
         </Bloque>
       </div>
-    </div>
+    </>
   );
 };
+
+export default ResumenProtectora;
