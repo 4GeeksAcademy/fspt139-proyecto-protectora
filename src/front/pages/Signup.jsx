@@ -3,13 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signup } from "../services/authServices";
 import { getShelterTypes } from "../services/shelterTypesService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { sanitizeRedirectTarget } from "../utils/redirect";
+import { soloRedirectsInternos } from "../utils/redirect";
 
 export const Signup = () => {
     const navigate = useNavigate()
     const location = useLocation()
     // la pagina a la que volver tras el login que sigue a este registro (ver Login.jsx)
-    const redirectTo = sanitizeRedirectTarget(location.state?.from)
+    const redirectTo = soloRedirectsInternos(location.state?.from)
     const { store, dispatch } = useGlobalReducer()
     const [rol, setRol] = useState("volunteer");
     const [showPassword, setShowPassword] = useState(false);
