@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { Mapa } from "../components/Mapa";
 import { AnimalCard } from "../components/AnimalCard";
 import { getAnimals } from "../services/animalsService";
-import { getShelters } from "../services/sheltersService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 const PER_PAGE = 12;
@@ -24,11 +24,13 @@ const EDADES = [
 export const Adoptar = () => {
   const { store } = useGlobalReducer();
   const animalTypes = store.animalTypes;
+  const shelterTypes = store.shelterTypes || [];
+  const esProtectora = store.user?.rol === "shelter_admin";
 
 
   const [especie, setEspecie] = useState("todos");
   const [edad, setEdad] = useState("");
-  const [shelterId, setShelterId] = useState("");
+  const [tipoId, setTipoId] = useState("");
   const [pagina, setPagina] = useState(1);
 
 
@@ -39,7 +41,6 @@ export const Adoptar = () => {
   const [error, setError] = useState(null);
 
 
-  const [shelters, setShelters] = useState([]);
 
 
   const animalTypeIds = useMemo(() => {
@@ -64,16 +65,6 @@ export const Adoptar = () => {
   const esperandoCatalogo =
     especie !== "todos" && animalTypes.length === 0;
 
-  useEffect(() => {
-    getShelters({
-      ordenarPor: "name",
-      orden: "asc",
-      pagina: 1,
-      perPage: 100,
-    })
-      .then((data) => setShelters(data.items || []))
-      .catch(() => setShelters([]));
-  }, []);
 
   useEffect(() => {
     if (esperandoCatalogo) return;
@@ -84,7 +75,7 @@ export const Adoptar = () => {
 
     getAnimals(
       { pagina, perPage: PER_PAGE },
-      { animalTypeIds, shelterId, edad }
+      { animalTypeIds, shelterTypeId: tipoId, edad }
     )
       .then((data) => {
         if (cancelado) return;
@@ -106,7 +97,7 @@ export const Adoptar = () => {
     return () => {
       cancelado = true;
     };
-  }, [pagina, edad, shelterId, animalTypeIds, esperandoCatalogo]);
+  }, [pagina, edad, tipoId, animalTypeIds, esperandoCatalogo]);
 
   const cambiarEspecie = (key) => {
     setEspecie(key);
@@ -118,15 +109,15 @@ export const Adoptar = () => {
     setPagina(1);
   };
 
-  const cambiarProtectora = (value) => {
-    setShelterId(value);
+  const cambiarTipo = (value) => {
+    setTipoId(value);
     setPagina(1);
   };
 
   const limpiarFiltros = () => {
     setEspecie("todos");
     setEdad("");
-    setShelterId("");
+    setTipoId("");
     setPagina(1);
   };
 
@@ -140,17 +131,39 @@ export const Adoptar = () => {
     >
       <div className="bg-success-subtle py-5">
         <div className="container">
-          <p className="text-success fw-bold text-uppercase small mb-1">
-            Adopciones
-          </p>
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3">
+            <div>
+              <p className="text-success fw-bold text-uppercase small mb-1">
+                Adopciones
+              </p>
 
-          <h2 className="fw-bold mb-1">Buscan casa</h2>
+              <h2 className="fw-bold mb-1">Buscan casa</h2>
 
-          <p className="text-secondary mb-0">
-            {cargando
-              ? "Cargando animales…"
-              : `${totalAnimales} animales esperando una familia`}
-          </p>
+              <p className="text-secondary mb-0">
+                {cargando
+                  ? "Cargando animales…"
+                  : `${totalAnimales} animales esperando una familia`}
+              </p>
+            </div>
+
+            {esProtectora && (
+              <div className="d-flex flex-wrap gap-2">
+                <Link
+                  to="/panel/adopciones"
+                  className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+                >
+                  Ver mis adopciones
+                </Link>
+
+                <Link
+                  to="/panel/animales"
+                  className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+                >
+                  Ver mis animales
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -200,14 +213,14 @@ export const Adoptar = () => {
               <select
                 className="form-select form-select-sm rounded-pill"
                 style={{ width: "190px" }}
-                value={shelterId}
-                onChange={(e) => cambiarProtectora(e.target.value)}
+                value={tipoId}
+                onChange={(e) => cambiarTipo(e.target.value)}
               >
-                <option value="">Cualquier protectora</option>
+                <option value="">Cualquier tipo</option>
 
-                {shelters.map((shelter) => (
-                  <option key={shelter.shelter_id} value={shelter.id}>
-                    {shelter.name}
+                {shelterTypes.map((tipo) => (
+                  <option key={tipo.shelter_type_id} value={tipo.id}>
+                    {tipo.name}
                   </option>
                 ))}
               </select>

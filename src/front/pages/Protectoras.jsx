@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Mapa } from "../components/Mapa";
 import { ProtectoraCard } from "../components/protectora/ProtectoraCard";
-import { getShelters } from "../services/sheltersService";
+import { getShelters, getShelterProfile } from "../services/sheltersService";
 import { getAnimals, cargarMediaUrl } from "../services/animalsService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
@@ -139,6 +139,17 @@ export const Protectoras = () => {
   const { store } = useGlobalReducer();
   const shelterTypes = store.shelterTypes || [];
 
+  const esProtectora = store.user?.rol === "shelter_admin";
+  const [miShelterUuid, setMiShelterUuid] = useState(null);
+
+  useEffect(() => {
+    if (!esProtectora) return;
+
+    getShelterProfile()
+      .then((datos) => setMiShelterUuid(datos.shelter_id))
+      .catch(() => setMiShelterUuid(null));
+  }, [esProtectora]);
+
   const [pestana, setPestana] = useState("todas");
   const [tipoId, setTipoId] = useState("");
   const [pagina, setPagina] = useState(1);
@@ -232,12 +243,34 @@ export const Protectoras = () => {
               </p>
             </div>
 
-            <Link
-              to="/signup"
-              className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
-            >
-              Registrar mi protectora
-            </Link>
+            {!store.user && (
+              <Link
+                to="/signup"
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Registrar mi protectora
+              </Link>
+            )}
+
+            {esProtectora && (
+              <div className="d-flex flex-wrap gap-2">
+                {miShelterUuid && (
+                  <Link
+                    to={`/protectoras/${miShelterUuid}`}
+                    className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+                  >
+                    Ver mi ficha pública
+                  </Link>
+                )}
+
+                <Link
+                  to="/panel"
+                  className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+                >
+                  Ir a mi panel
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -360,7 +393,10 @@ export const Protectoras = () => {
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
               {protectoras.map((protectora) => (
                 <div className="col" key={protectora.shelter_id}>
-                  <ProtectoraCard protectora={protectora} />
+                  <ProtectoraCard
+                    protectora={protectora}
+                    esMiProtectora={esProtectora && protectora.id === store.user?.shelter_id}
+                  />
                 </div>
               ))}
             </div>

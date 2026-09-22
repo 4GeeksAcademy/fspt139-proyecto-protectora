@@ -106,7 +106,7 @@ export const ProtectoraPanel = () => {
         <Cifra numero={protectora.open_requests} texto="Necesidades abiertas" color="#138f4d" to="/panel/necesidades" />
         <Cifra numero={protectora.published_animals} texto="Animales en adopción" color="#F0946A" to="/panel/animales" />
         <Cifra numero={adopciones.total_items} texto="Adopciones por revisar" color="#E8B04B" to="/panel/adopciones" />
-        <Cifra numero={protectora.supporters} texto="Colaboradores" color="#E0756B" />
+        <Cifra numero={protectora.supporters} texto="Colaboradores en total" color="#E0756B" />
       </div>
 
       <div className="row g-3">
