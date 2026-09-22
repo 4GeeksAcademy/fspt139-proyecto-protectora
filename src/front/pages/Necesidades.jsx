@@ -75,16 +75,24 @@ export const Necesidades = () => {
 
   const sinResultados = !cargando && !error && necesidades.length === 0;
 
+  const antetitulo = esProtectora ? "Toda la red" : "Tablón público";
+
+  const titulo = esProtectora ? "Necesidades de toda la red" : "Necesidades abiertas";
+
+  const textoContador = esProtectora
+    ? `${totalItems} necesidades abiertas en toda la red, incluidas las vuestras`
+    : `${totalItems} necesidades esperando ayuda`;
+
   return (
     <div style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="bg-success-subtle py-5">
         <div className="container">
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3">
             <div>
-              <p className="text-success fw-bold text-uppercase small mb-1">Tablón público</p>
-              <h2 className="fw-bold mb-1">Necesidades abiertas</h2>
+              <p className="text-success fw-bold text-uppercase small mb-1">{antetitulo}</p>
+              <h2 className="fw-bold mb-1">{titulo}</h2>
               <p className="text-secondary mb-0">
-                {cargando ? "Cargando necesidades…" : `${totalItems} necesidades esperando ayuda`}
+                {cargando ? "Cargando necesidades…" : textoContador}
               </p>
             </div>
 

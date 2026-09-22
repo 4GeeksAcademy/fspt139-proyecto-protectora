@@ -215,10 +215,11 @@ export const Protectoras = () => {
   const sinResultados =
     !cargando && !error && protectoras.length === 0;
 
-  const textoContador =
-    totalItems === 1
-      ? "1 protectora en toda España"
-      : `${totalItems} protectoras en toda España`;
+  const textoContador = esProtectora
+  ? `${totalItems} protectoras registradas, incluida la vuestra`
+  : totalItems === 1
+    ? "1 protectora en toda España"
+    : `${totalItems} protectoras en toda España`;
 
   return (
     <div
@@ -252,24 +253,13 @@ export const Protectoras = () => {
               </Link>
             )}
 
-            {esProtectora && (
-              <div className="d-flex flex-wrap gap-2">
-                {miShelterUuid && (
-                  <Link
-                    to={`/protectoras/${miShelterUuid}`}
-                    className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
-                  >
-                    Ver mi ficha pública
-                  </Link>
-                )}
-
-                <Link
-                  to="/panel"
-                  className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
-                >
-                  Ir a mi panel
-                </Link>
-              </div>
+            {esProtectora && miShelterUuid && (
+              <Link
+                to={`/protectoras/${miShelterUuid}`}
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Ver mi perfil publico
+              </Link>
             )}
           </div>
         </div>

@@ -124,6 +124,14 @@ export const Adoptar = () => {
   const sinResultados =
     !cargando && !error && animales.length === 0;
 
+  const antetitulo = esProtectora ? "Toda la red" : "Adopciones";
+
+  const titulo = esProtectora ? "Animales de toda la red" : "Buscan casa";
+
+  const textoContador = esProtectora
+    ? `${totalAnimales} animales publicados por todas las protectoras, incluidos los vuestros`
+    : `${totalAnimales} animales esperando una familia`;
+
   return (
     <div
       className="d-flex flex-column min-vh-100"
@@ -133,16 +141,12 @@ export const Adoptar = () => {
         <div className="container">
           <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3">
             <div>
-              <p className="text-success fw-bold text-uppercase small mb-1">
-                Adopciones
-              </p>
+              <p className="text-success fw-bold text-uppercase small mb-1">{antetitulo}</p>
 
-              <h2 className="fw-bold mb-1">Buscan casa</h2>
+              <h2 className="fw-bold mb-1">{titulo}</h2>
 
               <p className="text-secondary mb-0">
-                {cargando
-                  ? "Cargando animales…"
-                  : `${totalAnimales} animales esperando una familia`}
+                {cargando ? "Cargando animales…" : textoContador}
               </p>
             </div>
 

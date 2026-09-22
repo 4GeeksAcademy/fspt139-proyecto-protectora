@@ -25,7 +25,6 @@ import { Logout } from "../pages/Logout";
 import { Signup } from "../pages/Signup.jsx";
 
 // PAGINAS DE PROTECTORA
-import { ProtectoraPanel } from "../pages/shelter-admin/ProtectoraPanel.jsx";
 import { ProtectoraAnimales } from "../pages/shelter-admin/ProtectoraAnimales.jsx";
 import { ProtectoraNecesidades } from "../pages/shelter-admin/ProtectoraNecesidades.jsx";
 import { ProtectoraPerfil } from "../pages/shelter-admin/ProtectoraPerfil";
@@ -103,10 +102,6 @@ export const router = createBrowserRouter([
                     {
                         path: "/test-api-requests",
                         element: <TestRequestsFilters />
-                    },
-                    {
-                        path: "/panel",
-                        element: <ProtectoraPanel />
                     },
                     {
                         path: "/panel/necesidades",
