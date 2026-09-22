@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { NecesidadCard } from "../components/NecesidadCard";
 import { Mapa } from "../components/Mapa";
 import { getRequests } from "../services/requestsService";
-import { getShelters } from "../services/sheltersService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 const PER_PAGE = 12;
@@ -23,9 +22,11 @@ const posicionValida = (valor) => {
 export const Necesidades = () => {
   const { store } = useGlobalReducer();
   const requestTypes = store.requestTypes || [];
+  const shelterTypes = store.shelterTypes || [];
+  const esProtectora = store.user?.rol === "shelter_admin";
 
   const [categoria, setCategoria] = useState("");
-  const [shelterId, setShelterId] = useState("");
+  const [tipoId, setTipoId] = useState("");
   const [busqueda, setBusqueda] = useState("");
   const [busquedaAplicada, setBusquedaAplicada] = useState("");
   const [pagina, setPagina] = useState(1);
@@ -48,6 +49,7 @@ export const Necesidades = () => {
         if (!cancelado) setShelters([]);
       });
 
+
     return () => { cancelado = true; };
   }, []);
 
@@ -67,7 +69,7 @@ export const Necesidades = () => {
 
     getRequests(
       { pagina, perPage: PER_PAGE },
-      { nombre: busquedaAplicada, requestTypeId: categoria, shelterId },
+      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId },
     )
       .then((data) => {
         if (cancelado) return;
@@ -87,7 +89,7 @@ export const Necesidades = () => {
       });
 
     return () => { cancelado = true; };
-  }, [pagina, categoria, shelterId, busquedaAplicada]);
+  }, [pagina, categoria, tipoId, busquedaAplicada]);
 
   const necesidadesMapa = useMemo(() => {
     if (cargando || error) return [];
@@ -121,11 +123,11 @@ export const Necesidades = () => {
   }, [necesidades, shelters, cargando, error]);
 
   const cambiarCategoria = (id) => { setCategoria(id); setPagina(1); };
-  const cambiarProtectora = (id) => { setShelterId(id); setPagina(1); };
+  const cambiarTipo = (id) => { setTipoId(id); setPagina(1); };
 
   const limpiarFiltros = () => {
     setCategoria("");
-    setShelterId("");
+    setTipoId("");
     setBusqueda("");
     setBusquedaAplicada("");
     setPagina(1);
@@ -133,15 +135,36 @@ export const Necesidades = () => {
 
   const sinResultados = !cargando && !error && necesidades.length === 0;
 
+  const antetitulo = esProtectora ? "Toda la red" : "Tablón público";
+
+  const titulo = esProtectora ? "Necesidades de toda la red" : "Necesidades abiertas";
+
+  const textoContador = esProtectora
+    ? `${totalItems} necesidades abiertas en toda la red, incluidas las vuestras`
+    : `${totalItems} necesidades esperando ayuda`;
+
   return (
     <div style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="bg-success-subtle py-5">
         <div className="container">
-          <p className="text-success fw-bold text-uppercase small mb-1">Tablón público</p>
-          <h2 className="fw-bold mb-1">Necesidades abiertas</h2>
-          <p className="text-secondary mb-0">
-            {cargando ? "Cargando necesidades…" : `${totalItems} necesidades esperando ayuda`}
-          </p>
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3">
+            <div>
+              <p className="text-success fw-bold text-uppercase small mb-1">{antetitulo}</p>
+              <h2 className="fw-bold mb-1">{titulo}</h2>
+              <p className="text-secondary mb-0">
+                {cargando ? "Cargando necesidades…" : textoContador}
+              </p>
+            </div>
+
+            {esProtectora && (
+              <Link
+                to="/panel/necesidades"
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Ver mis necesidades
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
@@ -257,6 +280,14 @@ export const Necesidades = () => {
                 {shelters.map((shelter) => (
                   <option key={shelter.id ?? shelter.shelter_id} value={shelter.id ?? shelter.shelter_id}>
                     {shelter.name}
+                style={{ width: "190px" }}
+                value={tipoId}
+                onChange={(e) => cambiarTipo(e.target.value)}
+              >
+                <option value="">Cualquier tipo</option>
+                {shelterTypes.map((tipo) => (
+                  <option key={tipo.shelter_type_id} value={tipo.id}>
+                    {tipo.name}
                   </option>
                 ))}
               </select>

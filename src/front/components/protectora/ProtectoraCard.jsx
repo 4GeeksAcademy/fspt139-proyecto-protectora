@@ -21,7 +21,7 @@ export const Metrica = ({ valor, etiqueta, destacada }) => (
   </div>
 );
 
-export const ProtectoraCard = ({ protectora }) => {
+export const ProtectoraCard = ({ protectora, esMiProtectora = false }) => {
   if (!protectora) return null;
 
   const iniciales = generarIniciales(protectora.name);
@@ -57,9 +57,12 @@ export const ProtectoraCard = ({ protectora }) => {
               {protectora.name}
             </h5>
             <div className="d-flex flex-wrap gap-1">
-              {protectora.shelter_type_name && (
-                <span className="badge rounded-pill" style={{ backgroundColor: "var(--rp-verde-cl)", color: "var(--rp-verde)" }}>
-                  {protectora.shelter_type_name}
+              {esMiProtectora && (
+                <span
+                  className="badge rounded-pill"
+                  style={{ backgroundColor: "var(--rp-pino)", color: "var(--rp-papel)" }}
+                >
+                  Tu protectora
                 </span>
               )}
               {protectora.has_urgent && (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Mapa } from "../components/Mapa";
 import { ProtectoraCard } from "../components/protectora/ProtectoraCard";
-import { getShelters } from "../services/sheltersService";
+import { getShelters, getShelterProfile } from "../services/sheltersService";
 import { getAnimals, cargarMediaUrl } from "../services/animalsService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
@@ -126,6 +126,17 @@ export const Protectoras = () => {
   const { store } = useGlobalReducer();
   const shelterTypes = store.shelterTypes || [];
 
+  const esProtectora = store.user?.rol === "shelter_admin";
+  const [miShelterUuid, setMiShelterUuid] = useState(null);
+
+  useEffect(() => {
+    if (!esProtectora) return;
+
+    getShelterProfile()
+      .then((datos) => setMiShelterUuid(datos.shelter_id))
+      .catch(() => setMiShelterUuid(null));
+  }, [esProtectora]);
+
   const [pestana, setPestana] = useState("todas");
   const [tipoId, setTipoId] = useState("");
   const [pagina, setPagina] = useState(1);
@@ -191,10 +202,11 @@ export const Protectoras = () => {
   const sinResultados =
     !cargando && !error && protectoras.length === 0;
 
-  const textoContador =
-    totalItems === 1
-      ? "1 protectora en toda España"
-      : `${totalItems} protectoras en toda España`;
+  const textoContador = esProtectora
+  ? `${totalItems} protectoras registradas, incluida la vuestra`
+  : totalItems === 1
+    ? "1 protectora en toda España"
+    : `${totalItems} protectoras en toda España`;
 
   return (
     <div
@@ -219,12 +231,23 @@ export const Protectoras = () => {
               </p>
             </div>
 
-            <Link
-              to="/signup"
-              className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
-            >
-              Registrar mi protectora
-            </Link>
+            {!store.user && (
+              <Link
+                to="/signup"
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Registrar mi protectora
+              </Link>
+            )}
+
+            {esProtectora && miShelterUuid && (
+              <Link
+                to={`/protectoras/${miShelterUuid}`}
+                className="btn btn-success rounded-pill px-4 py-2 fw-semibold shadow-sm"
+              >
+                Ver mi perfil publico
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -345,7 +368,10 @@ export const Protectoras = () => {
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
               {protectoras.map((protectora) => (
                 <div className="col" key={protectora.shelter_id}>
-                  <ProtectoraCard protectora={protectora} />
+                  <ProtectoraCard
+                    protectora={protectora}
+                    esMiProtectora={esProtectora && protectora.id === store.user?.shelter_id}
+                  />
                 </div>
               ))}
             </div>
