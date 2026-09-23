@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
  
 // piezas compartidas de los resumenes de protectora (Home) y colaborador (Actividad)
@@ -28,8 +28,9 @@ export const Cifra = ({ numero, texto, color, to }) => {
   );
 };
  
-// bloque con titulo, enlace opcional a la seccion completa y sus filas (o un texto si no hay ninguna)
-export const Bloque = ({ titulo, verTodas, vacio, children }) => (
+// bloque con titulo, enlace opcional a la seccion completa, sus filas (o un texto si no hay ninguna)
+// y un pie opcional debajo de las filas
+export const Bloque = ({ titulo, verTodas, vacio, pie, children }) => (
   <div className="col-md-6">
     <div className="p-4 rounded-4 shadow-sm h-100" style={{ backgroundColor: "var(--rp-papel)" }}>
       <div className="d-flex justify-content-between align-items-baseline mb-2">
@@ -41,24 +42,56 @@ export const Bloque = ({ titulo, verTodas, vacio, children }) => (
         )}
       </div>
       {React.Children.count(children) > 0 ? children : <p className="text-muted small mb-0 mt-3">{vacio}</p>}
+      {pie}
     </div>
   </div>
 );
  
-// fila clicable con nombre y etiqueta; la etiqueta admite clases de Bootstrap (`badgeClass`),
-// un color de fondo (`fondo`) o, sin ninguno de los dos, el verde claro por defecto
-export const Fila = ({ to, nombre, etiqueta, fondo, badgeClass }) => {
-  const estilo = fondo ? { backgroundColor: fondo } : { backgroundColor: "var(--rp-verde-cl)", color: "var(--rp-verde-osc)" };
+// etiqueta de las filas: admite clases de Bootstrap (`badgeClass`), un color de fondo (`fondo`)
+// o, sin ninguno de los dos, el verde claro por defecto
+const Etiqueta = ({ texto, fondo, badgeClass }) => {
+  const estilo = fondo
+    ? { backgroundColor: fondo }
+    : { backgroundColor: "var(--rp-verde-cl)", color: "var(--rp-verde-osc)" };
  
   return (
-    <Link
-      to={to}
-      className="d-flex justify-content-between align-items-center gap-2 py-2 border-top text-decoration-none text-reset"
-    >
-      <span className="text-truncate">{nombre}</span>
-      <span className={`badge rounded-pill flex-shrink-0 ${badgeClass || ""}`} style={badgeClass ? undefined : estilo}>
-        {etiqueta}
-      </span>
-    </Link>
+    <span className={`badge rounded-pill flex-shrink-0 ${badgeClass || ""}`} style={badgeClass ? undefined : estilo}>
+      {texto}
+    </span>
+  );
+};
+ 
+// fila clicable con nombre y etiqueta que lleva a otra pagina
+export const Fila = ({ to, nombre, etiqueta, fondo, badgeClass }) => (
+  <Link
+    to={to}
+    className="d-flex justify-content-between align-items-center gap-2 py-2 border-top text-decoration-none text-reset"
+  >
+    <span className="text-truncate">{nombre}</span>
+    <Etiqueta texto={etiqueta} fondo={fondo} badgeClass={badgeClass} />
+  </Link>
+);
+ 
+// fila con el mismo aspecto que Fila, pero al pulsarla despliega su detalle (children) en vez de navegar
+export const FilaDesplegable = ({ nombre, etiqueta, fondo, badgeClass, children }) => {
+  const [abierta, setAbierta] = useState(false);
+ 
+  return (
+    <div className="border-top">
+      <button
+        type="button"
+        className="btn w-100 d-flex justify-content-between align-items-center gap-2 py-2 px-0 border-0 text-start"
+        onClick={() => setAbierta(!abierta)}
+        aria-expanded={abierta}
+      >
+        <span className="text-truncate">{nombre}</span>
+        <span className="d-flex align-items-center gap-2 flex-shrink-0">
+          <Etiqueta texto={etiqueta} fondo={fondo} badgeClass={badgeClass} />
+          <i className={`fa-solid fa-chevron-${abierta ? "up" : "down"} small text-muted`}></i>
+        </span>
+      </button>
+ 
+      {abierta && <div className="small pb-3">{children}</div>}
+    </div>
   );
 };
