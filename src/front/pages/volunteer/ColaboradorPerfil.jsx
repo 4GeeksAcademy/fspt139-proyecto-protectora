@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useState } from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
 import { fetchProfile, updateProfile } from "../../services/authServices";
@@ -31,6 +31,9 @@ export const ColaboradorPerfil = () => {
   const [aviso, setAviso] = useState("");
   const [guardando, setGuardando] = useState(false);
   const errorRef = useRef(null);
+
+
+  usePageTitle("Mi perfil");
 
   useEffect(() => {
     fetchProfile()

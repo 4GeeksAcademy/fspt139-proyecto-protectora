@@ -5,6 +5,7 @@ import { Mapa } from "../components/Mapa";
 import { getRequests } from "../services/requestsService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getShelters } from "../services/sheltersService";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 const PER_PAGE = 12;
 
@@ -39,6 +40,8 @@ export const Necesidades = () => {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [shelters, setShelters] = useState([]);
+
+  usePageTitle("Necesidades");
 
   useEffect(() => {
     let cancelado = false;

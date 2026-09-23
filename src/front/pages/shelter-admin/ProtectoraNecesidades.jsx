@@ -4,6 +4,7 @@ import { getShelterNecesidades } from "../../services/requestsService";
 import { getShelterAnimals } from "../../services/animalsService";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { ShelterNecesidadCard } from "../../components/protectora/ShelterNecesidadCard";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 
 //TODO: llevar al store (ver si necesitamos mñas estados antes)
@@ -32,6 +33,8 @@ export const ProtectoraNecesidades = () => {
   const [search, setSearch] = useState("");
   const [tipoFilter, setTipoFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+
+  usePageTitle("Panel · Necesidades");
 
   // pequeño debounce para no lanzar una petición por cada tecla
   useEffect(() => {

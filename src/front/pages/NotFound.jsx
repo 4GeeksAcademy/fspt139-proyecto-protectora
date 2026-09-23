@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export const NotFound = () => {
+  usePageTitle("Página no encontrada");
   return (
     <div className="not-found-animal-wrapper">
       {/* Estilos y animaciones CSS integrados directamente en el componente */}
