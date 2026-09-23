@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getShelterById } from "../services/sheltersService";
 import { getRequests } from "../services/requestsService";
 import { getAnimals, cargarMediaUrl } from "../services/animalsService";
@@ -10,7 +10,7 @@ import { AnimalCard } from "../components/AnimalCard";
 import { Metrica } from "../components/protectora/ProtectoraCard";
 import { NotFound } from "./NotFound";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-
+ 
 const Dato = ({ etiqueta, children }) => {
   if (children == null || children === "" || children === false) return null;
   return (
@@ -20,11 +20,11 @@ const Dato = ({ etiqueta, children }) => {
     </div>
   );
 };
-
+ 
 const MAX_NECESIDADES = 3;
 const MAX_ANIMALES = 6;
-
-
+ 
+ 
 const Seccion = ({ titulo, items, vacio, children }) => (
   <section className="mt-5">
     <h4 className="fw-bold mb-3" style={{ color: "var(--rp-pino)" }}>{titulo}</h4>
@@ -41,24 +41,30 @@ const Seccion = ({ titulo, items, vacio, children }) => (
     )}
   </section>
 );
-
+ 
 export const ProtectoraProfile = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+ 
+  // si llegaste desde la web, volver es ir atras: recupera el listado con su pagina y filtros;
+  // si entraste directo a la ficha (un enlace compartido) no hay atras y vamos al listado
+  const volver = () => (location.key !== "default" ? navigate(-1) : navigate("/protectoras"));
   const { store } = useGlobalReducer();
-
+ 
   const [protectora, setProtectora] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
   const [noEncontrada, setNoEncontrada] = useState(false);
   const [necesidades, setNecesidades] = useState(null);
   const [animales, setAnimales] = useState(null);
-
+ 
   useEffect(() => {
     let cancelado = false;
     setCargando(true);
     setError(null);
     setNoEncontrada(false);
-
+ 
     getShelterById(id)
       .then((data) => {
         if (!cancelado) setProtectora(data);
@@ -71,17 +77,17 @@ export const ProtectoraProfile = () => {
       .finally(() => {
         if (!cancelado) setCargando(false);
       });
-
+ 
     return () => { cancelado = true; };
   }, [id]);
-
+ 
   // los listados filtran por el id numerico, que solo tenemos cuando llega la ficha
   useEffect(() => {
     if (!protectora) return;
     let cancelado = false;
     setNecesidades(null);
     setAnimales(null);
-
+ 
     getRequests({ ordenarPor: "request_deadline", orden: "asc", perPage: 20 }, { shelterId: protectora.id })
       .then((data) => {
         if (cancelado) return;
@@ -92,7 +98,7 @@ export const ProtectoraProfile = () => {
       .catch(() => {
         if (!cancelado) setNecesidades([]);
       });
-
+ 
     getAnimals({ perPage: MAX_ANIMALES }, { shelterId: protectora.id })
       .then((data) => {
         if (!cancelado) setAnimales(data.items || []);
@@ -100,10 +106,10 @@ export const ProtectoraProfile = () => {
       .catch(() => {
         if (!cancelado) setAnimales([]);
       });
-
+ 
     return () => { cancelado = true; };
   }, [protectora?.id]);
-
+ 
   if (cargando) {
     return (
       <div className="container py-5 d-flex justify-content-center">
@@ -113,30 +119,30 @@ export const ProtectoraProfile = () => {
       </div>
     );
   }
-
+ 
   if (noEncontrada) return <NotFound />;
-
+ 
   if (error || !protectora) {
     return (
       <div className="container py-5">
         <div className="alert alert-danger">{error || "No se ha podido cargar la protectora"}</div>
-        <Link to="/protectoras" className="btn btn-outline-secondary">← Volver a Protectoras</Link>
+        <button type="button" onClick={volver} className="btn btn-outline-secondary">← Volver</button>
       </div>
     );
   }
-
+ 
   const tipo = protectora.shelter_type?.name;
   const desde = protectora.created_at ? new Date(protectora.created_at).getFullYear() : null;
   const subtitulo = [tipo, desde && `En Red Protectora desde ${desde}`].filter(Boolean).join(" · ");
   const categorias = store.requestTypes || [];
-
+ 
   return (
     <div style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="container py-5">
-        <Link to="/protectoras" className="btn btn-outline-secondary rounded-pill mb-4">
-          ← Volver a Protectoras
-        </Link>
-
+        <button type="button" onClick={volver} className="btn btn-outline-secondary rounded-pill mb-4">
+          ← Volver
+        </button>
+ 
         <div className="row g-4">
           <div className="col-lg-5">
             <div
@@ -155,7 +161,7 @@ export const ProtectoraProfile = () => {
                   {generarIniciales(protectora.name)}
                 </span>
               )}
-
+ 
               <div className="position-absolute top-0 start-0 m-3 d-flex gap-1">
                 {tipo && (
                   <span className="badge" style={{ backgroundColor: "var(--rp-verde)", color: "var(--rp-papel)" }}>
@@ -169,7 +175,7 @@ export const ProtectoraProfile = () => {
                 )}
               </div>
             </div>
-
+ 
             <div className="d-flex text-center rounded-3 py-3 mt-3" style={{ backgroundColor: "var(--rp-papel)" }}>
               <Metrica valor={protectora.open_requests} etiqueta="necesidades" destacada />
               <div className="vr" style={{ backgroundColor: "var(--rp-linea)" }} />
@@ -178,14 +184,14 @@ export const ProtectoraProfile = () => {
               <Metrica valor={protectora.supporters} etiqueta="apoyos" />
             </div>
           </div>
-
+ 
           <div className="col-lg-7">
             <h1 className="fw-bold mb-1" style={{ color: "var(--rp-pino)" }}>{protectora.name}</h1>
             {subtitulo && <p className="text-secondary mb-3">{subtitulo}</p>}
             {protectora.description && (
               <p className="mb-4" style={{ lineHeight: 1.7 }}>{protectora.description}</p>
             )}
-
+ 
             <h5 className="fw-bold mt-4 mb-2">Contacto</h5>
             <Dato etiqueta="Dirección">{protectora.address}</Dato>
             <Dato etiqueta="Email">
@@ -200,7 +206,7 @@ export const ProtectoraProfile = () => {
               )}
             </Dato>
             <Dato etiqueta="Instagram">{protectora.instagram}</Dato>
-
+ 
             <h5 className="fw-bold mt-4 mb-2">Necesidades</h5>
             <Dato etiqueta="Activas">{protectora.open_requests}</Dato>
             <Dato etiqueta="Cubiertas">{protectora.closed_requests}</Dato>
@@ -211,7 +217,7 @@ export const ProtectoraProfile = () => {
             ))}
           </div>
         </div>
-
+ 
         <Seccion
           titulo="Lo que más necesitan ahora"
           items={necesidades}
@@ -219,7 +225,7 @@ export const ProtectoraProfile = () => {
         >
           {(necesidad) => <NecesidadCard necesidad={necesidad} />}
         </Seccion>
-
+ 
         <Seccion
           titulo="Buscan hogar"
           items={animales}

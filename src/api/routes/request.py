@@ -36,7 +36,8 @@ def list_requests_action():
             continue
         filters[field] = values if len(values) > 1 else values[0]
 
-    filters['status'] = PUBLIC_STATUSES  # fuerza los estados publicos: ignora cualquier status recibido por query
+    status = request.args.get('status')
+    filters['status'] = status if status in PUBLIC_STATUSES else PUBLIC_STATUSES
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
     page, per_page = paginate_args()

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useSearchParams, Link } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { getRequestById } from "../services/requestsService";
 import { cargarMediaUrl } from "../services/animalsService";
 import { construirBadge, calcularDeadlineLabel, esFueraDePlazo } from "../utils/necesidadDeadline";
@@ -24,6 +24,9 @@ export const ContributeProfile = () => {
   const { id } = useParams();
   const { store } = useGlobalReducer();
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const volver = () => (location.key !== "default" ? navigate(-1) : navigate("/necesidades"));
 
   const [necesidad, setNecesidad] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -89,7 +92,9 @@ export const ContributeProfile = () => {
     return (
       <div className="container py-5">
         <div className="alert alert-danger">{error || "No se ha podido cargar la necesidad"}</div>
-        <Link to="/necesidades" className="btn btn-outline-secondary"><i className="fa fa-arrow-left text-danger me-1"></i> Volver al listado</Link>
+        <button type="button" onClick={volver} className="btn btn-outline-secondary rounded-pill mb-4">
+          <i className="fa fa-arrow-left text-danger me-1"></i> Volver
+        </button>
       </div>
     );
   }
@@ -116,9 +121,9 @@ export const ContributeProfile = () => {
   return (
     <div style={{ backgroundColor: "var(--rp-hueso)" }}>
       <div className="container py-5">
-        <Link to="/necesidades" className="btn btn-outline-secondary rounded-pill mb-4">
-          <i className="fa fa-arrow-left text-danger me-1"></i> Volver al listado
-        </Link>
+        <button type="button" onClick={volver} className="btn btn-outline-secondary rounded-pill mb-4">
+          <i className="fa fa-arrow-left text-danger me-1"></i> Volver
+        </button>
 
         <div className="row g-4">
           <div className="col-lg-6">
