@@ -32,6 +32,26 @@ export const crearSolicitudAdopcion = async (animal_id, respuestas) => {
   return response.json();
 };
 
+// listado (paginado) de las solicitudes de adopcion del usuario logueado; admite filtro por estado
+export const getMisSolicitudesAdopcion = async ({ pagina = 1, perPage = 20 } = {}, filters = {}) => {
+  const params = new URLSearchParams({ page: pagina, per_page: perPage });
+
+  const { status } = filters;
+  if (status) params.set("status", status);
+
+  const response = await fetch(`${backendUrl}/api/user/addoption-requests?${params.toString()}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener tus solicitudes de adopción");
+  }
+  return response.json();
+};
+
 // listado (paginado) de las solicitudes de un proceso propio de la protectora, con datos del
 // solicitante incluidos; admite filtro por estado y busqueda por nombre/email
 export const getShelterAddoptionRequests = async (

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import selectinload
 
-from api.models import AddoptionRequest, User, db
+from api.models import AddoptionRequest, Animal, User, db
 
 
 class AddoptionRequestRepository:
@@ -62,6 +62,22 @@ class AddoptionRequestRepository:
 
         query = query.order_by(
             AddoptionRequest.created_at.desc() if dir == 'desc' else AddoptionRequest.created_at.asc())
+
+        return db.paginate(query, page=page, per_page=per_page, error_out=False)
+
+     # listado (paginado) de las solicitudes de un usuario, para su vista de actividad: incluye el
+    # animal y su protectora; admite filtro por estado
+    @staticmethod
+    def list_by_user(user_id, status=None, page=1, per_page=20):
+        query = db.select(AddoptionRequest).where(
+            AddoptionRequest.user_id == user_id
+        ).options(
+            selectinload(AddoptionRequest.animal).selectinload(Animal.shelter),
+            selectinload(AddoptionRequest.answers),
+        ).order_by(AddoptionRequest.created_at.desc())
+
+        if status:
+            query = query.where(AddoptionRequest.status == status)
 
         return db.paginate(query, page=page, per_page=per_page, error_out=False)
 

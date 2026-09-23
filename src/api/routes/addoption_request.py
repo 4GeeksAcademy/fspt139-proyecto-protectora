@@ -6,8 +6,10 @@ from api.services.addoption_request_service import (
     create_addoption_request,
     discard_addoption_requests,
     get_shelter_addoption_request,
+    list_my_addoption_requests,
     list_shelter_addoption_requests,
     serialize_addoption_request_for_shelter,
+    serialize_addoption_request_for_user,
 )
 from api.utils import APIException, paginate_args
 
@@ -101,3 +103,25 @@ def discard_addoption_requests_action():
 
     discarded = discard_addoption_requests(data.get("addoption_request_ids"), user.shelter_id)
     return jsonify({"discarded": [serialize_addoption_request_for_shelter(r) for r in discarded]}), 200
+
+# ######################
+# ruta para listar (paginado, filtrable por estado) las solicitudes de adopcion del usuario logueado
+# ######################
+@api.route('/user/addoption-requests', methods=['GET'])
+@jwt_required()
+def list_my_addoption_requests_action():
+    user = get_current_user()
+    status = request.args.get("status")
+    page, per_page = paginate_args()
+
+    resultados = list_my_addoption_requests(user.id, status=status, page=page, per_page=per_page)
+
+    response_body = {
+        "items": [serialize_addoption_request_for_user(r) for r in resultados.items],
+        "page": resultados.page,
+        "per_page": resultados.per_page,
+        "total_items": resultados.total,
+        "total_pages": resultados.pages,
+    }
+
+    return jsonify(response_body), 200

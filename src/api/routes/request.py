@@ -7,8 +7,10 @@ from api.services.user_request_service import (
     answer_user_request,
     answer_user_requests_bulk,
     create_user_request,
+    list_my_user_requests,
     list_shelter_user_requests,
     serialize_user_request_for_shelter,
+    serialize_user_request_for_user,
 )
 
 from api.utils import APIException, paginate_args
@@ -195,3 +197,26 @@ def answer_user_requests_bulk_action():
     answered = answer_user_requests_bulk(
         data.get("user_request_ids"), user.shelter_id, data.get("shelter_answer"))
     return jsonify({"answered": [serialize_user_request_for_shelter(r) for r in answered]}), 200
+
+# ######################
+# ruta para listar (paginado) las colaboraciones del usuario logueado; con ?answered=true solo
+# las que la protectora ya ha respondido
+# ######################
+@api.route('/user/user-requests', methods=['GET'])
+@jwt_required()
+def list_my_user_requests_action():
+    user = get_current_user()
+    answered = request.args.get("answered", "false").lower() == "true"
+    page, per_page = paginate_args()
+
+    resultados = list_my_user_requests(user.id, answered=answered, page=page, per_page=per_page)
+
+    response_body = {
+        "items": [serialize_user_request_for_user(r) for r in resultados.items],
+        "page": resultados.page,
+        "per_page": resultados.per_page,
+        "total_items": resultados.total,
+        "total_pages": resultados.pages,
+    }
+
+    return jsonify(response_body), 200

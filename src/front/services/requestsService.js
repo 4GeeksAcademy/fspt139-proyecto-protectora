@@ -191,6 +191,26 @@ export const crearColaboracion = async (request_id, { amount, details } = {}) =>
   return response.json();
 };
 
+// listado (paginado) de las colaboraciones del usuario logueado; con `respondidas` solo las ya contestadas
+export const getMisColaboraciones = async ({ pagina = 1, perPage = 20 } = {}, filters = {}) => {
+  const params = new URLSearchParams({ page: pagina, per_page: perPage });
+
+  const { respondidas } = filters;
+  if (respondidas) params.set("answered", "true");
+
+  const response = await fetch(`${backendUrl}/api/user/user-requests?${params.toString()}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener tus colaboraciones");
+  }
+  return response.json();
+};
+
 // listado (paginado) de las contribuciones de una necesidad propia de la protectora
 export const getShelterUserRequests = async (request_id, { pagina = 1, perPage = 20 } = {}) => {
   const params = new URLSearchParams({ page: pagina, per_page: perPage });
