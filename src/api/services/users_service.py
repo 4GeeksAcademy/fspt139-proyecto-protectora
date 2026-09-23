@@ -154,7 +154,19 @@ def update_user_profile(user, **data):
         except Exception:
             pass  # peta el apino tocamos map_positioning
 
+    # cambio de contraseña si se envía algo en el form
+    nueva_password = data.get("password")
+    if nueva_password:
+        if nueva_password != data.get("password2"):
+            raise APIException("Las contraseñas no coinciden", status_code=400)
+        if not check_password(user, data.get("current_password") or ""):
+            raise APIException("La contraseña actual no es correcta", status_code=401)
+        validate_password(nueva_password)
+
     for campo, valor in cambios.items():
         setattr(user, campo, valor)
+
+    if nueva_password:
+        set_password(user, nueva_password)
 
     return UserRepository.save(user)

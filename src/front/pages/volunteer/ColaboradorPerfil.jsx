@@ -4,7 +4,9 @@ import { SectionCard } from "../../components/protectora/SectionCard";
 import { fetchProfile, updateProfile } from "../../services/authServices";
 import { generarIniciales } from "../../utils/iniciales";
 import {usePageTitle} from "../../hooks/usePageTitle";
- 
+import { calcularFuerzaPassword, PASSWORD_MIN_LENGTH } from "../../utils/format";
+
+
 // campos editables del usuario (los mismos que acepta PUT /api/profile)
 const CAMPOS = ["name", "last_name1", "last_name2", "email", "phone", "address"];
  
@@ -33,6 +35,10 @@ export const ColaboradorPerfil = () => {
   const [guardando, setGuardando] = useState(false);
   const errorRef = useRef(null);
 
+  const [passwordForm, setPasswordForm] = useState({ current_password: "", password: "", password2: "" });
+  const [mostrarPassword, setMostrarPassword] = useState(false);
+  const fuerzaPassword = calcularFuerzaPassword(passwordForm.password);
+
 
   usePageTitle("Ajustes");
 
@@ -52,14 +58,38 @@ export const ColaboradorPerfil = () => {
     setForm((prev) => ({ ...prev, [campo]: valor }));
     setAviso("");
   };
- 
+
+  const handlePasswordField = (campo, valor) => {
+    setPasswordForm((prev) => ({ ...prev, [campo]: valor }));
+    setAviso("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setGuardando(true);
     setError("");
     try {
-      const datos = await updateProfile(form);
+      const nuevaPassword = passwordForm.password;
+
+      if (nuevaPassword) {
+        if (!passwordForm.current_password) {
+          throw new Error("Debes indicar tu contraseña actual.");
+        }
+        if (nuevaPassword.length < PASSWORD_MIN_LENGTH) {
+          throw new Error(`La contraseña debe tener al menos ${PASSWORD_MIN_LENGTH} caracteres.`);
+        }
+        if (nuevaPassword !== passwordForm.password2) {
+          throw new Error("Las contraseñas no coinciden.");
+        }
+      }
+
+      const payload = nuevaPassword
+        ? { ...form, current_password: passwordForm.current_password, password: nuevaPassword, password2: passwordForm.password2 }
+        : form;
+
+      const datos = await updateProfile(payload);
       setForm(aFormulario(datos));
+      setPasswordForm({ current_password: "", password: "", password2: "" });
       // el navbar pinta el nombre desde el store: sin esto seguiría mostrando el antiguo
       dispatch({ type: "set-user", payload: datos });
       setAviso("Cambios guardados");
@@ -136,7 +166,71 @@ export const ColaboradorPerfil = () => {
               </div>
             </div>
           </SectionCard>
- 
+
+          <SectionCard number={3} title="Cambiar contraseña" subtitle="Déjalo en blanco si no quieres cambiarla." unlocked>
+            <div className="row g-3">
+              <div className="col-12">
+                <label className="form-label" htmlFor="current_password">Contraseña actual</label>
+                <input
+                  id="current_password"
+                  type={mostrarPassword ? "text" : "password"}
+                  className="form-control"
+                  value={passwordForm.current_password}
+                  onChange={(e) => handlePasswordField("current_password", e.target.value)}
+                  autoComplete="current-password"
+                />
+              </div>
+
+              <div className="col-12 col-sm-6">
+                <label className="form-label" htmlFor="password">Nueva contraseña</label>
+                <div className="input-group">
+                  <input
+                    id="password"
+                    type={mostrarPassword ? "text" : "password"}
+                    className="form-control"
+                    placeholder={`Mínimo ${PASSWORD_MIN_LENGTH} caracteres`}
+                    value={passwordForm.password}
+                    onChange={(e) => handlePasswordField("password", e.target.value)}
+                    minLength={PASSWORD_MIN_LENGTH}
+                    autoComplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    className="btn btn-light border text-secondary"
+                    onClick={() => setMostrarPassword(!mostrarPassword)}
+                    aria-label={mostrarPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                  >
+                    <i className={`fa-solid ${mostrarPassword ? "fa-eye-slash" : "fa-eye"}`}></i>
+                  </button>
+                </div>
+                {passwordForm.password && (
+                  <div className="mt-2">
+                    <div className="progress" style={{ height: "6px" }}>
+                      <div
+                        className={`progress-bar ${fuerzaPassword.colorClass}`}
+                        style={{ width: `${(fuerzaPassword.nivel / 3) * 100}%` }}
+                      />
+                    </div>
+                    <small className="text-muted">{fuerzaPassword.label}</small>
+                  </div>
+                )}
+              </div>
+
+              <div className="col-12 col-sm-6">
+                <label className="form-label" htmlFor="password2">Repite la contraseña</label>
+                <input
+                  id="password2"
+                  type={mostrarPassword ? "text" : "password"}
+                  className="form-control"
+                  value={passwordForm.password2}
+                  onChange={(e) => handlePasswordField("password2", e.target.value)}
+                  minLength={PASSWORD_MIN_LENGTH}
+                  autoComplete="new-password"
+                />
+              </div>
+            </div>
+          </SectionCard>
+
           <button type="submit" className="btn btn-success rounded-pill px-4" disabled={guardando}>
             {guardando ? "Guardando…" : "Guardar cambios"}
           </button>

@@ -75,3 +75,19 @@ export const formatearCantidad = (valor) => {
     return numero.toLocaleString("es-ES", { maximumFractionDigits: 2 });
 };
 
+ // utilidad para mostrar fuerza de password
+export const PASSWORD_MIN_LENGTH = 8;
+export const calcularFuerzaPassword = (password = "") => {
+    if (!password) return { nivel: 0, label: "", colorClass: "" };
+
+    let puntos = 0;
+    if (password.length >= PASSWORD_MIN_LENGTH) puntos++;
+    if (password.length >= 12) puntos++;
+    if (/[a-z]/.test(password) && /[A-Z]/.test(password)) puntos++;
+    if (/\d/.test(password)) puntos++;
+    if (/[^A-Za-z0-9]/.test(password)) puntos++;
+
+    if (puntos <= 1) return { nivel: 1, label: "Débil", colorClass: "bg-danger" };
+    if (puntos <= 3) return { nivel: 2, label: "Media", colorClass: "bg-warning" };
+    return { nivel: 3, label: "Fuerte", colorClass: "bg-success" };
+};
