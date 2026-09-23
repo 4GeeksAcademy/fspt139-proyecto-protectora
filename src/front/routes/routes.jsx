@@ -145,6 +145,17 @@ export const router = createBrowserRouter([
                     },
                 ]
             },
+            // RUTAS COMUNES
+            {
+                element: <ProtectedRoutes rolesPermitidos={["shelter_admin", "volunteer"]} />,
+                children: [
+                    {
+                        path: "/settings/perfil",
+                        element: <ColaboradorPerfil />
+                    }
+                ]
+            },
+
             // RUTAS DEL ROL COLABORADOR
             {
                 element: <ProtectedRoutes rolesPermitidos={["volunteer"]} />,
@@ -153,10 +164,7 @@ export const router = createBrowserRouter([
                         path: "/colaborador",
                         element: <ColaboradorActividad />
                     },
-                    {
-                        path: "/colaborador/perfil",
-                        element: <ColaboradorPerfil />
-                    },
+
                 ]
             },
         ]

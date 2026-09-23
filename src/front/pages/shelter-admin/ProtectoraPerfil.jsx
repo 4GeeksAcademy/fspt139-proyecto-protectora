@@ -115,7 +115,7 @@ export const ProtectoraPerfil = () => {
             </div>
           )}
 
-          <SectionCard number={1} title="Identidad" subtitle="Cómo os reconocen las personas colaboradoras." unlocked>
+          <SectionCard number={1} title="Identidad de la Protectora" subtitle="Cómo os reconocen las personas colaboradoras." unlocked>
             <div className="d-flex align-items-center gap-3 mb-3">
               <div
                 className="rounded-circle overflow-hidden d-flex align-items-center justify-content-center flex-shrink-0"

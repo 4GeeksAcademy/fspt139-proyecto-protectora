@@ -34,7 +34,7 @@ export const ColaboradorPerfil = () => {
   const errorRef = useRef(null);
 
 
-  usePageTitle("Mi perfil");
+  usePageTitle("Ajustes");
 
   useEffect(() => {
     fetchProfile()
@@ -73,7 +73,7 @@ export const ColaboradorPerfil = () => {
   return (
     <div className="container py-5">
       <div className="mb-4">
-        <h2 className="fw-bold mb-2">Mi perfil</h2>
+        <h2 className="fw-bold mb-2">Ajustes de usuario</h2>
         <p className="mb-0">Estos son los datos que ven las protectoras cuando colaboras o solicitas una adopción.</p>
       </div>
  
