@@ -290,7 +290,7 @@ export const ProtectoraNecesidad = () => {
           <div className="text-center text-muted py-5">
             <p className="mb-0">Todavía no ha llegado ninguna colaboración para tu petición.</p>
 
-          <BotonCompartir />
+          <BotonCompartir url={`${window.location.origin}/necesidades/${necesidad.request_id}`} />
 
           </div>
         ) : (
