@@ -64,6 +64,30 @@
 
 ---
 
+## LLAMADAS A API EXTERNAS:
+
+  ### 1) IP-API  ➡️ ip-api.com (gratuito, sin api key)
+
+  Geolocaliza de forma aproximada la IP del visitante, para centrar el mapa de inicio cuando el usuario todavía no ha compartido su ubicación del navegador.
+
+  - Implementación: [`geolocation_service.py`](/src/api/services/geolocation_service.py) → `locate_ip(ip)`.
+  - Se consume desde `GET /api/data` ([`src/api/routes/data.py`](/src/api/routes/data.py)) y se expone al frontend como `user_location`.
+  - Devuelve `"lat,lon"` o `None` si la IP falla o no puede obtenerla o el servicio externo falla
+  - Ruta de prueba manual: [`testgeo.py`](/src/api/routes/testip.py) (`GET /api/testip`), con una llamada directa vía `requests` a modo de ejemplo/depuración.
+
+  ### 2) Nominatim ➡️ nominatim.org (gratuito, sin api key)
+
+  Geocodifica una dirección en texto (calle, ciudad...) a sus coordenadas, para calcular el `map_positioning` de usuarios y protectoras.
+
+  - Implementación: [`geolocation_service.py`](/src/api/services/geolocation_service.py) → `locate_address(direccion)`. Requiere un `User-Agent` propio por política de uso de Nominatim.
+  - Se consume desde `update_user_profile` ([`users_service.py`](/src/api/services/users_service.py)) y `update_shelter_profile` ([`shelters_service.py`](/src/api/services/shelters_service.py)) cada vez que cambia el campo `address`: si el geocoding falla por cualquier motivo, no bloquea el guardado del resto del perfil, simplemente no actualiza `map_positioning`.
+  - Ruta de prueba manual: [`testgeo.py`](/src/api/routes/testgeo.py) (`GET /api/testgeo`), con una llamada directa vía `requests` a modo de ejemplo/depuración.
+
+  ### 3) Cloudinary
+...
+
+
+---
 ## LÓGICA DE ESTADOS:
 
 ## Animal y Adoptar:

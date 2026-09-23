@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
 import { fetchProfile, updateProfile } from "../../services/authServices";
@@ -30,14 +30,20 @@ export const ColaboradorPerfil = () => {
   const [error, setError] = useState("");
   const [aviso, setAviso] = useState("");
   const [guardando, setGuardando] = useState(false);
- 
+  const errorRef = useRef(null);
+
   useEffect(() => {
     fetchProfile()
       .then((datos) => setForm(aFormulario(datos)))
       .catch((err) => setErrorCarga(err.message))
       .finally(() => setCargando(false));
   }, []);
- 
+
+  useEffect(() => {
+    if (error || aviso) errorRef.current?.focus();
+  }, [error, aviso]);
+
+
   const handleField = (campo, valor) => {
     setForm((prev) => ({ ...prev, [campo]: valor }));
     setAviso("");
@@ -70,18 +76,18 @@ export const ColaboradorPerfil = () => {
       {cargando ? (
         <div className="text-center text-muted py-5">Cargando perfil…</div>
       ) : errorCarga ? (
-        <div className="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert" ref={errorRef} tabIndex={-1}>
           {errorCarga}
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="col-md-8">
           {error && (
-            <div className="alert alert-danger" role="alert">
+            <div className="alert alert-danger" role="alert" ref={errorRef} tabIndex={-1}>
               {error}
             </div>
           )}
           {aviso && (
-            <div className="alert alert-success" role="alert">
+            <div className="alert alert-success" role="alert" ref={errorRef} tabIndex={-1}>
               {aviso}
             </div>
           )}

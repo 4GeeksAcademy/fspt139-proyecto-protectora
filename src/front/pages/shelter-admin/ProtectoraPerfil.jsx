@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
@@ -28,7 +28,7 @@ const Campo = ({ id, label, value, onChange, type = "text", required = false, pl
 );
 
 export const ProtectoraPerfil = () => {
-  const { store } = useGlobalReducer();
+  const { store, dispatch } = useGlobalReducer();
 
   const [protectora, setProtectora] = useState(null);
   const [form, setForm] = useState(null);
@@ -38,6 +38,7 @@ export const ProtectoraPerfil = () => {
   const [aviso, setAviso] = useState("");
   const [guardando, setGuardando] = useState(false);
   const [logoRoto, setLogoRoto] = useState(false);
+  const errorRef = useRef(null);
 
   useEffect(() => {
     getShelterProfile()
@@ -48,6 +49,10 @@ export const ProtectoraPerfil = () => {
       .catch((err) => setErrorCarga(err.message))
       .finally(() => setCargando(false));
   }, []);
+
+  useEffect(() => {
+    if (error || aviso) errorRef.current?.focus();
+  }, [error, aviso]);
 
   const handleField = (campo, valor) => {
     setForm((prev) => ({ ...prev, [campo]: valor }));
@@ -63,6 +68,9 @@ export const ProtectoraPerfil = () => {
       const datos = await updateShelterProfile(form);
       setProtectora(datos);
       setForm(aFormulario(datos));
+      if (datos.map_positioning) {
+        dispatch({ type: "set_user_location", payload: datos.map_positioning });
+      }
       setAviso("Cambios guardados");
     } catch (err) {
       setError(err.message);
@@ -88,18 +96,18 @@ export const ProtectoraPerfil = () => {
       {cargando ? (
         <div className="text-center text-muted py-5">Cargando perfil…</div>
       ) : errorCarga ? (
-        <div className="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert" ref={errorRef} tabIndex={-1}>
           {errorCarga}
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="col-md-8">
           {error && (
-            <div className="alert alert-danger" role="alert">
+            <div className="alert alert-danger" role="alert" ref={errorRef} tabIndex={-1}>
               {error}
             </div>
           )}
           {aviso && (
-            <div className="alert alert-success" role="alert">
+            <div className="alert alert-success" role="alert" ref={errorRef} tabIndex={-1}>
               {aviso}
             </div>
           )}

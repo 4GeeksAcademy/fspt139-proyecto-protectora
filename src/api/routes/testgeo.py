@@ -53,3 +53,35 @@ def testgeo_nominatim_action():
         "display_name": resultado.get("display_name"),
         "map_positioning": f"{ resultado.get("lat")},{ resultado.get("lon")}",
     }), 200
+
+
+IP_API_URL = "http://ip-api.com/json/{ip}"
+IP_API_TIMEOUT_SECONDS = 3
+
+
+# caso de prueba fijo para ip-api.com: usa una IP publica de ejemplo (DNS de Google)
+@api.route('/testip', methods=['GET'])
+def testip_action():
+    ip = "8.8.8.8"
+
+    try:
+        response = requests.get(
+            IP_API_URL.format(ip=ip),
+            timeout=IP_API_TIMEOUT_SECONDS,
+        )
+        response.raise_for_status()
+        resultado = response.json()
+    except requests.RequestException:
+        return jsonify({"error": "No se ha podido contactar con el api"}), 502
+
+    if resultado.get("status") != "success":
+        return jsonify({"error": "No se ha podido localizar esa IP"}), 404
+
+    return jsonify({
+        "ip": ip,
+        "lat": resultado.get("lat"),
+        "lon": resultado.get("lon"),
+        "city": resultado.get("city"),
+        "country": resultado.get("country"),
+        "map_positioning": f"{resultado.get('lat')},{resultado.get('lon')}",
+    }), 200

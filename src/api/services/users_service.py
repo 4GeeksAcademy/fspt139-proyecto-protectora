@@ -4,12 +4,22 @@ from api.repositories.user_repository import UserRepository
 from api.services.shelters_service import create_shelter
 from flask_bcrypt import generate_password_hash
 from flask_bcrypt import check_password_hash
-from flask_jwt_extended import create_access_token
 from api.utils import APIException
+from flask_jwt_extended import create_access_token, get_jwt_identity
+from api.services.geolocation_service import locate_address
 
 # campos que el usuario puede cambiar desde su perfil (rol, shelter_id o ranking nunca)
 EDITABLE_FIELDS = {"name", "last_name1", "last_name2", "phone", "email", "address"}
 REQUIRED_FIELDS = {"name", "last_name1", "phone", "email"}
+
+# funcion que usa el jwt de la peticion para recuperar el usuario, o falla si no lo encuentra;
+# con @jwt_required(optional=True) (sin token) devuelve None en vez de petar
+def get_current_user():
+    current_user_id = get_jwt_identity()
+    if not current_user_id:
+        return None
+    return get_user(current_user_id)
+
 
 # busca un usuario por uuid
 def find_user(user_id):
@@ -134,6 +144,15 @@ def update_user_profile(user, **data):
     nuevo_email = cambios.get("email")
     if nuevo_email and nuevo_email != user.email and UserRepository.get_by_email(nuevo_email):
         raise APIException("Ya existe una cuenta con ese correo", status_code=409)
+
+    if "address" in cambios and cambios["address"] != user.address:
+        try:
+            cambios["map_positioning"] = locate_address(cambios["address"]).get("map_positioning")
+        except APIException as error:
+            if error.status_code == 404:
+                cambios["map_positioning"] = None  # si no localiza la direccion vacia lo que haya
+        except Exception:
+            pass  # peta el apino tocamos map_positioning
 
     for campo, valor in cambios.items():
         setattr(user, campo, valor)

@@ -12,18 +12,29 @@ from api.services.requests_service import ABIERTA
 
 from api.services.geolocation_service import locate_ip
 from api.utils import get_client_ip
+from flask_jwt_extended import jwt_required
+from api.services.users_service import get_current_user
 
 from . import api
 
 
 @api.route('/data', methods=['GET'])
+@jwt_required(optional=True)
 def application_shared_data_action():
     shelter_types = ShelterTypeRepository.list_all()
     animal_types = AnimalTypeRepository.list_all()
     request_types = RequestTypeRepository.list_all()
 
-    # aqui modificar con devolver la del usuario si la tenemos
-    user_location = locate_ip(get_client_ip())
+    # si hay un usuario logueado con map_positioning propio, se prioriza sobre la IP
+    usuario = get_current_user()
+    user_location = usuario.map_positioning if usuario else None
+
+    if not user_location:
+        client_ip = get_client_ip()
+        try:
+            user_location = locate_ip(client_ip)
+        except Exception:
+            user_location = None
 
     response_body = {
         "shelter_types": [shelter_type.serialize() for shelter_type in shelter_types],
