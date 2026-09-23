@@ -12,6 +12,7 @@ export const Home = () => {
 
     const { store } = useGlobalReducer();
     const esProtectora = store.user?.rol === "shelter_admin";
+    const esColaborador = store.user?.rol === "volunteer";
 
     const [insights, setInsights] = useState(null);
     const [protectora, setProtectora] = useState(null);
@@ -62,25 +63,46 @@ export const Home = () => {
                             </>
                         ) : (
                             <>
-                                <div className="badge bg-white text-success rounded-pill px-3 py-2 mb-3">
-                                    ● 14 needs open today
-                                </div>
 
-                                <h1 className="fw-bold display-5">
-                                    They don't ask for money.
-                                    <br />
-                                    <div className="text-success d-inline">They ask for specific things.</div>
-                                </h1>
+                                {esColaborador ? (
+                                    <>
+                                        <h1 className="fw-bold display-5">
+                                            Hola,
+                                            <br />
+                                            <div className="text-success d-inline">{store.user.name}</div>
+                                        </h1>
 
-                                <p className="text-secondary my-3">
-                                    Shelters post exactly what they need, how much, and by when.
-                                    You choose the part you can cover and see it get filled.
-                                </p>
+                                        <p className="text-secondary my-3">
+                                            Gracias por tu tiempo y por querer ayudar. Cada cosa que aportas
+                                            llega directa a los animales que la necesitan.
+                                        </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <h1 className="fw-bold display-5">
+                                            They don't ask for money.
+                                            <br />
+                                            <div className="text-success d-inline">They ask for specific things.</div>
+                                        </h1>
+
+                                        <p className="text-secondary my-3">
+                                            Shelters post exactly what they need, how much, and by when.
+                                            You choose the part you can cover and see it get filled.
+                                        </p>
+                                    </>
+                                )}
 
                                 <div className="d-flex gap-2">
                                     <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
                                     <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
                                 </div>
+
+                                {esColaborador && (
+                                    <p className="small text-secondary mt-3 mb-0">
+                                        Tus colaboraciones y solicitudes de adopción están en{" "}
+                                        <Link to="/colaborador" className="text-success fw-semibold">Actividad</Link>.
+                                    </p>
+                                )}
                             </>
                         )}
                     </div>

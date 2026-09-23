@@ -70,7 +70,7 @@ export const Necesidades = () => {
 
     getRequests(
       { pagina, perPage: PER_PAGE },
-      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId },
+      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId, status: "abierta"},
     )
       .then((data) => {
         if (cancelado) return;
