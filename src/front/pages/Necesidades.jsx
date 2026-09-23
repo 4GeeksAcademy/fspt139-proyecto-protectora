@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams} from "react-router-dom";
 import { NecesidadCard } from "../components/NecesidadCard";
 import { Mapa } from "../components/Mapa";
 import { getRequests } from "../services/requestsService";
@@ -26,12 +26,13 @@ export const Necesidades = () => {
   const shelterTypes = store.shelterTypes || [];
   const esProtectora = store.user?.rol === "shelter_admin";
 
-  const [categoria, setCategoria] = useState("");
-  const [tipoId, setTipoId] = useState("");
-  const [busqueda, setBusqueda] = useState("");
-  const [busquedaAplicada, setBusquedaAplicada] = useState("");
-  const [pagina, setPagina] = useState(1);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoria = searchParams.get("categoria") || "";
+  const tipoId = searchParams.get("tipo") || "";
+  const busquedaAplicada = searchParams.get("q") || "";
+  const pagina = Number(searchParams.get("pagina")) || 1
 
+  const [busqueda, setBusqueda] = useState(busquedaAplicada);
   const [necesidades, setNecesidades] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPaginas, setTotalPaginas] = useState(1);
@@ -54,11 +55,18 @@ export const Necesidades = () => {
     return () => { cancelado = true; };
   }, []);
 
+  const actualizarUrl = (cambios) => {
+    const params = new URLSearchParams(searchParams);
+    if (!("pagina" in cambios)) params.delete("pagina");
+    Object.entries(cambios).forEach(([clave, valor]) => (valor ? params.set(clave, valor) : params.delete(clave)));
+    setSearchParams(params, { replace: true });
+  };
+
   useEffect(() => {
-    const temporizador = setTimeout(() => {
-      setBusquedaAplicada(busqueda);
-      setPagina(1);
-    }, 400);
+    // al volver atras el buscador ya coincide con la URL: sin esta guarda nos devolveria a la pagina 1
+    if (busqueda === busquedaAplicada) return;
+
+    const temporizador = setTimeout(() => actualizarUrl({ q: busqueda }), 400);
 
     return () => clearTimeout(temporizador);
   }, [busqueda]);
@@ -123,15 +131,12 @@ export const Necesidades = () => {
     });
   }, [necesidades, shelters, cargando, error]);
 
-  const cambiarCategoria = (id) => { setCategoria(id); setPagina(1); };
-  const cambiarTipo = (id) => { setTipoId(id); setPagina(1); };
+  const cambiarCategoria = (id) => actualizarUrl({ categoria: id });
+  const cambiarTipo = (id) => actualizarUrl({ tipo: id });
 
   const limpiarFiltros = () => {
-    setCategoria("");
-    setTipoId("");
     setBusqueda("");
-    setBusquedaAplicada("");
-    setPagina(1);
+    setSearchParams({}, { replace: true });
   };
 
   const sinResultados = !cargando && !error && necesidades.length === 0;
@@ -332,7 +337,7 @@ export const Necesidades = () => {
                 <button
                   className="btn btn-outline-primary rounded-pill px-4"
                   disabled={pagina <= 1}
-                  onClick={() => setPagina((p) => Math.max(1, p - 1))}
+                  onClick={() => actualizarUrl({ pagina: pagina - 1 })}
                 >
                   Anterior
                 </button>
@@ -340,7 +345,7 @@ export const Necesidades = () => {
                 <button
                   className="btn btn-outline-primary rounded-pill px-4"
                   disabled={pagina >= totalPaginas}
-                  onClick={() => setPagina((p) => Math.min(totalPaginas, p + 1))}
+                  onClick={() => actualizarUrl({ pagina: pagina + 1 })}
                 >
                   Siguiente
                 </button>
