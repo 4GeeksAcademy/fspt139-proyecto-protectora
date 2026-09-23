@@ -86,6 +86,28 @@
   ### 3) Cloudinary
 ...
 
+---
+## SECCIONES / PAGINAS PRINCIPALES:
+
+### — HOME
+>  - como usuario invitado o como colaborador, muestra un hero con información sobre la plataforma y enlaces a las secciones principales.
+>  - bajo usuario identificado como Protectora mostrará el dashboard con atajos a las principales secciones de su panel
+>  - la imagen del hero, rotará entre un set de imagenes locales
+### — NECESIDADES
+>   - listado de necesidades con representación en un mapa
+>   - filtrado básico por tipo 
+### — ADOPTAR
+>
+### — PROTECTORAS
+>
+### — AYUDA
+>
+### — TERMINOS DE USO Y PRIVACIDAD
+>
+### — LOGIN / SIGNUP / LOGOUT
+>
+### — 
+> ...
 
 ---
 ## LÓGICA DE ESTADOS:
