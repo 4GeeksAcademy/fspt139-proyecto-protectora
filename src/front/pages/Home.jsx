@@ -6,6 +6,7 @@ import { Statscard } from "../components/Statscard";
 import { ResumenProtectora } from "../components/protectora/ResumenProtectora";
 import { getHomeInsights } from "../services/insightsService";
 import { getShelterProfile } from "../services/sheltersService";
+import { usePageTitle } from "../hooks/usePageTitle";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 export const Home = () => {
@@ -16,6 +17,8 @@ export const Home = () => {
 
     const [insights, setInsights] = useState(null);
     const [protectora, setProtectora] = useState(null);
+
+    usePageTitle();
 
     useEffect(() => {
         if (esProtectora) return;

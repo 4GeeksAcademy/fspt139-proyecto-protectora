@@ -3,7 +3,9 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Mapa } from "../components/Mapa";
 import { AnimalCard } from "../components/AnimalCard";
 import { getAnimals } from "../services/animalsService";
+import { usePageTitle } from "../hooks/usePageTitle";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+
  
 const PER_PAGE = 12;
  
@@ -22,6 +24,7 @@ const EDADES = [
 ];
  
 export const Adoptar = () => {
+  usePageTitle("Adoptar");
   const { store } = useGlobalReducer();
   const animalTypes = store.animalTypes;
   const shelterTypes = store.shelterTypes || [];

@@ -1,7 +1,9 @@
 import { CategoryCard } from "../components/CategoryCard";
 import { FaqItem } from "../components/FaqItem";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export const Ayuda = () => {
+    usePageTitle("Ayuda");
 
     return (
         <div className="container py-4">

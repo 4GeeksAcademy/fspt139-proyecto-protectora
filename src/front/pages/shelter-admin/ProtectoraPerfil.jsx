@@ -5,6 +5,7 @@ import { SectionCard } from "../../components/protectora/SectionCard";
 import { getShelterProfile, updateShelterProfile } from "../../services/sheltersService";
 import { cargarMediaUrl } from "../../services/animalsService";
 import { generarIniciales } from "../../utils/iniciales";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 // campos de texto editables (el tipo va aparte porque llega anidado)
 const CAMPOS = ["name", "description", "logo_url", "email", "phone", "website", "instagram", "address"];
@@ -38,6 +39,8 @@ export const ProtectoraPerfil = () => {
   const [aviso, setAviso] = useState("");
   const [guardando, setGuardando] = useState(false);
   const [logoRoto, setLogoRoto] = useState(false);
+
+  usePageTitle("Panel · Perfil");
 
   useEffect(() => {
     getShelterProfile()

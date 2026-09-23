@@ -13,6 +13,7 @@ import { SolicitudAdopcionDetalleModal } from "../../components/protectora/Solic
 import { AbrirProcesoAdopcionModal } from "../../components/protectora/FormsProtectora/AbrirProcesoAdopcionModal";
 import { ADDOPTION_REQUEST_STATUS_OPTIONS, PENDIENTE } from "../../utils/addoptionRequestStatus";
 import { ADDOPTION_PROCESS_STATUS_LABELS, ABIERTO, CERRADO } from "../../utils/addoptionProcessStatus";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const PER_PAGE = 20;
 
@@ -35,6 +36,8 @@ export const ProtectoraAdopcionProceso = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+
+  usePageTitle("Panel · Proceso de adopción");
 
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");

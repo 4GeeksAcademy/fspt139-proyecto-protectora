@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const BotonCompartir = ({ url }) => {
+const BotonCompartir = ({ url, titulo }) => {
     const [mensajeCopiado, setMensajeCopiado] = useState(false);
 
     const handleCompartir = async () => {
@@ -8,7 +8,7 @@ const BotonCompartir = ({ url }) => {
 
         // Datos que se enviarán al menú nativo del sistema
         const datosCompartir = {
-            title: document.title,              // Captura el título de tu web actual
+            title: titulo || document.title,       // Captura el título de tu web actual
             text: '¡Echa un vistazo a esta página!',
             url: urlCompartir,
         };
