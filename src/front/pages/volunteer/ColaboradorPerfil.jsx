@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
 import { fetchProfile, updateProfile } from "../../services/authServices";
 import { generarIniciales } from "../../utils/iniciales";
+import {usePageTitle} from "../../hooks/usePageTitle";
  
 // campos editables del usuario (los mismos que acepta PUT /api/profile)
 const CAMPOS = ["name", "last_name1", "last_name2", "email", "phone", "address"];
