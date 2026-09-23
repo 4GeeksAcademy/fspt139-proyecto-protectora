@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import { getAnimalById, cargarMediaUrl } from "../services/animalsService";
 import { getPublicAddoptionProcess } from "../services/addoptionRequestService";
 import { calcularAgeLabel } from "../utils/animalAge";
@@ -34,6 +34,7 @@ const SiNo = (valor) => (valor === true ? "Sí" : valor === false ? "No" : null)
 export const AnimalProfile = () => {
   const { id } = useParams();
   const { store } = useGlobalReducer();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [animal, setAnimal] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -79,6 +80,20 @@ export const AnimalProfile = () => {
 
     return () => { cancelado = true; };
   }, [id]);
+
+  // vuelta desde el login (?adoptar=1 en la url, ver el Link "Inicia sesión para solicitar
+  // adopción"): si ya hay sesion y el proceso sigue admitiendo solicitudes, abre el modal solo
+  useEffect(() => {
+    if (!proceso || !store.token || searchParams.get("adoptar") !== "1") return;
+
+    if (proceso.is_open_for_requests) setModalSolicitudAbierto(true);
+
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.delete("adoptar");
+      return next;
+    }, { replace: true });
+  }, [proceso, store.token]);
 
    if (cargando) {
     return (
@@ -267,9 +282,10 @@ export const AnimalProfile = () => {
               ) : (
                 <Link
                   to="/login"
+                  state={{ from: `/adoptar/${id}?adoptar=1` }}
                   className="btn btn-success btn-lg w-100 mt-4 rounded-pill d-block text-center"
                 >
-                  Adoptar (FALTA CAMBIAR Login)
+                  Adoptar
                 </Link>
               )
             ) : (

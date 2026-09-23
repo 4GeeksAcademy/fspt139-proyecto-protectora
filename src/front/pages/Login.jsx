@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {login} from "../services/authServices";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { soloRedirectsInternos } from "../utils/redirect";
 
 export const Login = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+    // bypass del state al que redirigir tras identificarse (Colaborar o Adoptar o Registrar)
+    const redirectTo = soloRedirectsInternos(location.state?.from)
 
     const [showPassword, setShowPassword] = useState(false);
     const [form, setForm] = useState({ user: "", password: "" });
@@ -15,10 +19,10 @@ export const Login = () => {
     };
     const { store, dispatch } = useGlobalReducer()
 
-    //prevenimos si ya estas identificado, redirigir a home
+    //prevenimos si ya estas identificado, redirigir a donde recibimos la accion (o a home)
     useEffect(() => {
         if (store.token) {
-            navigate("/");
+            navigate(redirectTo, { replace: true });
         }
     }, [store.token]);
 
@@ -28,7 +32,7 @@ export const Login = () => {
         try {
             const { token, user } = await login(form.user, form.password);
             dispatch({ type: "LOGIN", payload: {token, user} });
-            navigate("/")
+            navigate(redirectTo, { replace: true })
 
 
         } catch (error) {
@@ -98,7 +102,7 @@ export const Login = () => {
                     </form>
 
                     <p className="text-center small mb-0 text-secondary">
-                        ¿Todavía no tienes cuenta? <Link to="/signup" className="fw-semibold text-primary">Créala aquí</Link>
+                        ¿Todavía no tienes cuenta? <Link to="/signup" state={{ from: redirectTo }} className="fw-semibold text-primary">Créala aquí</Link>
                     </p>
                 </div>
             </div>

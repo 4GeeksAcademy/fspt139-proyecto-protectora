@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useSearchParams, Link } from "react-router-dom";
 import { getRequestById } from "../services/requestsService";
 import { cargarMediaUrl } from "../services/animalsService";
 import { construirBadge, calcularDeadlineLabel, esFueraDePlazo } from "../utils/necesidadDeadline";
@@ -23,6 +23,7 @@ const Dato = ({ etiqueta, children }) => {
 export const ContributeProfile = () => {
   const { id } = useParams();
   const { store } = useGlobalReducer();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [necesidad, setNecesidad] = useState(null);
   const [cargando, setCargando] = useState(true);
@@ -56,6 +57,21 @@ export const ContributeProfile = () => {
 
     return () => { cancelado = true; };
   }, [id]);
+
+  // vuelta desde el login (?colaborar=1 en la url, ver el Link "Inicia sesión para colaborar"):
+  // si ya hay sesion y la necesidad admite colaboraciones, abre el modal solo y limpia la url
+  useEffect(() => {
+    if (!necesidad || !store.token || searchParams.get("colaborar") !== "1") return;
+
+    const puedeColaborar = necesidad.status !== "cerrada" && !esFueraDePlazo(necesidad.request_deadline);
+    if (puedeColaborar) setModalColaborarAbierto(true);
+
+    setSearchParams((prev) => {
+      const next = new URLSearchParams(prev);
+      next.delete("colaborar");
+      return next;
+    }, { replace: true });
+  }, [necesidad, store.token]);
 
   if (cargando) {
     return (
@@ -198,9 +214,10 @@ export const ContributeProfile = () => {
             ) : (
               <Link
                 to="/login"
+                state={{ from: `/necesidades/${necesidad.request_id}?colaborar=1` }}
                 className="btn btn-success btn-lg w-100 mt-4 rounded-pill d-block text-center"
               >
-                Colaborar (FALTA LOGIN)
+                Colaborar
               </Link>
             )}
           </div>
