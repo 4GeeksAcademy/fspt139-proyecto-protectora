@@ -8,6 +8,7 @@ from api.repositories.animal_type_repository import AnimalTypeRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.repositories.request_type_repository import RequestTypeRepository
 from api.services.animals_service import PUBLIC_STATUSES
+from api.services.requests_service import ABIERTA
 
 from api.services.geolocation_service import locate_ip
 from api.utils import get_client_ip
@@ -37,7 +38,8 @@ def application_shared_data_action():
 @api.route('/data/insights', methods=['GET'])
 def home_insights_action():
 
-    needs_open_count = RequestRepository.list_all(per_page=1).total
+    # solo abiertas, igual que el tablon de Needs
+    needs_open_count = RequestRepository.list_all(filters={"status": ABIERTA}, per_page=1).total
     animals_available_count = AnimalRepository.list_all(
         filters={"status": PUBLIC_STATUSES}, per_page=1).total
     shelters_count = ShelterRepository.list_all(per_page=1).total
@@ -48,7 +50,7 @@ def home_insights_action():
             collaborations_closed_count += 1
 
     open_needs_page = RequestRepository.list_all(
-        sort_by="request_deadline", dir="asc", per_page=3)
+        filters={"status": ABIERTA}, sort_by="request_deadline", dir="asc", per_page=3)
     open_needs = []
     for request in open_needs_page.items:
         open_needs.append(request.serialize())

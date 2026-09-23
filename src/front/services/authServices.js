@@ -116,3 +116,26 @@ export const getUser = () => {
   const user = localStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 };
+
+// guarda los datos personales del usuario logueado y los actualiza
+export const updateProfile = async (datos) => {
+  const response = await fetch(`${BACKEND_URL.replace(/\/$/, "")}/api/profile`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(datos),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const error = new Error(data.error || data.message || "No se han podido guardar los cambios");
+    error.status = response.status;
+    throw error;
+  }
+
+  localStorage.setItem("user", JSON.stringify(data));
+
+  return data;
+};

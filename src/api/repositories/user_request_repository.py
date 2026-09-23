@@ -1,6 +1,6 @@
 from sqlalchemy.orm import selectinload
 
-from api.models import UserRequest, db
+from api.models import Request, UserRequest, db
 
 
 class UserRequestRepository:
@@ -28,6 +28,21 @@ class UserRequestRepository:
         query = db.select(UserRequest).where(
             UserRequest.request_id == request_id
         ).options(selectinload(UserRequest.user)).order_by(UserRequest.created_at.desc())
+
+        return db.paginate(query, page=page, per_page=per_page, error_out=False)
+
+    # listado (paginado) de las colaboraciones de un usuario, para su vista de actividad: incluye la
+    # necesidad y su protectora; con answered=True solo las que la protectora ya ha respondido
+    @staticmethod
+    def list_by_user(user_id, answered=False, page=1, per_page=20):
+        query = db.select(UserRequest).where(
+            UserRequest.user_id == user_id
+        ).options(
+            selectinload(UserRequest.request).selectinload(Request.shelter)
+        ).order_by(UserRequest.created_at.desc())
+
+        if answered:
+            query = query.where(UserRequest.shelter_answer.is_not(None))
 
         return db.paginate(query, page=page, per_page=per_page, error_out=False)
 

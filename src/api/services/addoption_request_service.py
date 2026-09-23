@@ -89,6 +89,23 @@ def serialize_addoption_request_for_shelter(addoption_request):
     return data
 
 
+# incluye los datos basicos del animal: el colaborador necesita saber por quien pregunto y enlazar a su ficha
+def serialize_addoption_request_for_user(addoption_request):
+    data = addoption_request.serialize()
+    animal = addoption_request.animal
+    data["animal"] = {
+        "animal_id": animal.animal_id,
+        "name": animal.name,
+        "shelter_name": animal.shelter.name if animal.shelter else None,
+    } if animal else None
+    return data
+
+
+# listado (paginado) de las solicitudes de adopcion del usuario logueado
+def list_my_addoption_requests(user_id, status=None, page=1, per_page=20):
+    return AddoptionRequestRepository.list_by_user(user_id, status=status, page=page, per_page=per_page)
+
+
 def get_shelter_addoption_request(addoption_request_id, shelter_id):
     return _get_owned_addoption_request(addoption_request_id, shelter_id)
 

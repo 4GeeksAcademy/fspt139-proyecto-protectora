@@ -65,6 +65,24 @@ def serialize_user_request_for_shelter(user_request):
     data["user"] = user_request.user.serialize() if user_request.user else None
     return data
 
+# incluye los datos basicos de la necesidad: el colaborador necesita saber a que ayudo y enlazar a su ficha
+def serialize_user_request_for_user(user_request):
+    data = user_request.serialize()
+    necesidad = user_request.request
+    data["request"] = {
+        "request_id": necesidad.request_id,
+        "name": necesidad.name,
+        "unit": necesidad.unit,
+        "status": necesidad.status,
+        "shelter_name": necesidad.shelter.name if necesidad.shelter else None,
+    } if necesidad else None
+    return data
+
+
+# listado (paginado) de las colaboraciones del usuario logueado
+def list_my_user_requests(user_id, answered=False, page=1, per_page=20):
+    return UserRequestRepository.list_by_user(user_id, answered=answered, page=page, per_page=per_page)
+
 
 # listado (paginado) de las contribuciones de una necesidad propia de la protectora
 def list_shelter_user_requests(request_id, shelter_id, page=1, per_page=20):

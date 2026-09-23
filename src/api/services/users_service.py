@@ -7,14 +7,15 @@ from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token
 from api.utils import APIException
 
+# campos que el usuario puede cambiar desde su perfil (rol, shelter_id o ranking nunca)
+EDITABLE_FIELDS = {"name", "last_name1", "last_name2", "phone", "email", "address"}
+REQUIRED_FIELDS = {"name", "last_name1", "phone", "email"}
+
 # busca un usuario por uuid
-
-
 def find_user(user_id):
     return UserRepository.get_by_user_id(user_id)
+
 # carga un usuario por uuid o falla si no encontrado
-
-
 def get_user(user_id):
     user = UserRepository.get_by_user_id(user_id)
     if user is None:
@@ -22,8 +23,6 @@ def get_user(user_id):
     return user
 
 # crear, con uuid opcional y password de entrada plana y hash en el servicio
-
-
 def create_user(**data):
     password = data.pop("password")
 
@@ -121,5 +120,22 @@ def register_user(shelter_data=None, **data):
 
     if shelter:
         user.shelter = shelter
+
+    return UserRepository.save(user)
+
+# actualiza los datos personales del usuario logueado;
+def update_user_profile(user, **data):
+    cambios = {campo: valor for campo, valor in data.items() if campo in EDITABLE_FIELDS}
+
+    for campo in REQUIRED_FIELDS & cambios.keys():
+        if not str(cambios[campo] or "").strip():
+            raise APIException(f"El campo {campo} es obligatorio", status_code=400)
+
+    nuevo_email = cambios.get("email")
+    if nuevo_email and nuevo_email != user.email and UserRepository.get_by_email(nuevo_email):
+        raise APIException("Ya existe una cuenta con ese correo", status_code=409)
+
+    for campo, valor in cambios.items():
+        setattr(user, campo, valor)
 
     return UserRepository.save(user)

@@ -14,7 +14,7 @@ export const getRequests = async (
     per_page: perPage,
   });
 
-  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId, animalId } = filters;
+  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId, animalId, status } = filters;
 
   if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
   if (tipoShelter) params.set("shelter_type_id", tipoShelter);
@@ -22,6 +22,7 @@ export const getRequests = async (
   if (requestTypeId) params.set("request_type_id", requestTypeId);
   if (shelterId) params.set("shelter_id", shelterId);
   if (animalId) params.set("animal_id", animalId);
+  if (status) params.set("status", status);
 
   const response = await fetch(`${backendUrl}/api/requests?${params.toString()}`);
 
@@ -186,6 +187,26 @@ export const crearColaboracion = async (request_id, { amount, details } = {}) =>
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.error || data.message || "No se ha podido enviar tu colaboración");
+  }
+  return response.json();
+};
+
+// listado (paginado) de las colaboraciones del usuario logueado; con `respondidas` solo las ya contestadas
+export const getMisColaboraciones = async ({ pagina = 1, perPage = 20 } = {}, filters = {}) => {
+  const params = new URLSearchParams({ page: pagina, per_page: perPage });
+
+  const { respondidas } = filters;
+  if (respondidas) params.set("answered", "true");
+
+  const response = await fetch(`${backendUrl}/api/user/user-requests?${params.toString()}`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || data.message || "No se han podido obtener tus colaboraciones");
   }
   return response.json();
 };
