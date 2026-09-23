@@ -8,6 +8,7 @@ import { NotFound } from "./NotFound";
 import { SolicitarAdopcionModal } from "../components/adopcion/SolicitarAdopcionModal";
 import { AnimalNeeds } from "../components/necesidades/AnimalNeeds";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { usePageTitle } from "../hooks/usePageTitle";
 import { ANIMAL_PUBLIC_STATUS_LABELS } from "../utils/format";
  
 // una fila etiqueta/valor que desaparece sola si no hay valor
@@ -49,6 +50,7 @@ export const AnimalProfile = () => {
   const [mediaActivo, setMediaActivo] = useState(null);
   const [proceso, setProceso] = useState(null);
   const [modalSolicitudAbierto, setModalSolicitudAbierto] = useState(false);
+  usePageTitle(animal?.name);
  
   const recargarProceso = () => {
     getPublicAddoptionProcess(id).then(setProceso).catch(() => setProceso(null));

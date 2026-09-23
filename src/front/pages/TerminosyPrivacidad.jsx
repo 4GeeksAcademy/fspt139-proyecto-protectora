@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { usePageTitle } from '../hooks/usePageTitle';
 
 export const TerminosyPrivacidad = () => {
+  usePageTitle('Términos y privacidad');
   return (
     <div className="container mt-4 mb-5" style={{ maxWidth: '900px' }}>
       

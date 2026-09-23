@@ -12,6 +12,7 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
 import { NecesidadPreviewCard } from "../../components/protectora/NecesidadPreviewCard";
 import { AnimalMiniAvatar } from "../../components/protectora/AnimalMiniAvatar";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const BYTES_MAX_IMAGEN = 10 * 1024 * 1024;
 
@@ -65,6 +66,8 @@ export const ProtectoraNecesidadesForm = () => {
   const [shelterAnimals, setShelterAnimals] = useState([]);
   const [showAnimalPicker, setShowAnimalPicker] = useState(false);
   const [animalQuery, setAnimalQuery] = useState("");
+
+  usePageTitle(isEditMode ? "Panel · Editar necesidad" : "Panel · Nueva necesidad");
 
   const [mediaItems, setMediaItems] = useState([]);
   const [coverId, setCoverId] = useState(null);

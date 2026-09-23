@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getShelterAddoptionProcesses } from "../../services/addoptionProcessService";
 import { AdoptionProcessCard } from "../../components/protectora/AdoptionProcessCard";
 import { ADDOPTION_PROCESS_STATUS_OPTIONS } from "../../utils/addoptionProcessStatus";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const PER_PAGE = 8;
 
@@ -17,6 +18,8 @@ export const ProtectoraAdopciones = () => {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [pendingFilter, setPendingFilter] = useState(false);
+
+  usePageTitle("Panel · Adopciones");
 
   // pequeño debounce para no lanzar una petición por cada tecla
   useEffect(() => {

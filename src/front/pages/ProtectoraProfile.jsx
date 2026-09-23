@@ -9,6 +9,7 @@ import { NecesidadCard } from "../components/NecesidadCard";
 import { AnimalCard } from "../components/AnimalCard";
 import { Metrica } from "../components/protectora/ProtectoraCard";
 import { NotFound } from "./NotFound";
+import { usePageTitle } from "../hooks/usePageTitle";
 import useGlobalReducer from "../hooks/useGlobalReducer";
  
 const Dato = ({ etiqueta, children }) => {
@@ -58,6 +59,8 @@ export const ProtectoraProfile = () => {
   const [noEncontrada, setNoEncontrada] = useState(false);
   const [necesidades, setNecesidades] = useState(null);
   const [animales, setAnimales] = useState(null);
+
+  usePageTitle(protectora?.name);
  
   useEffect(() => {
     let cancelado = false;

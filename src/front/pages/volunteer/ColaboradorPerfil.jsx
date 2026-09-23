@@ -3,6 +3,7 @@ import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
 import { fetchProfile, updateProfile } from "../../services/authServices";
 import { generarIniciales } from "../../utils/iniciales";
+import { usePageTitle } from "../../hooks/usePageTitle";
  
 // campos editables del usuario (los mismos que acepta PUT /api/profile)
 const CAMPOS = ["name", "last_name1", "last_name2", "email", "phone", "address"];
@@ -30,6 +31,8 @@ export const ColaboradorPerfil = () => {
   const [error, setError] = useState("");
   const [aviso, setAviso] = useState("");
   const [guardando, setGuardando] = useState(false);
+
+  usePageTitle("Mi perfil");
  
   useEffect(() => {
     fetchProfile()
