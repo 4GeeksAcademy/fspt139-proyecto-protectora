@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
-const BotonCompartir = () => {
+const BotonCompartir = ({ url }) => {
     const [mensajeCopiado, setMensajeCopiado] = useState(false);
 
     const handleCompartir = async () => {
+        const urlCompartir = url || window.location.href;
+
         // Datos que se enviarán al menú nativo del sistema
         const datosCompartir = {
             title: document.title,              // Captura el título de tu web actual
             text: '¡Echa un vistazo a esta página!',
-            url: window.location.href,          // Captura la URL actual automáticamente
+            url: urlCompartir,
         };
 
         // 1. Validamos si el navegador soporta la Web Share API
@@ -23,7 +25,7 @@ const BotonCompartir = () => {
         } else {
             // 2. Alternativa: Si no es compatible, copiamos la URL al portapapeles
             try {
-                await navigator.clipboard.writeText(window.location.href);
+                await navigator.clipboard.writeText(urlCompartir);
                 setMensajeCopiado(true);
 
                 // Ocultar el mensaje de éxito después de 2 segundos
