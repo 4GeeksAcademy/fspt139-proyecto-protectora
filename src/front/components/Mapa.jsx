@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -21,6 +21,15 @@ const iconoVerde = new Icon({
   ...iconoNormal.options,
   className: "pin-usuario",
 });
+
+// Expone la instancia del mapa de la pagina al componente padre (via onListo)
+const ObtenerInstanciaMapa = ({ onListo }) => {
+  const mapa = useMap();
+  useEffect(() => {
+    onListo(mapa);
+  }, [mapa, onListo]);
+  return null;
+};
 
 // Convierte las coordenadas del backend en dos numeros
 const obtenerPosicion = (ubicacion) => {
@@ -51,9 +60,9 @@ export const Mapa = ({
 }) => {
   const { store } = useGlobalReducer();
   const [mapaGrande, setMapaGrande] = useState(false);
+  const instanciaMapaRef = useRef(null);
 
   const posicionUsuario = obtenerPosicion(store.user_location);
-  const centroMapa = posicionUsuario || [40.4168, -3.7038];
 
   // Agrupa los elementos que tienen las mismas coordenadas
   const ubicacionesAgrupadas = useMemo(() => {
@@ -78,6 +87,22 @@ export const Mapa = ({
 
     return Array.from(grupos.values());
   }, [datos]);
+
+  // Busca la primera posicion de los datosa que nos devuelve posicion, ojo... requiere que mantengamos como map_positioning la propiedad del fetch que traigamos
+  const primeraPosicionValida = useMemo(() => {
+    for (const dato of datos) {
+      const posicion = obtenerPosicion(dato.map_positioning);
+      if (posicion) return posicion;
+    }
+    return null;
+  }, [datos]);
+
+  // Centra el mapa en:
+  // - la primera posicion valida del listado (map_positioning)
+  // - si no hay resultados con ubicacion cae en la posicion del usuario
+  // - si no tenemos Madrid por defecto
+  const centroMapa =
+    primeraPosicionValida || posicionUsuario || [40.4168, -3.7038];
 
   return (
     <div
@@ -221,25 +246,50 @@ export const Mapa = ({
             </Marker>
           );
         })}
+
+        <ObtenerInstanciaMapa
+          onListo={(mapa) => { instanciaMapaRef.current = mapa; }}
+        />
       </MapContainer>
 
-      {/* Boton para ampliar o reducir el mapa */}
-      <button
-        type="button"
-        className="btn btn-light btn-sm shadow position-absolute bottom-0 end-0 m-3"
+      <div
+        className="position-absolute bottom-0 end-0 m-3 d-flex flex-column gap-2"
         style={{ zIndex: 1000 }}
-        title={mapaGrande ? "Reducir mapa" : "Ampliar mapa"}
-        aria-label={mapaGrande ? "Reducir mapa" : "Ampliar mapa"}
-        onClick={() => setMapaGrande(!mapaGrande)}
       >
-        <i
-          className={
-            mapaGrande
-              ? "fa-solid fa-compress"
-              : "fa-solid fa-expand"
-          }
-        ></i>
-      </button>
+        {posicionUsuario && (
+          <button
+            type="button"
+            className="btn btn-light btn-sm shadow"
+            title="Centrar en mi ubicación"
+            aria-label="Centrar en mi ubicación"
+            onClick={() => {
+              instanciaMapaRef.current?.setView(
+                posicionUsuario,
+                instanciaMapaRef.current.getZoom(),
+              );
+            }}
+          >
+            <i className="fa-solid fa-location-crosshairs"></i>
+          </button>
+        )}
+
+        {/* Boton para ampliar o reducir el mapa */}
+        <button
+          type="button"
+          className="btn btn-light btn-sm shadow"
+          title={mapaGrande ? "Reducir mapa" : "Ampliar mapa"}
+          aria-label={mapaGrande ? "Reducir mapa" : "Ampliar mapa"}
+          onClick={() => setMapaGrande(!mapaGrande)}
+        >
+          <i
+            className={
+              mapaGrande
+                ? "fa-solid fa-compress"
+                : "fa-solid fa-expand"
+            }
+          ></i>
+        </button>
+      </div>
     </div>
   );
 };
