@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { Link, useSearchParams} from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { NecesidadCard } from "../components/NecesidadCard";
 import { Mapa } from "../components/Mapa";
 import { getRequests } from "../services/requestsService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getShelters } from "../services/sheltersService";
+import { useMiProtectora } from "../hooks/useMiProtectora";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 const PER_PAGE = 12;
@@ -26,6 +27,8 @@ export const Necesidades = () => {
   const requestTypes = store.requestTypes || [];
   const shelterTypes = store.shelterTypes || [];
   const esProtectora = store.user?.rol === "shelter_admin";
+
+  const { esMiNecesidad } = useMiProtectora();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const categoria = searchParams.get("categoria") || "";
@@ -81,7 +84,7 @@ export const Necesidades = () => {
 
     getRequests(
       { pagina, perPage: PER_PAGE },
-      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId, status: "abierta"},
+      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId, status: "abierta" },
     )
       .then((data) => {
         if (cancelado) return;
@@ -278,20 +281,20 @@ export const Necesidades = () => {
             </div>
 
             <div className="d-flex flex-wrap flex-sm-nowrap gap-2">
-  <select
-    aria-label="Filtrar por tipo de protectora"
-    className="form-select form-select-sm rounded-pill"
-    style={{ width: "190px", maxWidth: "100%" }}
-    value={tipoId}
-    onChange={(e) => cambiarTipo(e.target.value)}
-  >
-    <option value="">Cualquier tipo</option>
-    {shelterTypes.map((tipo) => (
-      <option key={tipo.shelter_type_id} value={tipo.id}>
-        {tipo.name}
-      </option>
-    ))}
-  </select>
+              <select
+                aria-label="Filtrar por tipo de protectora"
+                className="form-select form-select-sm rounded-pill"
+                style={{ width: "190px", maxWidth: "100%" }}
+                value={tipoId}
+                onChange={(e) => cambiarTipo(e.target.value)}
+              >
+                <option value="">Cualquier tipo</option>
+                {shelterTypes.map((tipo) => (
+                  <option key={tipo.shelter_type_id} value={tipo.id}>
+                    {tipo.name}
+                  </option>
+                ))}
+              </select>
 
               <input
                 type="search"
@@ -330,7 +333,7 @@ export const Necesidades = () => {
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
               {necesidades.map((necesidad) => (
                 <div className="col" key={necesidad.request_id ?? necesidad.id}>
-                  <NecesidadCard necesidad={necesidad} />
+                  <NecesidadCard necesidad={necesidad} esMia={esMiNecesidad(necesidad)} />
                 </div>
               ))}
             </div>
