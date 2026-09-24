@@ -1,6 +1,6 @@
 import React from "react";
-import { generarIniciales } from "../../utils/iniciales";
 import { Link } from "react-router-dom";
+import { AvatarLogoProtectora } from "./AvatarLogoProtectora";
 
 
 
@@ -24,8 +24,6 @@ export const Metrica = ({ valor, etiqueta, destacada }) => (
 export const ProtectoraCard = ({ protectora, esMiProtectora = false }) => {
   if (!protectora) return null;
 
-  const iniciales = generarIniciales(protectora.name);
-
   return (
     <div
       className="card h-100 border-0 shadow-sm overflow-hidden"
@@ -36,18 +34,7 @@ export const ProtectoraCard = ({ protectora, esMiProtectora = false }) => {
       <div className="card-body d-flex flex-column p-4">
 
         <div className="d-flex align-items-center gap-3 mb-3">
-          <div
-            className="rounded-circle d-flex justify-content-center align-items-center fw-bold flex-shrink-0"
-            style={{
-              width: "52px",
-              height: "52px",
-              backgroundColor: "var(--rp-verde-cl)",
-              color: "var(--rp-verde)",
-              fontSize: "1.1rem",
-            }}
-          >
-            {iniciales}
-          </div>
+          <AvatarLogoProtectora logoUrl={protectora.logo_url} nombre={protectora.name} size={52} />
 
           <div className="overflow-hidden">
             <h5

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { SectionCard } from "../../components/protectora/SectionCard";
-import { getShelterProfile, updateShelterProfile } from "../../services/sheltersService";
-import { cargarMediaUrl } from "../../services/animalsService";
-import { generarIniciales } from "../../utils/iniciales";
+import { getShelterProfile, updateShelterProfile, uploadShelterLogo } from "../../services/sheltersService";
+import { AvatarLogoProtectora } from "../../components/protectora/AvatarLogoProtectora";
 import { usePageTitle } from "../../hooks/usePageTitle";
 
 // campos de texto editables (el tipo va aparte porque llega anidado)
@@ -29,7 +28,7 @@ const Campo = ({ id, label, value, onChange, type = "text", required = false, pl
 );
 
 export const ProtectoraPerfil = () => {
-  const { store } = useGlobalReducer();
+  const { store, dispatch } = useGlobalReducer();
 
   const [protectora, setProtectora] = useState(null);
   const [form, setForm] = useState(null);
@@ -38,7 +37,10 @@ export const ProtectoraPerfil = () => {
   const [error, setError] = useState("");
   const [aviso, setAviso] = useState("");
   const [guardando, setGuardando] = useState(false);
-  const [logoRoto, setLogoRoto] = useState(false);
+  const errorRef = useRef(null);
+  const [logoSubiendo, setLogoSubiendo] = useState(false);
+  const [arrastrandoLogo, setArrastrandoLogo] = useState(false);
+  const logoInputRef = useRef(null);
 
   usePageTitle("Panel · Perfil");
 
@@ -52,10 +54,42 @@ export const ProtectoraPerfil = () => {
       .finally(() => setCargando(false));
   }, []);
 
+  useEffect(() => {
+    if (error || aviso) errorRef.current?.focus();
+  }, [error, aviso]);
+
   const handleField = (campo, valor) => {
     setForm((prev) => ({ ...prev, [campo]: valor }));
     setAviso("");
-    if (campo === "logo_url") setLogoRoto(false);
+  };
+
+  const handleLogoFile = async (file) => {
+    if (!file) return;
+    setError("");
+    setLogoSubiendo(true);
+    try {
+      const datos = await uploadShelterLogo(file);
+      setProtectora(datos);
+      setForm(aFormulario(datos));
+      setAviso("Logo actualizado");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLogoSubiendo(false);
+    }
+  };
+
+  const handleDragOverLogo = (e) => {
+    e.preventDefault();
+    setArrastrandoLogo(true);
+  };
+
+  const handleDragLeaveLogo = () => setArrastrandoLogo(false);
+
+  const handleDropLogo = (e) => {
+    e.preventDefault();
+    setArrastrandoLogo(false);
+    handleLogoFile(e.dataTransfer.files?.[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -66,6 +100,9 @@ export const ProtectoraPerfil = () => {
       const datos = await updateShelterProfile(form);
       setProtectora(datos);
       setForm(aFormulario(datos));
+      if (datos.map_positioning) {
+        dispatch({ type: "set_user_location", payload: datos.map_positioning });
+      }
       setAviso("Cambios guardados");
     } catch (err) {
       setError(err.message);
@@ -91,54 +128,79 @@ export const ProtectoraPerfil = () => {
       {cargando ? (
         <div className="text-center text-muted py-5">Cargando perfil…</div>
       ) : errorCarga ? (
-        <div className="alert alert-danger" role="alert">
+        <div className="alert alert-danger" role="alert" ref={errorRef} tabIndex={-1}>
           {errorCarga}
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="col-md-8">
           {error && (
-            <div className="alert alert-danger" role="alert">
+            <div className="alert alert-danger" role="alert" ref={errorRef} tabIndex={-1}>
               {error}
             </div>
           )}
           {aviso && (
-            <div className="alert alert-success" role="alert">
+            <div className="alert alert-success" role="alert" ref={errorRef} tabIndex={-1}>
               {aviso}
             </div>
           )}
 
-          <SectionCard number={1} title="Identidad" subtitle="Cómo os reconocen las personas colaboradoras." unlocked>
+          <SectionCard number={1} title="Identidad de la Protectora" subtitle="Cómo os reconocen las personas colaboradoras." unlocked>
             <div className="d-flex align-items-center gap-3 mb-3">
               <div
-                className="rounded-circle overflow-hidden d-flex align-items-center justify-content-center flex-shrink-0"
-                style={{ width: "72px", height: "72px", backgroundColor: "var(--rp-verde-cl)" }}
+                className="position-relative flex-shrink-0 rounded-circle"
+                style={{
+                  width: "72px",
+                  height: "72px",
+                  cursor: "pointer",
+                  outline: arrastrandoLogo ? "2px dashed var(--rp-verde)" : "none",
+                  outlineOffset: "2px",
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="Cambiar logo"
+                onClick={() => logoInputRef.current?.click()}
+                onKeyDown={(e) => e.key === "Enter" && logoInputRef.current?.click()}
+                onDragOver={handleDragOverLogo}
+                onDragLeave={handleDragLeaveLogo}
+                onDrop={handleDropLogo}
               >
-                {form.logo_url && !logoRoto ? (
-                  <img
-                    src={cargarMediaUrl(form.logo_url)}
-                    alt=""
-                    className="w-100 h-100"
-                    style={{ objectFit: "cover" }}
-                    onError={() => setLogoRoto(true)}
-                  />
-                ) : (
-                  <span className="fw-bold fs-4" style={{ color: "var(--rp-verde)" }}>
-                    {generarIniciales(form.name)}
-                  </span>
-                )}
+                <AvatarLogoProtectora
+                  logoUrl={form.logo_url}
+                  nombre={form.name}
+                  size={72}
+                  cargando={logoSubiendo}
+                />
+                <span
+                  className="position-absolute bottom-0 end-0 rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                  style={{
+                    width: "24px",
+                    height: "24px",
+                    backgroundColor: "var(--rp-verde)",
+                    color: "white",
+                    border: "2px solid var(--rp-papel)",
+                    lineHeight: 1,
+                  }}
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+
+                <input
+                  ref={logoInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png"
+                  hidden
+                  onChange={(e) => {
+                    handleLogoFile(e.target.files?.[0]);
+                    e.target.value = "";
+                  }}
+                />
               </div>
               <div className="flex-grow-1">
-                <label className="form-label" htmlFor="logo_url">
-                  URL del logo
-                </label>
-                <input
-                  id="logo_url"
-                  type="url"
-                  className="form-control"
-                  value={form.logo_url}
-                  placeholder="https://…"
-                  onChange={(e) => handleField("logo_url", e.target.value)}
-                />
+                <p className="fw-semibold mb-1">Logo de la protectora</p>
+                <p className="text-muted small mb-0">
+                  Haz clic o arrastra una imagen.
+                </p>
               </div>
             </div>
 

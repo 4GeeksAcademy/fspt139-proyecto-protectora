@@ -56,6 +56,7 @@ export default function storeReducer(store, action = {}) {
         ...store,
         token: action.payload.token,
         user: action.payload.user,
+        user_location: action.payload.user?.map_positioning || store.user_location,
       };
 
     case "LOGOUT":
@@ -63,12 +64,14 @@ export default function storeReducer(store, action = {}) {
         ...store,
         token: null,
         user: null,
+        user_location: action.payload?.map_positioning || store.user_location
       };
 
     case "set-user":
       return {
         ...store,
         user: action.payload,
+        user_location: action.payload?.map_positioning || store.user_location,
       };
 
     default:

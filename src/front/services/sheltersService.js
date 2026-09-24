@@ -60,3 +60,27 @@ export const updateShelterProfile = async (datos) => {
   if (!response.ok) await lanzarError(response, "No se han podido guardar los cambios");
   return response.json();
 };
+
+// sube (o reemplaza) el logo de la protectora del usuario logueado
+export const uploadShelterLogo = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${backendUrl}/api/shelter/logo`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${getToken()}` },
+    body: formData,
+  });
+  if (!response.ok) await lanzarError(response, "No se ha podido subir el logo");
+  return response.json();
+};
+
+// quita el logo de la protectora del usuario logueado
+export const deleteShelterLogo = async () => {
+  const response = await fetch(`${backendUrl}/api/shelter/logo`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  if (!response.ok) await lanzarError(response, "No se ha podido quitar el logo");
+  return response.json();
+};

@@ -6,6 +6,7 @@ from api.repositories.shelter_repository import DIAS_URGENTE, ShelterRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.services.animals_service import PUBLIC_STATUSES as ANIMAL_PUBLIC_STATUSES
 from api.utils import APIException
+from api.services.geolocation_service import locate_address
 
 
 # campos que la protectora puede modificar desde su panel
@@ -105,6 +106,15 @@ def update_shelter_profile(shelter_pk, **data):
         if tipo is None:
             raise APIException("El tipo de entidad no es válido", status_code=400)
         cambios["shelter_type_id"] = tipo.id
+
+    if "address" in cambios and cambios["address"] != shelter.address:
+        try:
+            cambios["map_positioning"] = locate_address(cambios["address"]).get("map_positioning")
+        except APIException as error:
+            if error.status_code == 404:
+                cambios["map_positioning"] = None  # si no localiza la direccion vacia lo que haya
+        except Exception:
+            pass  # peta el apino tocamos map_positioning
 
     for campo, valor in cambios.items():
         setattr(shelter, campo, valor)

@@ -2,12 +2,10 @@ import { Link, NavLink } from "react-router-dom";
 import { Logo } from "../Logo";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { UserAvatar } from "../UserAvatar";
-import { closeCollapse } from "./closeCollapse";
+import { closeCollapse, NAVBAR_COLLAPSE_ID as COLLAPSE_ID } from "./closeCollapse";
 
 import { NavbarProtectora } from "./NavbarProtectora";
 import { NavbarColaborador } from "./NavbarColaborador";
-
-const COLLAPSE_ID = "navbarGuestCollapse";
 
 const navLinkClass = ({ isActive }) =>
     `nav-link ${isActive ? "text-success fw-bold" : ""}`;
@@ -68,7 +66,7 @@ export const Navbar = () => {
 
                                 {user?.rol === "shelter_admin" ? (<NavbarProtectora />) : <NavbarColaborador />}
                                 <li>
-                                    <Link className="dropdown-item text-end" to="/logout">Salir</Link>
+                                    <Link className="dropdown-item text-end" to="/logout">Salir <i className="fa fa-sign-out ms-1"></i></Link>
                                 </li>
                             </ul>
                         </div>
