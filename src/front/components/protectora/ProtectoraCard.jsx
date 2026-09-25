@@ -94,16 +94,16 @@ export const ProtectoraCard = ({ protectora, esMiProtectora = false }) => {
           <Metrica valor={protectora.supporters} etiqueta="apoyos" />
         </div>
 
-        <div className={`d-flex ${esMiProtectora ? 'justify-content-between' : 'justify-content-end'}`}    >
+        <div className={`d-flex justify-content-end`} >
             {esMiProtectora && (
             <Link to={`/panel/perfil`}
-                  className="btn btn-danger text-white btn-sm rounded-pill px-4"
-            ><i className="fa fa-edit me-1"></i> Modificar</Link>
+                  className="btn btn-sm btn-outline-secondary me-2"
+            >Editar ✏️</Link>
                 )}
 
           <Link
             to={`/protectoras/${protectora.shelter_id}`}
-            className="btn btn-success btn-sm rounded-pill px-4"
+            className="btn btn-success btn-sm px-4"
           >
             Ver perfil
           </Link>
