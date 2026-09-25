@@ -4,6 +4,7 @@ import ScrollToTop from "../components/ScrollToTop"
 import { Navbar } from "../components/navigation/Navbar"
 import { Footer } from "../components/Footer"
 import { GlobalModal } from "../components/GlobalModal"
+import { CookieBanner } from "../components/CookieBanner" // <-- 1. Importas el componente aquí
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx"
 import { getToken } from "../services/authServices"
 
@@ -41,6 +42,7 @@ export const Layout = () => {
             <Navbar />
                 <Outlet />
             <Footer />
+            <CookieBanner /> {/* <-- 2. Colocas el banner aquí */}
         </ScrollToTop>
     )
 }
