@@ -39,26 +39,26 @@ export const Home = () => {
     return (
         <div className="container py-4">
 
-            <div className="bg-success bg-opacity-10 rounded-4 p-5 mb-5">
+            <div className="bg-success bg-opacity-10 rounded-4 p-4 p-md-5 mb-5">
 
-                <div className="row align-items-center">
+                <div className="row align-items-center g-4">
 
-                    <div className="col-12 col-md-6">
+                    <div className="col-12 col-md-6 text-center text-md-start">
 
                         {esProtectora ? (
                             <>
-                                <h1 className="fw-bold display-5">
+                                <h1 className="fw-bold display-5 lh-sm mb-0">
                                     Hola,
                                     <br />
-                                    <div className="text-success d-inline">{protectora?.name}</div>
+                                    <span className="text-success">{protectora?.name}</span>
                                 </h1>
 
-                                <p className="text-secondary my-3">
+                                <p className="text-secondary mt-3 mb-4">
                                     Gracias por cuidar de ellos cada día. Publicad lo que
                                     necesitáis y la comunidad se encarga del resto.
                                 </p>
 
-                                <div className="d-flex gap-2">
+                                <div className="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
                                     <Link to="/panel/necesidades/create" className="btn btn-success btn-lg">Publicar necesidad</Link>
                                     <Link to="/panel/animales/create" className="btn btn-outline-success btn-lg">Publicar animal</Link>
                                     <Link to="/panel/animales" className="btn btn-outline-success btn-lg">Ver mis animales</Link>
@@ -69,33 +69,33 @@ export const Home = () => {
 
                                 {esColaborador ? (
                                     <>
-                                        <h1 className="fw-bold display-5">
+                                        <h1 className="fw-bold display-5 lh-sm mb-0">
                                             Hola,
                                             <br />
-                                            <div className="text-success d-inline">{store.user.name}</div>
+                                            <span className="text-success">{store.user.name}</span>
                                         </h1>
 
-                                        <p className="text-secondary my-3">
+                                        <p className="text-secondary mt-3 mb-4">
                                             Gracias por tu tiempo y por querer ayudar. Cada cosa que aportas
                                             llega directa a los animales que la necesitan.
                                         </p>
                                     </>
                                 ) : (
                                     <>
-                                        <h1 className="fw-bold display-5">
+                                        <h1 className="fw-bold display-5 lh-sm mb-0">
                                             They don't ask for money.
                                             <br />
-                                            <div className="text-success d-inline">They ask for specific things.</div>
+                                            <span className="text-success">They ask for specific things.</span>
                                         </h1>
 
-                                        <p className="text-secondary my-3">
+                                        <p className="text-secondary mt-3 mb-4">
                                             Shelters post exactly what they need, how much, and by when.
                                             You choose the part you can cover and see it get filled.
                                         </p>
                                     </>
                                 )}
 
-                                <div className="d-flex gap-2">
+                                <div className="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
                                     <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
                                     <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
                                 </div>
@@ -110,11 +110,12 @@ export const Home = () => {
                         )}
                     </div>
 
-                    <div className="col-12 col-md-6 mt-4 mt-md-0">
+                    <div className="col-12 col-md-6">
                         <img
                             src="https://placedog.net/500/400?id=10"
-                            alt="Dog"
-                            className="img-fluid rounded-4"
+                            alt="Perro en adopción"
+                            className="img-fluid rounded-4 w-100"
+                            style={{ maxHeight: "340px", objectFit: "cover" }}
                         />
                     </div>
 

@@ -24,7 +24,7 @@ const truncar = (texto, max) => {
   return texto.length > max ? `${texto.slice(0, max).trim()}…` : texto;
 };
 
-export const AnimalCard = ({ animal }) => {
+export const AnimalCard = ({ animal, esMia = false }) => {
   if (!animal) return null;
 
   const tieneProceso = Boolean(animal.addoption_process_id);
@@ -112,13 +112,35 @@ export const AnimalCard = ({ animal }) => {
           </div>
         )}
 
-        <div className="mt-auto d-flex justify-content-between align-items-center gap-2">
-          <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
-            {animal.shelter_name || "Protectora sin asignar"}
-          </small>
-          <Link to={`/adoptar/${animal.animal_id}`} className="btn btn-sm btn-outline-success flex-shrink-0">
-            Ver ficha
-          </Link>
+        <div className="mt-auto d-flex flex-wrap justify-content-between align-items-center gap-2">
+          {animal.shelter_id ? (
+            <Link
+              to={`/protectoras/${animal.shelter_id}`}
+              className="text-truncate text-decoration-none"
+              style={{ color: "var(--rp-gris)", fontSize: "0.875rem" }}
+            >
+              {animal.shelter_name || "Ver protectora"}
+            </Link>
+          ) : (
+            <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
+              Protectora sin asignar
+            </small>
+          )}
+
+          <div className="d-flex flex-wrap gap-2 flex-shrink-0">
+            {esMia && (
+              <Link
+                to={`/panel/animales/${animal.animal_id}`}
+                className="btn btn-sm btn-outline-secondary"
+              >
+                Editar ✏️
+              </Link>
+            )}
+
+            <Link to={`/adoptar/${animal.animal_id}`} className="btn btn-sm btn-outline-success">
+              Ver ficha
+            </Link>
+          </div>
         </div>
       </div>
     </div>

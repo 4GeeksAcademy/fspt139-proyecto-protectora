@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { construirBadge, esFueraDePlazo } from "../utils/necesidadDeadline";
 import { cargarMediaUrl } from "../services/animalsService";
-import {formatearCantidad} from "../utils/format";
+import { formatearCantidad } from "../utils/format";
 
 
-export const NecesidadCard = ({ necesidad }) => {
+export const NecesidadCard = ({ necesidad, esMia = false }) => {
   if (!necesidad) return null;
 
   const badge = construirBadge(necesidad);
@@ -116,12 +116,24 @@ export const NecesidadCard = ({ necesidad }) => {
             <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
               {necesidad.footnote}
             </small>
-            <Link
-              to={`/necesidades/${necesidad.request_id}`}
-              className={`btn btn-sm flex-shrink-0 ${puedeColaborar ? "btn-success" : "btn-outline-secondary"}`}
-            >
-              {puedeColaborar ? "Colaborar" : "Ver detalle"}
-            </Link>
+
+            <div className="d-flex gap-2 flex-shrink-0">
+              {esMia && (
+                <Link
+                  to={`/panel/necesidades/${necesidad.request_id}/editar`}
+                  className="btn btn-sm btn-outline-secondary"
+                >
+                  Editar ✏️
+                </Link>
+              )}
+
+              <Link
+                to={`/necesidades/${necesidad.request_id}`}
+                className={`btn btn-sm ${puedeColaborar ? "btn-success" : "btn-outline-secondary"}`}
+              >
+                {puedeColaborar ? "Colaborar" : "Ver detalle"}
+              </Link>
+            </div>
           </div>
 
         </div>
