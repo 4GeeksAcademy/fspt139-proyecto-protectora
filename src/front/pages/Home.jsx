@@ -8,14 +8,43 @@ import { getHomeInsights } from "../services/insightsService";
 import { getShelterProfile } from "../services/sheltersService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
-export const Home = () => {
+const imagenesAnimales = [
+    "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1559190394-df5a28aab5c5?auto=format&fit=crop&w=800&q=80",
 
+
+    "https://images.unsplash.com/photo-1513360371669-4adf3dd7df8?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=800&q=80",
+
+
+    "https://images.unsplash.com/photo-1591160690555-5debfba289f0?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?auto=format&fit=crop&w=800&q=80",
+
+    "https://images.unsplash.com/photo-1577023311546-cdc07a8454d9?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1553882809-a4f57e59501d?auto=format&fit=crop&w=800&q=80"
+];
+
+const efectosVisuales = [
+    { transform: "scale(1)" },
+    { transform: "scale(1.04)" },
+    { transform: "scale(0.97)" },
+    { transform: "scale(1.02) rotate(0.5deg)" },
+    { transform: "scale(1.03) rotate(-0.5deg)" }
+];
+
+export const Home = () => {
     const { store } = useGlobalReducer();
     const esProtectora = store.user?.rol === "shelter_admin";
     const esColaborador = store.user?.rol === "volunteer";
 
     const [insights, setInsights] = useState(null);
     const [protectora, setProtectora] = useState(null);
+
+    const [indiceImagen, setIndiceImagen] = useState(() => Math.floor(Math.random() * imagenesAnimales.length));
+    const [indiceEfecto, setIndiceEfecto] = useState(() => Math.floor(Math.random() * efectosVisuales.length));
+    const [opacidad, setOpacidad] = useState(1);
 
     useEffect(() => {
         if (esProtectora) return;
@@ -33,15 +62,24 @@ export const Home = () => {
             .catch((error) => console.log(error));
     }, [esProtectora]);
 
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            setOpacidad(0);
+            setTimeout(() => {
+                setIndiceImagen((prevIndex) => (prevIndex + 1) % imagenesAnimales.length);
+                setIndiceEfecto((prevEfecto) => (prevEfecto + 1) % efectosVisuales.length);
+                setOpacidad(1);
+            }, 600);
+        }, 7000);
+
+        return () => clearInterval(intervalo);
+    }, []);
+
     return (
         <div className="container py-4">
-
             <div className="bg-success bg-opacity-10 rounded-4 p-5 mb-5">
-
                 <div className="row align-items-center">
-
                     <div className="col-12 col-md-6">
-
                         {esProtectora ? (
                             <>
                                 <h1 className="fw-bold display-5">
@@ -63,7 +101,6 @@ export const Home = () => {
                             </>
                         ) : (
                             <>
-
                                 {esColaborador ? (
                                     <>
                                         <h1 className="fw-bold display-5">
@@ -109,12 +146,19 @@ export const Home = () => {
 
                     <div className="col-12 col-md-6 mt-4 mt-md-0">
                         <img
-                            src="https://placedog.net/500/400?id=10"
-                            alt="Dog"
-                            className="img-fluid rounded-4"
+                            src={imagenesAnimales[indiceImagen]}
+                            alt="Animales en adopción"
+                            className="img-fluid rounded-4 shadow-sm"
+                            style={{
+                                height: "400px",
+                                width: "100%",
+                                objectFit: "cover",
+                                transition: "all 0.6s ease-in-out",
+                                opacity: opacidad,
+                                ...efectosVisuales[indiceEfecto]
+                            }}
                         />
                     </div>
-
                 </div>
             </div>
 
@@ -134,7 +178,6 @@ export const Home = () => {
                     {insights && <BuscanCasa animals={insights.open_adoptions} />}
                 </>
             )}
-
         </div>
     );
 };
