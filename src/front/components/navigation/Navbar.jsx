@@ -40,11 +40,11 @@ export const Navbar = () => {
                     {/*// NAVEGACION PRINCIPAL DE LA WEB */}
                     {/*///////////////////////////////////*/}
                     <div className="navbar-nav mx-lg-auto gap-lg-2">
-                        <NavLink onClick={closeMenu} to="/"className={navLinkClass}>Home</NavLink>
-                        <NavLink onClick={closeMenu} to="/necesidades" className={navLinkClass}>Needs</NavLink>
-                        <NavLink onClick={closeMenu} to="/adoptar" className={navLinkClass}>Adopt</NavLink>
-                        <NavLink onClick={closeMenu} to="/protectoras" className={navLinkClass}>Shelters</NavLink>
-                        <NavLink onClick={closeMenu} to="/ayuda" className={navLinkClass}>Help</NavLink>
+                        <NavLink onClick={closeMenu} to="/"className={navLinkClass}>Inicio</NavLink>
+                        <NavLink onClick={closeMenu} to="/necesidades" className={navLinkClass}>Necesidades</NavLink>
+                        <NavLink onClick={closeMenu} to="/adoptar" className={navLinkClass}>Adopción</NavLink>
+                        <NavLink onClick={closeMenu} to="/protectoras" className={navLinkClass}>Protectoras</NavLink>
+                        <NavLink onClick={closeMenu} to="/ayuda" className={navLinkClass}>Ayuda</NavLink>
                     </div>
                     {/*///////////////////////////////////*/}
                     <hr className="d-lg-none my-2" />
@@ -82,7 +82,7 @@ export const Navbar = () => {
                                 to="/login"
                                 className="btn btn-outline-secondary btn-sm"
                             >
-                                Log in
+                                Acceder
                             </Link>
 
                             <Link
@@ -90,7 +90,7 @@ export const Navbar = () => {
                                 to="/signup"
                                 className="btn btn-success btn-sm"
                             >
-                                Sign up
+                                Crear cuenta
                             </Link>
                         </div>
                         ///////////////////////////////////
