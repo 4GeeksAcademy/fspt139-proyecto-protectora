@@ -52,7 +52,7 @@ def home_insights_action():
     # solo abiertas, igual que el tablon de Needs
     needs_open_count = RequestRepository.list_all(filters={"status": ABIERTA}, per_page=1).total
     animals_available_count = AnimalRepository.list_all(
-        filters={"status": PUBLIC_STATUSES}, per_page=1).total
+        filters={"status": PUBLIC_STATUSES}, per_page=1, hide_adopted=True).total
     shelters_count = ShelterRepository.list_all(per_page=1).total
 
     collaborations_closed_count = 0
@@ -70,7 +70,8 @@ def home_insights_action():
         filters={"status": PUBLIC_STATUSES},
         sort_by="created_at",
         dir="desc",
-        per_page=3
+        per_page=3,
+        hide_adopted=True
     )
     open_adoptions = []
     for animal in open_adoptions_page.items:
