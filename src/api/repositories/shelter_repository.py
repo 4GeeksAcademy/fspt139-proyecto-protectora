@@ -101,6 +101,12 @@ class ShelterRepository:
         return shelter
 
     @staticmethod
+    def update(shelter, **fields):
+        for field, value in fields.items():
+            setattr(shelter, field, value)
+        return shelter
+
+    @staticmethod
     def save(shelter):
         db.session.add(shelter)
         db.session.commit()
