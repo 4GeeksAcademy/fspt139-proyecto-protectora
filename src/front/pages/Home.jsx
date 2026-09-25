@@ -10,12 +10,11 @@ import { usePageTitle } from "../hooks/usePageTitle";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 const imagenesAnimales = [
-    "https://images.unsplash.com/photo-1596492784531-6e6eb5ea9993?auto=format&fit=crop&w=800&q=80",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWywbYA-tsLtn1dfXIYAOfqKPzdVJtzFVoLJ7XFgt8kg&s=10",
     "https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1559190394-df5a28aab5c5?auto=format&fit=crop&w=800&q=80",
 
-
-    "https://images.unsplash.com/photo-1513360371669-4adf3dd7df8?auto=format&fit=crop&w=800&q=80",
+    "https://media.istockphoto.com/id/1041987488/es/foto/lindo-perro-de-poner-su-cara-en-sus-rodillas-y-el-hombre-sonriente-de-las-manos-rascarse-el.jpg?s=612x612&w=0&k=20&c=_-QrG1QimtXPttueHgPSkhchwUcn8DNtEclUpV991Cg=",
     "https://images.unsplash.com/photo-1568393691622-c7ba131d63b4?auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=800&q=80",
 
