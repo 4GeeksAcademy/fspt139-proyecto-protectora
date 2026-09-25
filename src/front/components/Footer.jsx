@@ -36,7 +36,7 @@ export const Footer = () => {
                         <ul className="list-unstyled">
                             <li className="mb-2"><Link to="/login" className="text-dark-emphasis text-decoration-none">Acceder</Link></li>
                             <li className="mb-2"><Link to="/signup" className="text-dark-emphasis text-decoration-none">Crear cuenta</Link></li>
-                            <li className="mb-2"><Link to="/terminos-y-privacidad" className="text-dark-emphasis text-decoration-none">Términos de uso y política de privacidad</Link></li>
+                            <li className="mb-2"><Link to="/terminos-y-privacidad" className="text-dark-emphasis text-decoration-none">Términos de uso, privacidad y cookies</Link></li>
                             <li className="mb-2"><Link to="/ayuda" className="text-dark-emphasis text-decoration-none">Ayuda</Link></li>
                         </ul>
                     </div>

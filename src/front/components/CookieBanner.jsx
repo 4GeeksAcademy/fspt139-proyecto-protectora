@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 export const CookieBanner = () => {
@@ -26,7 +27,8 @@ export const CookieBanner = () => {
         <div className="fixed-bottom bg-dark text-white p-3 shadow-lg" style={{ zIndex: 1050, borderTop: "3px solid #138f4d" }}>
             <div className="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
                 <p className="mb-0 small text-light text-center text-md-start">
-                    Utilizamos cookies propias y de terceros para garantizar el correcto funcionamiento del sitio y mejorar tu experiencia de navegación. Puedes aceptar todas las cookies o rechazarlas.
+                    Utilizamos cookies propias y de terceros para garantizar el correcto funcionamiento del sitio y mejorar tu experiencia de navegación. Puedes aceptar todas las cookies o rechazarlas.{" "}
+                    <Link to="/terminos-y-privacidad#cookies" className="text-white fw-semibold">Más información</Link>
                 </p>
                 <div className="d-flex gap-2 flex-shrink-0">
                     <button className="btn btn-outline-light btn-sm px-3" onClick={rechazarCookies}>
