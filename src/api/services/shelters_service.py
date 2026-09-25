@@ -5,6 +5,7 @@ from datetime import date
 from api.repositories.shelter_repository import DIAS_URGENTE, ShelterRepository
 from api.repositories.shelter_type_repository import ShelterTypeRepository
 from api.services.animals_service import PUBLIC_STATUSES as ANIMAL_PUBLIC_STATUSES
+from api.services.requests_service import is_request_contributable
 from api.utils import APIException
 from api.services.geolocation_service import locate_address
 
@@ -36,7 +37,7 @@ def shelter_metrics(shelter):
     }
 
     return {
-        "open_requests": len(abiertas),
+        "open_requests": len([n for n in abiertas if is_request_contributable(n)]),
         "published_animals": len([a for a in animales if a.status in ANIMAL_PUBLIC_STATUSES]),
         "supporters": len(colaboradores),
         "has_urgent": any(_es_urgente(n) for n in abiertas),

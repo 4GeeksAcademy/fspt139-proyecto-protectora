@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import selectinload
 from api.models import Animal, Request, Shelter, db
 
@@ -34,7 +35,7 @@ class RequestRepository:
         ).one_or_none()
 
     @staticmethod
-    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
+    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10, hide_expired=False):
         query = db.select(Request).options(
             selectinload(Request.request_type),
             selectinload(Request.shelter),
@@ -60,6 +61,13 @@ class RequestRepository:
                 query = query.where(column.ilike(f"%{value}%"))
             elif field in EQUAL_FILTER_FIELDS:
                 query = query.where(column == value)
+
+        if hide_expired:
+            query = query.where(db.or_(
+                Request.status != "abierta",
+                Request.request_deadline.is_(None),
+                Request.request_deadline >= datetime.utcnow(),
+            ))
 
         if sort_by in SORTABLE_FIELDS:
             column = getattr(Request, sort_by)
