@@ -37,7 +37,7 @@ export const ProtectoraAdopcionProceso = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
 
-  usePageTitle("Panel · Proceso de adopción");
+  usePageTitle(["Panel · Proceso de adopción", proceso?.animal?.name].filter(Boolean).join(" · "));
 
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");

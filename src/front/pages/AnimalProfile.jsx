@@ -51,7 +51,7 @@ export const AnimalProfile = () => {
   const [mediaActivo, setMediaActivo] = useState(null);
   const [proceso, setProceso] = useState(null);
   const [modalSolicitudAbierto, setModalSolicitudAbierto] = useState(false);
-  usePageTitle(animal?.name);
+  usePageTitle([animal?.name, animal?.shelter_name].filter(Boolean).join(" · "));
 
   const recargarProceso = () => {
     getPublicAddoptionProcess(id).then(setProceso).catch(() => setProceso(null));

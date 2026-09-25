@@ -35,7 +35,7 @@ export const ContributeProfile = () => {
   const [noEncontrada, setNoEncontrada] = useState(false);
   const [modalColaborarAbierto, setModalColaborarAbierto] = useState(false);
 
-  usePageTitle(necesidad?.name);
+  usePageTitle([necesidad?.name, necesidad?.shelter_name].filter(Boolean).join(" · "));
 
   const recargarNecesidad = () => {
     getRequestById(id).then(setNecesidad).catch(() => {});
