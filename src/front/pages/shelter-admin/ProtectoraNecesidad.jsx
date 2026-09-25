@@ -5,8 +5,9 @@ import { cargarMediaUrl } from "../../services/animalsService";
 import { calcularDeadlineLabel } from "../../utils/necesidadDeadline";
 import { ContribucionRow } from "../../components/protectora/ContribucionRow";
 import { ResponderContribucionesModal } from "../../components/protectora/ResponderContribucionesModal";
-import {formatearCantidad} from "../../utils/format";
+import { formatearCantidad } from "../../utils/format";
 import BotonCompartir from "../../components/BotonCompartir";
+import { usePageTitle, formatearTitulo } from "../../hooks/usePageTitle";
 
 const PER_PAGE = 20;
 
@@ -33,6 +34,8 @@ export const ProtectoraNecesidad = () => {
 
   const [seleccionadas, setSeleccionadas] = useState(new Set());
   const [respondiendoA, setRespondiendoA] = useState(null); // contribucion individual, o "bulk"
+
+  usePageTitle(necesidad ? `Panel · ${necesidad.name}` : "Panel · Necesidad");
 
   const cargarNecesidad = useCallback(() => {
     setCargandoNecesidad(true);
@@ -290,7 +293,10 @@ export const ProtectoraNecesidad = () => {
           <div className="text-center text-muted py-5">
             <p className="mb-0">Todavía no ha llegado ninguna colaboración para tu petición.</p>
 
-          <BotonCompartir url={`${window.location.origin}/necesidades/${necesidad.request_id}`} />
+            <BotonCompartir
+              url={`${window.location.origin}/necesidades/${necesidad.request_id}`}
+              titulo={formatearTitulo(necesidad.name)}
+            />
 
           </div>
         ) : (

@@ -52,7 +52,10 @@ class Animal(db.Model):
         # estados de necesidad visibles en el frontend publico (PASAR tmb el NECESIDADES_PUBLIC_STATUSES)
 
         last_process = max(self.addoption_processes, key=lambda p: p.created_at or datetime.min, default=None)
-        necesidades_visibles = [r for r in self.requests if r.status in self.NECESIDADES_PUBLIC_STATUSES]
+        necesidades_visibles = [r for r in self.requests
+            if r.status in self.NECESIDADES_PUBLIC_STATUSES
+            and not (r.status == "abierta" and r.request_deadline and r.request_deadline < datetime.utcnow())
+        ]
 
         return {
             "id": self.id,
@@ -80,12 +83,14 @@ class Animal(db.Model):
             "species": self.animal_type.species if self.animal_type else None,
             "shelter_id": self.shelter.shelter_id if self.shelter else None,
             "shelter_name": self.shelter.name if self.shelter else None,
+            "logo_url": self.shelter.logo_url if self.shelter else None,
             "map_positioning": self.shelter.map_positioning if self.shelter else None,
             "media": [media.serialize() for media in self.media],
             "cover_image": next((media.url for media in self.media if media.is_cover), None),
             "created_at": self.created_at.isoformat() if self.created_at else None,
             "update_at": self.update_at.isoformat() if self.update_at else None,
             "addoption_requests_count": len(self.adoption_requests),
+            "is_adopted": any(request.status == "aceptada" for request in self.adoption_requests),
             "addoption_process_id": last_process.addoption_process_id if last_process else None,
             "animal_request_ids": [request.request_id for request in self.requests],
             "necesidades": [necesidad.serialize() for necesidad in necesidades_visibles],

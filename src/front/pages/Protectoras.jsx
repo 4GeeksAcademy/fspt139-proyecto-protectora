@@ -4,6 +4,7 @@ import { Mapa } from "../components/Mapa";
 import { ProtectoraCard } from "../components/protectora/ProtectoraCard";
 import { getShelters, getShelterProfile } from "../services/sheltersService";
 import { getAnimals, cargarMediaUrl } from "../services/animalsService";
+import { usePageTitle } from "../hooks/usePageTitle";
 import useGlobalReducer from "../hooks/useGlobalReducer";
  
 const PER_PAGE = 12;
@@ -158,6 +159,8 @@ export const Protectoras = () => {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+
+  usePageTitle("Protectoras");
  
   useEffect(() => {
     let cancelado = false;

@@ -44,10 +44,10 @@ def age_range_to_dates(age_range):
 
     return birthdate_from, birthdate_to
 
-def list_animals(filters=None, sort_by=None, dir='asc', page=1, per_page=10, age_range=None):
+def list_animals(filters=None, sort_by=None, dir='asc', page=1, per_page=10, age_range=None, hide_adopted=False):
     birthdate_from, birthdate_to = age_range_to_dates(age_range)
     return AnimalRepository.list_all(filters=filters, sort_by=sort_by, dir=dir,
-    page=page, per_page=per_page, birthdate_from=birthdate_from, birthdate_to=birthdate_to)
+    page=page, per_page=per_page, birthdate_from=birthdate_from, birthdate_to=birthdate_to, hide_adopted=hide_adopted)
 
 # limita a un animal propio de la protectora (formulario de edicion)
 def get_shelter_animal(animal_id, shelter_id):

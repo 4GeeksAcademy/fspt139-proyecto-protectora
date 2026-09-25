@@ -4,6 +4,7 @@ import { getShelterAnimals } from "../../services/animalsService";
 import useGlobalReducer from "../../hooks/useGlobalReducer";
 import { ShelterAnimalCard } from "../../components/protectora/ShelterAnimalCard";
 import { ANIMAL_STATUS_OPTIONS } from "../../utils/format";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const PER_PAGE = 8;
 
@@ -22,6 +23,8 @@ export const ProtectoraAnimales = () => {
   const [search, setSearch] = useState("");
   const [speciesFilter, setSpeciesFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
+
+  usePageTitle("Panel · Animales");
 
   // pequeño debounce para no lanzar una petición por cada tecla
   useEffect(() => {

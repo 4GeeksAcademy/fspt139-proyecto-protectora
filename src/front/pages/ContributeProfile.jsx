@@ -8,6 +8,7 @@ import { ColaborarModal } from "../components/necesidades/ColaborarModal";
 import { NecesidadAnimalCard } from "../components/necesidades/NecesidadAnimalCard";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import {formatearCantidad} from "../utils/format";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 // una fila etiqueta/valor que desaparece sola si no hay valor
 const Dato = ({ etiqueta, children }) => {
@@ -33,6 +34,8 @@ export const ContributeProfile = () => {
   const [error, setError] = useState(null);
   const [noEncontrada, setNoEncontrada] = useState(false);
   const [modalColaborarAbierto, setModalColaborarAbierto] = useState(false);
+
+  usePageTitle([necesidad?.name, necesidad?.shelter_name].filter(Boolean).join(" · "));
 
   const recargarNecesidad = () => {
     getRequestById(id).then(setNecesidad).catch(() => {});

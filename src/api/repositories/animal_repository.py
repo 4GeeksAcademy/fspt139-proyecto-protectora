@@ -1,4 +1,4 @@
-from api.models import Animal, Shelter, db
+from api.models import AddoptionRequest, Animal, Shelter, db
 from sqlalchemy.orm import selectinload
 
 # FILTROS ADMITIDOS PARA EL REPOSITORIO ANIMAL
@@ -19,6 +19,15 @@ SORTABLE_FIELDS = {
 }
 
 
+def _esta_adoptado():
+    return (
+        db.select(AddoptionRequest.id)
+        .where(AddoptionRequest.animal_id == Animal.id)
+        .where(AddoptionRequest.status == "aceptada")
+        .exists()
+    )
+
+
 class AnimalRepository:
 
     @staticmethod
@@ -32,7 +41,7 @@ class AnimalRepository:
         ).one_or_none()
 
     @staticmethod
-    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10, birthdate_from=None, birthdate_to=None):
+    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10, birthdate_from=None, birthdate_to=None, hide_adopted=False):
         query = db.select(Animal).options(
             selectinload(Animal.animal_type),
             selectinload(Animal.shelter),
@@ -57,11 +66,15 @@ class AnimalRepository:
             query = query.where(Animal.birthdate > birthdate_from)
         if birthdate_to is not None:
             query = query.where(Animal.birthdate <= birthdate_to)
+        if hide_adopted:
+            query = query.where(~_esta_adoptado())
 
         if sort_by in SORTABLE_FIELDS:
             column = getattr(Animal, sort_by)
             query = query.order_by(
-                column.desc() if dir == 'desc' else column.asc())
+                column.desc() if dir == 'desc' else column.asc(),
+                Animal.id.desc() if dir == 'desc' else Animal.id.asc(),
+            )
 
         return db.paginate(query, page=page, per_page=per_page, error_out=False)
 

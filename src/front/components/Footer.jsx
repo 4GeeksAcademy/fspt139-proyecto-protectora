@@ -14,7 +14,7 @@ export const Footer = () => {
                             <Logo />
                         </div>
                         <p className="text-dark-emphasis">
-                            Shelters post what they need. You choose what to cover.
+                            Las protectoras publican lo que necesitan. Tú decides con qué ayudar.
                         </p>
                         <p className="text-dark-emphasis">
                             © 2026 RedProtectora · 4Geeks Academy
@@ -22,22 +22,22 @@ export const Footer = () => {
                     </div>
 
                     <div className="col-6 col-md-3">
-                        <h6 className="fw-bold mb-3">Platform</h6>
+                        <h6 className="fw-bold mb-3">Plataforma</h6>
                         <ul className="list-unstyled">
-                            <li className="mb-2"><Link to="/" className="text-dark-emphasis text-decoration-none">Home</Link></li>
-                            <li className="mb-2"><Link to="/necesidades" className="text-dark-emphasis text-decoration-none">Needs</Link></li>
-                            <li className="mb-2"><Link to="/adoptar" className="text-dark-emphasis text-decoration-none">Adopt</Link></li>
-                            <li className="mb-2"><Link to="/protectoras" className="text-dark-emphasis text-decoration-none">Shelters</Link></li>
+                            <li className="mb-2"><Link to="/" className="text-dark-emphasis text-decoration-none">Inicio</Link></li>
+                            <li className="mb-2"><Link to="/necesidades" className="text-dark-emphasis text-decoration-none">Necesidades</Link></li>
+                            <li className="mb-2"><Link to="/adoptar" className="text-dark-emphasis text-decoration-none">Adopción</Link></li>
+                            <li className="mb-2"><Link to="/protectoras" className="text-dark-emphasis text-decoration-none">Protectoras</Link></li>
                         </ul>
                     </div>
 
                     <div className="col-6 col-md-3">
-                        <h6 className="fw-bold mb-3">Account</h6>
+                        <h6 className="fw-bold mb-3">Cuenta</h6>
                         <ul className="list-unstyled">
-                            <li className="mb-2"><Link to="/login" className="text-dark-emphasis text-decoration-none">Log in</Link></li>
-                            <li className="mb-2"><Link to="/signup" className="text-dark-emphasis text-decoration-none">Sign up</Link></li>
-                            <li className="mb-2"><Link to="/terminos-y-privacidad" className="text-dark-emphasis text-decoration-none">Terms of Use and Privacy Policy</Link></li>
-                            <li className="mb-2"><Link to="/ayuda" className="text-dark-emphasis text-decoration-none">Help</Link></li>
+                            <li className="mb-2"><Link to="/login" className="text-dark-emphasis text-decoration-none">Acceder</Link></li>
+                            <li className="mb-2"><Link to="/signup" className="text-dark-emphasis text-decoration-none">Crear cuenta</Link></li>
+                            <li className="mb-2"><Link to="/terminos-y-privacidad" className="text-dark-emphasis text-decoration-none">Términos de uso y política de privacidad</Link></li>
+                            <li className="mb-2"><Link to="/ayuda" className="text-dark-emphasis text-decoration-none">Ayuda</Link></li>
                         </ul>
                     </div>
 

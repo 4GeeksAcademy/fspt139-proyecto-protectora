@@ -13,6 +13,7 @@ import { SolicitudAdopcionDetalleModal } from "../../components/protectora/Solic
 import { AbrirProcesoAdopcionModal } from "../../components/protectora/FormsProtectora/AbrirProcesoAdopcionModal";
 import { ADDOPTION_REQUEST_STATUS_OPTIONS, PENDIENTE } from "../../utils/addoptionRequestStatus";
 import { ADDOPTION_PROCESS_STATUS_LABELS, ABIERTO, CERRADO } from "../../utils/addoptionProcessStatus";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 const PER_PAGE = 20;
 
@@ -35,6 +36,8 @@ export const ProtectoraAdopcionProceso = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+
+  usePageTitle(["Panel · Proceso de adopción", proceso?.animal?.name].filter(Boolean).join(" · "));
 
   const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
@@ -299,6 +302,15 @@ export const ProtectoraAdopcionProceso = () => {
                     {cambiandoEstadoProceso ? "Guardando…" : proceso.status === ABIERTO ? "Cerrar proceso" : "Reabrir proceso"}
                   </button>
                 </li>
+
+                {animal && (
+                  <li>
+                    <Link to={`/animal/view/${animal.animal_id}`} className="dropdown-item">
+                      <i className="fa fa-eye me-2"></i> Ver ficha
+                    </Link>
+                  </li>
+                )}
+
                 <li>
                   <button type="button" className="dropdown-item" onClick={() => setModalEditarAbierto(true)}>
                     <i className="fa fa-pencil me-2"></i> Editar
@@ -406,48 +418,48 @@ export const ProtectoraAdopcionProceso = () => {
 
       <div className="card shadow-sm rounded-4 overflow-hidden">
         {seleccionablesEnPagina.length !== 0 ? (
-        <div className="d-flex flex-wrap align-items-center gap-2 px-2 py-2 border-bottom bg-light">
+          <div className="d-flex flex-wrap align-items-center gap-2 px-2 py-2 border-bottom bg-light">
 
-          <label
-            className="d-flex align-items-center justify-content-center flex-shrink-0"
-            style={{ width: "2.75rem", height: "2.75rem", margin: "-0.5rem 0", cursor: seleccionablesEnPagina.length === 0 ? "default" : "pointer" }}
-          >
-            <input
-              type="checkbox"
-              className="form-check-input"
-              style={{ width: "1.2rem", height: "1.2rem", cursor: "inherit" }}
-              checked={todasSeleccionadas}
-              disabled={seleccionablesEnPagina.length === 0}
-              onChange={alternarSeleccionarTodas}
-              aria-label="Seleccionar todas las solicitudes pendientes de esta página"
-            />
-          </label>
+            <label
+              className="d-flex align-items-center justify-content-center flex-shrink-0"
+              style={{ width: "2.75rem", height: "2.75rem", margin: "-0.5rem 0", cursor: seleccionablesEnPagina.length === 0 ? "default" : "pointer" }}
+            >
+              <input
+                type="checkbox"
+                className="form-check-input"
+                style={{ width: "1.2rem", height: "1.2rem", cursor: "inherit" }}
+                checked={todasSeleccionadas}
+                disabled={seleccionablesEnPagina.length === 0}
+                onChange={alternarSeleccionarTodas}
+                aria-label="Seleccionar todas las solicitudes pendientes de esta página"
+              />
+            </label>
 
-          {seleccionadas.size > 0 && (
-            <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 flex-grow-1">
-              <span className="fw-semibold" style={{ fontSize: "0.9rem" }}>
-                {seleccionadas.size} {seleccionadas.size === 1 ? "seleccionada" : "seleccionadas"}
-              </span>
-              <div className="d-flex flex-wrap gap-2">
-                <button type="button" className="btn btn-link btn-sm" onClick={() => setSeleccionadas(new Set())}>
-                  Limpiar selección
-                </button>
-                <button
+            {seleccionadas.size > 0 && (
+              <div className="d-flex flex-wrap align-items-center justify-content-between gap-2 flex-grow-1">
+                <span className="fw-semibold" style={{ fontSize: "0.9rem" }}>
+                  {seleccionadas.size} {seleccionadas.size === 1 ? "seleccionada" : "seleccionadas"}
+                </span>
+                <div className="d-flex flex-wrap gap-2">
+                  <button type="button" className="btn btn-link btn-sm" onClick={() => setSeleccionadas(new Set())}>
+                    Limpiar selección
+                  </button>
+                  <button
                     type="button"
                     className="btn btn-danger btn-sm rounded-pill px-3"
                     onClick={handleDescartarSeleccionadas}
                     disabled={procesando}
-                >
-                  Descartar seleccionadas <i className="fa-solid fa-circle-xmark"></i>
-                </button>
+                  >
+                    Descartar seleccionadas <i className="fa-solid fa-circle-xmark"></i>
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-            ):
-            <>
-            </>
-          }
+            )}
+          </div>
+        ) :
+          <>
+          </>
+        }
 
         {cargando ? (
           <div className="text-center text-muted py-5">Cargando solicitudes…</div>
@@ -576,10 +588,10 @@ export const ProtectoraAdopcionProceso = () => {
                 Cancelar
               </button>
               <button
-                  type="button"
-                  className="btn btn-danger rounded-pill px-4"
-                  onClick={confirmarDescartarSeleccionadas}
-                  disabled={procesando}
+                type="button"
+                className="btn btn-danger rounded-pill px-4"
+                onClick={confirmarDescartarSeleccionadas}
+                disabled={procesando}
               >
                 Descartar <i className="fa-solid fa-circle-xmark"></i>
               </button>
@@ -615,10 +627,10 @@ export const ProtectoraAdopcionProceso = () => {
                 Cancelar
               </button>
               <button
-                  type="button"
-                  className="btn btn-danger rounded-pill px-4"
-                  onClick={confirmarDescartarUna}
-                  disabled={procesando}
+                type="button"
+                className="btn btn-danger rounded-pill px-4"
+                onClick={confirmarDescartarUna}
+                disabled={procesando}
               >
                 Descartar <i className="fa-solid fa-circle-xmark"></i>
               </button>

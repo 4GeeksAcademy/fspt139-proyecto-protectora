@@ -1,3 +1,6 @@
+// id del navbar-collapse principal, compartido por Navbar y los submenus de usuario (NavbarProtectora/NavbarColaborador)
+export const NAVBAR_COLLAPSE_ID = "navbarGuestCollapse";
+
 // Cierra manualmente un navbar-collapse de Bootstrap tras navegar por un link.
 // No usamos data-bs-toggle en los propios links: Bootstrap intercepta y hace
 // preventDefault en el click de cualquier <a> con ese atributo, lo que impedía

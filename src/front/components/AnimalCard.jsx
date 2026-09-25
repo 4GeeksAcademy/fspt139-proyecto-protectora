@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { calcularAgeLabel } from "../utils/animalAge";
 import { construirTags } from "../utils/animalTags";
 import { cargarMediaUrl } from "../services/animalsService";
+import AvatarLogoProtectora from "./protectora/AvatarLogoProtectora";
 
 const MAX_TAGS = 3;
 
@@ -24,7 +25,7 @@ const truncar = (texto, max) => {
   return texto.length > max ? `${texto.slice(0, max).trim()}…` : texto;
 };
 
-export const AnimalCard = ({ animal }) => {
+export const AnimalCard = ({ animal, esMia = false }) => {
   if (!animal) return null;
 
   const tieneProceso = Boolean(animal.addoption_process_id);
@@ -112,13 +113,44 @@ export const AnimalCard = ({ animal }) => {
           </div>
         )}
 
-        <div className="mt-auto d-flex justify-content-between align-items-center gap-2">
-          <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
-            {animal.shelter_name || "Protectora sin asignar"}
-          </small>
-          <Link to={`/adoptar/${animal.animal_id}`} className="btn btn-sm btn-outline-success flex-shrink-0">
-            Ver ficha
-          </Link>
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <AvatarLogoProtectora logoUrl={animal.logo_url} nombre={animal.shelter_name} size={52} />
+          <div className="overflow-hidden">
+            <p className="small mb-0" style={{ color: "var(--rp-gris)" }}>
+              {animal.shelter_id ? (
+                  <Link
+                      to={`/protectoras/${animal.shelter_id}`}
+                      className="text-decoration-none fw-bold"
+                      style={{ color: "var(--rp-pino)"}}
+                  >
+                    {animal.shelter_name || "Ver protectora"}
+                  </Link>
+              ) : (
+                  <small className="" style={{ color: "var(--rp-gris)" }}>
+                    Protectora sin asignar
+                  </small>
+              )}
+
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-auto d-flex flex-wrap justify-content-end align-items-center gap-2">
+
+          <div className="d-flex flex-wrap gap-2 flex-shrink-0">
+            {esMia && (
+              <Link
+                to={`/panel/animales/${animal.animal_id}`}
+                className="btn btn-sm btn-outline-secondary"
+              >
+                Editar ✏️
+              </Link>
+            )}
+
+            <Link to={`/adoptar/${animal.animal_id}`} className="btn btn-sm btn-outline-success">
+              Ver ficha
+            </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -17,6 +17,7 @@ import { SiNoUndefinedRow } from "../../components/protectora/FormsProtectora/Si
 import { AbrirProcesoAdopcionModal } from "../../components/protectora/FormsProtectora/AbrirProcesoAdopcionModal";
 import { getAddoptionProcess } from "../../services/addoptionProcessService";
 import { ACTIVADO, DESACTIVADO, BORRADOR } from "../../utils/format";
+import { usePageTitle } from "../../hooks/usePageTitle";
 
 // para los casos principales de la aplicacion,
 // dejamos otros por si metemos periquitos o tortugas
@@ -128,6 +129,10 @@ export const ProtectoraAnimalesForm = () => {
   const [coverId, setCoverId] = useState(null);
   const [hoveredMediaId, setHoveredMediaId] = useState(null);
   const [isDraggingMedia, setIsDraggingMedia] = useState(false);
+
+  usePageTitle(isEditMode
+  ? ["Panel · Editar animal", loadedAnimal?.name].filter(Boolean).join(" · ")
+  : "Panel · Nuevo animal");
 
   const [procesoAdopcion, setProcesoAdopcion] = useState(null);
   const [mostrarModalProceso, setMostrarModalProceso] = useState(false);

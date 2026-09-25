@@ -6,6 +6,7 @@ import { Statscard } from "../components/Statscard";
 import { ResumenProtectora } from "../components/protectora/ResumenProtectora";
 import { getHomeInsights } from "../services/insightsService";
 import { getShelterProfile } from "../services/sheltersService";
+import { usePageTitle } from "../hooks/usePageTitle";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 const imagenesAnimales = [
@@ -45,6 +46,7 @@ export const Home = () => {
     const [indiceImagen, setIndiceImagen] = useState(() => Math.floor(Math.random() * imagenesAnimales.length));
     const [indiceEfecto, setIndiceEfecto] = useState(() => Math.floor(Math.random() * efectosVisuales.length));
     const [opacidad, setOpacidad] = useState(1);
+    usePageTitle();
 
     useEffect(() => {
         if (esProtectora) return;
@@ -77,23 +79,27 @@ export const Home = () => {
 
     return (
         <div className="container py-4">
-            <div className="bg-success bg-opacity-10 rounded-4 p-5 mb-5">
-                <div className="row align-items-center">
-                    <div className="col-12 col-md-6">
+
+            <div className="bg-success bg-opacity-10 rounded-4 p-4 p-md-5 mb-5">
+
+                <div className="row align-items-center g-4">
+
+                    <div className="col-12 col-md-6 text-center text-md-start">
+
                         {esProtectora ? (
                             <>
-                                <h1 className="fw-bold display-5">
+                                <h1 className="fw-bold display-5 lh-sm mb-0">
                                     Hola,
                                     <br />
-                                    <div className="text-success d-inline">{protectora?.name}</div>
+                                    <span className="text-success">{protectora?.name}</span>
                                 </h1>
 
-                                <p className="text-secondary my-3">
+                                <p className="text-secondary mt-3 mb-4">
                                     Gracias por cuidar de ellos cada día. Publicad lo que
                                     necesitáis y la comunidad se encarga del resto.
                                 </p>
 
-                                <div className="d-flex gap-2">
+                                <div className="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
                                     <Link to="/panel/necesidades/create" className="btn btn-success btn-lg">Publicar necesidad</Link>
                                     <Link to="/panel/animales/create" className="btn btn-outline-success btn-lg">Publicar animal</Link>
                                     <Link to="/panel/animales" className="btn btn-outline-success btn-lg">Ver mis animales</Link>
@@ -103,35 +109,35 @@ export const Home = () => {
                             <>
                                 {esColaborador ? (
                                     <>
-                                        <h1 className="fw-bold display-5">
+                                        <h1 className="fw-bold display-5 lh-sm mb-0">
                                             Hola,
                                             <br />
-                                            <div className="text-success d-inline">{store.user.name}</div>
+                                            <span className="text-success">{store.user.name}</span>
                                         </h1>
 
-                                        <p className="text-secondary my-3">
+                                        <p className="text-secondary mt-3 mb-4">
                                             Gracias por tu tiempo y por querer ayudar. Cada cosa que aportas
                                             llega directa a los animales que la necesitan.
                                         </p>
                                     </>
                                 ) : (
                                     <>
-                                        <h1 className="fw-bold display-5">
-                                            They don't ask for money.
+                                        <h1 className="fw-bold display-5 lh-sm mb-0">
+                                            No piden un donativo.
                                             <br />
-                                            <div className="text-success d-inline">They ask for specific things.</div>
+                                            <span className="text-success">Piden lo que necesitan.</span>
                                         </h1>
 
-                                        <p className="text-secondary my-3">
-                                            Shelters post exactly what they need, how much, and by when.
-                                            You choose the part you can cover and see it get filled.
+                                        <p className="text-secondary mt-3 mb-4">
+                                            Las protectoras publican exactamente qué necesitan, cuánto y para cuándo.
+                                            Tú eliges la parte que puedes cubrir y ves cómo se completa.
                                         </p>
                                     </>
                                 )}
 
-                                <div className="d-flex gap-2">
-                                    <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
-                                    <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
+                                <div className="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
+                                    <Link to="/necesidades" className="btn btn-success btn-lg">Ver necesidades</Link>
+                                    <Link to="/adoptar" className="btn btn-outline-success btn-lg">Ver animales en adopción</Link>
                                 </div>
 
                                 {esColaborador && (
@@ -144,13 +150,13 @@ export const Home = () => {
                         )}
                     </div>
 
-                    <div className="col-12 col-md-6 mt-4 mt-md-0">
+                    <div className="col-12 col-md-6">
                         <img
                             src={imagenesAnimales[indiceImagen]}
                             alt="Animales en adopción"
                             className="img-fluid rounded-4 shadow-sm"
                             style={{
-                                height: "400px",
+                                height: "340px",
                                 width: "100%",
                                 objectFit: "cover",
                                 transition: "all 0.6s ease-in-out",
@@ -167,10 +173,10 @@ export const Home = () => {
             ) : (
                 <>
                     <div className="row text-center g-3 mb-5">
-                        <Statscard number={insights ? insights.needs_open : 0} label="Needs open" color="#138f4d" />
-                        <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animals for adoption" color="#F0946A" />
-                        <Statscard number={insights ? insights.registered_shelters : 0} label="Registered shelters" color="#E8B04B" />
-                        <Statscard number={insights ? insights.collaborations_closed : 0} label="Collaborations closed" color="#E0756B" />
+                        <Statscard number={insights ? insights.needs_open : 0} label="Necesidades abiertas" color="#138f4d" />
+                        <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animales en adopción" color="#F0946A" />
+                        <Statscard number={insights ? insights.registered_shelters : 0} label="Protectoras registradas" color="#E8B04B" />
+                        <Statscard number={insights ? insights.collaborations_closed : 0} label="Colaboraciones completadas" color="#E0756B" />
                     </div>
 
                     {insights && <NecesidadesDestacadas needs={insights.open_needs} />}

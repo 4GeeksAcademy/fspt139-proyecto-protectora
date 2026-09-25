@@ -4,6 +4,7 @@ import { signup } from "../services/authServices";
 import { getShelterTypes } from "../services/shelterTypesService";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { soloRedirectsInternos } from "../utils/redirect";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export const Signup = () => {
     const navigate = useNavigate()
@@ -31,6 +32,8 @@ export const Signup = () => {
         shelter_address: "",
         shelter_phone: "",
     });
+
+    usePageTitle("Crear cuenta");
 
     useEffect(() => {
         getShelterTypes()

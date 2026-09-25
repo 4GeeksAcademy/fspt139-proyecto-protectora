@@ -31,7 +31,8 @@ def list_animals_action():
     age_range = request.args.get('age_range')
     page, per_page = paginate_args()
 
-    resultados = list_animals(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page, age_range=age_range)
+    resultados = list_animals(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page,
+                              age_range=age_range, hide_adopted=True)
 
     response_body = {
         "items": [animal.serialize() for animal in resultados.items],

@@ -105,26 +105,31 @@ def seed_database():
     # Shelters
     ##############################
     created["shelters"] = 0
+    updated["shelters"] = 0
     for item in load("shelter.json"):
-        if ShelterRepository.get_by_shelter_id(item["shelter_id"]) is None:
+        shelter_type = ShelterTypeRepository.get_by_shelter_type_id(item["shelter_type_id"])
 
-            shelter_type = ShelterTypeRepository.get_by_shelter_type_id(item["shelter_type_id"])
+        data = dict(
+            name = item["name"],
+            description = item.get("description"),
+            logo_url = item.get("logo_url"),
+            email = item["email"],
+            phone = item["phone"],
+            website = item.get("website"),
+            instagram = item.get("instagram"),
+            address = item.get("address"),
+            map_positioning = item.get("map_positioning"),
+            shelter_type_id = shelter_type.id,
+        )
 
-            ShelterRepository.create(
-                shelter_id = item["shelter_id"],
-                name = item["name"],
-                description = item.get("description"),
-                logo_url = item.get("logo_url"),
-                email = item["email"],
-                phone = item["phone"],
-                website = item.get("website"),
-                instagram = item.get("instagram"),
-                address = item.get("address"),
-                map_positioning = item.get("map_positioning"),
-                shelter_type_id = shelter_type.id,
-            )
+        shelter = ShelterRepository.get_by_shelter_id(item["shelter_id"])
 
+        if shelter is None:
+            ShelterRepository.create(shelter_id=item["shelter_id"], **data)
             created["shelters"] += 1
+        else:
+            ShelterRepository.update(shelter, **data)
+            updated["shelters"] += 1
 
 
     ##############################

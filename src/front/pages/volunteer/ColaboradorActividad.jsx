@@ -5,6 +5,7 @@ import { getMisColaboraciones } from "../../services/requestsService";
 import { getMisSolicitudesAdopcion } from "../../services/addoptionRequestService";
 import { ACEPTADA, ADDOPTION_REQUEST_STATUS_LABELS } from "../../utils/addoptionRequestStatus";
 import { formatearCantidad, formatearFechaRelativa } from "../../utils/format";
+import { usePageTitle } from "../../hooks/usePageTitle";
  
 // filas visibles de inicio en cada bloque
 const MAX_FILAS = 5;
@@ -48,6 +49,8 @@ export const ColaboradorActividad = () => {
   const [todasColaboraciones, setTodasColaboraciones] = useState(false);
   const [todasSolicitudes, setTodasSolicitudes] = useState(false);
   const [cargandoMas, setCargandoMas] = useState(false);
+
+  usePageTitle("Mi actividad");
  
   useEffect(() => {
     // las cifras salen del total_items de cada listado: con perPage 1 solo nos interesa el recuento

@@ -42,7 +42,7 @@ def list_requests_action():
     order = request.args.get('dir', 'asc').lower()
     page, per_page = paginate_args()
 
-    resultados = list_requests(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page)
+    resultados = list_requests(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page, hide_expired=True)
 
     response_body = {
         "items": [req.serialize() for req in resultados.items],

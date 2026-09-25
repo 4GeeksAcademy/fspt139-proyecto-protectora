@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {login} from "../services/authServices";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { soloRedirectsInternos } from "../utils/redirect";
+import { usePageTitle } from "../hooks/usePageTitle";
 
 export const Login = () => {
     const navigate = useNavigate()
@@ -13,6 +14,8 @@ export const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [form, setForm] = useState({ user: "", password: "" });
     const [error, setError] = useState("");
+
+    usePageTitle("Iniciar sesión");
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
