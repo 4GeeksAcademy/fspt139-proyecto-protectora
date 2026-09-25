@@ -33,7 +33,11 @@ export const ShelterAnimalCard = ({ animal }) => {
             <span className={`badge ${ANIMAL_STATUS_BADGE_CLASS[animal.status] || "bg-secondary"}`}>
               {ANIMAL_STATUS_LABELS[animal.status] || animal.status}
             </span>
-            {tieneProceso && (
+            {animal.is_adopted ? (
+              <span className="badge" style={{ backgroundColor: "var(--rp-verde)", color: "var(--rp-papel)" }}>
+                {animal.sex === "hembra" ? "Adoptada" : "Adoptado"}
+              </span>
+            ) : tieneProceso && (
               <span className="badge" style={{ backgroundColor: "var(--rp-miel)", color: "var(--rp-papel)" }}>
                 En adopción
               </span>
