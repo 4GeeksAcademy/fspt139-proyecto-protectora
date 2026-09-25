@@ -83,21 +83,21 @@ export const Home = () => {
                                 ) : (
                                     <>
                                         <h1 className="fw-bold display-5 lh-sm mb-0">
-                                            They don't ask for money.
+                                            No piden un donativo.
                                             <br />
-                                            <span className="text-success">They ask for specific things.</span>
+                                            <span className="text-success">Piden lo que necesitan.</span>
                                         </h1>
 
                                         <p className="text-secondary mt-3 mb-4">
-                                            Shelters post exactly what they need, how much, and by when.
-                                            You choose the part you can cover and see it get filled.
+                                            Las protectoras publican exactamente qué necesitan, cuánto y para cuándo.
+                                            Tú eliges la parte que puedes cubrir y ves cómo se completa.
                                         </p>
                                     </>
                                 )}
 
                                 <div className="d-flex flex-wrap justify-content-center justify-content-md-start gap-2">
-                                    <Link to="/necesidades" className="btn btn-success btn-lg">See what's needed</Link>
-                                    <Link to="/adoptar" className="btn btn-outline-success btn-lg">See animals in adoption</Link>
+                                    <Link to="/necesidades" className="btn btn-success btn-lg">Ver necesidades</Link>
+                                    <Link to="/adoptar" className="btn btn-outline-success btn-lg">Ver animales en adopción</Link>
                                 </div>
 
                                 {esColaborador && (
@@ -127,10 +127,10 @@ export const Home = () => {
             ) : (
                 <>
                     <div className="row text-center g-3 mb-5">
-                        <Statscard number={insights ? insights.needs_open : 0} label="Needs open" color="#138f4d" />
-                        <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animals for adoption" color="#F0946A" />
-                        <Statscard number={insights ? insights.registered_shelters : 0} label="Registered shelters" color="#E8B04B" />
-                        <Statscard number={insights ? insights.collaborations_closed : 0} label="Collaborations closed" color="#E0756B" />
+                        <Statscard number={insights ? insights.needs_open : 0} label="Necesidades abiertas" color="#138f4d" />
+                        <Statscard number={insights ? insights.animals_for_adoption : 0} label="Animales en adopción" color="#F0946A" />
+                        <Statscard number={insights ? insights.registered_shelters : 0} label="Protectoras registradas" color="#E8B04B" />
+                        <Statscard number={insights ? insights.collaborations_closed : 0} label="Colaboraciones completadas" color="#E0756B" />
                     </div>
 
                     {insights && <NecesidadesDestacadas needs={insights.open_needs} />}

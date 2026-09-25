@@ -4,8 +4,8 @@ export const BuscanCasa = ({ animals }) => {
 
     return (
         <div className="mb-5">
-            <h2 className="fw-bold mb-1">Looking for a home</h2>
-            <p className="text-secondary mb-4">Animals waiting for a family</p>
+            <h2 className="fw-bold mb-1">Buscan hogar</h2>
+            <p className="text-secondary mb-4">Animales esperando una familia</p>
 
             <div className="row g-4">
 
