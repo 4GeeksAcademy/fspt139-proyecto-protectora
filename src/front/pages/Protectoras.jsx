@@ -301,8 +301,8 @@ export const Protectoras = () => {
             border: "1px solid var(--rp-linea)",
           }}
         >
-          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-center gap-3">
-            <div className="d-flex flex-nowrap gap-2 overflow-auto pb-1 pb-lg-0">
+          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div className="d-flex flex-nowrap gap-2 overflow-auto pb-1" style={{ minWidth: 0 }}>
               {PESTANAS.map((p) => (
                 <button
                   key={p.key}
