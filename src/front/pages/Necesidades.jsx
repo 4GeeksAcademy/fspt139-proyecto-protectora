@@ -110,12 +110,10 @@ export const Necesidades = () => {
     if (cargando || error) return [];
 
     return necesidades.flatMap((necesidad) => {
-      const idProtectora = necesidad.shelter_id
-        ?? necesidad.shelter?.id
-        ?? necesidad.shelter?.shelter_id;
+      const idProtectora = necesidad.shelter_id ?? necesidad.shelter?.shelter_id;
 
       const protectora = idProtectora == null ? undefined : shelters.find(
-        (shelter) => String(shelter.id ?? shelter.shelter_id) === String(idProtectora),
+        (shelter) => String(shelter.shelter_id) === String(idProtectora),
       );
 
       const posicion = [
