@@ -130,7 +130,9 @@ export const ProtectoraAnimalesForm = () => {
   const [hoveredMediaId, setHoveredMediaId] = useState(null);
   const [isDraggingMedia, setIsDraggingMedia] = useState(false);
 
-  usePageTitle(isEditMode ? "Panel · Editar animal" : "Panel · Nuevo animal");
+  usePageTitle(isEditMode
+  ? ["Panel · Editar animal", loadedAnimal?.name].filter(Boolean).join(" · ")
+  : "Panel · Nuevo animal");
 
   const [procesoAdopcion, setProcesoAdopcion] = useState(null);
   const [mostrarModalProceso, setMostrarModalProceso] = useState(false);

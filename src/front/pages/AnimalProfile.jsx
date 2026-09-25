@@ -51,7 +51,7 @@ export const AnimalProfile = () => {
   const [mediaActivo, setMediaActivo] = useState(null);
   const [proceso, setProceso] = useState(null);
   const [modalSolicitudAbierto, setModalSolicitudAbierto] = useState(false);
-  usePageTitle(animal?.name);
+  usePageTitle([animal?.name, animal?.shelter_name].filter(Boolean).join(" · "));
 
   const recargarProceso = () => {
     getPublicAddoptionProcess(id).then(setProceso).catch(() => setProceso(null));
@@ -127,11 +127,13 @@ export const AnimalProfile = () => {
     );
   }
 
-  const estado = ANIMAL_PUBLIC_STATUS_LABELS[animal.status] || { texto: animal.status, fondo: "var(--rp-gris)" };
   const tags = construirTags(animal);
   const media = animal.media || [];
   const edad = calcularAgeLabel(animal.birthdate);
   const peso = Number(animal.weight) > 0 ? `${Number(animal.weight).toLocaleString("es-ES")} kg` : null;
+  const estado = animal.is_adopted
+    ? { texto: animal.sex === "hembra" ? "Adoptada" : "Adoptado", fondo: "var(--rp-verde)" }
+    : ANIMAL_PUBLIC_STATUS_LABELS[animal.status] || { texto: animal.status, fondo: "var(--rp-gris)" };
 
   const especie =
     animal.sex === "hembra" && animal.species?.endsWith("o")
@@ -300,7 +302,9 @@ export const AnimalProfile = () => {
             ) : (
               <>
                 <p className="mt-4 mb-0 text-center text-muted" style={{ fontSize: "0.875rem" }}>
-                  Este animal no tiene un proceso de adopción abierto en este momento.
+                  {animal.is_adopted
+                    ? `${animal.name} ya ha encontrado un hogar.`
+                    : "Este animal no tiene un proceso de adopción abierto en este momento."}
                 </p>
                 {animal.shelter_id && (
                   <Link

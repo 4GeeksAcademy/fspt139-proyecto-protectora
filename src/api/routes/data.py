@@ -1,3 +1,4 @@
+import random
 from api.repositories.request_repository import RequestRepository
 from api.repositories.user_request_repository import UserRequestRepository
 from api.repositories.shelter_repository import ShelterRepository
@@ -50,9 +51,9 @@ def application_shared_data_action():
 def home_insights_action():
 
     # solo abiertas, igual que el tablon de Needs
-    needs_open_count = RequestRepository.list_all(filters={"status": ABIERTA}, per_page=1).total
+    needs_open_count = RequestRepository.list_all(filters={"status": ABIERTA}, per_page=1, hide_expired=True).total
     animals_available_count = AnimalRepository.list_all(
-        filters={"status": PUBLIC_STATUSES}, per_page=1).total
+        filters={"status": PUBLIC_STATUSES}, per_page=1, hide_adopted=True).total
     shelters_count = ShelterRepository.list_all(per_page=1).total
 
     collaborations_closed_count = 0
@@ -61,19 +62,22 @@ def home_insights_action():
             collaborations_closed_count += 1
 
     open_needs_page = RequestRepository.list_all(
-        filters={"status": ABIERTA}, sort_by="request_deadline", dir="asc", per_page=3)
+        filters={"status": ABIERTA}, sort_by="request_deadline", dir="asc", per_page=3, hide_expired=True)
     open_needs = []
     for request in open_needs_page.items:
         open_needs.append(request.serialize())
 
+    # se sortean 3 entre los 12 mas recientes para que el Home vaya rotando
     open_adoptions_page = AnimalRepository.list_all(
         filters={"status": PUBLIC_STATUSES},
         sort_by="created_at",
         dir="desc",
-        per_page=3
+        per_page=12,
+        hide_adopted=True
     )
+    candidatos = open_adoptions_page.items
     open_adoptions = []
-    for animal in open_adoptions_page.items:
+    for animal in random.sample(candidatos, min(3, len(candidatos))):
         open_adoptions.append(animal.serialize())
 
     response_body = {

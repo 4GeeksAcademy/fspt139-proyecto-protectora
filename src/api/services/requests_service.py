@@ -19,8 +19,8 @@ SETTABLE_STATUSES = {ABIERTA, BORRADOR}
 PUBLIC_STATUSES = {ABIERTA, CERRADA}
 
 
-def list_requests(filters=None, sort_by=None, dir='asc', page=1, per_page=10):
-    return RequestRepository.list_all(filters=filters, sort_by=sort_by, dir=dir, page=page, per_page=per_page)
+def list_requests(filters=None, sort_by=None, dir='asc', page=1, per_page=10, hide_expired=False):
+    return RequestRepository.list_all(filters=filters, sort_by=sort_by, dir=dir, page=page, per_page=per_page, hide_expired=hide_expired)
 
 
 # limita a una necesidad propia de la protectora (formulario de edicion)
