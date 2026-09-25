@@ -7,11 +7,10 @@ import { soloRedirectsInternos } from "../utils/redirect";
 import { usePageTitle } from "../hooks/usePageTitle";
 
 export const Signup = () => {
-    const navigate = useNavigate()
-    const location = useLocation()
-    // la pagina a la que volver tras el login que sigue a este registro (ver Login.jsx)
-    const redirectTo = soloRedirectsInternos(location.state?.from)
-    const { store, dispatch } = useGlobalReducer()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const redirectTo = soloRedirectsInternos(location.state?.from);
+    const { store, dispatch } = useGlobalReducer();
     const [rol, setRol] = useState("volunteer");
     const [showPassword, setShowPassword] = useState(false);
     const [aceptaTerminos, setAceptaTerminos] = useState(false);
@@ -366,7 +365,10 @@ export const Signup = () => {
                                 required
                             />
                             <label className="form-check-label" htmlFor="terminos">
-                                Acepto los <Link to="/terminos" target="_blank">términos de uso y la política de privacidad</Link>
+                                Acepto los{" "}
+                                <Link to="/terminos-y-privacidad" target="_blank">
+                                    términos de uso, privacidad y cookies
+                                </Link>
                             </label>
                         </div>
 
