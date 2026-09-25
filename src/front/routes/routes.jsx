@@ -9,6 +9,7 @@ import { Necesidades } from "../pages/Necesidades.jsx";
 import { TerminosyPrivacidad } from "../pages/TerminosyPrivacidad.jsx";
 import { TestMapa } from "../pages/TestMapa.jsx";
 import { ProtectoraProfile } from "../pages/ProtectoraProfile.jsx";
+import { UploadCloudinary } from "../pages/UploadCloudinary.jsx";
 
 import { TestSheltersFilters } from "../pages/test/TestSheltersFilters.jsx";
 import { TestAnimalFilters } from "../pages/test/TestAnimalFilters.jsx";
@@ -84,13 +85,20 @@ export const router = createBrowserRouter([
                 element: <TerminosyPrivacidad />
             },
             {
-              path: "/test-mapa",
-              element: <TestMapa />
+                path: "/test-mapa",
+                element: <TestMapa />
             },
+
             // RUTAS DEL ROL PROTECTORA
             {
-                element: <ProtectedRoutes rolesPermitidos={["shelter_admin"]} />,
+                element: (
+                    <ProtectedRoutes rolesPermitidos={["shelter_admin"]} />
+                ),
                 children: [
+                    {
+                        path: "/upload-cloudinary",
+                        element: <UploadCloudinary />
+                    },
                     {
                         path: "/test-api-animals",
                         element: <TestAnimalFilters />
@@ -142,12 +150,17 @@ export const router = createBrowserRouter([
                     {
                         path: "/panel/perfil",
                         element: <ProtectoraPerfil />
-                    },
+                    }
                 ]
             },
+
             // RUTAS COMUNES
             {
-                element: <ProtectedRoutes rolesPermitidos={["shelter_admin", "volunteer"]} />,
+                element: (
+                    <ProtectedRoutes
+                        rolesPermitidos={["shelter_admin", "volunteer"]}
+                    />
+                ),
                 children: [
                     {
                         path: "/settings/perfil",
@@ -158,15 +171,16 @@ export const router = createBrowserRouter([
 
             // RUTAS DEL ROL COLABORADOR
             {
-                element: <ProtectedRoutes rolesPermitidos={["volunteer"]} />,
+                element: (
+                    <ProtectedRoutes rolesPermitidos={["volunteer"]} />
+                ),
                 children: [
                     {
                         path: "/colaborador",
                         element: <ColaboradorActividad />
-                    },
-
+                    }
                 ]
-            },
+            }
         ]
     },
     {
@@ -185,11 +199,12 @@ export const router = createBrowserRouter([
                 path: "/signup",
                 element: <Signup />
             },
+
             // PAGINA DE ERROR 404
             {
                 path: "*",
                 element: <NotFound />
             }
         ]
-    },
+    }
 ]);
