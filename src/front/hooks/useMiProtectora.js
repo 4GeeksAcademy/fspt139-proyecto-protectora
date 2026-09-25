@@ -39,7 +39,7 @@ export const useMiProtectora = () => {
     Boolean(miProtectora) && animal?.shelter_id === miProtectora.shelter_id;
 
   const esMiNecesidad = (necesidad) =>
-    Boolean(miProtectora) && necesidad?.shelter_id === miProtectora.id;
+    Boolean(miProtectora) && necesidad?.shelter_id === miProtectora.shelter_id;
 
   return { miProtectora, esProtectora, esMiAnimal, esMiNecesidad };
 };

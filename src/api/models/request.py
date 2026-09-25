@@ -39,7 +39,7 @@ class Request(db.Model):
         return {
             "id": self.id,
             "request_id": self.request_id,
-            "shelter_id": self.shelter_id,
+            "shelter_id": self.shelter.shelter_id if self.shelter else None,
             "animal_id": self.animal_id,
             "name": self.name,
             "description": self.description,
@@ -52,6 +52,7 @@ class Request(db.Model):
             "unit": self.unit,
             "footnote": self.footnote,
             "shelter_name": self.shelter.name if self.shelter else None,
+            "logo_url": self.shelter.logo_url if self.shelter.logo_url else None,
             "animal_uuid": self.animal.animal_id if self.animal else None,
             "animal_name": self.animal.name if self.animal else None,
             "animal_species": self.animal.animal_type.species if self.animal and self.animal.animal_type else None,

@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { construirBadge, esFueraDePlazo } from "../utils/necesidadDeadline";
 import { cargarMediaUrl } from "../services/animalsService";
 import { formatearCantidad } from "../utils/format";
+import React from "react";
+import AvatarLogoProtectora from "./protectora/AvatarLogoProtectora";
 
 
 export const NecesidadCard = ({ necesidad, esMia = false }) => {
@@ -73,9 +75,22 @@ export const NecesidadCard = ({ necesidad, esMia = false }) => {
           {necesidad.name}
         </h5>
 
-        <p className="small mb-3 text-truncate" style={{ color: "var(--rp-gris)" }}>
-          {[necesidad.shelter_name, necesidad.request_type_name].filter(Boolean).join(" · ")}
-        </p>
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <AvatarLogoProtectora logoUrl={necesidad.logo_url} nombre={necesidad.shelter_name} size={52} />
+          <div className="overflow-hidden">
+            <p className="small mb-0" style={{ color: "var(--rp-gris)" }}>
+              <Link
+                  to={`/protectoras/${necesidad.shelter_id}`}
+                  className="text-decoration-none fw-bold"
+                  style={{ color: "var(--rp-pino)"}}
+              >
+                {[necesidad.shelter_name, necesidad.request_type_name].filter(Boolean).join(" · ")}
+              </Link>
+
+            </p>
+          </div>
+        </div>
+
 
         <div className="mt-auto">
 

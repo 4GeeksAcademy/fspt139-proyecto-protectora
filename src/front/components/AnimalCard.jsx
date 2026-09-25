@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { calcularAgeLabel } from "../utils/animalAge";
 import { construirTags } from "../utils/animalTags";
 import { cargarMediaUrl } from "../services/animalsService";
+import AvatarLogoProtectora from "./protectora/AvatarLogoProtectora";
 
 const MAX_TAGS = 3;
 
@@ -112,20 +113,29 @@ export const AnimalCard = ({ animal, esMia = false }) => {
           </div>
         )}
 
-        <div className="mt-auto d-flex flex-wrap justify-content-between align-items-center gap-2">
-          {animal.shelter_id ? (
-            <Link
-              to={`/protectoras/${animal.shelter_id}`}
-              className="text-truncate text-decoration-none"
-              style={{ color: "var(--rp-gris)", fontSize: "0.875rem" }}
-            >
-              {animal.shelter_name || "Ver protectora"}
-            </Link>
-          ) : (
-            <small className="text-truncate" style={{ color: "var(--rp-gris)" }}>
-              Protectora sin asignar
-            </small>
-          )}
+        <div className="d-flex align-items-center gap-2 mb-3">
+          <AvatarLogoProtectora logoUrl={animal.logo_url} nombre={animal.shelter_name} size={52} />
+          <div className="overflow-hidden">
+            <p className="small mb-0" style={{ color: "var(--rp-gris)" }}>
+              {animal.shelter_id ? (
+                  <Link
+                      to={`/protectoras/${animal.shelter_id}`}
+                      className="text-decoration-none fw-bold"
+                      style={{ color: "var(--rp-pino)"}}
+                  >
+                    {animal.shelter_name || "Ver protectora"}
+                  </Link>
+              ) : (
+                  <small className="" style={{ color: "var(--rp-gris)" }}>
+                    Protectora sin asignar
+                  </small>
+              )}
+
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-auto d-flex flex-wrap justify-content-end align-items-center gap-2">
 
           <div className="d-flex flex-wrap gap-2 flex-shrink-0">
             {esMia && (
