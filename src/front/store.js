@@ -30,19 +30,19 @@ export default function storeReducer(store, action = {}) {
     case "set_shelter_types":
       return {
         ...store,
-        shelterTypes: action.payload,
+        shelterTypes: Array.isArray(action.payload) ? action.payload : store.shelterTypes,
       };
 
     case "set_animal_types":
       return {
         ...store,
-        animalTypes: action.payload,
+        animalTypes: Array.isArray(action.payload) ? action.payload : store.animalTypes,
       };
 
     case "set_request_types":
       return {
         ...store,
-        requestTypes: action.payload,
+        requestTypes: Array.isArray(action.payload) ? action.payload : store.requestTypes,
       };
 
     case "set_user_location":

@@ -13,7 +13,7 @@ export const Layout = () => {
     const { store, dispatch } = useGlobalReducer()
 
     useEffect(() => {
-        if (store.shelterTypes.length > 0 && store.animalTypes.length > 0 && store.requestTypes.length > 0) return
+        if (store.shelterTypes?.length > 0 && store.animalTypes?.length > 0 && store.requestTypes?.length > 0) return
 
         const backendUrl = import.meta.env.VITE_BACKEND_URL
         const token = getToken()
@@ -21,7 +21,10 @@ export const Layout = () => {
         fetch(backendUrl + "/api/data", {
             headers: token ? { Authorization: `Bearer ${token}` } : {},
         })
-            .then((response) => response.json())
+            .then((response) => {
+                if (!response.ok) throw new Error("No se pudo cargar /api/data")
+                return response.json()
+            })
             .then((data) => {
                 dispatch({ type: "set_shelter_types", payload: data.shelter_types })
                 dispatch({ type: "set_animal_types", payload: data.animal_types })
