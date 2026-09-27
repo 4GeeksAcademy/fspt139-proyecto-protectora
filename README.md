@@ -237,13 +237,13 @@ $ make seed
 ---
 ## Cloudinary
 
-Permite subir archivos a Cloudinary desde la aplicación y obtener un enlace para visualizarlos.
+Permite guardar las imágenes y vídeos de los animales y las necesidades en Cloudinary.
 
 ### 1. Configuración
 
 Consultar los requisitos en el mensaje fijado en Slack.
 
-Añadir al `.env` las credenciales de Cloudinary:
+Completar en el `.env`:
 
 - `CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`
@@ -252,6 +252,8 @@ Añadir al `.env` las credenciales de Cloudinary:
 Comprobar que `VITE_BACKEND_URL` apunta al backend del puerto 3001, sin `/api` al final.
 
 No subir el `.env` a GitHub. En `.env.example`, dejar las credenciales vacías.
+
+Cada entorno debe aplicar las migraciones que añaden `cloudinary_public_id` a las tablas `animal_media` y `request_media`.
 
 ### 2. Iniciar la aplicación
 
@@ -265,10 +267,28 @@ En otra terminal, iniciar el frontend:
 
 Si se modifican las variables de entorno, reiniciar el servidor correspondiente.
 
-### 3. Subir un archivo
+### 3. Subir imágenes a una ficha
 
 1. Iniciar sesión con una cuenta de protectora.
-2. Acceder a `/upload-cloudinary` desde el frontend.
-3. Seleccionar un archivo y pulsar “Subir archivo”.
-4. Esperar el mensaje “Archivo subido correctamente”.
-5. Pulsar “Abrir archivo” para comprobar el resultado.
+2. Abrir el formulario de creación o edición de un animal o una necesidad.
+3. Seleccionar una imagen y guardar la ficha.
+4. Actualizar la página para comprobar que la imagen sigue apareciendo.
+
+El archivo se guarda en Cloudinary. Su URL y su identificador se guardan en la base de datos, asociados a la ficha.
+
+Desde el formulario también se puede cambiar la portada o eliminar una imagen. Al eliminarla, se borra tanto su registro como el archivo de Cloudinary.
+
+### 4. Página de subida independiente
+
+La página `/upload-cloudinary` permite seleccionar un archivo, pulsar “Subir archivo” y abrir el enlace recibido.
+
+Los archivos enviados desde esta página no se asocian a ningún animal ni necesidad.
+
+### 5. Comprobaciones realizadas
+
+Se han probado la subida de imágenes, la persistencia al recargar, el cambio de portada y la eliminación en animales y necesidades.
+
+Los vídeos están contemplados en el código, pero todavía no se han probado.
+
+Las imágenes locales anteriores siguen disponibles y no se migran automáticamente a Cloudinary.
+

@@ -11,16 +11,52 @@ from . import db
 class RequestMedia(db.Model):
     __tablename__ = 'request_media'
 
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    media_id: Mapped[str] = mapped_column(String, unique=True)
-    request_id: Mapped[int] = mapped_column(ForeignKey('request.id', ondelete='CASCADE'))
-    format: Mapped[str] = mapped_column(String)
-    url: Mapped[str] = mapped_column(String)
-    is_cover: Mapped[bool] = mapped_column(Boolean, default=False)
-    created_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now())
-    update_at: Mapped[Optional[datetime]] = mapped_column(DateTime, default=func.now(), onupdate=func.now())
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        autoincrement=True
+    )
 
-    request: Mapped["Request"] = relationship(back_populates="media")
+    media_id: Mapped[str] = mapped_column(
+        String,
+        unique=True
+    )
+
+    request_id: Mapped[int] = mapped_column(
+        ForeignKey('request.id', ondelete='CASCADE')
+    )
+
+    # Tipo de recurso: image o video.
+    format: Mapped[str] = mapped_column(String)
+
+    # URL del archivo: local o de Cloudinary.
+    url: Mapped[str] = mapped_column(String)
+
+    # Identificador de Cloudinary para gestionar el archivo.
+    # Es opcional para mantener los archivos locales existentes.
+    cloudinary_public_id: Mapped[Optional[str]] = mapped_column(
+        String,
+        nullable=True
+    )
+
+    is_cover: Mapped[bool] = mapped_column(
+        Boolean,
+        default=False
+    )
+
+    created_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime,
+        default=func.now()
+    )
+
+    update_at: Mapped[Optional[datetime]] = mapped_column(
+        DateTime,
+        default=func.now(),
+        onupdate=func.now()
+    )
+
+    request: Mapped["Request"] = relationship(
+        back_populates="media"
+    )
 
     def serialize(self):
         return {
@@ -29,7 +65,14 @@ class RequestMedia(db.Model):
             "request_id": self.request_id,
             "format": self.format,
             "url": self.url,
+            "cloudinary_public_id": self.cloudinary_public_id,
             "is_cover": self.is_cover,
-            "created_at": self.created_at.isoformat() if self.created_at else None,
-            "update_at": self.update_at.isoformat() if self.update_at else None,
+            "created_at": (
+                self.created_at.isoformat()
+                if self.created_at else None
+            ),
+            "update_at": (
+                self.update_at.isoformat()
+                if self.update_at else None
+            ),
         }
