@@ -22,7 +22,7 @@ def _get_owned_shelter(shelter_pk):
 
 
 def _logo_public_id(shelter):
-    return f"shelters/{shelter.shelter_id}/logo"
+    return f"{shelter.shelter_id}/logo"
 
 
 def _borrar_logo_actual(shelter):
