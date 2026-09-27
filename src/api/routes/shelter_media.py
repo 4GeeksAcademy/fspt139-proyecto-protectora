@@ -1,10 +1,7 @@
-import os
-
-from flask import jsonify, request, send_from_directory
+from flask import jsonify, request
 from flask_jwt_extended import jwt_required
 
 from api.services.shelter_media_service import (
-    UPLOAD_ROOT,
     add_shelter_logo,
     delete_shelter_logo,
 )
@@ -20,17 +17,6 @@ def _require_shelter_user():
     if not user.shelter_id:
         raise APIException("El usuario no pertenece a ninguna protectora", status_code=403)
     return user
-
-
-# ######################
-# ruta para servir el logo subido por la protectora
-# ######################
-@api.route('/uploads/shelters/<shelter_id>/<filename>', methods=['GET'])
-def serve_shelter_logo(shelter_id, filename):
-    directory = os.path.realpath(os.path.join(UPLOAD_ROOT, shelter_id))
-    if not directory.startswith(os.path.realpath(UPLOAD_ROOT) + os.sep):
-        raise APIException("Recurso no encontrado", status_code=404)
-    return send_from_directory(directory, filename)
 
 
 # ######################
