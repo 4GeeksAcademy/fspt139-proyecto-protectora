@@ -51,7 +51,7 @@ def testgeo_nominatim_action():
         "country": resultado.get('address').get("country"),
         "country_code": resultado.get('address').get("country_code"),
         "display_name": resultado.get("display_name"),
-        "map_positioning": f"{ resultado.get("lat")},{ resultado.get("lon")}",
+        "map_positioning": f"{ resultado.get('lat')},{ resultado.get('lon')}",
     }), 200
 
 
