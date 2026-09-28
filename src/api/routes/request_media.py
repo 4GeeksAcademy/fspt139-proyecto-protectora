@@ -1,10 +1,7 @@
-import os
-
-from flask import jsonify, request, send_from_directory
+from flask import jsonify, request
 from flask_jwt_extended import jwt_required
 
 from api.services.request_media_service import (
-    UPLOAD_ROOT,
     add_necesidad_media,
     delete_necesidad_media,
     set_necesidad_media_cover,
@@ -20,17 +17,6 @@ def _require_shelter_user():
     if not user.shelter_id:
         raise APIException("El usuario no pertenece a ninguna protectora", status_code=403)
     return user
-
-
-# ######################
-#ruta para servir los archivos multimedia
-# ######################
-@api.route('/uploads/requests/<request_id>/<filename>', methods=['GET'])
-def serve_necesidad_media(request_id, filename):
-    directory = os.path.realpath(os.path.join(UPLOAD_ROOT, request_id))
-    if not directory.startswith(os.path.realpath(UPLOAD_ROOT) + os.sep):
-        raise APIException("Recurso no encontrado", status_code=404)
-    return send_from_directory(directory, filename)
 
 
 # ######################
