@@ -7,6 +7,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer";
 import { getShelters } from "../services/sheltersService";
 import { useMiProtectora } from "../hooks/useMiProtectora";
 import { usePageTitle } from "../hooks/usePageTitle";
+import { BotonCercania } from "../components/BotonCercania";
 
 const PER_PAGE = 12;
 
@@ -35,6 +36,8 @@ export const Necesidades = () => {
   const tipoId = searchParams.get("tipo") || "";
   const busquedaAplicada = searchParams.get("q") || "";
   const pagina = Number(searchParams.get("pagina")) || 1
+  const cercania = searchParams.get("cercania") === "1";
+  const cercaDe = cercania ? store.user_location : null;
 
   const [busqueda, setBusqueda] = useState(busquedaAplicada);
   const [necesidades, setNecesidades] = useState([]);
@@ -84,7 +87,7 @@ export const Necesidades = () => {
 
     getRequests(
       { pagina, perPage: PER_PAGE },
-      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId, status: "abierta" },
+      { nombre: busquedaAplicada, requestTypeId: categoria, tipoShelter: tipoId, status: "abierta", cercaDe },
     )
       .then((data) => {
         if (cancelado) return;
@@ -104,7 +107,7 @@ export const Necesidades = () => {
       });
 
     return () => { cancelado = true; };
-  }, [pagina, categoria, tipoId, busquedaAplicada]);
+  }, [pagina, categoria, tipoId, busquedaAplicada, cercaDe]);
 
   const necesidadesMapa = useMemo(() => {
     if (cargando || error) return [];
@@ -137,6 +140,7 @@ export const Necesidades = () => {
 
   const cambiarCategoria = (id) => actualizarUrl({ categoria: id });
   const cambiarTipo = (id) => actualizarUrl({ tipo: id });
+  const cambiarCercania = () => actualizarUrl({ cercania: cercania ? "" : "1" });
 
   const limpiarFiltros = () => {
     setBusqueda("");
@@ -256,10 +260,10 @@ export const Necesidades = () => {
             border: "1px solid var(--rp-linea)",
           }}
         >
-          <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
-            <div className="d-flex flex-nowrap gap-2 overflow-auto pb-1" style={{ minWidth: 0 }}>
+          <div className="d-flex flex-column flex-xxl-row justify-content-between align-items-xxl-center gap-3">
+            <div className="d-flex flex-wrap column-gap-1 column-gap-md-2 row-gap-2" style={{ minWidth: 0 }}>
               <button
-                className={`btn rounded-pill px-4 text-nowrap ${categoria === "" ? "btn-primary" : "btn-light"}`}
+                className={`btn rounded-pill px-2 px-md-4 text-nowrap flex-fill flex-md-grow-0 ${categoria === "" ? "btn-primary" : "btn-light"}`}
                 onClick={() => cambiarCategoria("")}
               >
                 Todas
@@ -269,7 +273,7 @@ export const Necesidades = () => {
                 return (
                   <button
                     key={id}
-                    className={`btn rounded-pill px-4 text-nowrap ${categoria === id ? "btn-primary" : "btn-light"}`}
+                    className={`btn rounded-pill px-2 px-md-4 text-nowrap flex-fill flex-md-grow-0 ${categoria === id ? "btn-primary" : "btn-light"}`}
                     onClick={() => cambiarCategoria(id)}
                   >
                     {tipo.name}
@@ -278,7 +282,13 @@ export const Necesidades = () => {
               })}
             </div>
 
-            <div className="d-flex flex-wrap flex-sm-nowrap gap-2">
+            <div className="d-flex flex-wrap flex-md-nowrap gap-2">
+              <BotonCercania
+                activo={cercania}
+                disponible={Boolean(store.user_location)}
+                onClick={cambiarCercania}
+              />
+
               <select
                 aria-label="Filtrar por tipo de protectora"
                 className="form-select form-select-sm rounded-pill"

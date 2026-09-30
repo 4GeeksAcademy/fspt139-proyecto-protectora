@@ -34,7 +34,7 @@ const SECCIONES = [
     corto: "Cookies",
     titulo: "3. Cookies y almacenamiento local",
     puntos: [
-      { titulo: "Cookies", texto: "No usamos cookies de analítica, publicidad ni seguimiento." },
+      { titulo: "Cookies", texto: "Actualmente no usamos cookies, pero, hemos creado el mensaje y su funcionalidad de cara a implementar cookies de analítica en un futuro." },
       { titulo: "Almacenamiento local", texto: "Guardamos en tu navegador los datos de tu sesión, para que no tengas que iniciarla en cada página, y tu respuesta al aviso de cookies. Se borran al cerrar sesión o al limpiar los datos del navegador." },
       { titulo: "Ubicación", texto: "Para centrar el mapa estimamos tu zona aproximada a partir de tu dirección IP (servicio ip-api.com). Si das permiso al navegador, usamos tu ubicación para mayor precisión. No guardamos ninguna de las dos." },
       { titulo: "Servicios externos", texto: "El mapa se carga desde OpenStreetMap, y las direcciones de las protectoras se sitúan en el mapa con su servicio Nominatim. Estos servicios reciben datos técnicos, como tu IP." },
@@ -64,7 +64,7 @@ export const TerminosyPrivacidad = () => {
         <h1 className="fw-bold display-6 mb-2" style={{ color: "var(--rp-pino)" }}>
           Términos de uso, privacidad y cookies
         </h1>
-        <p className="text-secondary mb-0">Última actualización: septiembre de 2026</p>
+        <p className="text-secondary mb-0">Última actualización: Octubre de 2026</p>
       </div>
 
       <nav aria-label="Secciones" className="d-flex flex-wrap justify-content-center gap-2 mb-5">

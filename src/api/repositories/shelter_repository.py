@@ -4,6 +4,7 @@ from sqlalchemy.orm import selectinload
 
 from api.models import Animal, Request, Shelter, db
 from api.services.animals_service import PUBLIC_STATUSES as ANIMAL_PUBLIC_STATUSES
+from api.repositories.shelter_proximity import order_by_shelter_proximity
 
 
 #FILTROS ADMITIDOS PARA EL REPOSITORIO SHELTER
@@ -66,7 +67,7 @@ class ShelterRepository:
 
     @staticmethod
     def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10,
-                 has_urgent=False, has_animals=False):
+                 has_urgent=False, has_animals=False, near=None):
         query = db.select(Shelter).options(
             selectinload(Shelter.shelter_type),
             selectinload(Shelter.animals),
@@ -87,6 +88,10 @@ class ShelterRepository:
                 query = query.where(column.ilike(f"%{value}%"))
             elif field in EQUAL_FILTER_FIELDS:
                 query = query.where(column == value)
+
+        orden_cercania = order_by_shelter_proximity(Shelter.id, near)
+        if orden_cercania is not None:
+            query = query.order_by(orden_cercania)
 
         if sort_by in SORTABLE_FIELDS:
             column = getattr(Shelter, sort_by)

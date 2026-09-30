@@ -6,6 +6,7 @@ import { getAnimals } from "../services/animalsService";
 import { usePageTitle } from "../hooks/usePageTitle";
 import { useMiProtectora } from "../hooks/useMiProtectora";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { BotonCercania } from "../components/BotonCercania";
 
 
 const PER_PAGE = 12;
@@ -40,6 +41,8 @@ export const Adoptar = () => {
   const edad = searchParams.get("edad") || "";
   const tipoId = searchParams.get("tipo") || "";
   const pagina = Number(searchParams.get("pagina")) || 1;
+  const cercania = searchParams.get("cercania") === "1";
+  const cercaDe = cercania ? store.user_location : null;   // solo se ordena por cercania si tenemos la posicion del usuario
 
   // cambia uno o varios parametros de la URL (vacio = se quita); cualquier cambio de filtro vuelve a
   // la pagina 1. replace: no deja una entrada en el historial por cada filtro o pagina
@@ -92,7 +95,7 @@ export const Adoptar = () => {
 
     getAnimals(
       { pagina, perPage: PER_PAGE },
-      { animalTypeIds, shelterTypeId: tipoId, edad }
+      { animalTypeIds, shelterTypeId: tipoId, edad, cercaDe }
     )
       .then((data) => {
         if (cancelado) return;
@@ -114,12 +117,13 @@ export const Adoptar = () => {
     return () => {
       cancelado = true;
     };
-  }, [pagina, edad, tipoId, animalTypeIds, esperandoCatalogo]);
+  }, [pagina, edad, tipoId, animalTypeIds, esperandoCatalogo, cercaDe]);
 
   // "todos" es el valor por defecto: no hace falta llevarlo en la URL
   const cambiarEspecie = (key) => actualizarUrl({ especie: key === "todos" ? "" : key });
   const cambiarEdad = (value) => actualizarUrl({ edad: value });
   const cambiarTipo = (value) => actualizarUrl({ tipo: value });
+  const cambiarCercania = () => actualizarUrl({ cercania: cercania ? "" : "1" });
   const limpiarFiltros = () => setSearchParams({}, { replace: true });
 
   const sinResultados =
@@ -185,12 +189,12 @@ export const Adoptar = () => {
             border: "1px solid var(--rp-linea)",
           }}
         >
-          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-            <div className="d-flex flex-nowrap gap-2 overflow-auto pb-1 pb-md-0">
+          <div className="d-flex flex-column flex-xl-row justify-content-between align-items-xl-center gap-3">
+            <div className="d-flex flex-nowrap justify-content-center gap-1 gap-md-2 overflow-auto pb-1 pb-md-0">
               {PESTANAS.map((pestana) => (
                 <button
                   key={pestana.key}
-                  className={`btn rounded-pill px-4 text-nowrap ${especie === pestana.key
+                  className={`btn rounded-pill px-1 px-md-4 text-nowrap flex-fill flex-md-grow-0 ${especie === pestana.key
                     ? "btn-primary"
                     : "btn-light"
                     }`}
@@ -201,7 +205,12 @@ export const Adoptar = () => {
               ))}
             </div>
 
-            <div className="d-flex flex-nowrap gap-2">
+            <div className="d-flex flex-wrap flex-md-nowrap justify-content-center gap-2">
+              <BotonCercania
+                activo={cercania}
+                disponible={Boolean(store.user_location)}
+                onClick={cambiarCercania}
+              />
               <select
                 className="form-select form-select-sm rounded-pill"
                 style={{ width: "170px" }}

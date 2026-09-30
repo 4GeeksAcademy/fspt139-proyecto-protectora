@@ -44,11 +44,9 @@ def shelter_metrics(shelter):
     }
 
 
-def list_shelters(filters=None, sort_by=None, dir='asc', page=1, per_page=10, has_urgent=False, has_animals=False):
-    return ShelterRepository.list_all(
-        filters=filters, sort_by=sort_by, dir=dir, page=page, per_page=per_page,
-        has_urgent=has_urgent, has_animals=has_animals,
-    )
+def list_shelters(filters=None, sort_by=None, dir='asc', page=1, per_page=10, has_urgent=False, has_animals=False,
+                  near=None):
+    return ShelterRepository.list_all(filters=filters, sort_by=sort_by, dir=dir, page=page, per_page=per_page, has_urgent=has_urgent, has_animals=has_animals, near=near)
 
 
 def get_shelter(shelter_id):

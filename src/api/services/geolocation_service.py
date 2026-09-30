@@ -1,6 +1,40 @@
 import ipaddress
 import requests
 from api.utils import APIException
+import math
+
+RADIO_TIERRA_KM = 6371  # para convertir el map_positioning en cercania
+
+
+# convierte un map_positioning "lat,lng" en floats (tupla)
+def parse_map_positioning(valor):
+    if not isinstance(valor, str):
+        return None
+
+    partes = [parte.strip() for parte in valor.split(",")]
+    if len(partes) != 2 or "" in partes:
+        return None
+
+    try:
+        lat, lng = float(partes[0]), float(partes[1])
+    except ValueError:
+        return None
+
+    if not (math.isfinite(lat) and math.isfinite(lng)) or abs(lat) > 90 or abs(lng) > 180:
+        return None
+
+    return lat, lng
+
+
+# distancia en km entre dos tuplas (lat, lng) usando la formula de haversine
+def distance_km(origen, destino):
+    lat1, lng1 = map(math.radians, origen)
+    lat2, lng2 = map(math.radians, destino)
+
+    a = (math.sin((lat2 - lat1) / 2) ** 2
+         + math.cos(lat1) * math.cos(lat2) * math.sin((lng2 - lng1) / 2) ** 2)
+
+    return 2 * RADIO_TIERRA_KM * math.asin(math.sqrt(a))
 
 IP_API_URL = "http://ip-api.com/json/{ip}"
 IP_API_TIMEOUT_SECONDS = 3

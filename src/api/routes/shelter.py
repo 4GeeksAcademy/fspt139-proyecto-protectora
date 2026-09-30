@@ -14,16 +14,18 @@ from . import api
 @api.route('/shelters', methods=['GET'])
 def list_shelters_action():
 
-    filters = {field: value for field in FILTERABLE_FIELDS if (value := request.args.get(field))}
+    filters = {field: value for field in FILTERABLE_FIELDS if (
+        value := request.args.get(field))}
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
     has_urgent = request.args.get('has_urgent') == 'true'
     has_animals = request.args.get('has_animals') == 'true'
+    near = request.args.get('near')
     page, per_page = paginate_args()
 
     resultados = list_shelters(
         filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page,
-        has_urgent=has_urgent, has_animals=has_animals,
+        has_urgent=has_urgent, has_animals=has_animals, near=near
     )
 
     response_body = {
@@ -52,7 +54,8 @@ def get_shelter_action(shelter_id):
 def _usuario_de_protectora():
     user = get_current_user()
     if not user.shelter_id:
-        raise APIException("El usuario no pertenece a ninguna protectora", status_code=403)
+        raise APIException(
+            "El usuario no pertenece a ninguna protectora", status_code=403)
     return user
 
 

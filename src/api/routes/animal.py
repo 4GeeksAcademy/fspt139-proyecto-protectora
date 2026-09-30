@@ -29,10 +29,11 @@ def list_animals_action():
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
     age_range = request.args.get('age_range')
+    near = request.args.get('near')  # "map_positioning del usuario: para ordenar por cercania
     page, per_page = paginate_args()
 
     resultados = list_animals(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page,
-                              age_range=age_range, hide_adopted=True)
+                              age_range=age_range, hide_adopted=True, near=near)
 
     response_body = {
         "items": [animal.serialize() for animal in resultados.items],
