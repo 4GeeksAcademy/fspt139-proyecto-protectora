@@ -14,7 +14,7 @@ export const getRequests = async (
     per_page: perPage,
   });
 
-  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId, animalId, status } = filters;
+  const { nombre, tipoShelter, tipoAnimal, requestTypeId, shelterId, animalId, status, cercaDe } = filters;
 
   if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
   if (tipoShelter) params.set("shelter_type_id", tipoShelter);
@@ -23,6 +23,7 @@ export const getRequests = async (
   if (shelterId) params.set("shelter_id", shelterId);
   if (animalId) params.set("animal_id", animalId);
   if (status) params.set("status", status);
+  if (cercaDe) params.set("near", cercaDe);
 
   const response = await fetch(`${backendUrl}/api/requests?${params.toString()}`);
 

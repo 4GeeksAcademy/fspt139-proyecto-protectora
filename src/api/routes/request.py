@@ -40,9 +40,11 @@ def list_requests_action():
     filters['status'] = status if status in PUBLIC_STATUSES else PUBLIC_STATUSES
     sort_by = request.args.get('sort_by')
     order = request.args.get('dir', 'asc').lower()
+    near = request.args.get('near')
     page, per_page = paginate_args()
 
-    resultados = list_requests(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page, hide_expired=True)
+    resultados = list_requests(filters=filters, sort_by=sort_by, dir=order, page=page, per_page=per_page,
+                               hide_expired=True, near=near)
 
     response_body = {
         "items": [req.serialize() for req in resultados.items],

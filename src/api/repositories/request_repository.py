@@ -1,6 +1,7 @@
 from datetime import datetime
 from sqlalchemy.orm import selectinload
 from api.models import Animal, Request, Shelter, db
+from api.repositories.shelter_proximity import order_by_shelter_proximity
 
 #FILTROS ADMITIDOS PARA EL REPOSITORIO ANIMAL
 #TIPO LIKE X
@@ -35,7 +36,7 @@ class RequestRepository:
         ).one_or_none()
 
     @staticmethod
-    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10, hide_expired=False):
+    def list_all(filters=None, sort_by=None, dir='asc', page=1, per_page=10, hide_expired=False, near=None):
         query = db.select(Request).options(
             selectinload(Request.request_type),
             selectinload(Request.shelter),
@@ -68,6 +69,10 @@ class RequestRepository:
                 Request.request_deadline.is_(None),
                 Request.request_deadline >= datetime.utcnow(),
             ))
+
+        orden_cercania = order_by_shelter_proximity(Request.shelter_id, near)
+        if orden_cercania is not None:
+            query = query.order_by(orden_cercania)
 
         if sort_by in SORTABLE_FIELDS:
             column = getattr(Request, sort_by)

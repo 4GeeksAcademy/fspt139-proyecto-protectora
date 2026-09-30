@@ -20,13 +20,14 @@ export const getShelters = async (
     per_page: perPage,
   });
 
-  const { nombre, phone, shelterTypeId, hasUrgent, hasAnimals } = filters;
+  const { nombre, phone, shelterTypeId, hasUrgent, hasAnimals, cercaDe } = filters;
 
   if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
   if (phone && phone.trim() !== "") params.set("phone", phone.trim());
   if (shelterTypeId) params.set("shelter_type_id", shelterTypeId);
   if (hasUrgent) params.set("has_urgent", "true");
   if (hasAnimals) params.set("has_animals", "true");
+  if (cercaDe) params.set("near", cercaDe);
 
   const response = await fetch(`${backendUrl}/api/shelters?${params.toString()}`);
 

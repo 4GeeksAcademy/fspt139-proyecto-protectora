@@ -21,13 +21,14 @@ export const getAnimals = async (
     per_page: perPage,
   });
 
-  const { nombre, raza, animalTypeIds, shelterId, shelterTypeId, edad } = filters;
+  const { nombre, raza, animalTypeIds, shelterId, shelterTypeId, edad, cercaDe } = filters;
 
   if (nombre && nombre.trim() !== "") params.set("name", nombre.trim());
   if (raza && raza.trim() !== "") params.set("breed", raza.trim());
   if (shelterId) params.set("shelter_id", shelterId);
   if (edad) params.set("age_range", edad);
   if (shelterTypeId) params.set("shelter_type_id", shelterTypeId);
+  if (cercaDe) params.set("near", cercaDe);
 
   (animalTypeIds || []).forEach((id) => params.append("animal_type_id", id));
 
