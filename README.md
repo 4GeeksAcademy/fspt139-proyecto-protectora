@@ -37,24 +37,24 @@
 
 ## DIRECTORIOS:
 
-| Tipo   | Ruta                   | Finalidad                                    |
-| ------ | ---------------------- | -------------------------------------------- |
-| vistas | /public/vistas         | Mockups de las vistas a desarrollar en figma |
-| UML    | /docs/database/uml.txt | documento uml del proyecto                   |
-| BACKEND | /src/api/data         | almacen de json para seeds, fixtures y mock data                                                                                         |
-| BACKEND | /src/api/routes       | ficheros de rutas con los ENDPOINT del API                                                                                               |
-| BACKEND | /src/api/models       | modelado de objetos de la base de datos                                                                                                  |
-| BACKEND | /src/api/repositories | capa de acceso a datos de la aplicación: encapsula todas las consultas, inserciones, actualizaciones y eliminaciones de la base de datos |
-| BACKEND | /src/api/services     | logica de la aplicación: aplica las reglas del sistema                                                                                   |
-| ... | ... | ... |
-| FRONTEND | /src/front/components | componentes React reutilizables  |
-| FRONTEND | /src/front/components/navigation | navbar y menu de enlaces de usuario  |
-| FRONTEND | /src/front/hooks | custom hooks y store context  |
-| FRONTEND | /src/front/pages | paginas con contenido  |
-| FRONTEND | /src/front/routes | routes.jsx y componentes de guardia  |
-| FRONTEND | /src/front/services | capa de logica de aplicación JS |
-| ... | ... | ... |
-| ... | ... | ... |
+| Tipo     | Ruta                             | Finalidad                                                                                                                                |
+| -------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| vistas   | /public/vistas                   | Mockups de las vistas a desarrollar en figma                                                                                             |
+| UML      | /docs/database/uml.txt           | documento uml del proyecto                                                                                                               |
+| BACKEND  | /src/api/data                    | almacen de json para seeds, fixtures y mock data                                                                                         |
+| BACKEND  | /src/api/routes                  | ficheros de rutas con los ENDPOINT del API                                                                                               |
+| BACKEND  | /src/api/models                  | modelado de objetos de la base de datos                                                                                                  |
+| BACKEND  | /src/api/repositories            | capa de acceso a datos de la aplicación: encapsula todas las consultas, inserciones, actualizaciones y eliminaciones de la base de datos |
+| BACKEND  | /src/api/services                | logica de la aplicación: aplica las reglas del sistema                                                                                   |
+| ...      | ...                              | ...                                                                                                                                      |
+| FRONTEND | /src/front/components            | componentes React reutilizables                                                                                                          |
+| FRONTEND | /src/front/components/navigation | navbar y menu de enlaces de usuario                                                                                                      |
+| FRONTEND | /src/front/hooks                 | custom hooks y store context                                                                                                             |
+| FRONTEND | /src/front/pages                 | paginas con contenido                                                                                                                    |
+| FRONTEND | /src/front/routes                | routes.jsx y componentes de guardia                                                                                                      |
+| FRONTEND | /src/front/services              | capa de logica de aplicación JS                                                                                                          |
+| ...      | ...                              | ...                                                                                                                                      |
+| ...      | ...                              | ...                                                                                                                                      |
 
 ## MODELO DE DATOS:
 
@@ -66,81 +66,98 @@
 
 ## LLAMADAS A API EXTERNAS:
 
-  ### 1) IP-API  ➡️ ip-api.com (gratuito, sin api key)
+### 1) IP-API ➡️ ip-api.com (gratuito, sin api key)
 
-  Geolocaliza de forma aproximada la IP del visitante, para centrar el mapa de inicio cuando el usuario todavía no ha compartido su ubicación del navegador.
+Geolocaliza de forma aproximada la IP del visitante, para centrar el mapa de inicio cuando el usuario todavía no ha compartido su ubicación del navegador.
 
-  - Implementación: [`geolocation_service.py`](/src/api/services/geolocation_service.py) → `locate_ip(ip)`.
-  - Se consume desde `GET /api/data` ([`src/api/routes/data.py`](/src/api/routes/data.py)) y se expone al frontend como `user_location`.
-  - Devuelve `"lat,lon"` o `None` si la IP falla o no puede obtenerla o el servicio externo falla
-  - Ruta de prueba manual: [`testgeo.py`](/src/api/routes/testip.py) (`GET /api/testip`), con una llamada directa vía `requests` a modo de ejemplo/depuración.
+- Implementación: [`geolocation_service.py`](/src/api/services/geolocation_service.py) → `locate_ip(ip)`.
+- Se consume desde `GET /api/data` ([`src/api/routes/data.py`](/src/api/routes/data.py)) y se expone al frontend como `user_location`.
+- Devuelve `"lat,lon"` o `None` si la IP falla o no puede obtenerla o el servicio externo falla
+- Ruta de prueba manual: [`testgeo.py`](/src/api/routes/testip.py) (`GET /api/testip`), con una llamada directa vía `requests` a modo de ejemplo/depuración.
 
-  ### 2) Nominatim ➡️ nominatim.org (gratuito, sin api key)
+### 2) Nominatim ➡️ nominatim.org (gratuito, sin api key)
 
-  Geocodifica una dirección en texto (calle, ciudad...) a sus coordenadas, para calcular el `map_positioning` de usuarios y protectoras.
+Geocodifica una dirección en texto (calle, ciudad...) a sus coordenadas, para calcular el `map_positioning` de usuarios y protectoras.
 
-  - Implementación: [`geolocation_service.py`](/src/api/services/geolocation_service.py) → `locate_address(direccion)`. Requiere un `User-Agent` propio por política de uso de Nominatim.
-  - Se consume desde `update_user_profile` ([`users_service.py`](/src/api/services/users_service.py)) y `update_shelter_profile` ([`shelters_service.py`](/src/api/services/shelters_service.py)) cada vez que cambia el campo `address`: si el geocoding falla por cualquier motivo, no bloquea el guardado del resto del perfil, simplemente no actualiza `map_positioning`.
-  - Ruta de prueba manual: [`testgeo.py`](/src/api/routes/testgeo.py) (`GET /api/testgeo`), con una llamada directa vía `requests` a modo de ejemplo/depuración.
+- Implementación: [`geolocation_service.py`](/src/api/services/geolocation_service.py) → `locate_address(direccion)`. Requiere un `User-Agent` propio por política de uso de Nominatim.
+- Se consume desde `update_user_profile` ([`users_service.py`](/src/api/services/users_service.py)) y `update_shelter_profile` ([`shelters_service.py`](/src/api/services/shelters_service.py)) cada vez que cambia el campo `address`: si el geocoding falla por cualquier motivo, no bloquea el guardado del resto del perfil, simplemente no actualiza `map_positioning`.
+- Ruta de prueba manual: [`testgeo.py`](/src/api/routes/testgeo.py) (`GET /api/testgeo`), con una llamada directa vía `requests` a modo de ejemplo/depuración.
 
-  ### 3) Cloudinary
-...
+### 3) Cloudinary
+
+- Servicio de almacenamiento de multimedia (imagenes y videos) de Animales, Necesidades y logotipos de protectoras.
 
 ---
+
 ## SECCIONES / PAGINAS PRINCIPALES:
 
 ### — HOME
->  - como usuario invitado o como colaborador, muestra un hero con información sobre la plataforma y enlaces a las secciones principales.
->  - bajo usuario identificado como Protectora mostrará el dashboard con atajos a las principales secciones de su panel
->  - la imagen del hero, rotará entre un set de imagenes locales
+
+> - como usuario invitado o como colaborador, muestra un hero con información sobre la plataforma y enlaces a las secciones principales.
+> - bajo usuario identificado como Protectora mostrará el dashboard con atajos a las principales secciones de su panel
+> - la imagen del hero, rotará entre un set de imagenes locales
+
 ### — NECESIDADES
->   - listado de necesidades con representación en un mapa
->   - filtrado básico por tipo 
+
+> - listado de necesidades con representación en un mapa
+> - filtrado básico por tipo
+
 ### — ADOPTAR
->
+
+> - listado de animales habilitados, si tiene un proceso de adopción permite aplicar.
+
 ### — PROTECTORAS
->
+
+> - listado de entidades protectoras.
+
 ### — AYUDA
->
+
+> - página de ayuda
+
 ### — TERMINOS DE USO Y PRIVACIDAD
->
+
+> - placeholder de términos de uso, privacidad y cookies
+
 ### — LOGIN / SIGNUP / LOGOUT
->
-### — 
-> ...
+
+> - sitema de autentificación y registro
+
+### —
+
+...
 
 ---
+
 ## LÓGICA DE ESTADOS:
 
 ## Animal y Adoptar:
+
 Los campos `status` del dominio de adopción tienen su fuente de verdad en el service que "posee" cada entidad — no en el modelo, ni en el repositorio, ni en el frontend. Modelos y repositorios son agnósticos del valor concreto (solo el `default` de columna hardcodea un literal, por ser inevitable); rutas y frontend consumen constantes/mapas importados desde ahí en vez de repetir los strings.
 
 ### `Animal.status` — lo controla: [`animals_service.py`](/src/api/services/animals_service.py)
 
-| Valor | Significado |
-| --- | --- |
-| `activado` | Único estado visible en las vistas públicas (`/adoptar`, `/adoptar/:id`) — `PUBLIC_STATUSES`. |
+| Valor         | Significado                                                                                           |
+| ------------- | ----------------------------------------------------------------------------------------------------- |
+| `activado`    | Único estado visible en las vistas públicas (`/adoptar`, `/adoptar/:id`) — `PUBLIC_STATUSES`.         |
 | `desactivado` | Oculto del catálogo público, reversible desde el panel de la protectora (botón Desactivar/Reactivar). |
-| `borrador` | Ficha incompleta, nunca visible públicamente. |
-
-
+| `borrador`    | Ficha incompleta, nunca visible públicamente.                                                         |
 
 ### `AddoptionProcess.status` — lo controla: [`addoption_process_service.py`](/src/api/services/addoption_process_service.py)
 
-| Valor | Significado |
-| --- | --- |
+| Valor     | Significado                                                                                                           |
+| --------- | --------------------------------------------------------------------------------------------------------------------- |
 | `abierto` | El proceso admite nuevas `AddoptionRequest` (sujeto también al rango de fechas) — ver `is_process_open_for_requests`. |
-| `cerrado` | Ya no admite solicitudes nuevas. |
+| `cerrado` | Ya no admite solicitudes nuevas.                                                                                      |
 
 - Punto que cierra un proceso: `close_addoption_process(process)`. Lo invocan tanto el cierre automático al alcanzar el límite de solicitudes simultáneas como la aceptación de una solicitud.
 - Abrir/Editar un proceso siempre lo deja en `abierto`, incluso si estaba `cerrado` (permite relanzarlo).
 
 ### `AddoptionRequest.status` — lo controla: [`addoption_request_service.py`](/src/api/services/addoption_request_service.py)
 
-| Valor | Significado |
-| --- | --- |
-| `pendiente` | Recién creada, sin revisar. |
-| `aceptada` | La protectora la ha aprobado. |
+| Valor        | Significado                              |
+| ------------ | ---------------------------------------- |
+| `pendiente`  | Recién creada, sin revisar.              |
+| `aceptada`   | La protectora la ha aprobado.            |
 | `descartada` | Rechazada (individualmente o en bloque). |
 
 - `accept_addoption_request`: marca la solicitud como `aceptada`, cierra el proceso asociado (`close_addoption_process`) y descarta automáticamente (`descartada`) el resto de solicitudes `pendiente` del mismo proceso, para que nunca quede más de una aceptada.
@@ -150,11 +167,11 @@ Los campos `status` del dominio de adopción tienen su fuente de verdad en el se
 
 ### `Request.status` — lo controla: [`requests_service.py`](/src/api/services/requests_service.py)
 
-| Valor | Significado |
-| --- | --- |
-| `abierta` | Admite nuevas `UserRequest` (colaboraciones) — ver `is_request_contributable`. |
-| `cerrada` | Ya no admite colaboraciones nuevas: se alcanza automáticamente cuando la suma de colaboraciones cubre `amount_needed`. |
-| `borrador` | Necesidad incompleta, nunca visible públicamente. |
+| Valor      | Significado                                                                                                            |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `abierta`  | Admite nuevas `UserRequest` (colaboraciones) — ver `is_request_contributable`.                                         |
+| `cerrada`  | Ya no admite colaboraciones nuevas: se alcanza automáticamente cuando la suma de colaboraciones cubre `amount_needed`. |
+| `borrador` | Necesidad incompleta, nunca visible públicamente.                                                                      |
 
 - Punto que cierra una necesidad: `_close_request_if_conseguido` en [`user_request_service.py`](/src/api/services/user_request_service.py), invocado tras cada colaboración creada. Solo aplica si la necesidad tiene `amount_needed` definido; sin objetivo (`amount_needed=None`) no hay cierre automático por acumulado.
 - A diferencia de `AddoptionProcess`, hoy no existe una vía para que la protectora reabra o cierre una necesidad a mano (`SETTABLE_STATUSES` solo admite `abierta`/`borrador` desde el formulario).
@@ -219,22 +236,26 @@ Usa el [`Makefile`](/Makefile) de la raíz del proyecto (`make help` lista los c
 ```sh
 $ make reset-db
 ```
-2. Repoblar datos de prueba (y tablas auxiliares): `make seed`. 
-Con el backend arrancado (`pipenv run start`), ejecutar make seed llamará a `/api/seed` contra la URL definida en `VITE_BACKEND_URL` (en tu `.env`)
+
+2. Repoblar datos de prueba (y tablas auxiliares): `make seed`.
+   Con el backend arrancado (`pipenv run start`), ejecutar make seed llamará a `/api/seed` contra la URL definida en `VITE_BACKEND_URL` (en tu `.env`)
+
 ```sh
 $ make seed
 ```
+
 ---
 
 ## ROLES DE USUARIO:
 
-| Rol            | Tipo |
-| ---------------- | ------------------------------------------------------------------- |
-| none          | Visitante sin identificar del sitio web                                       |
-| shelter_admin    | Rol de Usuario de una Protectora, gestiona todo el inventario y solicitudes de la protectora |
-| volunteer | Rol de colaborador, no vinculado a ninguna protectora. Colabora o puede solicitar adoptar animales |
+| Rol           | Tipo                                                                                               |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| none          | Visitante sin identificar del sitio web                                                            |
+| shelter_admin | Rol de Usuario de una Protectora, gestiona todo el inventario y solicitudes de la protectora       |
+| volunteer     | Rol de colaborador, no vinculado a ninguna protectora. Colabora o puede solicitar adoptar animales |
 
 ---
+
 ## Cloudinary
 
 Permite guardar las imágenes y vídeos de los animales y las necesidades en Cloudinary.
@@ -291,4 +312,3 @@ Se han probado la subida de imágenes, la persistencia al recargar, el cambio de
 Los vídeos están contemplados en el código, pero todavía no se han probado.
 
 Las imágenes locales anteriores siguen disponibles y no se migran automáticamente a Cloudinary.
-
