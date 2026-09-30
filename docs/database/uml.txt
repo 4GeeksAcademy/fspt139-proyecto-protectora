@@ -4,7 +4,7 @@ Table shelter {
   name string
   description text [null]
   logo_url string [null]
-  email string
+  email string [unique]
   phone string
   website string [null]
   instagram string [null]
@@ -28,12 +28,12 @@ Table user {
   last_name1 string
   last_name2 string [null]
   phone string
-  email string
+  email string [unique]
   password string
   token_version int [null]
   rol string
   shelter_id int [null]
-  ranking int [default: 0]
+  ranking int [null, default: 0]
   address string [null]
   map_positioning string [null]
   created_at datetime [null]
@@ -46,10 +46,33 @@ Table request {
   shelter_id int [null]
   animal_id int [null]
   name string
-  description text 
+  description text
   request_deadline datetime [null]
-  amount_needed float(10,2) [default: 0]
-  request_type string
+  amount_needed float(10,2) [null, default: 0]
+  unit string [null]
+  footnote string [null]
+  status string [default: 'abierta']
+  request_type_id int
+  created_at datetime [null]
+  update_at datetime [null]
+}
+
+Table request_type {
+  id int [pk, increment]
+  request_type_id string [unique]
+  code string [unique]
+  name string
+  description text [null]
+}
+
+Table request_media {
+  id int [pk, increment]
+  media_id string [unique]
+  request_id int
+  format string
+  url string
+  cloudinary_public_id string [null]
+  is_cover boolean [default: false]
   created_at datetime [null]
   update_at datetime [null]
 }
@@ -58,40 +81,67 @@ Table animal {
   id int [pk, increment]
   animal_id string [unique]
   name string
+  sex string [null]
   breed string
   size string
   weight float(10,2) [null, default: 0]
   birthdate date [null]
   activity_level string [null]
+  vaccines string [null]
+  has_microchip boolean [null, default: false]
+  is_sterilized boolean [null, default: false]
+  tests_done string [null]
+  special_needs text [null]
+  traits text [null]
+  lives_with_kids boolean [null]
+  lives_with_dogs boolean [null]
+  lives_with_cats boolean [null]
+  ideal_home text [null]
   story text
-  animal_type_id int 
+  status string [default: 'activado']
+  animal_type_id int
+  shelter_id int [null]
   created_at datetime [null]
   update_at datetime [null]
 }
 
 Table animal_type {
   id int [pk, increment]
-  animal_type_id string [unique] 
+  animal_type_id string [unique]
   species string
 }
 
-Table user_request {
-  user_id int
-  request_id int
-  user_request_id string [unique] 
-  amount float(10,2) [default: 0]
-  shelter_answer text [null]
+Table animal_type_requirement {
+  id int [pk, increment]
+  animal_type_requirement_id string [unique]
+  animal_type_id int
+  label string
+  is_checked_by_default boolean [default: false]
+  position int [default: 0]
   created_at datetime [null]
   update_at datetime [null]
 }
 
-Table addoption_request {
+Table animal_media {
   id int [pk, increment]
-  addoption_request_id string [unique] 
-  user_id int
+  media_id string [unique]
   animal_id int
-  score int [default: 0]
-  is_accepted boolean
+  format string
+  url string
+  cloudinary_public_id string [null]
+  is_cover boolean [default: false]
+  created_at datetime [null]
+  update_at datetime [null]
+}
+
+Table user_request {
+  id int [pk, increment]
+  user_id int
+  request_id int
+  user_request_id string [unique]
+  amount float(10,2) [null, default: 0]
+  details text [null]
+  shelter_answer text [null]
   created_at datetime [null]
   update_at datetime [null]
 }
@@ -99,19 +149,66 @@ Table addoption_request {
 Table user_review {
   id int [pk, increment]
   user_id int
-  review_id string [unique] 
-  ranking int [default: 1]
+  review_id string [unique]
+  ranking int [null, default: 1]
   review text [null]
   created_at datetime [null]
   update_at datetime [null]
 }
 
-Table animal_media {
+Table addoption_process {
   id int [pk, increment]
-  media_id string [unique] 
+  addoption_process_id string [unique]
   animal_id int
-  format string
-  url string
+  shelter_id int
+  concurrent_requests_limit int [null]
+  contribution_amount float(10,2) [null]
+  start_date date [null]
+  end_date date [null]
+  status string [default: 'abierto']
+  created_at datetime [null]
+  update_at datetime [null]
+}
+
+Table addoption_process_requirement {
+  id int [pk, increment]
+  addoption_process_requirement_id string [unique]
+  addoption_process_id int
+  label string
+  position int [default: 0]
+  created_at datetime [null]
+  update_at datetime [null]
+}
+
+Table addoption_request_question {
+  id int [pk, increment]
+  addoption_request_question_id string [unique]
+  addoption_process_id int
+  question text
+  position int [default: 0]
+  created_at datetime [null]
+  update_at datetime [null]
+}
+
+Table addoption_request {
+  id int [pk, increment]
+  addoption_request_id string [unique]
+  user_id int
+  animal_id int
+  addoption_process_id int [null]
+  score int [null, default: 0]
+  status string [default: 'pendiente']
+  created_at datetime [null]
+  update_at datetime [null]
+}
+
+Table addoption_request_answer {
+  id int [pk, increment]
+  addoption_request_answer_id string [unique]
+  addoption_request_id int
+  question text
+  answer text
+  position int [default: 0]
   created_at datetime [null]
   update_at datetime [null]
 }
@@ -124,20 +221,40 @@ Ref: "shelter"."shelter_type_id" ?>? "shelter_type"."id"
 
 Ref: "user"."shelter_id" ?>? "shelter"."id"
 
-Ref: "request"."shelter_id" ?>? "shelter"."shelter_id"
+Ref: "request"."shelter_id" ?>? "shelter"."id"
 
 Ref: "request"."animal_id" ?>? "animal"."id"
 
-Ref: "animal"."id" ?<? "animal_media"."animal_id"
+Ref: "request"."request_type_id" ?>? "request_type"."id"
 
-Ref: "user_review"."user_id" ?>? "user"."id"
+Ref: "request_media"."request_id" ?>? "request"."id"
 
-Ref: "addoption_request"."user_id" ?>? "user"."user_id"
+Ref: "animal"."animal_type_id" ?>? "animal_type"."id"
 
-Ref: "animal"."animal_id" ?<? "addoption_request"."animal_id"
+Ref: "animal"."shelter_id" ?>? "shelter"."id"
 
-Ref: "request"."id" ?<? "user_request"."request_id"
+Ref: "animal_type_requirement"."animal_type_id" ?>? "animal_type"."id"
+
+Ref: "animal_media"."animal_id" ?>? "animal"."id"
 
 Ref: "user_request"."user_id" ?>? "user"."id"
 
-Ref: "animal"."animal_type_id" ?>? "animal_type"."id"
+Ref: "user_request"."request_id" ?>? "request"."id"
+
+Ref: "user_review"."user_id" ?>? "user"."id"
+
+Ref: "addoption_process"."animal_id" ?>? "animal"."id"
+
+Ref: "addoption_process"."shelter_id" ?>? "shelter"."id"
+
+Ref: "addoption_process_requirement"."addoption_process_id" ?>? "addoption_process"."id"
+
+Ref: "addoption_request_question"."addoption_process_id" ?>? "addoption_process"."id"
+
+Ref: "addoption_request"."user_id" ?>? "user"."id"
+
+Ref: "addoption_request"."animal_id" ?>? "animal"."id"
+
+Ref: "addoption_request"."addoption_process_id" ?>? "addoption_process"."id"
+
+Ref: "addoption_request_answer"."addoption_request_id" ?>? "addoption_request"."id"
